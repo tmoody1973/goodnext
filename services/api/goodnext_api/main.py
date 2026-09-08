@@ -1,6 +1,7 @@
 """GoodNext application API. Food planning needs no account, no notice, no benefits questions."""
 
 import hashlib
+import logging
 import os
 import uuid
 from datetime import date, datetime, timedelta
@@ -17,6 +18,7 @@ from goodnext_api.agent_client import AgentClient, default_agent_client
 LOCAL_TZ = ZoneInfo("America/Chicago")
 SESSION_COOKIE = "gn_session"
 DEV = os.environ.get("GOODNEXT_ENV", "dev") == "dev"
+log = logging.getLogger(__name__)
 
 app = FastAPI(title="GoodNext API", version="0.1.0", docs_url="/api/docs", openapi_url="/api/openapi.json")
 
@@ -41,8 +43,21 @@ class PlanRequest(BaseModel):
     constraints: HouseholdConstraints
 
 
+def local_now() -> datetime:
+    """Current Milwaukee time, or the pinned GOODNEXT_DEMO_NOW when GOODNEXT_ENV=demo.
+
+    Env is read here (not at import time) so tests can monkeypatch it per-call.
+    """
+    pinned = os.environ.get("GOODNEXT_DEMO_NOW")
+    if pinned and os.environ.get("GOODNEXT_ENV") == "demo":
+        return datetime.fromisoformat(pinned)
+    if pinned:
+        log.warning("GOODNEXT_DEMO_NOW is set but GOODNEXT_ENV is not 'demo'; ignoring pinned time")
+    return datetime.now(LOCAL_TZ)
+
+
 def seven_local_dates(today: date | None = None) -> list[str]:
-    start = today or datetime.now(LOCAL_TZ).date()
+    start = today or local_now().date()
     return [(start + timedelta(days=i)).isoformat() for i in range(7)]
 
 
@@ -76,10 +91,12 @@ def create_plan(
     agent: AgentClient = Depends(get_agent_client),
 ):
     request_id = str(uuid.uuid4())
+    now = local_now()
     payload = {
         "workflow": body.workflow,
         "constraints": body.constraints.model_dump(),
-        "dates": seven_local_dates(),
+        "dates": seven_local_dates(now.date()),
+        "now_local": now.isoformat(),
         "request_id": request_id,
     }
     try:

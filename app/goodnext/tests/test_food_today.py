@@ -13,6 +13,7 @@ from tools import check_food_constraints, find_food_resources, load_directory, r
 from validators import validate_food_plan
 
 DATES = [f"2026-09-{d:02d}" for d in range(8, 15)]
+NOW_LOCAL = "2026-09-08T10:00:00-05:00"
 ZERO_BUDGET_NO_KITCHEN = HouseholdConstraints(zip_code="53206", budget_usd=0, kitchen="none", travel=["bus"])
 
 
@@ -109,11 +110,18 @@ def test_envelope_status_rules():
 
 def test_invoke_rejects_bad_payloads_without_calling_model():
     assert invoke("not a dict")["status"] == "denied"
-    bad = invoke({"workflow": "food_today", "constraints": {"zip_code": "abc", "budget_usd": 0}, "dates": DATES})
+    bad = invoke({"workflow": "food_today", "constraints": {"zip_code": "abc", "budget_usd": 0}, "dates": DATES, "now_local": NOW_LOCAL})
     assert bad["status"] == "needs_clarification" and "zip_code" in bad["missing"]
 
 
+def test_invoke_needs_clarification_when_now_local_missing():
+    payload = {"workflow": "food_today", "constraints": ZERO_BUDGET_NO_KITCHEN.model_dump(), "dates": DATES}
+    result = invoke(payload)
+    assert result["status"] == "needs_clarification" and "now_local" in result["missing"]
+
+
 def test_task_text_keeps_resident_data_out_of_system_prompt():
-    req = FoodTodayRequest(workflow="food_today", constraints=ZERO_BUDGET_NO_KITCHEN, dates=DATES)
+    req = FoodTodayRequest(workflow="food_today", constraints=ZERO_BUDGET_NO_KITCHEN, dates=DATES, now_local=NOW_LOCAL)
     text = task_text(req)
     assert "<resident_constraints>" in text and "53206" in text
+    assert f"now_local: {NOW_LOCAL}" in text
