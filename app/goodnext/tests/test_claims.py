@@ -144,3 +144,8 @@ def test_reviewed_directory_records_are_verified_and_honest_about_unknowns():
     assert any("Cost not stated" in u for u in kept[0].uncertainty)
     assert kept[0].claims.freshness_text == "Last checked 2026-09-08"
     assert never_list_hits(envelope_for(cleaned, violations, "r1").model_dump()) == []
+
+
+def test_never_list_matches_whole_words_only():
+    assert never_list_hits({"status": "temporarily_unavailable"}) == []
+    assert never_list_hits({"t": "Food is available now"}) == ["available"]

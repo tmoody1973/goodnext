@@ -15,7 +15,13 @@
       "codeLocation": "app/goodnext/",
       "runtimeVersion": "PYTHON_3_12",
       "networkMode": "PUBLIC",
-      "protocol": "HTTP"
+      "protocol": "HTTP",
+      "envVars": [
+        {
+          "name": "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT",
+          "value": "false"
+        }
+      ]
     }
   ],
   "memories": [],

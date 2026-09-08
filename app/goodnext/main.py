@@ -53,7 +53,8 @@ def task_text(req: FoodTodayRequest) -> str:
         f"{req.constraints.model_dump_json(indent=2)}\n"
         "</resident_constraints>\n"
         "Propose the seven-day food access plan. Call find_food_resources first, "
-        "then check_food_constraints on the returned IDs."
+        "then check_food_constraints on the returned IDs. Be brief: at most three "
+        "visits per day, explanation under 120 words, no repeated text across days."
     )
 
 

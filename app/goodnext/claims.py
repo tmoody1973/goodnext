@@ -7,6 +7,7 @@ reviewed constant a test scans every resident-facing response against.
 Pure; no I/O.
 """
 
+import re
 from datetime import datetime
 from urllib.parse import quote_plus
 
@@ -27,14 +28,17 @@ NEVER_LIST = [
 _COST_LABELS = {"free": "Free", "paid": "Paid", "sliding": "Sliding scale", "unknown": "Cost not stated; ask"}
 
 
+_NEVER_RE = [re.compile(r"\b" + re.escape(term) + r"\b", re.I) for term in NEVER_LIST]
+
+
 def never_list_hits(obj: object) -> list[str]:
-    """Walk any JSON-like structure's string values, case-insensitively, for never-list terms."""
+    """Walk any JSON-like structure's string values for never-list terms as whole words
+    (so 'unavailable' in a status does not count as 'available')."""
     hits: list[str] = []
 
     def walk(node: object) -> None:
         if isinstance(node, str):
-            low = node.lower()
-            hits.extend(term for term in NEVER_LIST if term in low)
+            hits.extend(term for term, rx in zip(NEVER_LIST, _NEVER_RE) if rx.search(node))
         elif isinstance(node, dict):
             for value in node.values():
                 walk(value)
