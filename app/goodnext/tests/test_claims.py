@@ -156,3 +156,7 @@ def test_never_list_ignores_honest_denials():
     assert never_list_hits({"t": "Nothing is reserved for you."}) == []
     assert never_list_hits({"t": "Your food is guaranteed."}) == ["guaranteed"]
     assert never_list_hits({"t": "A spot is reserved for you."}) == ["reserved"]
+
+
+def test_ci_proof_must_fail():
+    assert False, "deliberate: proving CI catches a failure"
