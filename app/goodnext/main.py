@@ -95,7 +95,7 @@ def run_food_today(req: FoodTodayRequest, model=None) -> Envelope:
     try:
         # Tool-level no-match short-circuit (MOO-773): skip the model entirely
         # when the search would come back empty for this ZIP and date range.
-        precheck = find_food_resources(req.constraints.zip_code, req.dates[0], req.dates[-1])
+        precheck = find_food_resources(req.constraints.zip_code, req.dates[0], req.dates[-1], req.now_local)
         if precheck["status"] == "no_match":
             return no_match_envelope(req.request_id)
         agent = build_agent(model)
