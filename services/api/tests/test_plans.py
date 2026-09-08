@@ -75,6 +75,28 @@ def test_demo_env_pins_date_and_now_local(monkeypatch):
     assert payload["now_local"] == "2026-09-08T10:00:00-05:00"
 
 
+def test_no_match_envelope_passes_through_three_help_routes():
+    routes = [
+        {"name": "2-1-1", "purpose": "Find local food and other help by phone, any day.",
+         "phone": "2-1-1", "url": "https://www.211.org", "source_url": "https://www.211.org", "last_checked": "2026-09-08"},
+        {"name": "Hunger Task Force emergency food", "purpose": "Milwaukee County pantry and meal map.",
+         "phone": None, "url": "https://www.hungertaskforce.org/get-help/emergency-food/",
+         "source_url": "https://www.hungertaskforce.org/get-help/emergency-food/", "last_checked": "2026-09-08"},
+        {"name": "FoodShare member line", "purpose": "Questions about your FoodShare case or QUEST card.",
+         "phone": "1-800-362-3002", "url": "https://www.dhs.wisconsin.gov/foodshare/index.htm",
+         "source_url": "https://www.dhs.wisconsin.gov/foodshare/index.htm", "last_checked": "2026-09-08"},
+    ]
+    reply = {"status": "no_match", "data": None, "evidence": [], "missing": ["No feasible resource found; see help route"],
+             "warnings": [], "retryable": False, "request_id": "r1", "help_routes": routes}
+    agent = FakeAgent(reply=reply)
+    r = client_with(agent).post("/api/plans", json={**BODY, "constraints": {**BODY["constraints"], "zip_code": "53999"}})
+    body = r.json()
+    assert r.status_code == 200
+    assert body["status"] == "no_match"
+    assert len(body["help_routes"]) == 3
+    assert body["data"] is None
+
+
 def test_demo_now_ignored_outside_demo_env(monkeypatch, caplog):
     monkeypatch.delenv("GOODNEXT_ENV", raising=False)
     monkeypatch.setenv("GOODNEXT_DEMO_NOW", "2026-09-08T10:00:00-05:00")

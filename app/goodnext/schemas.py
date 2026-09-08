@@ -90,6 +90,17 @@ class FoodPlanProposal(BaseModel):
     explanation: str = Field(description="Short, evidence-based, resident-facing")
 
 
+class HelpRoute(BaseModel):
+    """CONTEXT.md: Help route. A maintained, verified way to reach a human."""
+
+    name: str
+    purpose: str = Field(description="One plain sentence")
+    phone: str | None = None
+    url: str | None = None
+    source_url: str
+    last_checked: ISODate
+
+
 EnvelopeStatus = Literal[
     "success", "partial", "needs_clarification", "no_match", "denied", "temporarily_unavailable"
 ]
@@ -105,3 +116,4 @@ class Envelope(BaseModel):
     warnings: list[str] = []
     retryable: bool = False
     request_id: str
+    help_routes: list[HelpRoute] = []

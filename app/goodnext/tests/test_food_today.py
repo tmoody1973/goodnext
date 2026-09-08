@@ -7,7 +7,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import pytest
 
-from main import FoodTodayRequest, envelope_for, invoke, task_text
+import main
+from help_routes import HELP_ROUTES
+from main import FoodTodayRequest, envelope_for, invoke, run_food_today, task_text
 from schemas import DayPlan, FoodPlanProposal, HouseholdConstraints, PlannedVisit
 from tools import check_food_constraints, find_food_resources, load_directory, returned_ids
 from validators import validate_food_plan
@@ -103,9 +105,35 @@ def test_validator_rebuilds_seven_dates_and_flags_stale():
 def test_envelope_status_rules():
     find_food_resources("53206", DATES[0], DATES[-1])
     ok = proposal_with([visit("res-001", DATES[0])])
-    assert envelope_for(ok, [], "r1").status == "success"
+    success = envelope_for(ok, [], "r1")
+    assert success.status == "success" and success.help_routes == []
     assert envelope_for(ok, ["something stripped"], "r1").status == "partial"
-    assert envelope_for(proposal_with([]), [], "r1").status == "no_match"
+    no_match = envelope_for(proposal_with([]), [], "r1")
+    assert no_match.status == "no_match"
+    assert no_match.help_routes == HELP_ROUTES and len(no_match.help_routes) == 3
+
+
+def test_run_food_today_no_match_short_circuits_without_calling_model(monkeypatch):
+    def refuse_to_build(model=None):
+        raise AssertionError("build_agent must not be called on a no-match ZIP")
+
+    monkeypatch.setattr(main, "build_agent", refuse_to_build)
+    req = FoodTodayRequest(
+        workflow="food_today",
+        constraints=HouseholdConstraints(zip_code="53999", budget_usd=0, kitchen="none", travel=["bus"]),
+        dates=DATES,
+        now_local=NOW_LOCAL,
+    )
+    envelope = run_food_today(req)
+    assert envelope.status == "no_match"
+    assert envelope.evidence == []
+    assert envelope.data is None
+    assert envelope.help_routes == HELP_ROUTES
+    assert [r.name for r in envelope.help_routes] == [
+        "2-1-1",
+        "Hunger Task Force emergency food",
+        "FoodShare member line",
+    ]
 
 
 def test_invoke_rejects_bad_payloads_without_calling_model():
