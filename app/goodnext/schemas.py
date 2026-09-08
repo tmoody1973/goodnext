@@ -66,6 +66,23 @@ class FoodResource(BaseModel):
     notes: str = ""
 
 
+class Claims(BaseModel):
+    """MOO-775 (D9): the eight permitted resident-facing statements for one visit,
+    plus directions and the travel echo. Rendered by the application only, from
+    record fields and resident constraints, never by the model. See claims.py."""
+
+    open_today_text: str
+    cost_label: str
+    requirements_text: str
+    appointment_text: str
+    freshness_text: str
+    inventory_text: str
+    service_area_text: str
+    travel_text: str
+    directions_url: str
+    travel_echo: str
+
+
 class PlannedVisit(BaseModel):
     """One proposed visit. Every field the resident sees per PRD FR04."""
 
@@ -82,6 +99,7 @@ class PlannedVisit(BaseModel):
     uncertainty: list[str] = Field(default=[], description="Unknowns the resident should confirm")
     backup_resource_id: str | None = None
     next_open: NextOpen | None = Field(default=None, description="Set when the resource's window today has already closed")
+    claims: Claims | None = Field(default=None, description="MOO-775: the permitted claims, populated by the validator")
 
 
 class DayPlan(BaseModel):

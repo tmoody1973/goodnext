@@ -8,6 +8,7 @@ stripped and the plan returns as partial. No retry in this slice.
 
 from datetime import datetime
 
+from claims import build_claims
 from schemas import DayPlan, FoodPlanProposal, FoodResource, HouseholdConstraints, NextOpen, PlannedVisit, UnconfirmedRecord
 from tools import freshness_tier, next_open_after, window_open_at
 
@@ -32,7 +33,7 @@ def _visit_violation(
     return None
 
 
-def _with_freshness(v: PlannedVisit, resource: FoodResource, tier: str, now: datetime) -> PlannedVisit:
+def _with_freshness(v: PlannedVisit, resource: FoodResource, tier: str, now: datetime, constraints: HouseholdConstraints) -> PlannedVisit:
     update = {"freshness_tier": tier}
     if tier == "call_to_confirm":
         note = f"Last checked {resource.last_verified}; call to confirm"
@@ -40,7 +41,10 @@ def _with_freshness(v: PlannedVisit, resource: FoodResource, tier: str, now: dat
             update["uncertainty"] = [*v.uncertainty, note]
     nxt = next_open_after([w.model_dump() for w in resource.windows], now)
     update["next_open"] = NextOpen(date=nxt["date"], open=nxt["open"], close=nxt["close"]) if nxt else None
-    return v.model_copy(update=update)
+    updated = v.model_copy(update=update)
+    # MOO-775 (D9): every kept visit carries the permitted claims, built after
+    # freshness_tier and next_open are set since claims read both.
+    return updated.model_copy(update={"claims": build_claims(updated, resource, constraints, now)})
 
 
 def _unconfirmed_records(ledger: set[str], directory: dict[str, FoodResource], start: str) -> list[UnconfirmedRecord]:
@@ -78,7 +82,7 @@ def validate_food_plan(
             if strip_unconfirmed and tier == "unconfirmed":
                 violations.append(f"{v.resource_id}: unconfirmed tier; kept out of Food today")
                 continue
-            kept.append(_with_freshness(v, resource, tier, now))
+            kept.append(_with_freshness(v, resource, tier, now, constraints))
         return kept
 
     by_date = {d.date: d for d in proposal.days}
