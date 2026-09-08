@@ -1,0 +1,1013 @@
+{
+ "status": "success",
+ "data": {
+  "start_date": "2026-09-10",
+  "days": [
+   {
+    "date": "2026-09-10",
+    "visits": [
+     {
+      "resource_id": "mke-gathering-running-rebels",
+      "provider": "The Gathering at Running Rebels",
+      "date": "2026-09-10",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Breakfast 8:30\u20139:30 am",
+      "requirements": [],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 272-4122",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Appointment requirement not confirmed.",
+       "The listed phone is the administrative-office number, not confirmed as a site-specific number.",
+       "The program serves 51 weeks per year, closes for one week between Christmas and New Year's, and closes on major holidays; specific closure dates were not supplied.",
+       "Appointment requirement, visit limit, service-area boundary, languages, food quantity, and current availability are not known."
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "08:30",
+       "close": "09:30"
+      },
+      "claims": {
+       "open_today_text": "Open today from 8:30 AM to 9:30 AM",
+       "cost_label": "Free",
+       "requirements_text": "May require: The provider states it welcomes everyone to its meal sites without regard to race, religion or lack of faith belief, national origin, gender, age, handicap, or sexual orientation.",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1300+W.+Fond+du+Lac+Ave.%2C+Milwaukee%2C+WI",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     },
+     {
+      "resource_id": "mke-interchange-village-church-food-pantry",
+      "provider": "Interchange Food Pantry at Village Church",
+      "date": "2026-09-10",
+      "service_type": "free_pantry",
+      "cost": "unknown",
+      "schedule_text": "Thu 9:30\u201311:30 am",
+      "requirements": [
+       "Photo ID",
+       "City of Milwaukee residency"
+      ],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 551-2184",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Cost unknown \u2014 ask on arrival; appointment requirement unknown; ask for no-cook items.",
+       "Cost, appointment requirement, languages, holiday exceptions, food quantity, and current availability are not known.",
+       "Published two- and three-visit rules apply to proxy pickups and are not represented as a general guest visit limit.",
+       "Cost not stated by the provider; ask"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "14:00",
+       "close": "16:00"
+      },
+      "claims": {
+       "open_today_text": "Open today from 9:30 AM to 11:30 AM",
+       "cost_label": "Cost not stated; ask",
+       "requirements_text": "May require: Photo ID.; Live in the City of Milwaukee.",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=130+E.+Juneau+Avenue%2C+Milwaukee%2C+WI+53202",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     },
+     {
+      "resource_id": "mke-svdp-harambee-kitchen",
+      "provider": "St. Vincent de Paul Harambee Kitchen",
+      "date": "2026-09-10",
+      "service_type": "free_meal",
+      "cost": "unknown",
+      "schedule_text": "Mon\u2013Fri dinner 5:30\u20136:15 pm",
+      "requirements": [],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 249-3866",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Cost not stated \u2014 ask on arrival; appointment requirement unknown.",
+       "The linked 2026 holiday schedule says closures are subject to change.",
+       "Cost, eligibility requirements, appointment requirement, visit limit, languages, food quantity, and current availability are not known.",
+       "Cost not stated by the provider; ask"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "17:30",
+       "close": "18:15"
+      },
+      "claims": {
+       "open_today_text": "Open today from 5:30 PM to 6:15 PM",
+       "cost_label": "Cost not stated; ask",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=2600+N.+2nd+Street%2C+Milwaukee%2C+WI+53212",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     }
+    ],
+    "meal_notes": [
+     "Breakfast at Running Rebels (8:30 am). Pantry pickup at Village Church (9:30 am) \u2014 bring photo ID, ask for no-cook items. Dinner at Harambee Kitchen (5:30 pm)."
+    ],
+    "unmet_needs": []
+   },
+   {
+    "date": "2026-09-11",
+    "visits": [
+     {
+      "resource_id": "mke-gathering-running-rebels",
+      "provider": "The Gathering at Running Rebels",
+      "date": "2026-09-11",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Breakfast 8:30\u20139:30 am",
+      "requirements": [],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 272-4122",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Appointment requirement not confirmed.",
+       "The listed phone is the administrative-office number, not confirmed as a site-specific number.",
+       "The program serves 51 weeks per year, closes for one week between Christmas and New Year's, and closes on major holidays; specific closure dates were not supplied.",
+       "Appointment requirement, visit limit, service-area boundary, languages, food quantity, and current availability are not known."
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "08:30",
+       "close": "09:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 8:30 AM",
+       "cost_label": "Free",
+       "requirements_text": "May require: The provider states it welcomes everyone to its meal sites without regard to race, religion or lack of faith belief, national origin, gender, age, handicap, or sexual orientation.",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1300+W.+Fond+du+Lac+Ave.%2C+Milwaukee%2C+WI",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     },
+     {
+      "resource_id": "mfc-038",
+      "provider": "Maccanon Brown Homeless Sanctuary \u2013 Hephatha Lutheran Church",
+      "date": "2026-09-11",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Fri 11:00 am\u20132:30 pm",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-404-0600",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": false,
+      "uncertainty": [
+       "Service area not confirmed for 53206 \u2014 call ahead; hours last checked Aug 2024.",
+       "Last checked 2024-08-27; call to confirm",
+       "Confirm they serve your area"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-11",
+       "open": "11:00",
+       "close": "14:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-11 at 11:00 AM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "Confirm they serve your area",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1720+W.+Locust+St.%2C+Milwaukee%2C+WI+53206",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     },
+     {
+      "resource_id": "mke-svdp-harambee-kitchen",
+      "provider": "St. Vincent de Paul Harambee Kitchen",
+      "date": "2026-09-11",
+      "service_type": "free_meal",
+      "cost": "unknown",
+      "schedule_text": "Mon\u2013Fri dinner 5:30\u20136:15 pm",
+      "requirements": [],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 249-3866",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Cost not stated \u2014 ask on arrival.",
+       "The linked 2026 holiday schedule says closures are subject to change.",
+       "Cost, eligibility requirements, appointment requirement, visit limit, languages, food quantity, and current availability are not known.",
+       "Cost not stated by the provider; ask"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "17:30",
+       "close": "18:15"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 5:30 PM",
+       "cost_label": "Cost not stated; ask",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=2600+N.+2nd+Street%2C+Milwaukee%2C+WI+53212",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     }
+    ],
+    "meal_notes": [
+     "Breakfast at Running Rebels (8:30 am). Midday meal at Hephatha Lutheran \u2014 call 414-404-0600 first to confirm service area and hours. Dinner at Harambee Kitchen (5:30 pm)."
+    ],
+    "unmet_needs": []
+   },
+   {
+    "date": "2026-09-12",
+    "visits": [
+     {
+      "resource_id": "mke-gathering-running-rebels",
+      "provider": "The Gathering at Running Rebels",
+      "date": "2026-09-12",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Sat lunch 11:30 am\u201312:30 pm (all four Gathering locations)",
+      "requirements": [],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 272-4122",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Appointment requirement not confirmed.",
+       "The listed phone is the administrative-office number, not confirmed as a site-specific number.",
+       "The program serves 51 weeks per year, closes for one week between Christmas and New Year's, and closes on major holidays; specific closure dates were not supplied.",
+       "Appointment requirement, visit limit, service-area boundary, languages, food quantity, and current availability are not known."
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "08:30",
+       "close": "09:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 8:30 AM",
+       "cost_label": "Free",
+       "requirements_text": "May require: The provider states it welcomes everyone to its meal sites without regard to race, religion or lack of faith belief, national origin, gender, age, handicap, or sexual orientation.",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1300+W.+Fond+du+Lac+Ave.%2C+Milwaukee%2C+WI",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     },
+     {
+      "resource_id": "mke-interchange-village-church-food-pantry",
+      "provider": "Interchange Food Pantry at Village Church",
+      "date": "2026-09-12",
+      "service_type": "free_pantry",
+      "cost": "unknown",
+      "schedule_text": "Sat 9:30\u201311:30 am",
+      "requirements": [
+       "Photo ID",
+       "City of Milwaukee residency"
+      ],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 551-2184",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Cost unknown \u2014 ask on arrival; ask for no-cook items.",
+       "Cost, appointment requirement, languages, holiday exceptions, food quantity, and current availability are not known.",
+       "Published two- and three-visit rules apply to proxy pickups and are not represented as a general guest visit limit.",
+       "Cost not stated by the provider; ask"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "14:00",
+       "close": "16:00"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 2:00 PM",
+       "cost_label": "Cost not stated; ask",
+       "requirements_text": "May require: Photo ID.; Live in the City of Milwaukee.",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=130+E.+Juneau+Avenue%2C+Milwaukee%2C+WI+53202",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     },
+     {
+      "resource_id": "mfc-013",
+      "provider": "COA Goldin Center",
+      "date": "2026-09-12",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "schedule_text": "Sat 9:00 am\u201312:00 pm",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-265-7696",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": false,
+      "uncertainty": [
+       "Service area not confirmed for 53206; hours last checked Aug 2024 \u2014 call ahead; ask for no-cook items.",
+       "Last checked 2024-08-27; call to confirm",
+       "Confirm they serve your area"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-09",
+       "open": "15:00",
+       "close": "18:00"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-09 at 3:00 PM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "Confirm they serve your area",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=2320+W+Burleigh+St.%2C+Milwaukee%2C+WI+53206",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     }
+    ],
+    "meal_notes": [
+     "Pantry at Village Church (9:30 am, bring photo ID) and/or COA Goldin Center (9 am \u2014 call first). Lunch at Running Rebels (11:30 am)."
+    ],
+    "unmet_needs": [
+     "No dinner service confirmed for Saturday \u2014 no SVdP Cross Roads or Harambee Kitchen on Sat."
+    ]
+   },
+   {
+    "date": "2026-09-13",
+    "visits": [
+     {
+      "resource_id": "mke-interchange-st-mark-quality-of-life-pantry",
+      "provider": "Interchange Food Pantry at St. Mark AME (Quality of Life Pantry)",
+      "date": "2026-09-13",
+      "service_type": "free_pantry",
+      "cost": "unknown",
+      "schedule_text": "2nd & 4th Sunday 12:30\u20132:00 pm",
+      "requirements": [
+       "Photo ID",
+       "City of Milwaukee residency"
+      ],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 551-2184",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Cost unknown \u2014 ask on arrival; appointment requirement unknown; ask for no-cook items.",
+       "Cost, appointment requirement, languages, holiday exceptions, food quantity, and current availability are not known.",
+       "Published two- and three-visit rules apply to proxy pickups and are not represented as a general guest visit limit.",
+       "Cost not stated by the provider; ask"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-13",
+       "open": "12:30",
+       "close": "14:00"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-13 at 12:30 PM",
+       "cost_label": "Cost not stated; ask",
+       "requirements_text": "May require: Photo ID.; Live in the City of Milwaukee.",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1530+W.+Atkinson+Avenue%2C+Milwaukee%2C+WI+53206",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     },
+     {
+      "resource_id": "mke-svdp-cross-roads-kitchen",
+      "provider": "St. Vincent de Paul Cross Roads Kitchen",
+      "date": "2026-09-13",
+      "service_type": "free_meal",
+      "cost": "unknown",
+      "schedule_text": "Sun\u2013Fri dinner 5:30\u20136:15 pm",
+      "requirements": [],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 649-9555",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Cost not stated \u2014 ask on arrival; appointment requirement unknown; subject to holiday closures.",
+       "The linked 2026 holiday schedule says closures are subject to change.",
+       "Cost, eligibility requirements, appointment requirement, visit limit, languages, food quantity, and current availability are not known.",
+       "Cost not stated by the provider; ask"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "17:30",
+       "close": "18:15"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 5:30 PM",
+       "cost_label": "Cost not stated; ask",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=931+W.+Madison+Street%2C+Milwaukee%2C+WI",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     }
+    ],
+    "meal_notes": [
+     "Pantry at St. Mark AME (12:30 pm, bring photo ID, ask for no-cook items). Dinner at Cross Roads Kitchen (5:30 pm)."
+    ],
+    "unmet_needs": [
+     "No confirmed breakfast or lunch meal service on Sunday."
+    ]
+   },
+   {
+    "date": "2026-09-14",
+    "visits": [
+     {
+      "resource_id": "mke-gathering-running-rebels",
+      "provider": "The Gathering at Running Rebels",
+      "date": "2026-09-14",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Breakfast Mon\u2013Fri 8:30\u20139:30 am",
+      "requirements": [],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 272-4122",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Appointment requirement not confirmed.",
+       "The listed phone is the administrative-office number, not confirmed as a site-specific number.",
+       "The program serves 51 weeks per year, closes for one week between Christmas and New Year's, and closes on major holidays; specific closure dates were not supplied.",
+       "Appointment requirement, visit limit, service-area boundary, languages, food quantity, and current availability are not known."
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "08:30",
+       "close": "09:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 8:30 AM",
+       "cost_label": "Free",
+       "requirements_text": "May require: The provider states it welcomes everyone to its meal sites without regard to race, religion or lack of faith belief, national origin, gender, age, handicap, or sexual orientation.",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1300+W.+Fond+du+Lac+Ave.%2C+Milwaukee%2C+WI",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     },
+     {
+      "resource_id": "mke-gathering-ascension-lutheran",
+      "provider": "The Gathering at Ascension Lutheran Church",
+      "date": "2026-09-14",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Mon & Wed dinner 4:30\u20135:30 pm",
+      "requirements": [],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 272-4122",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Appointment requirement not confirmed.",
+       "The listed phone is the administrative-office number, not confirmed as a site-specific number.",
+       "The program closes for one week between Christmas and New Year's and on major holidays; specific closure dates were not supplied.",
+       "Appointment requirement, visit limit, service-area boundary, languages, food quantity, and current availability are not known."
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-09",
+       "open": "16:30",
+       "close": "17:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-09 at 4:30 PM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1236+S.+Layton+Blvd.+%2827th+St.%29%2C+Milwaukee%2C+WI",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     },
+     {
+      "resource_id": "mfc-008",
+      "provider": "Capuchin Community Services \u2013 House of Peace",
+      "date": "2026-09-14",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "schedule_text": "Mon\u2013Fri 8:30 am\u201312 pm and 12\u20133:15 pm",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-933-1300",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": true,
+      "uncertainty": [
+       "Hours last checked Aug 2024 \u2014 call to confirm; ask for no-cook items.",
+       "Last checked 2024-08-27; call to confirm"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "08:30",
+       "close": "12:00"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 8:30 AM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1702+West+Walnut+St.%2C+Milwaukee%2C+WI+53205",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     }
+    ],
+    "meal_notes": [
+     "Breakfast at Running Rebels (8:30 am). Pantry at House of Peace (8:30 am\u20133:15 pm, call first). Dinner at Ascension Lutheran (4:30 pm)."
+    ],
+    "unmet_needs": []
+   },
+   {
+    "date": "2026-09-15",
+    "visits": [
+     {
+      "resource_id": "mke-gathering-running-rebels",
+      "provider": "The Gathering at Running Rebels",
+      "date": "2026-09-15",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Breakfast Mon\u2013Fri 8:30\u20139:30 am",
+      "requirements": [],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 272-4122",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Appointment requirement not confirmed.",
+       "The listed phone is the administrative-office number, not confirmed as a site-specific number.",
+       "The program serves 51 weeks per year, closes for one week between Christmas and New Year's, and closes on major holidays; specific closure dates were not supplied.",
+       "Appointment requirement, visit limit, service-area boundary, languages, food quantity, and current availability are not known."
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "08:30",
+       "close": "09:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 8:30 AM",
+       "cost_label": "Free",
+       "requirements_text": "May require: The provider states it welcomes everyone to its meal sites without regard to race, religion or lack of faith belief, national origin, gender, age, handicap, or sexual orientation.",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1300+W.+Fond+du+Lac+Ave.%2C+Milwaukee%2C+WI",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     },
+     {
+      "resource_id": "mfc-036",
+      "provider": "Maccanon Brown Homeless Sanctuary",
+      "date": "2026-09-15",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "schedule_text": "Tue 11:00 am\u20131:30 pm",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-404-0600",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": false,
+      "uncertainty": [
+       "Service area not confirmed for 53206; hours last checked Aug 2024 \u2014 call ahead; ask for no-cook items.",
+       "Last checked 2024-08-27; call to confirm",
+       "Confirm they serve your area"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "11:00",
+       "close": "13:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 11:00 AM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "Confirm they serve your area",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=2461+W.+Center+St.%2C+Milwaukee%2C+WI+53206",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     },
+     {
+      "resource_id": "mke-svdp-harambee-kitchen",
+      "provider": "St. Vincent de Paul Harambee Kitchen",
+      "date": "2026-09-15",
+      "service_type": "free_meal",
+      "cost": "unknown",
+      "schedule_text": "Mon\u2013Fri dinner 5:30\u20136:15 pm",
+      "requirements": [],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 249-3866",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Cost not stated \u2014 ask on arrival.",
+       "The linked 2026 holiday schedule says closures are subject to change.",
+       "Cost, eligibility requirements, appointment requirement, visit limit, languages, food quantity, and current availability are not known.",
+       "Cost not stated by the provider; ask"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "17:30",
+       "close": "18:15"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 5:30 PM",
+       "cost_label": "Cost not stated; ask",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=2600+N.+2nd+Street%2C+Milwaukee%2C+WI+53212",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     }
+    ],
+    "meal_notes": [
+     "Breakfast at Running Rebels (8:30 am). Pantry at Maccanon Brown (11 am \u2014 call 414-404-0600 first). Dinner at Harambee Kitchen (5:30 pm)."
+    ],
+    "unmet_needs": []
+   },
+   {
+    "date": "2026-09-16",
+    "visits": [
+     {
+      "resource_id": "mke-gathering-running-rebels",
+      "provider": "The Gathering at Running Rebels",
+      "date": "2026-09-16",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Breakfast Mon\u2013Fri 8:30\u20139:30 am",
+      "requirements": [],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 272-4122",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Appointment requirement not confirmed.",
+       "The listed phone is the administrative-office number, not confirmed as a site-specific number.",
+       "The program serves 51 weeks per year, closes for one week between Christmas and New Year's, and closes on major holidays; specific closure dates were not supplied.",
+       "Appointment requirement, visit limit, service-area boundary, languages, food quantity, and current availability are not known."
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "08:30",
+       "close": "09:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 8:30 AM",
+       "cost_label": "Free",
+       "requirements_text": "May require: The provider states it welcomes everyone to its meal sites without regard to race, religion or lack of faith belief, national origin, gender, age, handicap, or sexual orientation.",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1300+W.+Fond+du+Lac+Ave.%2C+Milwaukee%2C+WI",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     },
+     {
+      "resource_id": "mke-gathering-ascension-lutheran",
+      "provider": "The Gathering at Ascension Lutheran Church",
+      "date": "2026-09-16",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Mon & Wed dinner 4:30\u20135:30 pm",
+      "requirements": [],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 272-4122",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Appointment requirement not confirmed.",
+       "The listed phone is the administrative-office number, not confirmed as a site-specific number.",
+       "The program closes for one week between Christmas and New Year's and on major holidays; specific closure dates were not supplied.",
+       "Appointment requirement, visit limit, service-area boundary, languages, food quantity, and current availability are not known."
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-09",
+       "open": "16:30",
+       "close": "17:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-09 at 4:30 PM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1236+S.+Layton+Blvd.+%2827th+St.%29%2C+Milwaukee%2C+WI",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     },
+     {
+      "resource_id": "mke-interchange-village-church-food-pantry",
+      "provider": "Interchange Food Pantry at Village Church",
+      "date": "2026-09-16",
+      "service_type": "free_pantry",
+      "cost": "unknown",
+      "schedule_text": "Wed 4:00\u20136:00 pm",
+      "requirements": [
+       "Photo ID",
+       "City of Milwaukee residency"
+      ],
+      "last_verified": "2026-09-08",
+      "contact": "(414) 551-2184",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Cost unknown \u2014 ask on arrival; ask for no-cook items.",
+       "Cost, appointment requirement, languages, holiday exceptions, food quantity, and current availability are not known.",
+       "Published two- and three-visit rules apply to proxy pickups and are not represented as a general guest visit limit.",
+       "Cost not stated by the provider; ask"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "14:00",
+       "close": "16:00"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 2:00 PM",
+       "cost_label": "Cost not stated; ask",
+       "requirements_text": "May require: Photo ID.; Live in the City of Milwaukee.",
+       "appointment_text": "Appointment: not stated; call to ask",
+       "freshness_text": "Last checked 2026-09-08",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=130+E.+Juneau+Avenue%2C+Milwaukee%2C+WI+53202",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Official provider page, checked 2026-09-08"
+      }
+     }
+    ],
+    "meal_notes": [
+     "Breakfast at Running Rebels (8:30 am). Pantry at Village Church (4\u20136 pm, bring photo ID, ask for no-cook items). Dinner at Ascension Lutheran (4:30 pm) \u2014 note overlap with pantry; prioritize whichever is closer."
+    ],
+    "unmet_needs": []
+   }
+  ],
+  "food_today": [
+   {
+    "resource_id": "mke-gathering-running-rebels",
+    "provider": "The Gathering at Running Rebels",
+    "date": "2026-09-10",
+    "service_type": "free_meal",
+    "cost": "free",
+    "schedule_text": "Breakfast 8:30\u20139:30 am",
+    "requirements": [],
+    "last_verified": "2026-09-08",
+    "contact": "(414) 272-4122",
+    "freshness_tier": "verified",
+    "service_area_known": true,
+    "uncertainty": [
+     "Appointment requirement not confirmed.",
+     "The listed phone is the administrative-office number, not confirmed as a site-specific number.",
+     "The program serves 51 weeks per year, closes for one week between Christmas and New Year's, and closes on major holidays; specific closure dates were not supplied.",
+     "Appointment requirement, visit limit, service-area boundary, languages, food quantity, and current availability are not known."
+    ],
+    "backup_resource_id": null,
+    "next_open": {
+     "date": "2026-09-08",
+     "open": "08:30",
+     "close": "09:30"
+    },
+    "claims": {
+     "open_today_text": "Open today from 8:30 AM to 9:30 AM",
+     "cost_label": "Free",
+     "requirements_text": "May require: The provider states it welcomes everyone to its meal sites without regard to race, religion or lack of faith belief, national origin, gender, age, handicap, or sexual orientation.",
+     "appointment_text": "Appointment: not stated; call to ask",
+     "freshness_text": "Last checked 2026-09-08",
+     "inventory_text": "We can't confirm they have food today.",
+     "service_area_text": "",
+     "travel_text": "Travel time unknown, check the map.",
+     "directions_url": "https://www.google.com/maps/search/?api=1&query=1300+W.+Fond+du+Lac+Ave.%2C+Milwaukee%2C+WI",
+     "travel_echo": "You said: bus, up to 30 minutes",
+     "source_text": "Source: Official provider page, checked 2026-09-08"
+    }
+   },
+   {
+    "resource_id": "mke-interchange-village-church-food-pantry",
+    "provider": "Interchange Food Pantry at Village Church",
+    "date": "2026-09-10",
+    "service_type": "free_pantry",
+    "cost": "unknown",
+    "schedule_text": "Thu 9:30\u201311:30 am",
+    "requirements": [
+     "Photo ID",
+     "City of Milwaukee residency"
+    ],
+    "last_verified": "2026-09-08",
+    "contact": "(414) 551-2184",
+    "freshness_tier": "verified",
+    "service_area_known": true,
+    "uncertainty": [
+     "Cost unknown \u2014 ask on arrival; appointment requirement unknown; ask for no-cook items.",
+     "Cost, appointment requirement, languages, holiday exceptions, food quantity, and current availability are not known.",
+     "Published two- and three-visit rules apply to proxy pickups and are not represented as a general guest visit limit.",
+     "Cost not stated by the provider; ask"
+    ],
+    "backup_resource_id": null,
+    "next_open": {
+     "date": "2026-09-08",
+     "open": "14:00",
+     "close": "16:00"
+    },
+    "claims": {
+     "open_today_text": "Open today from 9:30 AM to 11:30 AM",
+     "cost_label": "Cost not stated; ask",
+     "requirements_text": "May require: Photo ID.; Live in the City of Milwaukee.",
+     "appointment_text": "Appointment: not stated; call to ask",
+     "freshness_text": "Last checked 2026-09-08",
+     "inventory_text": "We can't confirm they have food today.",
+     "service_area_text": "",
+     "travel_text": "Travel time unknown, check the map.",
+     "directions_url": "https://www.google.com/maps/search/?api=1&query=130+E.+Juneau+Avenue%2C+Milwaukee%2C+WI+53202",
+     "travel_echo": "You said: bus, up to 30 minutes",
+     "source_text": "Source: Official provider page, checked 2026-09-08"
+    }
+   },
+   {
+    "resource_id": "mke-svdp-harambee-kitchen",
+    "provider": "St. Vincent de Paul Harambee Kitchen",
+    "date": "2026-09-10",
+    "service_type": "free_meal",
+    "cost": "unknown",
+    "schedule_text": "Mon\u2013Fri dinner 5:30\u20136:15 pm",
+    "requirements": [],
+    "last_verified": "2026-09-08",
+    "contact": "(414) 249-3866",
+    "freshness_tier": "verified",
+    "service_area_known": true,
+    "uncertainty": [
+     "Cost not stated \u2014 ask on arrival; appointment requirement unknown.",
+     "The linked 2026 holiday schedule says closures are subject to change.",
+     "Cost, eligibility requirements, appointment requirement, visit limit, languages, food quantity, and current availability are not known.",
+     "Cost not stated by the provider; ask"
+    ],
+    "backup_resource_id": null,
+    "next_open": {
+     "date": "2026-09-08",
+     "open": "17:30",
+     "close": "18:15"
+    },
+    "claims": {
+     "open_today_text": "Open today from 5:30 PM to 6:15 PM",
+     "cost_label": "Cost not stated; ask",
+     "requirements_text": "No requirements listed",
+     "appointment_text": "Appointment: not stated; call to ask",
+     "freshness_text": "Last checked 2026-09-08",
+     "inventory_text": "We can't confirm they have food today.",
+     "service_area_text": "",
+     "travel_text": "Travel time unknown, check the map.",
+     "directions_url": "https://www.google.com/maps/search/?api=1&query=2600+N.+2nd+Street%2C+Milwaukee%2C+WI+53212",
+     "travel_echo": "You said: bus, up to 30 minutes",
+     "source_text": "Source: Official provider page, checked 2026-09-08"
+    }
+   }
+  ],
+  "resource_ids_used": [
+   "mfc-008",
+   "mfc-013",
+   "mfc-036",
+   "mfc-038",
+   "mke-gathering-ascension-lutheran",
+   "mke-gathering-running-rebels",
+   "mke-interchange-st-mark-quality-of-life-pantry",
+   "mke-interchange-village-church-food-pantry",
+   "mke-svdp-cross-roads-kitchen",
+   "mke-svdp-harambee-kitchen"
+  ],
+  "preparation_checklist": [
+   "Bring a valid photo ID every day \u2014 required at Interchange pantries (Village Church and St. Mark AME) and Jewish Community Pantry.",
+   "Call The Gathering (414-272-4122) before your first visit to confirm walk-in policy.",
+   "Call SVdP Harambee Kitchen (414-249-3866) and Cross Roads Kitchen (414-649-9555) to confirm cost and walk-in access.",
+   "Call Capuchin House of Peace (414-933-1300) to confirm current hours before visiting \u2014 last checked Aug 2024.",
+   "Call Maccanon Brown (414-404-0600) to confirm they serve 53206 and to verify hours before Tue/Fri visits.",
+   "Call COA Goldin Center (414-265-7696) before Sat Sep 12 visit \u2014 service area and hours unconfirmed.",
+   "At every pantry, ask specifically for no-cook or ready-to-eat items \u2014 you have no kitchen.",
+   "Saturday dinner (Sep 12) and Sunday breakfast/lunch (Sep 13) have no confirmed service \u2014 plan to use pantry items picked up earlier in the week."
+  ],
+  "unmet_needs": [
+   "Saturday Sep 12 dinner: no confirmed free meal service found.",
+   "Sunday Sep 13 breakfast and lunch: no confirmed free meal service found.",
+   "No kitchen means pantry items must be no-cook/ready-to-eat \u2014 confirm availability at each pantry before relying on them for meals.",
+   "Paid mobile market (res-003) excluded \u2014 $0 budget."
+  ],
+  "unconfirmed": [],
+  "explanation": "You have $0 budget and no kitchen, so the plan prioritizes free hot meals (no prep needed) and pantries that carry no-cook items. Three verified meal programs \u2014 The Gathering, St. Vincent de Paul Cross Roads, and Harambee Kitchen \u2014 anchor most days. Pantries fill gaps for take-home food. res-003 (paid mobile market) is excluded. All sources are free or cost-unknown; call ahead to confirm cost-unknown sites before visiting. Pantry items need no-cook confirmation at pickup."
+ },
+ "evidence": [
+  "mfc-008",
+  "mfc-013",
+  "mfc-036",
+  "mfc-038",
+  "mke-gathering-ascension-lutheran",
+  "mke-gathering-running-rebels",
+  "mke-interchange-st-mark-quality-of-life-pantry",
+  "mke-interchange-village-church-food-pantry",
+  "mke-svdp-cross-roads-kitchen",
+  "mke-svdp-harambee-kitchen"
+ ],
+ "missing": [
+  "Saturday Sep 12 dinner: no confirmed free meal service found.",
+  "Sunday Sep 13 breakfast and lunch: no confirmed free meal service found.",
+  "No kitchen means pantry items must be no-cook/ready-to-eat \u2014 confirm availability at each pantry before relying on them for meals.",
+  "Paid mobile market (res-003) excluded \u2014 $0 budget."
+ ],
+ "warnings": [],
+ "retryable": false,
+ "request_id": "5101c665-9499-4cae-985d-869582d6471b",
+ "help_routes": []
+}

@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
         rewrites: async () => [
           { source: "/api/:path*", destination: `${apiOrigin}/api/:path*` },
         ],
+        // A plan takes 60 to 105 s; the dev proxy gives up at 30 s by default.
+        experimental: { proxyTimeout: 180_000 },
       }
     : {}),
 };
