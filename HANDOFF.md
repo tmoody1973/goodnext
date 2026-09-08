@@ -33,9 +33,11 @@ Hackathon". Only the `linear-build` skill creates or closes issues. Issues
 MOO-770 to MOO-775, MOO-777, MOO-778 are Done with evidence comments.
 **All nine Food today issues (MOO-770 to 778) are Done.**
 
-GitHub: https://github.com/tmoody1973/goodnext. **`origin/main` is far
-behind local `main`; nothing has been pushed since the first commit.**
-Push only when Tarik says "push".
+GitHub: https://github.com/tmoody1973/goodnext, pushed and current as of
+2026-09-08 13:10 CDT. CI (`.github/workflows/ci.yml`) runs both test suites
+and `agentcore validate` on every push to main and every PR; proven red on
+PR #1 (closed, throwaway). **Branch protection on main is not set**; that is
+a manual GitHub settings step for Tarik. Push only when Tarik says "push".
 
 ## The deployed runtime
 
@@ -85,7 +87,8 @@ confirm" with the date; only a missing date is "unconfirmed".
 
 ## Next steps, in order
 
-1. Tarik: "push" to catch GitHub up. Then add CI (typecheck, tests) per the
+1. Tarik: enable branch protection on main requiring the CI check
+   (GitHub → Settings → Branches → Add rule → require status checks). Then add CI (typecheck, tests) per the
    global going-live rule; a public repo with real tests and no CI is overdue.
 2. Spec and ticket feature 2 (website, Food today screen) with
    `grill-with-docs` → `to-spec` → `to-tickets` → `linear-build`. Impeccable
