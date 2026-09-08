@@ -43,6 +43,16 @@ export const copy = {
       temporarily_unavailable: "Temporarily unavailable. Try again in a moment.",
     },
     unreachable: "We could not reach the service. Try again in a moment.",
+    listedToday: "{n} listed today",
+    oneListedToday: "1 listed today",
+    noneListedToday: "Nothing listed for today.",
+  },
+  card: {
+    directions: "Directions",
+    call: "Call {phone}",
+  },
+  unconfirmed: {
+    heading: "Not checked recently. Call before you go.",
   },
 } as const;
 

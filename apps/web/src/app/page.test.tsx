@@ -54,7 +54,7 @@ describe("Food today page", () => {
     await user.click(screen.getByRole("button", { name: "Show food today" }));
 
     expect(await screen.findByRole("heading", { level: 1 })).toHaveTextContent("Food today, Wednesday, September 9");
-    expect(screen.getByText("Listed options found.")).toBeInTheDocument();
+    expect(screen.getByText("Nothing listed for today.")).toBeInTheDocument();
 
     const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     expect(url).toBe("/api/plans");
