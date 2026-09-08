@@ -36,8 +36,9 @@ MOO-770 to MOO-775, MOO-777, MOO-778 are Done with evidence comments.
 GitHub: https://github.com/tmoody1973/goodnext, pushed and current as of
 2026-09-08 13:10 CDT. CI (`.github/workflows/ci.yml`) runs both test suites
 and `agentcore validate` on every push to main and every PR; proven red on
-PR #1 (closed, throwaway). **Branch protection on main is not set**; that is
-a manual GitHub settings step for Tarik. Push only when Tarik says "push".
+PR #1 (closed, throwaway). Branch protection on main requires all three CI
+checks and blocks force-pushes; admins can bypass in an emergency. Claude
+makes changes through pull requests. Push only when Tarik says "push".
 
 ## The deployed runtime
 
@@ -85,16 +86,40 @@ confirm" with the date; only a missing date is "unconfirmed".
    exists; DIY verification guide at `docs/research/211-portal-verification-guide.md`.
 5. **Website** does not exist. Impeccable shape pass first, then screens.
 
-## Next steps, in order
+## Next steps, in order (six days to September 14, 7 p.m. Central)
 
-1. Tarik: enable branch protection on main requiring the CI check
-   (GitHub → Settings → Branches → Add rule → require status checks). Then add CI (typecheck, tests) per the
-   global going-live rule; a public repo with real tests and no CI is overdue.
-2. Spec and ticket feature 2 (website, Food today screen) with
-   `grill-with-docs` → `to-spec` → `to-tickets` → `linear-build`. Impeccable
-   4.1.2 is installed; use its `shape` workflow before coding screens.
-3. Send the three drafted emails in `docs/research/211-permission-requests.md`
-   and work the 53206 call sheet.
+1. **Website, Food today screen.** Run `impeccable` `shape` for the Food
+   today journey first (PRD section 14 requires it), then
+   `mattpocock-skills:grill-with-docs` → `to-spec` → `to-tickets` →
+   `linear-build`. Next.js 16 static export, Tailwind 4, `apps/web/`. The
+   screen calls `POST /api/plans`. It must show today expanded, days two to
+   seven collapsed, the no-match state with help routes, and a delayed-status
+   message after 30 s (PRD section 8) because a plan takes 60–100 s.
+2. **Latency.** Return day one first, the week second; or cache the system
+   prompt. Only after the screen exists, so the fix is measured on the real
+   flow.
+3. **Judge-facing hosting.** The API needs a public home (Tech Stack says
+   Fargate behind CloudFront); the site is a static export. Use an IAM role,
+   not root, for this. Not started.
+4. **Submission checklist** (PRD section 13, H06–H10): public repo with MIT
+   (done), architecture diagram matching what shipped, description, video
+   under five minutes, Builder ID, judge access through October 8.
+5. **Data follow-ups.** Send the three drafted permission requests; work the
+   53206 call sheet; set CloudWatch log retention on the runtime log group.
+
+## First message for the next session (paste this)
+
+```text
+We are building GoodNext in /Users/tarikmoody/Projects/foodshare-strands.
+Read HANDOFF.md, then CONTEXT.md, then docs/agents/issue-tracker.md.
+Do not re-read the planning docs unless a task needs them.
+
+Next feature is the website's Food today screen. Start with the Impeccable
+shape workflow for that journey, then grill-with-docs, to-spec, to-tickets,
+and create the Linear issues with linear-build. Ship the scaffolding;
+Socratic only at the seams. Explain in plain English. Nothing in AWS is
+created or changed without my go, and deploys are commands I run myself.
+```
 
 ## Working agreements
 
