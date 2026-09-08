@@ -53,7 +53,7 @@ def small_resource(rid: str, last_verified: str | None, dates=DATES) -> FoodReso
 
 
 def test_find_excludes_closed_and_out_of_area():
-    result = find_food_resources("53206", DATES[0], DATES[-1])
+    result = find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
     ids = {r["resource_id"] for r in result["data"]}
     assert result["status"] == "success"
     assert "res-005" not in ids, "closed resource must not be returned"
@@ -64,12 +64,12 @@ def test_find_excludes_closed_and_out_of_area():
 
 
 def test_find_no_match_for_unserved_zip():
-    result = find_food_resources("53999", DATES[0], DATES[-1])
+    result = find_food_resources("53999", DATES[0], DATES[-1], NOW_LOCAL)
     assert result["status"] == "no_match" and result["data"] == []
 
 
 def test_zero_budget_marks_paid_unsuitable():
-    find_food_resources("53206", DATES[0], DATES[-1])
+    find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
     result = check_food_constraints(["res-003", "res-001"], 0.0, "none", ["bus"])
     verdicts = {r["resource_id"]: r for r in result["data"]}
     assert verdicts["res-003"]["verdict"] == "unsuitable"
@@ -83,31 +83,31 @@ def test_constraint_check_rejects_unreturned_id():
 
 
 def test_validator_strips_fabricated_id():
-    find_food_resources("53206", DATES[0], DATES[-1])
+    find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
     proposal = proposal_with([visit("res-001", DATES[0]), visit("res-999", DATES[0])])
-    cleaned, violations = validate_food_plan(proposal, returned_ids.get(), load_directory(), ZERO_BUDGET_NO_KITCHEN, DATES)
+    cleaned, violations = validate_food_plan(proposal, returned_ids.get(), load_directory(), ZERO_BUDGET_NO_KITCHEN, DATES, NOW_LOCAL)
     assert [v.resource_id for v in cleaned.days[0].visits] == ["res-001"]
     assert any("res-999" in v for v in violations)
 
 
 def test_validator_strips_paid_visit_in_zero_budget_plan():
-    find_food_resources("53206", DATES[0], DATES[-1])
+    find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
     proposal = proposal_with([visit("res-003", DATES[1], cost="paid")])
-    cleaned, violations = validate_food_plan(proposal, returned_ids.get(), load_directory(), ZERO_BUDGET_NO_KITCHEN, DATES)
+    cleaned, violations = validate_food_plan(proposal, returned_ids.get(), load_directory(), ZERO_BUDGET_NO_KITCHEN, DATES, NOW_LOCAL)
     assert cleaned.days[1].visits == [] and any("zero-budget" in v for v in violations)
 
 
 def test_validator_strips_visit_on_a_day_with_no_window():
-    find_food_resources("53206", DATES[0], DATES[-1])
+    find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
     proposal = proposal_with([visit("res-001", DATES[1])])  # res-001 is not open on 09-09
-    cleaned, violations = validate_food_plan(proposal, returned_ids.get(), load_directory(), ZERO_BUDGET_NO_KITCHEN, DATES)
+    cleaned, violations = validate_food_plan(proposal, returned_ids.get(), load_directory(), ZERO_BUDGET_NO_KITCHEN, DATES, NOW_LOCAL)
     assert cleaned.days[1].visits == [] and any("no opening window" in v for v in violations)
 
 
 def test_validator_rebuilds_seven_dates_and_flags_stale():
-    find_food_resources("53206", DATES[0], DATES[-1])
+    find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
     short = proposal_with([visit("res-004", "2026-09-11")], dates=DATES[:4])
-    cleaned, violations = validate_food_plan(short, returned_ids.get(), load_directory(), ZERO_BUDGET_NO_KITCHEN, DATES)
+    cleaned, violations = validate_food_plan(short, returned_ids.get(), load_directory(), ZERO_BUDGET_NO_KITCHEN, DATES, NOW_LOCAL)
     assert [d.date for d in cleaned.days] == DATES
     assert any("seven server dates" in v for v in violations)
     stale_visit = cleaned.days[3].visits[0]
@@ -115,7 +115,7 @@ def test_validator_rebuilds_seven_dates_and_flags_stale():
 
 
 def test_envelope_status_rules():
-    find_food_resources("53206", DATES[0], DATES[-1])
+    find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
     ok = proposal_with([visit("res-001", DATES[0])])
     success = envelope_for(ok, [], "r1")
     assert success.status == "success" and success.help_routes == []
@@ -183,7 +183,7 @@ def test_freshness_tier_missing_date_is_unconfirmed():
 
 
 def test_find_call_to_confirm_warning_names_check_date():
-    result = find_food_resources("53206", DATES[0], DATES[-1])
+    result = find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
     assert any("res-004" in w and "2026-08-20" in w for w in result["warnings"])
 
 
@@ -195,10 +195,56 @@ def test_validator_strips_unconfirmed_visit_from_food_today_and_lists_it():
     v = v.model_copy(update={"provider": resource.provider, "contact": resource.contact})
     proposal = proposal_with([v])
 
-    cleaned, violations = validate_food_plan(proposal, ledger, directory, ZERO_BUDGET_NO_KITCHEN, DATES)
+    cleaned, violations = validate_food_plan(proposal, ledger, directory, ZERO_BUDGET_NO_KITCHEN, DATES, NOW_LOCAL)
 
     assert cleaned.food_today == []
     assert cleaned.days[0].visits == []
     assert any("unconfirmed" in w for w in violations)
     assert [u.resource_id for u in cleaned.unconfirmed] == ["res-900"]
     assert cleaned.unconfirmed[0].contact == resource.contact
+
+
+# --- MOO-774: closed-earlier-today windows are not Food today; next open carried ---
+
+AFTERNOON = "2026-09-08T15:00:00-05:00"
+MORNING = "2026-09-08T09:00:00-05:00"
+
+
+def test_find_marks_closed_earlier_today_resource_not_open_today_with_next_open():
+    result = find_food_resources("53206", DATES[0], DATES[-1], AFTERNOON)
+    by_id = {r["resource_id"]: r for r in result["data"]}
+    assert by_id["res-001"]["open_today"] is False
+    assert by_id["res-001"]["next_open"] == {"date": "2026-09-10", "open": "10:00", "close": "14:00"}
+    assert by_id["res-002"]["open_today"] is True
+
+
+def test_find_marks_both_open_today_in_the_morning():
+    result = find_food_resources("53206", DATES[0], DATES[-1], MORNING)
+    by_id = {r["resource_id"]: r for r in result["data"]}
+    assert by_id["res-001"]["open_today"] is True
+    assert by_id["res-002"]["open_today"] is True
+
+
+def test_validator_strips_day_one_visit_closed_before_request_time():
+    find_food_resources("53206", DATES[0], DATES[-1], AFTERNOON)
+    proposal = proposal_with([visit("res-001", DATES[0])])
+
+    cleaned, violations = validate_food_plan(
+        proposal, returned_ids.get(), load_directory(), ZERO_BUDGET_NO_KITCHEN, DATES, AFTERNOON
+    )
+
+    assert cleaned.food_today == [] and cleaned.days[0].visits == []
+    assert any("res-001" in v and "closed before request time" in v for v in violations)
+
+
+def test_food_today_derived_from_surviving_day_one_visits_not_models_list():
+    find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
+    day_one_visit = visit("res-001", DATES[0])
+    proposal = proposal_with([day_one_visit]).model_copy(update={"food_today": []})  # model omitted it
+
+    cleaned, violations = validate_food_plan(
+        proposal, returned_ids.get(), load_directory(), ZERO_BUDGET_NO_KITCHEN, DATES, NOW_LOCAL
+    )
+
+    assert [v.resource_id for v in cleaned.food_today] == ["res-001"]
+    assert cleaned.food_today == cleaned.days[0].visits

@@ -34,6 +34,14 @@ class ServiceWindow(BaseModel):
     note: str | None = None
 
 
+class NextOpen(BaseModel):
+    """MOO-774: the earliest still-open-or-future window carried when today's is already closed."""
+
+    date: ISODate
+    open: str
+    close: str
+
+
 ServiceType = Literal["free_pantry", "free_meal", "paid_market", "mobile_market"]
 Cost = Literal["free", "paid", "sliding"]
 
@@ -73,6 +81,7 @@ class PlannedVisit(BaseModel):
     freshness_tier: FreshnessTier = "unconfirmed"
     uncertainty: list[str] = Field(default=[], description="Unknowns the resident should confirm")
     backup_resource_id: str | None = None
+    next_open: NextOpen | None = Field(default=None, description="Set when the resource's window today has already closed")
 
 
 class DayPlan(BaseModel):

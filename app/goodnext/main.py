@@ -103,7 +103,7 @@ def run_food_today(req: FoodTodayRequest, model=None) -> Envelope:
         proposal = result.structured_output
         if proposal is None:
             return Envelope(status="temporarily_unavailable", warnings=["model returned no structured output"], retryable=True, request_id=req.request_id)
-        cleaned, violations = validate_food_plan(proposal, returned_ids.get(), load_directory(), req.constraints, req.dates)
+        cleaned, violations = validate_food_plan(proposal, returned_ids.get(), load_directory(), req.constraints, req.dates, req.now_local)
         return envelope_for(cleaned, violations, req.request_id)
     finally:
         returned_ids.reset(token)
