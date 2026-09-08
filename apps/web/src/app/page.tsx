@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { ConstraintForm, toConstraints, type FormValues } from "@/components/ConstraintForm";
-import { postPlan, type Envelope } from "@/lib/api";
+import { OptionCard } from "@/components/OptionCard";
+import { postPlan, type Envelope, type PlanData } from "@/lib/api";
 import { copy, fill } from "@/lib/copy";
 import { formatPlanDate } from "@/lib/format";
+import { telHref } from "@/lib/phone";
 
 type State =
   | { kind: "idle" }
@@ -48,12 +50,52 @@ export default function FoodTodayPage() {
   );
 }
 
+// Spec: today's visits are the plan's first day. food_today mirrors it.
+function todayVisits(data: PlanData) {
+  return data.days.find((d) => d.date === data.start_date)?.visits ?? data.food_today;
+}
+
+function countLine(n: number) {
+  if (n === 0) return copy.result.noneListedToday;
+  if (n === 1) return copy.result.oneListedToday;
+  return fill(copy.result.listedToday, { n: String(n) });
+}
+
 function Result({ envelope }: { envelope: Envelope }) {
-  const date = envelope.data?.start_date;
+  const data = envelope.data;
+  const hasPlan = (envelope.status === "success" || envelope.status === "partial") && data !== null;
+  const visits = hasPlan ? todayVisits(data) : [];
   return (
-    <div className="rounded-2xl bg-navy px-5 py-4 text-paper">
-      {date && <h1 className="text-2xl font-bold text-balance">{fill(copy.result.heading, { date: formatPlanDate(date) })}</h1>}
-      <p className="mt-1 text-navy-soft">{copy.result.status[envelope.status]}</p>
+    <div className="flex flex-col gap-4">
+      <div className="rounded-2xl bg-navy px-5 py-4 text-paper">
+        {data?.start_date && (
+          <h1 className="text-2xl font-bold text-balance">{fill(copy.result.heading, { date: formatPlanDate(data.start_date) })}</h1>
+        )}
+        <p className="mt-1 text-navy-soft">{hasPlan ? countLine(visits.length) : copy.result.status[envelope.status]}</p>
+      </div>
+      {envelope.status === "partial" && <p className="font-medium">{copy.result.status.partial}</p>}
+      {visits.map((v) => (
+        <OptionCard key={v.resource_id} visit={v} />
+      ))}
+      {hasPlan && data.unconfirmed.length > 0 && (
+        <section className="flex flex-col gap-1 rounded-2xl border border-line px-4 py-3">
+          <h2 className="font-semibold">{copy.unconfirmed.heading}</h2>
+          <ul className="flex flex-col gap-1">
+            {data.unconfirmed.map((u) => (
+              <li key={u.resource_id}>
+                {u.provider}{" "}
+                {telHref(u.contact) ? (
+                  <a href={telHref(u.contact)!} className="font-medium text-navy underline underline-offset-4">
+                    {u.contact}
+                  </a>
+                ) : (
+                  <span className="text-ink-soft">{u.contact}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
   );
 }
