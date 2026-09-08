@@ -88,6 +88,15 @@ describe("today's cards", () => {
     expect(screen.getAllByRole("article")).toHaveLength(2);
   });
 
+  it("shows a contact with no digits as text, not a call link", async () => {
+    const noPhone = JSON.parse(JSON.stringify(day9));
+    noPhone.data.days[0].visits[0].contact = "no phone listed";
+    await submitWith(noPhone);
+    const card = screen.getAllByRole("article")[0];
+    expect(within(card).queryByRole("link", { name: /^Call/ })).not.toBeInTheDocument();
+    expect(within(card).getByText("no phone listed")).toBeInTheDocument();
+  });
+
   it("never-list scan passes over the rendered fixture pages", async () => {
     await submitWith(day10);
     expect(neverListHits({ page: document.body.textContent }, NEVER_LIST)).toEqual([]);

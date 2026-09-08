@@ -1,5 +1,6 @@
 import type { PlannedVisit } from "@/lib/api";
 import { copy, fill } from "@/lib/copy";
+import { telHref } from "@/lib/phone";
 
 // "Open today from 8:30 AM to 12:00 PM" -> ["8:30 AM", "12:00 PM"]; anything
 // else (closed, next open) is shown as its own sentence in the time block.
@@ -11,6 +12,7 @@ export function OptionCard({ visit }: { visit: PlannedVisit }) {
   const c = visit.claims;
   if (!c) return null;
   const window = WINDOW.exec(c.open_today_text);
+  const tel = visit.contact ? telHref(visit.contact) : null;
   return (
     <article className="flex flex-col gap-3 rounded-2xl bg-paper p-4 shadow-[0_2px_10px_rgba(11,42,74,0.12)] sm:flex-row sm:gap-5">
       <div className="flex shrink-0 flex-col justify-center rounded-xl bg-navy px-4 py-3 text-paper sm:w-32 sm:text-center">
@@ -42,10 +44,12 @@ export function OptionCard({ visit }: { visit: PlannedVisit }) {
           >
             {copy.card.directions}
           </a>
-          {visit.contact && (
-            <a href={`tel:${visit.contact.replace(/[^\d+]/g, "")}`} className="font-medium text-navy underline underline-offset-4">
+          {tel ? (
+            <a href={tel} className="font-medium text-navy underline underline-offset-4">
               {fill(copy.card.call, { phone: visit.contact })}
             </a>
+          ) : (
+            visit.contact && <span className="text-ink-soft">{visit.contact}</span>
           )}
         </div>
         {c.source_text && <p className="mt-1 text-xs text-ink-soft">{c.source_text}</p>}

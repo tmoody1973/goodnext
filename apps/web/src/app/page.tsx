@@ -6,6 +6,7 @@ import { OptionCard } from "@/components/OptionCard";
 import { postPlan, type Envelope, type PlanData } from "@/lib/api";
 import { copy, fill } from "@/lib/copy";
 import { formatPlanDate } from "@/lib/format";
+import { telHref } from "@/lib/phone";
 
 type State =
   | { kind: "idle" }
@@ -83,9 +84,13 @@ function Result({ envelope }: { envelope: Envelope }) {
             {data.unconfirmed.map((u) => (
               <li key={u.resource_id}>
                 {u.provider}{" "}
-                <a href={`tel:${u.contact.replace(/[^\d+]/g, "")}`} className="font-medium text-navy underline underline-offset-4">
-                  {u.contact}
-                </a>
+                {telHref(u.contact) ? (
+                  <a href={telHref(u.contact)!} className="font-medium text-navy underline underline-offset-4">
+                    {u.contact}
+                  </a>
+                ) : (
+                  <span className="text-ink-soft">{u.contact}</span>
+                )}
               </li>
             ))}
           </ul>
