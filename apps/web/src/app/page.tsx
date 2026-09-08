@@ -14,10 +14,8 @@ type State =
 
 export default function FoodTodayPage() {
   const [state, setState] = useState<State>({ kind: "idle" });
-  const [values, setValues] = useState<FormValues | undefined>(undefined);
 
   async function submit(next: FormValues) {
-    setValues(next);
     setState({ kind: "submitting", zip: next.zip });
     try {
       const envelope = await postPlan(toConstraints(next));
@@ -34,7 +32,7 @@ export default function FoodTodayPage() {
         <p className="text-sm text-ink-soft">{copy.site.tagline}</p>
       </header>
 
-      <ConstraintForm key={values?.zip ?? "new"} initial={values} busy={state.kind === "submitting"} onSubmit={submit} />
+      <ConstraintForm busy={state.kind === "submitting"} onSubmit={submit} />
 
       <section aria-live="polite" className="flex flex-col gap-2">
         {state.kind === "submitting" && (

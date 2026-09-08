@@ -15,7 +15,7 @@ export type FormValues = {
   minutes: string;
 };
 
-export const emptyValues: FormValues = { zip: "", money: "0", kitchen: "full", travel: [], minutes: "" };
+const emptyValues: FormValues = { zip: "", money: "0", kitchen: "full", travel: [], minutes: "" };
 
 export function toConstraints(v: FormValues): Constraints {
   const minutes = Number(v.minutes);
@@ -29,13 +29,33 @@ export function toConstraints(v: FormValues): Constraints {
 }
 
 type Props = {
-  initial?: FormValues;
   busy?: boolean;
   onSubmit: (values: FormValues) => void;
 };
 
-export function ConstraintForm({ initial = emptyValues, busy = false, onSubmit }: Props) {
-  const [values, setValues] = useState<FormValues>(initial);
+// One pill per option: a visually hidden native input inside a styled label,
+// so keyboard, screen readers, and the browser's own form semantics all work.
+function Pill({ type, name, value, label, checked, onChange }: {
+  type: "radio" | "checkbox";
+  name: string;
+  value: string;
+  label: string;
+  checked: boolean;
+  onChange: () => void;
+}) {
+  const cls = `rounded-xl border px-4 py-3 text-base font-medium transition-colors ${
+    checked ? "border-navy bg-navy text-paper" : "border-line bg-paper text-ink hover:border-navy"
+  }`;
+  return (
+    <label className={cls}>
+      <input type={type} name={name} value={value} checked={checked} onChange={onChange} className="sr-only" />
+      {label}
+    </label>
+  );
+}
+
+export function ConstraintForm({ busy = false, onSubmit }: Props) {
+  const [values, setValues] = useState<FormValues>(emptyValues);
   const [errors, setErrors] = useState<{ zip?: string; travel?: string }>({});
   const set = <K extends keyof FormValues>(key: K, value: FormValues[K]) =>
     setValues((prev) => ({ ...prev, [key]: value }));
@@ -51,11 +71,6 @@ export function ConstraintForm({ initial = emptyValues, busy = false, onSubmit }
 
   const toggleTravel = (t: Travel) =>
     set("travel", values.travel.includes(t) ? values.travel.filter((x) => x !== t) : [...values.travel, t]);
-
-  const choice = (active: boolean) =>
-    `rounded-xl border px-4 py-3 text-base font-medium transition-colors ${
-      active ? "border-navy bg-navy text-paper" : "border-line bg-paper text-ink hover:border-navy"
-    }`;
 
   return (
     <form onSubmit={handleSubmit} noValidate aria-busy={busy} className="flex flex-col gap-6">
@@ -103,10 +118,7 @@ export function ConstraintForm({ initial = emptyValues, busy = false, onSubmit }
         <legend className="font-medium">{copy.form.kitchenLabel}</legend>
         <div className="flex flex-wrap gap-2">
           {KITCHENS.map((k) => (
-            <label key={k} className={choice(values.kitchen === k)}>
-              <input type="radio" name="kitchen" value={k} checked={values.kitchen === k} onChange={() => set("kitchen", k)} className="sr-only" />
-              {copy.form.kitchen[k]}
-            </label>
+            <Pill key={k} type="radio" name="kitchen" value={k} label={copy.form.kitchen[k]} checked={values.kitchen === k} onChange={() => set("kitchen", k)} />
           ))}
         </div>
       </fieldset>
@@ -116,10 +128,7 @@ export function ConstraintForm({ initial = emptyValues, busy = false, onSubmit }
         <p id="travel-help" className="text-sm text-ink-soft">{copy.form.travelHelp}</p>
         <div className="flex flex-wrap gap-2">
           {TRAVELS.map((t) => (
-            <label key={t} className={choice(values.travel.includes(t))}>
-              <input type="checkbox" name="travel" value={t} checked={values.travel.includes(t)} onChange={() => toggleTravel(t)} className="sr-only" />
-              {copy.form.travel[t]}
-            </label>
+            <Pill key={t} type="checkbox" name="travel" value={t} label={copy.form.travel[t]} checked={values.travel.includes(t)} onChange={() => toggleTravel(t)} />
           ))}
         </div>
         {errors.travel && <p id="travel-error" role="alert" className="text-sm font-medium text-alert">{errors.travel}</p>}
