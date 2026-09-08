@@ -10,6 +10,9 @@ from pydantic import BaseModel, Field
 
 ISODate = str  # YYYY-MM-DD, America/Chicago calendar date supplied by the server
 
+# CONTEXT.md: verified (0-14 days), call to confirm (15-60 days), unconfirmed (>60 or none).
+FreshnessTier = Literal["verified", "call_to_confirm", "unconfirmed"]
+
 
 class HouseholdConstraints(BaseModel):
     zip_code: str = Field(pattern=r"^\d{5}$")
@@ -48,7 +51,7 @@ class FoodResource(BaseModel):
     visit_limit: str | None = None
     contact: str
     languages: list[str] = []
-    last_verified: ISODate
+    last_verified: ISODate | None = None
     verifier: str
     status: Literal["published", "closed", "withdrawn"]
     source_url: str
@@ -67,6 +70,7 @@ class PlannedVisit(BaseModel):
     requirements: list[str] = []
     last_verified: ISODate
     contact: str
+    freshness_tier: FreshnessTier = "unconfirmed"
     uncertainty: list[str] = Field(default=[], description="Unknowns the resident should confirm")
     backup_resource_id: str | None = None
 
@@ -78,6 +82,14 @@ class DayPlan(BaseModel):
     unmet_needs: list[str] = []
 
 
+class UnconfirmedRecord(BaseModel):
+    """A tool-returned, unconfirmed-tier resource: phone number only, never a visit."""
+
+    resource_id: str
+    provider: str
+    contact: str
+
+
 class FoodPlanProposal(BaseModel):
     """Model output schema for P03. Schema validity is not factual correctness."""
 
@@ -87,6 +99,7 @@ class FoodPlanProposal(BaseModel):
     resource_ids_used: list[str] = []
     preparation_checklist: list[str] = []
     unmet_needs: list[str] = []
+    unconfirmed: list[UnconfirmedRecord] = []
     explanation: str = Field(description="Short, evidence-based, resident-facing")
 
 
