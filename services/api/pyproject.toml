@@ -1,0 +1,22 @@
+[project]
+name = "goodnext-api"
+version = "0.1.0"
+description = "GoodNext application API: sessions, validation, and the bridge to the agent runtime"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi >= 0.115",
+    "uvicorn[standard] >= 0.30",
+    "pydantic >= 2.11",
+    "httpx >= 0.27",
+    "boto3 >= 1.35",
+]
+
+[dependency-groups]
+dev = ["pytest >= 8.3"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["goodnext_api"]

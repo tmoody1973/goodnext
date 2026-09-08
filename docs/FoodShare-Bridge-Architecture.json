@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "FoodShare Bridge \u00b7 Proposed agent architecture",
+    "quality_profile": "showcase",
+    "viewBox": [
+      1360,
+      760
+    ]
+  },
+  "components": [
+    {
+      "id": "resident-web",
+      "type": "frontend",
+      "label": "Responsive website",
+      "sublabel": "Type, tap or speak",
+      "pos": [
+        30,
+        330
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "workflow-control",
+      "type": "security",
+      "label": "Workflow controller",
+      "sublabel": "Session, scope and permissions",
+      "pos": [
+        300,
+        330
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "resident-agent",
+      "type": "backend",
+      "label": "Strands resident agent",
+      "sublabel": "Interpret \u2192 tools \u2192 proposal",
+      "pos": [
+        570,
+        330
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "proposal-checks",
+      "type": "security",
+      "label": "Application validators",
+      "sublabel": "Evidence, dates and feasibility",
+      "pos": [
+        840,
+        330
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "resident-plan",
+      "type": "frontend",
+      "label": "Plan on the website",
+      "sublabel": "Next step + food for 7 days",
+      "pos": [
+        1110,
+        330
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "voice-adapter",
+      "type": "external",
+      "label": "Optional speech service",
+      "sublabel": "Transcribe / Deepgram; TTS",
+      "pos": [
+        30,
+        90
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "private-state",
+      "type": "database",
+      "label": "Private session records",
+      "sublabel": "Plans, consent and receipts",
+      "pos": [
+        300,
+        90
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "domain-tools",
+      "type": "backend",
+      "label": "FoodShare application tools",
+      "sublabel": "Notice, policy, food and hours",
+      "pos": [
+        570,
+        90
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "reviewed-evidence",
+      "type": "database",
+      "label": "Reviewed shared data",
+      "sublabel": "Policy versions + food directory",
+      "pos": [
+        840,
+        90
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "maintenance-agent",
+      "type": "backend",
+      "label": "Strands maintenance jobs",
+      "sublabel": "Official sources + human review",
+      "pos": [
+        1110,
+        90
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "consented-delivery",
+      "type": "security",
+      "label": "Consent + delivery services",
+      "sublabel": "Preview, approve, queue, receipt",
+      "pos": [
+        840,
+        590
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "partner-channels",
+      "type": "external",
+      "label": "Optional help channels",
+      "sublabel": "SMS + verified navigator",
+      "pos": [
+        1110,
+        590
+      ],
+      "size": [
+        210,
+        80
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "resident-request",
+      "from": "resident-web",
+      "to": "workflow-control",
+      "label": "Request",
+      "variant": "emphasis"
+    },
+    {
+      "id": "scoped-invocation",
+      "from": "workflow-control",
+      "to": "resident-agent",
+      "label": "Invoke",
+      "variant": "emphasis"
+    },
+    {
+      "id": "structured-proposal",
+      "from": "resident-agent",
+      "to": "proposal-checks",
+      "label": "Proposal",
+      "variant": "emphasis"
+    },
+    {
+      "id": "validated-display",
+      "from": "proposal-checks",
+      "to": "resident-plan",
+      "label": "Display",
+      "variant": "emphasis"
+    },
+    {
+      "id": "speech-io",
+      "from": "resident-web",
+      "to": "voice-adapter",
+      "label": "STT / TTS"
+    },
+    {
+      "id": "state-access",
+      "from": "workflow-control",
+      "to": "private-state",
+      "label": "Read / write"
+    },
+    {
+      "id": "tool-loop",
+      "from": "resident-agent",
+      "to": "domain-tools",
+      "label": "Call / result"
+    },
+    {
+      "id": "evidence-lookup",
+      "from": "domain-tools",
+      "to": "reviewed-evidence",
+      "label": "Lookup"
+    },
+    {
+      "id": "reviewed-publication",
+      "from": "maintenance-agent",
+      "to": "reviewed-evidence",
+      "label": "Publish"
+    },
+    {
+      "id": "pending-external-action",
+      "from": "proposal-checks",
+      "to": "consented-delivery",
+      "label": "Pending action",
+      "variant": "security",
+      "labelAt": [
+        945,
+        500
+      ]
+    },
+    {
+      "id": "approved-send",
+      "from": "consented-delivery",
+      "to": "partner-channels",
+      "label": "Send",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "One resident agent, several tools",
+      "items": [
+        "Notice \u2192 source-backed next step; hours \u2192 code-checked totals.",
+        "Food plan \u2192 real access constraints, backups and replanning."
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Shared updates help many households",
+      "items": [
+        "Maintenance has separate permissions and no resident documents.",
+        "Human-reviewed policy and resource updates trigger plan rechecks."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resident control throughout",
+      "items": [
+        "Confirm key speech fields; keep typing and official help available.",
+        "No eligibility decisions or automatic ACCESS submissions."
+      ]
+    }
+  ]
+}

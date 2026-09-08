@@ -1,0 +1,139 @@
+{
+  "_fixture_note": "SYNTHETIC DEMO DIRECTORY. Provider names, addresses, hours and contacts are fictional and labeled as such. Built to exercise: free food, paid options, opening restrictions, appointment rules, transportation limits, and one closure (PRD section 6). Not a live 211 or HTF feed. Replace record-by-record only with reviewed, permitted data.",
+  "resources": [
+    {
+      "resource_id": "res-001",
+      "provider": "Northside Community Pantry (synthetic)",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1200 W Demo St, Milwaukee, WI 53206",
+      "zip_codes_served": ["53206", "53205", "53212"],
+      "windows": [
+        {"date": "2026-09-08", "open": "10:00", "close": "14:00"},
+        {"date": "2026-09-10", "open": "10:00", "close": "14:00"},
+        {"date": "2026-09-12", "open": "09:00", "close": "12:00"}
+      ],
+      "requirements": ["Bring a photo ID if you have one; not required"],
+      "appointment_required": false,
+      "visit_limit": "Once per 7 days",
+      "contact": "(414) 555-0101",
+      "languages": ["en", "es"],
+      "last_verified": "2026-09-05",
+      "verifier": "demo-reviewer",
+      "status": "published",
+      "source_url": "https://example.invalid/northside",
+      "notes": "Pre-bagged groceries; some no-cook items usually available. Quantity per visit unknown."
+    },
+    {
+      "resource_id": "res-002",
+      "provider": "St. Demo Hot Meal Program (synthetic)",
+      "service_type": "free_meal",
+      "cost": "free",
+      "address": "300 E Fixture Ave, Milwaukee, WI 53212",
+      "zip_codes_served": ["53206", "53212", "53202", "53203"],
+      "windows": [
+        {"date": "2026-09-08", "open": "17:00", "close": "18:30"},
+        {"date": "2026-09-09", "open": "17:00", "close": "18:30"},
+        {"date": "2026-09-10", "open": "17:00", "close": "18:30"},
+        {"date": "2026-09-11", "open": "17:00", "close": "18:30"},
+        {"date": "2026-09-12", "open": "17:00", "close": "18:30"}
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "(414) 555-0102",
+      "languages": ["en"],
+      "last_verified": "2026-09-01",
+      "verifier": "demo-reviewer",
+      "status": "published",
+      "source_url": "https://example.invalid/stdemo",
+      "notes": "Sit-down hot meal. No take-home portions confirmed."
+    },
+    {
+      "resource_id": "res-003",
+      "provider": "Fresh Fixture Mobile Market (synthetic)",
+      "service_type": "mobile_market",
+      "cost": "paid",
+      "address": "Stops vary; 53206 stop at 900 N Sample Blvd",
+      "zip_codes_served": ["53206", "53210"],
+      "windows": [
+        {"date": "2026-09-09", "open": "11:00", "close": "13:00"},
+        {"date": "2026-09-13", "open": "11:00", "close": "13:00"}
+      ],
+      "requirements": ["Accepts EBT and cash; discounted produce"],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "(414) 555-0103",
+      "languages": ["en", "es"],
+      "last_verified": "2026-09-06",
+      "verifier": "demo-reviewer",
+      "status": "published",
+      "source_url": "https://example.invalid/mobilemarket",
+      "notes": "Paid option. Must be labeled paid; cannot appear in a zero-budget plan."
+    },
+    {
+      "resource_id": "res-004",
+      "provider": "Riverwest Appointment Pantry (synthetic)",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2100 N Placeholder Ln, Milwaukee, WI 53212",
+      "zip_codes_served": ["53212", "53206"],
+      "windows": [
+        {"date": "2026-09-11", "open": "13:00", "close": "16:00"}
+      ],
+      "requirements": ["Appointment required; call ahead", "Proof of address"],
+      "appointment_required": true,
+      "visit_limit": "Once per month",
+      "contact": "(414) 555-0104",
+      "languages": ["en"],
+      "last_verified": "2026-08-20",
+      "verifier": "demo-reviewer",
+      "status": "published",
+      "source_url": "https://example.invalid/riverwest",
+      "notes": "Verification is older than 14 days; treat hours as unconfirmed."
+    },
+    {
+      "resource_id": "res-005",
+      "provider": "Southside Food Shelf (synthetic, CLOSED)",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1500 S Closure Ct, Milwaukee, WI 53204",
+      "zip_codes_served": ["53204", "53215", "53206"],
+      "windows": [
+        {"date": "2026-09-09", "open": "10:00", "close": "13:00"}
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "(414) 555-0105",
+      "languages": ["en", "es"],
+      "last_verified": "2026-09-07",
+      "verifier": "demo-reviewer",
+      "status": "closed",
+      "source_url": "https://example.invalid/southside",
+      "notes": "Simulated closure for Journey C. Must never be proposed while status is closed."
+    },
+    {
+      "resource_id": "res-006",
+      "provider": "Far West Pantry (synthetic, out of area)",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "9000 W Outside Rd, Milwaukee, WI 53225",
+      "zip_codes_served": ["53225", "53222"],
+      "windows": [
+        {"date": "2026-09-08", "open": "09:00", "close": "17:00"},
+        {"date": "2026-09-09", "open": "09:00", "close": "17:00"}
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "(414) 555-0106",
+      "languages": ["en"],
+      "last_verified": "2026-09-06",
+      "verifier": "demo-reviewer",
+      "status": "published",
+      "source_url": "https://example.invalid/farwest",
+      "notes": "Does not serve 53206. Exercises service-area exclusion."
+    }
+  ]
+}

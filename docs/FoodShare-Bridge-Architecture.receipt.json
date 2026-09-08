@@ -1,0 +1,20 @@
+{
+  "diagram_type": "architecture",
+  "output": "/Users/tarikmoody/Projects/Foodshare/docs/FoodShare-Bridge-Architecture.html",
+  "specification": {
+    "path": "/Users/tarikmoody/Projects/Foodshare/docs/FoodShare-Bridge-Architecture.json",
+    "sha256": "3d0d2e911e3e83f703d549a092713db5a002e47bc98408981c641a5611332174",
+    "bytes": 5880
+  },
+  "artifact": {
+    "sha256": "437cb82b024b5ab855af54563f4f4201a8dbf97ab2003dde6229b8d1268d5611",
+    "bytes": 678076
+  },
+  "validation": "9/9 showcase, 0 errors, 0 warnings",
+  "visual_review": "passed",
+  "correction_rounds": 2,
+  "desktop_containment": ["1440x900", "1600x1000", "1920x1080", "2048x1320"],
+  "screenshots_inspected": ["1440x900 light", "1440x900 dark", "2048x1320 light", "2048x1320 dark"],
+  "source_plan": "FoodShare-Bridge-Strands-Execution-Design.md, version 1.1",
+  "scope": "Proposed component architecture, not an implemented deployment. Request arrows summarize service interactions; return paths and internal workflow repetitions are collapsed. Speech provider selection remains open."
+}
