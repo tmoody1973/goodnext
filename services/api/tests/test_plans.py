@@ -69,6 +69,27 @@ def test_agent_outage_is_truthful_503():
     assert r.status_code == 503
     body = r.json()
     assert body["status"] == "temporarily_unavailable" and body["retryable"] is True
+    # MOO-780: even when the agent is unreachable, the API's own answer carries the
+    # three reviewed help routes, read from the same file the agent reads.
+    assert [route["name"] for route in body["help_routes"]] == [
+        "2-1-1 (IMPACT 211 in Milwaukee County)",
+        "Hunger Task Force emergency food",
+        "FoodShare member line",
+    ]
+    assert never_list_hits(body) == []
+
+
+def test_api_help_routes_match_the_agent_file():
+    from goodnext_api.help_routes import help_routes
+    import json
+    agent_file = Path(__file__).resolve().parents[3] / "app" / "goodnext" / "help_routes.json"
+    assert help_routes() == json.loads(agent_file.read_text())
+
+
+def test_api_help_routes_missing_file_is_empty_not_fatal(monkeypatch, tmp_path):
+    from goodnext_api.help_routes import help_routes
+    monkeypatch.setenv("GOODNEXT_HELP_ROUTES_FILE", str(tmp_path / "nowhere.json"))
+    assert help_routes() == []
 
 
 def test_demo_env_pins_date_and_now_local(monkeypatch):

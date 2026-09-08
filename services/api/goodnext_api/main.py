@@ -14,6 +14,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from goodnext_api.agent_client import AgentClient, default_agent_client
+from goodnext_api.help_routes import help_routes
 
 LOCAL_TZ = ZoneInfo("America/Chicago")
 SESSION_COOKIE = "gn_session"
@@ -106,7 +107,8 @@ def create_plan(
             status_code=503,
             headers=dict(response.headers),
             content={"status": "temporarily_unavailable", "data": None, "evidence": [], "missing": [],
-                     "warnings": [f"agent unavailable: {exc.__class__.__name__}"], "retryable": True, "request_id": request_id},
+                     "warnings": [f"agent unavailable: {exc.__class__.__name__}"], "retryable": True, "request_id": request_id,
+                     "help_routes": help_routes()},
         )
     response.headers["Cache-Control"] = "no-store"
     return envelope

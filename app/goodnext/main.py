@@ -87,7 +87,7 @@ def envelope_for(proposal: FoodPlanProposal, violations: list[str], request_id: 
         warnings=violations,
         retryable=False,
         request_id=request_id,
-        help_routes=HELP_ROUTES if status == "no_match" else [],
+        help_routes=HELP_ROUTES,
     )
 
 
@@ -110,20 +110,26 @@ def run_food_today(req: FoodTodayRequest, model=None) -> Envelope:
         returned_ids.reset(token)
 
 
+def with_help_routes(envelope: Envelope) -> dict:
+    """MOO-780: every answer that leaves the agent carries the three reviewed help
+    routes (CONTEXT.md "Help route"), whatever its status. One boundary, no copies."""
+    return envelope.model_copy(update={"help_routes": HELP_ROUTES}).model_dump()
+
+
 @app.entrypoint
 def invoke(payload: Any, context: Any = None) -> dict:
     log.info("GoodNext food_today invocation")
     if not isinstance(payload, dict):
-        return Envelope(status="denied", warnings=["payload must be a JSON object"], request_id="invalid").model_dump()
+        return with_help_routes(Envelope(status="denied", warnings=["payload must be a JSON object"], request_id="invalid"))
     try:
         req = FoodTodayRequest(**payload)
     except ValidationError as exc:
-        return Envelope(status="needs_clarification", missing=[e["loc"][-1] if e["loc"] else "?" for e in exc.errors()][:10], warnings=["invalid request"], request_id=str(payload.get("request_id", "invalid"))).model_dump()
+        return with_help_routes(Envelope(status="needs_clarification", missing=[e["loc"][-1] if e["loc"] else "?" for e in exc.errors()][:10], warnings=["invalid request"], request_id=str(payload.get("request_id", "invalid"))))
     try:
-        return run_food_today(req).model_dump()
+        return with_help_routes(run_food_today(req))
     except Exception as exc:  # noqa: BLE001 - boundary: never leak a stack trace to the caller
         log.exception("food_today failed")
-        return Envelope(status="temporarily_unavailable", warnings=[exc.__class__.__name__], retryable=True, request_id=req.request_id).model_dump()
+        return with_help_routes(Envelope(status="temporarily_unavailable", warnings=[exc.__class__.__name__], retryable=True, request_id=req.request_id))
 
 
 if __name__ == "__main__":

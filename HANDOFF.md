@@ -33,9 +33,10 @@ Tracker: **Linear**, team MOO, project "GoodNext — Agents for Humans
 Hackathon". Only the `linear-build` skill creates or closes issues. Issues
 MOO-770 to MOO-775, MOO-777, MOO-778 are Done with evidence comments.
 **All nine Food today issues (MOO-770 to 778) are Done.** Screen issues
-MOO-779 to MOO-787 created 2026-09-08 14:45 CDT. 779 and 782 Done and merged
-(PRs #4, #5). 783 Done in PR #6. 780 and 781 are agent fixes, unblocked. 784
-and 785 unblocked. 786 waits on 784 and 785.
+MOO-779 to MOO-787 created 2026-09-08 14:45 CDT. 779, 782, 783 Done and
+merged (PRs #4, #5, #6). 780 built in PR #7 (agent and API; needs a runtime
+deploy, v4, before routes show live). 781 unblocked. 784 and 785 unblocked.
+786 waits on 784 and 785.
 
 GitHub: https://github.com/tmoody1973/goodnext, pushed and current as of
 2026-09-08 13:10 CDT. CI (`.github/workflows/ci.yml`) runs both test suites
@@ -49,7 +50,9 @@ makes changes through pull requests. Push only when Tarik says "push".
 - Runtime ARN: `arn:aws:bedrock-agentcore:us-east-1:953791390715:runtime/goodnext_goodnext-j7ndOFF7b3`
 - Stack `AgentCore-goodnext-default`, us-east-1, deployed 2026-09-08 12:30 CDT, version 1.
 - Version 3 deployed 2026-09-08 12:55 CDT: larger output ceiling, brevity
-  instruction, and both trace-redaction env vars. MOO-776 verified live on v3:
+  instruction, and both trace-redaction env vars. **Version 4 not yet deployed:**
+  MOO-780 (help routes on every status, decision 009) is on main once PR #7
+  merges; Tarik runs `agentcore deploy` for it. MOO-776 verified live on v3:
   53206 plan in 89 s, no-match in 7 s, CloudWatch shows zero resident values
   and REDACTED markers. Evidence under `docs/evidence/moo-776-*`.
 - Local dev: `agentcore dev --skip-deploy -l` (port 8080) plus
@@ -87,8 +90,10 @@ confirm" with the date; only a missing date is "unconfirmed".
 3. **Model sometimes places visits on days with no window**; the validator
    strips them and returns `partial` with a warning. Working as designed;
    a nudge in the task text could reduce it.
-4. **211 data** needs IMPACT 211 permission (decision 005). Trial subscription
-   exists; DIY verification guide at `docs/research/211-portal-verification-guide.md`.
+4. **211 data** needs IMPACT 211 permission (decision 005). The 211 API trial
+   request was rejected on 2026-09-08; the fixture directory (reviewed plus
+   Food Environment Map, decision 006) stays the data source for the hackathon.
+   DIY verification guide at `docs/research/211-portal-verification-guide.md`.
 5. **Website** has only the base screen (form to first response). Cards,
    waiting states, no-match, tiles, finish, and the live run are MOO-782 to 787.
 6. **Dev proxy timeout.** The Next dev proxy drops requests at 30 s by default;
@@ -127,9 +132,10 @@ Read HANDOFF.md, then CONTEXT.md, then docs/agents/issue-tracker.md, then
 docs/specs/food-today-screen.md. Do not re-read the planning docs unless a
 task needs them.
 
-PR #6 (MOO-783, waiting states) may still be open; merge it first. Build
-MOO-784 (no-match, help-routes footer, summary line) with linear-build, tdd,
-and code-review, on a new branch off main. Then MOO-780 on the agent side. Read the surface brief and PRODUCT.md before
+PR #7 (MOO-780, help routes on every status) may still be open; merge it,
+then I deploy runtime v4 myself. Build MOO-784 (no-match, help-routes footer,
+summary line) with linear-build, tdd, and code-review, on a new branch off
+main. Read the surface brief and PRODUCT.md before
 touching UI. Explain in plain English. Nothing in AWS is created or changed
 without my go; deploys and pushes are mine.
 ```
