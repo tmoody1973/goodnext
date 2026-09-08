@@ -1,9 +1,16 @@
+import sys
 from datetime import date, datetime
+from pathlib import Path
 
 import httpx
 from fastapi.testclient import TestClient
 
 from goodnext_api.main import LOCAL_TZ, app, get_agent_client, seven_local_dates, runtime_session_id
+
+# MOO-775: claims.py is a pure agent-package module (pydantic only, no
+# strands/bedrock imports) — reuse it here instead of duplicating never_list_hits.
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "app" / "goodnext"))
+from claims import never_list_hits  # noqa: E402
 
 BODY = {"constraints": {"zip_code": "53206", "budget_usd": 0, "kitchen": "none", "travel": ["bus"]}}
 
@@ -107,3 +114,37 @@ def test_demo_now_ignored_outside_demo_env(monkeypatch, caplog):
     payload, _ = agent.calls[0]
     assert payload["dates"][0] == real_today
     assert "GOODNEXT_DEMO_NOW is set" in caplog.text
+
+
+def test_success_envelope_with_claims_passes_through_and_has_no_never_list_hits():
+    claims = {
+        "open_today_text": "Open today from 10:00 AM to 2:00 PM",
+        "cost_label": "Free",
+        "requirements_text": "No requirements listed",
+        "appointment_text": "",
+        "freshness_text": "Last checked 2026-09-05",
+        "inventory_text": "We can't confirm they have food today.",
+        "service_area_text": "",
+        "travel_text": "Travel time unknown, check the map.",
+        "directions_url": "https://www.google.com/maps/search/?api=1&query=1200+W+Demo+St%2C+Milwaukee%2C+WI+53206",
+        "travel_echo": "You said: bus",
+    }
+    visit = {
+        "resource_id": "res-001", "provider": "Northside Community Pantry (synthetic)", "date": "2026-09-08",
+        "service_type": "free_pantry", "cost": "free", "schedule_text": "see record",
+        "requirements": [], "last_verified": "2026-09-05", "contact": "(414) 555-0101",
+        "freshness_tier": "verified", "uncertainty": [], "backup_resource_id": None, "next_open": None,
+        "claims": claims,
+    }
+    reply = {
+        "status": "success", "data": {"start_date": "2026-09-08", "days": [], "food_today": [visit]},
+        "evidence": ["res-001"], "missing": [], "warnings": [], "retryable": False, "request_id": "r1",
+    }
+    agent = FakeAgent(reply=reply)
+
+    r = client_with(agent).post("/api/plans", json=BODY)
+    body = r.json()
+
+    assert r.status_code == 200
+    assert body["data"]["food_today"][0]["claims"] == claims
+    assert never_list_hits(body) == []
