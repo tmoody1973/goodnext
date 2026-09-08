@@ -112,3 +112,16 @@ requests to the public service, no login.
 **Recommendation (not a fact):** ask Data You Can Use / Milwaukee Food Council
 for reuse permission before any record from this layer appears in the public
 repo or demo. Until then, use it only to sanity-check the fixture's shape.
+
+**Item record check (2026-09-08, ArcGIS Online):** feature layer item
+`EmergencyFood_MKE_2024`, owner `amanda_dycu` (Data You Can Use), access
+public, license field empty, credits field empty, item modified 2025-07-09,
+data last edited 2024-08-27. The viewer app "Milwaukee Food Environment Map"
+has the same owner, no license, modified 2026-04-13. The layer description
+says the data came from the Milwaukee Food Council and SafeGraph. SafeGraph is
+a commercial data vendor whose terms normally restrict redistribution, so
+some records may carry a third-party restriction the publisher cannot waive.
+No license means all rights reserved by default. Conclusion: usable to look
+at and to shape our own data model; not usable in the public repo or demo
+until Data You Can Use grants permission in writing and confirms the SafeGraph
+portion is clear.
