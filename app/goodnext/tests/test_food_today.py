@@ -120,8 +120,10 @@ def test_envelope_status_rules():
     find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
     ok = proposal_with([visit("res-001", DATES[0])])
     success = envelope_for(ok, [], "r1")
-    assert success.status == "success" and success.help_routes == []
-    assert envelope_for(ok, ["something stripped"], "r1").status == "partial"
+    # MOO-780: every status carries the three reviewed help routes.
+    assert success.status == "success" and success.help_routes == HELP_ROUTES
+    partial = envelope_for(ok, ["something stripped"], "r1")
+    assert partial.status == "partial" and partial.help_routes == HELP_ROUTES
     no_match = envelope_for(proposal_with([]), [], "r1")
     assert no_match.status == "no_match"
     assert no_match.help_routes == HELP_ROUTES and len(no_match.help_routes) == 3
@@ -299,3 +301,26 @@ def test_validator_keeps_unknown_area_visit_with_confirm_uncertainty():
     assert [v.resource_id for v in kept] == ["res-009"]
     assert kept[0].service_area_known is False
     assert "Confirm they serve your area" in kept[0].uncertainty
+
+
+def test_every_invoke_outcome_carries_three_help_routes(monkeypatch, fixture_without_res009):
+    """MOO-780: denied, needs_clarification, temporarily_unavailable, and no_match all
+    carry the same three reviewed routes, so the site never needs its own copy."""
+    names = [r.name for r in HELP_ROUTES]
+    denied = main.invoke("not a dict")
+    assert denied["status"] == "denied" and [r["name"] for r in denied["help_routes"]] == names
+    unclear = main.invoke({"workflow": "food_today"})
+    assert unclear["status"] == "needs_clarification" and [r["name"] for r in unclear["help_routes"]] == names
+
+    def explode(req, model=None):
+        raise RuntimeError("boom")
+
+    monkeypatch.setattr(main, "run_food_today", explode)
+    payload = {"workflow": "food_today", "constraints": {"zip_code": "53206", "budget_usd": 0, "kitchen": "none", "travel": ["bus"]}, "dates": DATES, "now_local": NOW_LOCAL, "request_id": "r-boom"}
+    down = main.invoke(payload)
+    assert down["status"] == "temporarily_unavailable" and [r["name"] for r in down["help_routes"]] == names
+
+    monkeypatch.undo()
+    payload["constraints"]["zip_code"] = "53999"
+    none = main.invoke(payload)
+    assert none["status"] == "no_match" and [r["name"] for r in none["help_routes"]] == names
