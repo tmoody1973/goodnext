@@ -149,3 +149,10 @@ def test_reviewed_directory_records_are_verified_and_honest_about_unknowns():
 def test_never_list_matches_whole_words_only():
     assert never_list_hits({"status": "temporarily_unavailable"}) == []
     assert never_list_hits({"t": "Food is available now"}) == ["available"]
+
+
+def test_never_list_ignores_honest_denials():
+    assert never_list_hits({"t": "Pantry quantities are unknown; stock cannot be guaranteed."}) == []
+    assert never_list_hits({"t": "Nothing is reserved for you."}) == []
+    assert never_list_hits({"t": "Your food is guaranteed."}) == ["guaranteed"]
+    assert never_list_hits({"t": "A spot is reserved for you."}) == ["reserved"]

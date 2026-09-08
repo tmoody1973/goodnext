@@ -29,6 +29,8 @@ _COST_LABELS = {"free": "Free", "paid": "Paid", "sliding": "Sliding scale", "unk
 
 
 _NEVER_RE = [re.compile(r"\b" + re.escape(term) + r"\b", re.I) for term in NEVER_LIST]
+# A denial is honest: "stock cannot be guaranteed", "not reserved", "no food secured".
+_NEGATED = re.compile(r"\b(?:not|no|nothing|none|never|cannot|can't|can not|isn't|aren't|without|nor)\b(?:\s+\w+){0,2}\s+$", re.I)
 
 
 def never_list_hits(obj: object) -> list[str]:
@@ -38,7 +40,10 @@ def never_list_hits(obj: object) -> list[str]:
 
     def walk(node: object) -> None:
         if isinstance(node, str):
-            hits.extend(term for term, rx in zip(NEVER_LIST, _NEVER_RE) if rx.search(node))
+            for term, rx in zip(NEVER_LIST, _NEVER_RE):
+                for m in rx.finditer(node):
+                    if not _NEGATED.search(node[max(0, m.start() - 40):m.start()]):
+                        hits.append(term)
         elif isinstance(node, dict):
             for value in node.values():
                 walk(value)
