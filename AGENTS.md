@@ -215,3 +215,23 @@ Run `agentcore --help` or `agentcore <command> --help` for full flags. Commonly 
 | `agentcore feedback` | Send feedback (with optional screenshot) to the AgentCore team |
 | `agentcore update` | Check for and install CLI updates |
 | `agentcore telemetry` | View or change telemetry preferences |
+
+## Agent skills
+
+### Issue tracker
+
+Linear, workspace Moodyco, team MOO, project "GoodNext — Agents for Humans Hackathon". Issues are created, moved, and closed only through the `linear-build` skill. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Mapped to existing Linear statuses; no new labels. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: `CONTEXT.md` at the repo root plus `docs/decisions/` for decision records. See `docs/agents/domain.md`.
+
+### Skill routing
+
+Top-level `code-review` is CodeRabbit. When a Matt Pocock skill (including `implement`) says "/code-review", use `mattpocock-skills:code-review`. Prefix `grill-with-docs`, `tdd`, `prototype`, and `handoff` with `mattpocock-skills:` so the older top-level copies are not used. `to-tickets` drafts tickets; it never creates Linear issues directly. Hand each ticket to `linear-build`.
+
+Global rules in `~/.claude/rules/` (including Context7 documentation checks) still apply and are not replaced by this section.
