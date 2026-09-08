@@ -24,7 +24,7 @@ NEVER_LIST = [
     "food covered",
 ]
 
-_COST_LABELS = {"free": "Free", "paid": "Paid", "sliding": "Sliding scale"}
+_COST_LABELS = {"free": "Free", "paid": "Paid", "sliding": "Sliding scale", "unknown": "Cost not stated; ask"}
 
 
 def never_list_hits(obj: object) -> list[str]:
@@ -92,7 +92,7 @@ def build_claims(visit: PlannedVisit, resource: FoodResource, constraints: House
         open_today_text=_open_today_text(visit, resource, now),
         cost_label=_COST_LABELS[resource.cost],
         requirements_text=_requirements_text(resource),
-        appointment_text="Appointment required, not booked" if resource.appointment_required else "",
+        appointment_text={True: "Appointment required, not booked", "unknown": "Appointment: not stated; call to ask"}.get(resource.appointment_required, ""),
         freshness_text=_freshness_text(visit, resource),
         inventory_text="We can't confirm they have food today.",
         service_area_text="Confirm they serve your area" if not getattr(visit, "service_area_known", True) else "",

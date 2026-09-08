@@ -118,3 +118,29 @@ def test_real_map_records_are_listed_with_source_and_call_to_confirm():
     assert kept and kept[0].claims.source_text.startswith("Source: Milwaukee Food Environment Map")
     assert kept[0].claims.freshness_text == "Last checked 2024-08-27; call to confirm"
     assert never_list_hits(envelope_for(cleaned, violations, "r1").model_dump()) == []
+
+
+def test_reviewed_directory_records_are_verified_and_honest_about_unknowns():
+    """Reviewed directory (checked against official pages 2026-09-08): Thursday Sep 10 in 53206
+    lists the Salvation Army Citadel pantry as verified, with cost unknown kept as a caveat,
+    and a serves-everyone meal site is listed without a service-area caveat."""
+    now = "2026-09-10T09:00:00-05:00"
+    dates = [f"2026-09-{d:02d}" for d in range(10, 17)]
+    result = find_food_resources("53206", dates[0], dates[-1], now)
+    by_id = {r["resource_id"]: r for r in result["data"]}
+    citadel = by_id["mke-salvation-army-citadel-food-pantry"]
+    assert citadel["freshness_tier"] == "verified" and citadel["open_today"] is True
+    assert citadel["service_area_known"] is True and citadel["cost"] == "unknown"
+    meal = next(r for r in result["data"] if r.get("serves_all_milwaukee"))
+    assert meal["service_area_known"] is True
+    directory = load_directory()
+    assert sum(1 for r in directory.values() if "Bay View Community Center" in r.provider) == 1, "map duplicate must yield to the reviewed record"
+    v = visit(citadel["resource_id"], dates[0])
+    cleaned, violations = validate_food_plan(proposal_with([v], dates=dates), returned_ids.get(), directory, ZERO_BUDGET_BUS, dates, now)
+    kept = cleaned.days[0].visits
+    assert kept, f"unknown cost must not be stripped at zero budget: {violations}"
+    assert kept[0].claims.cost_label == "Cost not stated; ask"
+    assert kept[0].claims.appointment_text == "Appointment: not stated; call to ask"
+    assert any("Cost not stated" in u for u in kept[0].uncertainty)
+    assert kept[0].claims.freshness_text == "Last checked 2026-09-08"
+    assert never_list_hits(envelope_for(cleaned, violations, "r1").model_dump()) == []

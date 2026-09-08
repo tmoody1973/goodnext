@@ -13,11 +13,11 @@ LAST_CHECKED = "2026-09-08"
 
 HELP_ROUTES: list[HelpRoute] = [
     HelpRoute(
-        name="2-1-1",
-        purpose="Find local food and other help by phone, any day.",
+        name="2-1-1 (IMPACT 211 in Milwaukee County)",
+        purpose="Find local food and other help by phone, any day. In Milwaukee County you can also text MKEFOOD to 898-211, or call (414) 773-0211.",
         phone="2-1-1",
-        url="https://www.211.org",
-        source_url="https://www.211.org",
+        url="https://www.impactinc.org/impact-211/",
+        source_url="https://www.impactinc.org/impact-211/",
         last_checked=LAST_CHECKED,
     ),
     HelpRoute(

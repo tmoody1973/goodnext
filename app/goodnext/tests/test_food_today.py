@@ -144,7 +144,7 @@ def test_run_food_today_no_match_short_circuits_without_calling_model(monkeypatc
     assert envelope.data is None
     assert envelope.help_routes == HELP_ROUTES
     assert [r.name for r in envelope.help_routes] == [
-        "2-1-1",
+        "2-1-1 (IMPACT 211 in Milwaukee County)",
         "Hunger Task Force emergency food",
         "FoodShare member line",
     ]

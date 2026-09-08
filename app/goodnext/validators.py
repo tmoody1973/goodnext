@@ -23,7 +23,7 @@ def _visit_violation(
         return f"{v.resource_id}: unknown resource"
     if resource.status != "published":
         return f"{v.resource_id}: status is {resource.status}"
-    if constraints.budget_usd <= 0 and resource.cost != "free":
+    if constraints.budget_usd <= 0 and resource.cost in ("paid", "sliding"):
         return f"{v.resource_id}: paid option in a zero-budget plan"
     window = next((w for w in resource.windows if w.date == v.date), None)
     if window is None:
@@ -39,7 +39,12 @@ def _with_freshness(v: PlannedVisit, resource: FoodResource, tier: str, now: dat
         note = f"Last checked {resource.last_verified}; call to confirm"
         if note not in uncertainty:
             uncertainty.append(note)
-    service_area_known = bool(resource.zip_codes_served)
+    for note in resource.uncertainties:
+        if note not in uncertainty:
+            uncertainty.append(note)
+    if resource.cost == "unknown" and "Cost not stated by the provider; ask" not in uncertainty:
+        uncertainty.append("Cost not stated by the provider; ask")
+    service_area_known = bool(resource.zip_codes_served) or resource.serves_all_milwaukee
     if not service_area_known:
         # MOO-772 (D5): keep the visit, never let it read as a plain confirmed one.
         note = "Confirm they serve your area"

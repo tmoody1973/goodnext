@@ -54,6 +54,12 @@ warning is logged) and the real Milwaukee clock is used.
 
 ## Data sources and disclosure
 
+- **GoodNext reviewed directory** (`app/goodnext/fixtures/reviewed/`), 16
+  Milwaukee sites checked against their official provider pages on September
+  8, 2026, with published service ZIPs, weekly schedules, evidence notes, and
+  stated uncertainties. Converted by `scripts/ingest_reviewed_directory.py`.
+  Shown as "Last checked 2026-09-08". Where a reviewed record and a map record
+  describe the same site, the reviewed record is used.
 - **Milwaukee Food Environment Map** (Data You Can Use / Milwaukee Food
   Council), public ArcGIS layer `EmergencyFood_MKE_2024`, 75 sites, data as of
   August 27, 2024. Loaded by `app/goodnext/scripts/ingest_mfc_map.py` into

@@ -43,7 +43,7 @@ class NextOpen(BaseModel):
 
 
 ServiceType = Literal["free_pantry", "free_meal", "paid_market", "mobile_market"]
-Cost = Literal["free", "paid", "sliding"]
+Cost = Literal["free", "paid", "sliding", "unknown"]
 
 
 class FoodResource(BaseModel):
@@ -53,13 +53,17 @@ class FoodResource(BaseModel):
     cost: Cost
     address: str
     zip_codes_served: list[str]
+    serves_all_milwaukee: bool = False
+    service_area_text: str = ""
     windows: list[ServiceWindow]
     requirements: list[str] = []
-    appointment_required: bool = False
+    appointment_required: bool | Literal["unknown"] = False
     visit_limit: str | None = None
     contact: str
     languages: list[str] = []
     last_verified: ISODate | None = None
+    review_due_on: ISODate | None = None
+    uncertainties: list[str] = []
     verifier: str
     status: Literal["published", "closed", "withdrawn"]
     source_url: str

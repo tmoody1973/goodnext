@@ -67,7 +67,13 @@ def load_directory() -> dict[str, FoodResource]:
     for path in paths:
         raw = json.loads(path.read_text())
         directory.update({r["resource_id"]: FoodResource(**r) for r in raw["resources"]})
-    return directory
+    # ponytail: a reviewed record wins over a map record for the same site; match on phone digits.
+    reviewed_phones = {_digits(r.contact) for r in directory.values() if not r.source.startswith("Milwaukee Food Environment Map") and _digits(r.contact)}
+    return {rid: r for rid, r in directory.items() if not (r.source.startswith("Milwaukee Food Environment Map") and _digits(r.contact) in reviewed_phones)}
+
+
+def _digits(text: str) -> str:
+    return "".join(ch for ch in text if ch.isdigit())[-10:]
 
 
 def _ledger() -> set[str]:
@@ -97,6 +103,8 @@ def _visible(resource: FoodResource, zip_code: str, start: str, end: str) -> lis
     requires an exact match (decision 004)."""
     if resource.status != "published":
         return []
+    if resource.serves_all_milwaukee and zip_code.startswith("532"):
+        return [w.model_dump() for w in resource.windows if start <= w.date <= end]
     if not resource.zip_codes_served and zip_code not in resource.address:
         # Decision 006 refinement of D5: an unknown service area is shown only for the
         # site's own address ZIP, still marked conditional. With 54 real records lacking
@@ -145,7 +153,7 @@ def find_food_resources(zip_code: str, start_date: str, end_date: str, now_local
         record["freshness_tier"] = tier
         record["open_today"] = _open_today(windows, now)
         record["next_open"] = {"date": nxt["date"], "open": nxt["open"], "close": nxt["close"]} if nxt else None
-        service_area_known = bool(resource.zip_codes_served)
+        service_area_known = bool(resource.zip_codes_served) or resource.serves_all_milwaukee
         record["service_area_known"] = service_area_known
         candidates.append(record)
         if stale := _staleness_warning(resource, tier):
@@ -185,16 +193,21 @@ def check_food_constraints(resource_ids: list[str], budget_usd: float, kitchen: 
             results.append({"resource_id": rid, "verdict": "unsuitable", "reasons": ["not a returned resource"]})
             continue
         reasons, verdict = [], "supported"
-        if resource.cost != "free" and budget_usd <= 0:
+        if resource.cost in ("paid", "sliding") and budget_usd <= 0:
             verdict, reasons = "unsuitable", ["costs money; household budget is zero"]
-        elif resource.cost != "free":
+        elif resource.cost in ("paid", "sliding"):
             verdict, reasons = "conditional", ["paid option; must fit stated budget"]
-        if not resource.zip_codes_served:
+        elif resource.cost == "unknown":
+            verdict, reasons = "conditional", ["cost not stated by the provider; ask before relying on it"]
+        if not resource.zip_codes_served and not resource.serves_all_milwaukee:
             verdict = "conditional" if verdict != "unsuitable" else verdict
             reasons.append("confirm they serve your area")
-        if resource.appointment_required:
+        if resource.appointment_required is True:
             verdict = "conditional" if verdict != "unsuitable" else verdict
             reasons.append("appointment required; not booked by this service")
+        elif resource.appointment_required == "unknown":
+            verdict = "conditional" if verdict != "unsuitable" else verdict
+            reasons.append("appointment requirement not stated; call to ask")
         if kitchen == "none" and resource.service_type == "free_pantry":
             verdict = "conditional" if verdict != "unsuitable" else verdict
             reasons.append("no kitchen; ask for no-cook items")
