@@ -13,15 +13,29 @@ from pathlib import Path
 
 from strands import tool
 
-from schemas import FoodResource, HouseholdConstraints
+from schemas import FoodResource, FreshnessTier, HouseholdConstraints
 
 # ponytail: request-scoped ledger of resource IDs the tools actually returned.
 # The validator rejects any ID outside it. Lives in-process; move to receipts
 # storage only if audit requirements demand it.
 returned_ids: contextvars.ContextVar[set[str]] = contextvars.ContextVar("returned_ids")
 
-STALE_AFTER_DAYS = 14
+# CONTEXT.md freshness tiers (D7): verified <=14 days, call_to_confirm <=60, else unconfirmed.
+VERIFIED_MAX_DAYS = 14
+CALL_TO_CONFIRM_MAX_DAYS = 60
 FIXTURE_PATH = Path(os.environ.get("GOODNEXT_FIXTURE_PATH", Path(__file__).parent / "fixtures" / "milwaukee-food-resources.json"))
+
+
+def freshness_tier(last_verified: str | None, start_date: str) -> FreshnessTier:
+    """Tier a record's last_verified date against the request start date. Pure; no I/O."""
+    if last_verified is None:
+        return "unconfirmed"
+    age = (date.fromisoformat(start_date) - date.fromisoformat(last_verified)).days
+    if age <= VERIFIED_MAX_DAYS:
+        return "verified"
+    if age <= CALL_TO_CONFIRM_MAX_DAYS:
+        return "call_to_confirm"
+    return "unconfirmed"
 
 
 def load_directory() -> dict[str, FoodResource]:
@@ -56,11 +70,11 @@ def _visible(resource: FoodResource, zip_code: str, start: str, end: str) -> lis
     return [w.model_dump() for w in resource.windows if start <= w.date <= end]
 
 
-def _staleness_warning(resource: FoodResource, start: str) -> str | None:
-    age = (date.fromisoformat(start) - date.fromisoformat(resource.last_verified)).days
-    if age > STALE_AFTER_DAYS:
-        return f"{resource.resource_id}: hours last verified {age} days ago; call to confirm"
-    return None
+def _staleness_warning(resource: FoodResource, tier: FreshnessTier) -> str | None:
+    if tier == "verified":
+        return None
+    checked = resource.last_verified or "never"
+    return f"{resource.resource_id}: last checked {checked}; {tier.replace('_', ' ')}"
 
 
 @tool
@@ -80,11 +94,13 @@ def find_food_resources(zip_code: str, start_date: str, end_date: str) -> dict:
         windows = _visible(resource, zip_code, start_date, end_date)
         if not windows:
             continue
+        tier = freshness_tier(resource.last_verified, start_date)
         record = resource.model_dump()
         record["windows"] = windows
         record["quantity_per_visit"] = "unknown"
+        record["freshness_tier"] = tier
         candidates.append(record)
-        if stale := _staleness_warning(resource, start_date):
+        if stale := _staleness_warning(resource, tier):
             warnings.append(stale)
 
     if not candidates:

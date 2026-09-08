@@ -134,6 +134,48 @@
       "status": "published",
       "source_url": "https://example.invalid/farwest",
       "notes": "Does not serve 53206. Exercises service-area exclusion."
+    },
+    {
+      "resource_id": "res-007",
+      "provider": "Placeholder Pop-Up Pantry (synthetic)",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "700 N Sample Way, Milwaukee, WI 53206",
+      "zip_codes_served": ["53206"],
+      "windows": [
+        {"date": "2026-09-09", "open": "10:00", "close": "12:00"}
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "(414) 555-0107",
+      "languages": ["en"],
+      "last_verified": null,
+      "verifier": "demo-reviewer",
+      "status": "published",
+      "source_url": "https://example.invalid/popup",
+      "notes": "Synthetic. No verification date on file; exercises the unconfirmed freshness tier (MOO-771)."
+    },
+    {
+      "resource_id": "res-008",
+      "provider": "Legacy Listing Pantry (synthetic, stale)",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "800 N Sample Way, Milwaukee, WI 53206",
+      "zip_codes_served": ["53206"],
+      "windows": [
+        {"date": "2026-09-10", "open": "10:00", "close": "12:00"}
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "(414) 555-0108",
+      "languages": ["en"],
+      "last_verified": "2026-06-01",
+      "verifier": "demo-reviewer",
+      "status": "published",
+      "source_url": "https://example.invalid/legacy",
+      "notes": "Synthetic. Last verified over 60 days before the demo date; exercises the unconfirmed freshness tier (MOO-771)."
     }
   ]
 }

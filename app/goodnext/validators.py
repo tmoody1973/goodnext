@@ -6,10 +6,8 @@ proposed; unknowns stay visible. Decision (2026-09-08): a violating visit is
 stripped and the plan returns as partial. No retry in this slice.
 """
 
-from datetime import date
-
-from schemas import DayPlan, FoodPlanProposal, FoodResource, HouseholdConstraints, PlannedVisit
-from tools import STALE_AFTER_DAYS
+from schemas import DayPlan, FoodPlanProposal, FoodResource, HouseholdConstraints, PlannedVisit, UnconfirmedRecord
+from tools import freshness_tier
 
 
 def _visit_violation(
@@ -29,12 +27,23 @@ def _visit_violation(
     return None
 
 
-def _with_staleness(v: PlannedVisit, resource: FoodResource, start: str) -> PlannedVisit:
-    age = (date.fromisoformat(start) - date.fromisoformat(resource.last_verified)).days
-    note = f"Hours last verified {age} days ago; call to confirm"
-    if age > STALE_AFTER_DAYS and note not in v.uncertainty:
-        return v.model_copy(update={"uncertainty": [*v.uncertainty, note]})
-    return v
+def _with_freshness(v: PlannedVisit, resource: FoodResource, tier: str) -> PlannedVisit:
+    update = {"freshness_tier": tier}
+    if tier == "call_to_confirm":
+        note = f"Last checked {resource.last_verified}; call to confirm"
+        if note not in v.uncertainty:
+            update["uncertainty"] = [*v.uncertainty, note]
+    return v.model_copy(update=update)
+
+
+def _unconfirmed_records(ledger: set[str], directory: dict[str, FoodResource], start: str) -> list[UnconfirmedRecord]:
+    """Tool-returned records that are unconfirmed-tier: phone number only, never a visit."""
+    records = [
+        UnconfirmedRecord(resource_id=r.resource_id, provider=r.provider, contact=r.contact)
+        for rid in ledger
+        if (r := directory.get(rid)) is not None and freshness_tier(r.last_verified, start) == "unconfirmed"
+    ]
+    return sorted(records, key=lambda r: r.resource_id)
 
 
 def validate_food_plan(
@@ -48,13 +57,18 @@ def validate_food_plan(
     violations: list[str] = []
     start = expected_dates[0]
 
-    def keep(visits: list[PlannedVisit]) -> list[PlannedVisit]:
+    def keep(visits: list[PlannedVisit], strip_unconfirmed: bool) -> list[PlannedVisit]:
         kept = []
         for v in visits:
             if problem := _visit_violation(v, ledger, directory, constraints):
                 violations.append(problem)
-            else:
-                kept.append(_with_staleness(v, directory[v.resource_id], start))
+                continue
+            resource = directory[v.resource_id]
+            tier = freshness_tier(resource.last_verified, start)
+            if strip_unconfirmed and tier == "unconfirmed":
+                violations.append(f"{v.resource_id}: unconfirmed tier; kept out of Food today")
+                continue
+            kept.append(_with_freshness(v, resource, tier))
         return kept
 
     by_date = {d.date: d for d in proposal.days}
@@ -63,11 +77,18 @@ def validate_food_plan(
     days = []
     for d in expected_dates:
         day = by_date.get(d, DayPlan(date=d, unmet_needs=["No plan proposed for this day"]))
-        days.append(day.model_copy(update={"visits": keep(day.visits)}))
+        days.append(day.model_copy(update={"visits": keep(day.visits, strip_unconfirmed=(d == start))}))
 
-    food_today = keep([v for v in proposal.food_today if v.date == start])
+    food_today = keep([v for v in proposal.food_today if v.date == start], strip_unconfirmed=True)
     used = sorted({v.resource_id for day in days for v in day.visits} | {v.resource_id for v in food_today})
+    unconfirmed = _unconfirmed_records(ledger, directory, start)
     cleaned = proposal.model_copy(
-        update={"start_date": start, "days": days, "food_today": food_today, "resource_ids_used": used}
+        update={
+            "start_date": start,
+            "days": days,
+            "food_today": food_today,
+            "resource_ids_used": used,
+            "unconfirmed": unconfirmed,
+        }
     )
     return cleaned, violations
