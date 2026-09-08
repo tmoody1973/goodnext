@@ -1,3 +1,17 @@
 {
-  "targets": {}
+  "targets": {
+    "default": {
+      "resources": {
+        "runtimes": {
+          "goodnext": {
+            "runtimeId": "goodnext_goodnext-j7ndOFF7b3",
+            "runtimeArn": "arn:aws:bedrock-agentcore:us-east-1:953791390715:runtime/goodnext_goodnext-j7ndOFF7b3",
+            "roleArn": "arn:aws:iam::953791390715:role/AgentCore-goodnext-defaul-ApplicationAgentGoodnextR-Thimqt8VXief"
+          }
+        },
+        "stackName": "AgentCore-goodnext-default",
+        "deployHash": "781630ba182bb8ed"
+      }
+    }
+  }
 }
