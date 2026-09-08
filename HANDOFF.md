@@ -18,7 +18,7 @@ or a notice before helping with food, or use real residents' documents.
 
 | Piece | Path | State |
 | --- | --- | --- |
-| Strands agent (Python 3.12) | `app/goodnext/` | Built, 38 tests green, deployed once |
+| Strands agent (Python 3.12) | `app/goodnext/` | Built, 39 tests green, deployed v2 |
 | FastAPI backend | `services/api/` | Built, 10 tests green |
 | AgentCore CLI config + CDK | `agentcore/` | Deployed to us-east-1 |
 | Website (Next.js) | `apps/web/` | **Not started** |
@@ -41,10 +41,15 @@ Push only when Tarik says "push".
 
 - Runtime ARN: `arn:aws:bedrock-agentcore:us-east-1:953791390715:runtime/goodnext_goodnext-j7ndOFF7b3`
 - Stack `AgentCore-goodnext-default`, us-east-1, deployed 2026-09-08 12:30 CDT, version 1.
-- Deployed from a commit **before** `5ce663e`. It needs a redeploy to pick up:
-  larger output ceiling, brevity instruction, and the env var that stops
-  prompt content reaching CloudWatch. Claude cannot run `agentcore deploy`;
-  Tarik types `! agentcore deploy -y`.
+- Version 2 deployed 2026-09-08 12:47 CDT with the larger output ceiling and
+  brevity instruction. Functional live checks passed on v2 (see MOO-776
+  comment). **One more deploy is needed** to apply the Strands trace
+  redaction env var (`OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_unredacted_attributes=`,
+  committed in `9232f9d`); until then CloudWatch span attributes contain
+  prompt content. Claude cannot run `agentcore deploy`; Tarik types
+  `! agentcore deploy -y`. After it: re-run the 53206 request, filter the
+  runtime log group for `budget_usd` since the deploy (expect 0), post
+  evidence, mark MOO-776 Done.
 - Local dev: `agentcore dev --skip-deploy -l` (port 8080) plus
   `cd services/api && uv run uvicorn goodnext_api.main:app --port 8000`.
 - Point the API at the deployed runtime with env `GOODNEXT_AGENT_RUNTIME_ARN`.
@@ -73,10 +78,9 @@ confirm" with the date; only a missing date is "unconfirmed".
 1. **Plan latency 60–105 s.** Too slow for a resident. Fix direction: a
    day-one-only first response, then the week; delayed-status message per
    PRD section 8; prompt caching. Not started.
-2. **Deployed runtime is stale** (see above); MOO-776's 53206 live check
-   failed on the old build with MaxTokens; the no-match check passed.
-3. **Prompt content in CloudWatch** on the old build; fixed by the env var
-   once redeployed. The 13 existing log lines hold synthetic test inputs only.
+2. **Prompt content in CloudWatch** on v2 via Strands' tracer; fix committed,
+   needs the third deploy. All logged inputs so far are synthetic test requests.
+3. **MOO-776 stays In Progress** until that log check passes.
 4. **211 data** needs IMPACT 211 permission (decision 005). Trial subscription
    exists; DIY verification guide at `docs/research/211-portal-verification-guide.md`.
 5. **Website** does not exist. Impeccable shape pass first, then screens.
