@@ -58,7 +58,7 @@ def convert(r: dict, retrieved_default: str) -> dict:
         "languages": list(r.get("languages") or []),
         "last_verified": r.get("source_retrieved_on") or retrieved_default,
         "review_due_on": r.get("review_due_on"),
-        "verifier": "GoodNext review of the official provider page",
+        "verifier": "Tarik Moody, checked against the official provider page",
         "status": r.get("status", "published"),
         "source_url": r["source_url"],
         "source": f"Official provider page, checked {r.get('source_retrieved_on') or retrieved_default}",
