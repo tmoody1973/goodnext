@@ -75,12 +75,12 @@ describe("Food today page", () => {
     expect(screen.getByText("This usually takes one to two minutes.")).toBeInTheDocument();
   });
 
-  it("says the service could not be reached when fetch fails", async () => {
+  it("treats a failed fetch as temporarily unavailable", async () => {
     vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new TypeError("Failed to fetch")));
     const user = userEvent.setup();
     render(<FoodTodayPage />);
     await fillValidForm(user);
     await user.click(screen.getByRole("button", { name: "Show food today" }));
-    expect(await screen.findByRole("alert")).toHaveTextContent("We could not reach the service.");
+    expect(await screen.findByRole("alert")).toHaveTextContent("Temporarily unavailable.");
   });
 });
