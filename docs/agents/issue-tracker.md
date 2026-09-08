@@ -1,8 +1,9 @@
 # Issue tracker: Linear via linear-build
 
 Issues for this repo live in **Linear**: workspace Moodyco, team **MOO**, project
-**GoodNext — Agents for Humans Hackathon**. The project does not exist yet; the
-`linear-build` kickoff creates it. Do not create a second project.
+**GoodNext — Agents for Humans Hackathon**
+(https://linear.app/moodyco/project/goodnext-agents-for-humans-hackathon-2064eca7984d),
+created September 8, 2026 by the `linear-build` kickoff. Do not create a second project.
 
 The PRD, research, and specs stay in this repository under `docs/`. Linear
 holds the execution contracts. There are no Markdown tickets.
