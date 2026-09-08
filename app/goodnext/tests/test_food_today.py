@@ -1,5 +1,6 @@
 """Offline checks for the food-today slice. No Bedrock or AgentCore needed."""
 
+import json
 import sys
 from datetime import date, timedelta
 from pathlib import Path
@@ -9,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pytest
 
 import main
+import tools
 from help_routes import HELP_ROUTES
 from main import FoodTodayRequest, envelope_for, invoke, run_food_today, task_text
 from schemas import DayPlan, FoodPlanProposal, FoodResource, HouseholdConstraints, PlannedVisit, ServiceWindow
@@ -25,6 +27,18 @@ def fresh_ledger():
     token = returned_ids.set(set())
     yield
     returned_ids.reset(token)
+
+
+@pytest.fixture
+def fixture_without_res009(tmp_path, monkeypatch):
+    """A temp copy of the fixture directory with res-009 removed. res-009 (MOO-772)
+    has an empty zip_codes_served, so by rule it is returned for ANY ZIP; tests that
+    need a true no-match ZIP must point tools.FIXTURE_PATH at a directory without it."""
+    raw = json.loads(tools.FIXTURE_PATH.read_text())
+    raw["resources"] = [r for r in raw["resources"] if r["resource_id"] != "res-009"]
+    path = tmp_path / "no-res-009.json"
+    path.write_text(json.dumps(raw))
+    monkeypatch.setattr(tools, "FIXTURE_PATH", path)
 
 
 def visit(rid: str, date: str, cost: str = "free") -> PlannedVisit:
@@ -63,7 +77,7 @@ def test_find_excludes_closed_and_out_of_area():
     assert any("res-004" in w for w in result["warnings"]), "stale verification should warn"
 
 
-def test_find_no_match_for_unserved_zip():
+def test_find_no_match_for_unserved_zip(fixture_without_res009):
     result = find_food_resources("53999", DATES[0], DATES[-1], NOW_LOCAL)
     assert result["status"] == "no_match" and result["data"] == []
 
@@ -125,7 +139,7 @@ def test_envelope_status_rules():
     assert no_match.help_routes == HELP_ROUTES and len(no_match.help_routes) == 3
 
 
-def test_run_food_today_no_match_short_circuits_without_calling_model(monkeypatch):
+def test_run_food_today_no_match_short_circuits_without_calling_model(monkeypatch, fixture_without_res009):
     def refuse_to_build(model=None):
         raise AssertionError("build_agent must not be called on a no-match ZIP")
 
@@ -248,3 +262,45 @@ def test_food_today_derived_from_surviving_day_one_visits_not_models_list():
 
     assert [v.resource_id for v in cleaned.food_today] == ["res-001"]
     assert cleaned.food_today == cleaned.days[0].visits
+
+
+# --- MOO-772: unknown service area shown as conditional, never confirmed ---
+
+
+@pytest.mark.parametrize("zip_code", ["53206", "53999"])
+def test_find_returns_unknown_service_area_record_for_any_zip(zip_code):
+    result = find_food_resources(zip_code, DATES[0], DATES[-1], NOW_LOCAL)
+    by_id = {r["resource_id"]: r for r in result["data"]}
+    assert "res-009" in by_id
+    assert by_id["res-009"]["service_area_known"] is False
+    assert any("res-009" in w and "service area unknown; confirm they serve your area" in w for w in result["warnings"])
+
+
+def test_find_known_service_area_record_keeps_service_area_known_true():
+    result = find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
+    by_id = {r["resource_id"]: r for r in result["data"]}
+    assert by_id["res-001"]["service_area_known"] is True
+
+
+def test_find_still_excludes_out_of_area_resource_for_wrong_zip():
+    result = find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
+    ids = {r["resource_id"] for r in result["data"]}
+    assert "res-006" not in ids, "res-006 serves only 53225; must stay excluded for 53206"
+
+
+def test_check_food_constraints_reports_unknown_area_as_conditional_never_supported():
+    find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
+    result = check_food_constraints(["res-009"], 0.0, "full", ["bus"])
+    verdict = result["data"][0]
+    assert verdict["verdict"] == "conditional"
+    assert "confirm they serve your area" in verdict["reasons"]
+
+
+def test_validator_keeps_unknown_area_visit_with_confirm_uncertainty():
+    find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
+    proposal = proposal_with([visit("res-009", DATES[0])])
+    cleaned, violations = validate_food_plan(proposal, returned_ids.get(), load_directory(), ZERO_BUDGET_NO_KITCHEN, DATES, NOW_LOCAL)
+    kept = cleaned.days[0].visits
+    assert [v.resource_id for v in kept] == ["res-009"]
+    assert kept[0].service_area_known is False
+    assert "Confirm they serve your area" in kept[0].uncertainty

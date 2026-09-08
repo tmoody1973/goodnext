@@ -86,8 +86,13 @@ def _envelope(status: str, data=None, evidence=(), missing=(), warnings=(), retr
 
 
 def _visible(resource: FoodResource, zip_code: str, start: str, end: str) -> list[dict]:
-    """Windows for a published resource serving this ZIP inside the date range."""
-    if resource.status != "published" or zip_code not in resource.zip_codes_served:
+    """Windows for a published resource serving this ZIP inside the date range.
+    An empty zip_codes_served list means unknown service area (MOO-772, D5): the
+    record is visible for any ZIP rather than excluded. A non-empty list still
+    requires an exact match (decision 004)."""
+    if resource.status != "published":
+        return []
+    if resource.zip_codes_served and zip_code not in resource.zip_codes_served:
         return []
     return [w.model_dump() for w in resource.windows if start <= w.date <= end]
 
@@ -130,9 +135,13 @@ def find_food_resources(zip_code: str, start_date: str, end_date: str, now_local
         record["freshness_tier"] = tier
         record["open_today"] = _open_today(windows, now)
         record["next_open"] = {"date": nxt["date"], "open": nxt["open"], "close": nxt["close"]} if nxt else None
+        service_area_known = bool(resource.zip_codes_served)
+        record["service_area_known"] = service_area_known
         candidates.append(record)
         if stale := _staleness_warning(resource, tier):
             warnings.append(stale)
+        if not service_area_known:
+            warnings.append(f"{resource.resource_id}: service area unknown; confirm they serve your area")
 
     if not candidates:
         return _envelope("no_match", data=[], missing=["No published resource serves this ZIP in the requested dates"])
@@ -170,6 +179,9 @@ def check_food_constraints(resource_ids: list[str], budget_usd: float, kitchen: 
             verdict, reasons = "unsuitable", ["costs money; household budget is zero"]
         elif resource.cost != "free":
             verdict, reasons = "conditional", ["paid option; must fit stated budget"]
+        if not resource.zip_codes_served:
+            verdict = "conditional" if verdict != "unsuitable" else verdict
+            reasons.append("confirm they serve your area")
         if resource.appointment_required:
             verdict = "conditional" if verdict != "unsuitable" else verdict
             reasons.append("appointment required; not booked by this service")
