@@ -13,6 +13,7 @@ from bedrock_agentcore.runtime import BedrockAgentCoreApp
 from pydantic import BaseModel, Field, ValidationError
 from strands import Agent
 
+from help_routes import HELP_ROUTES
 from model.load import load_model
 from prompts import FOOD_PLAN_INSTRUCTION, RESIDENT_SYSTEM_PROMPT
 from schemas import Envelope, FoodPlanProposal, HouseholdConstraints
@@ -56,6 +57,20 @@ def task_text(req: FoodTodayRequest) -> str:
     )
 
 
+def no_match_envelope(request_id: str) -> Envelope:
+    """The no-match envelope for the tool-level short-circuit: no model call, no visits."""
+    return Envelope(
+        status="no_match",
+        data=None,
+        evidence=[],
+        missing=["No feasible resource found; see help route"],
+        warnings=[],
+        retryable=False,
+        request_id=request_id,
+        help_routes=HELP_ROUTES,
+    )
+
+
 def envelope_for(proposal: FoodPlanProposal, violations: list[str], request_id: str) -> Envelope:
     visits = [v for d in proposal.days for v in d.visits] + proposal.food_today
     if not visits:
@@ -71,12 +86,18 @@ def envelope_for(proposal: FoodPlanProposal, violations: list[str], request_id: 
         warnings=violations,
         retryable=False,
         request_id=request_id,
+        help_routes=HELP_ROUTES if status == "no_match" else [],
     )
 
 
 def run_food_today(req: FoodTodayRequest, model=None) -> Envelope:
     token = returned_ids.set(set())
     try:
+        # Tool-level no-match short-circuit (MOO-773): skip the model entirely
+        # when the search would come back empty for this ZIP and date range.
+        precheck = find_food_resources(req.constraints.zip_code, req.dates[0], req.dates[-1])
+        if precheck["status"] == "no_match":
+            return no_match_envelope(req.request_id)
         agent = build_agent(model)
         result = agent(task_text(req), structured_output_model=FoodPlanProposal)
         proposal = result.structured_output
