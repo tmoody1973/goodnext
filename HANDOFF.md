@@ -1,6 +1,6 @@
 # GoodNext handoff
 
-Written September 8, 2026, 12:45 CDT, for a fresh Claude Code session.
+Written September 8, 2026, 12:45 CDT; updated 15:10 CDT, for a fresh Claude Code session.
 Read this, then `CONTEXT.md`, then `docs/agents/issue-tracker.md`. Do not
 re-read the planning docs unless a task needs them; the decisions are settled.
 
@@ -21,9 +21,10 @@ or a notice before helping with food, or use real residents' documents.
 | Strands agent (Python 3.12) | `app/goodnext/` | Built, 39 tests green, deployed v3 and verified live |
 | FastAPI backend | `services/api/` | Built, 10 tests green |
 | AgentCore CLI config + CDK | `agentcore/` | Deployed to us-east-1 |
-| Website (Next.js) | `apps/web/` | **Not started** |
+| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Base built (MOO-779, In Review); 9 tests green; screens MOO-782 to 787 open |
 | Directory data | `app/goodnext/fixtures/` | 93 records, see below |
-| Feature spec | `docs/specs/food-today.md` | Settled |
+| Feature specs | `docs/specs/food-today.md`, `docs/specs/food-today-screen.md` | Settled |
+| Design context | `PRODUCT.md`, `.impeccable/surfaces/`, `.impeccable/mocks/decision/` | Shape pass done; DESIGN.md lands with MOO-786 |
 | Decisions | `docs/decisions/001` to `006` | Plain English, blanks for Tarik |
 | Research | `docs/research/` | Data access, 211 guide, drafts, call sheet |
 | Evidence | `docs/evidence/` | Live responses per issue |
@@ -31,7 +32,9 @@ or a notice before helping with food, or use real residents' documents.
 Tracker: **Linear**, team MOO, project "GoodNext — Agents for Humans
 Hackathon". Only the `linear-build` skill creates or closes issues. Issues
 MOO-770 to MOO-775, MOO-777, MOO-778 are Done with evidence comments.
-**All nine Food today issues (MOO-770 to 778) are Done.**
+**All nine Food today issues (MOO-770 to 778) are Done.** Screen issues
+MOO-779 to MOO-787 created 2026-09-08 14:45 CDT (779 In Review; 780 and 781
+are agent fixes, unblocked; 782, 783, 784 unblocked once 779 is Done).
 
 GitHub: https://github.com/tmoody1973/goodnext, pushed and current as of
 2026-09-08 13:10 CDT. CI (`.github/workflows/ci.yml`) runs both test suites
@@ -85,17 +88,21 @@ confirm" with the date; only a missing date is "unconfirmed".
    a nudge in the task text could reduce it.
 4. **211 data** needs IMPACT 211 permission (decision 005). Trial subscription
    exists; DIY verification guide at `docs/research/211-portal-verification-guide.md`.
-5. **Website** does not exist. Impeccable shape pass first, then screens.
+5. **Website** has only the base screen (form to first response). Cards,
+   waiting states, no-match, tiles, finish, and the live run are MOO-782 to 787.
+6. **Dev proxy timeout.** The Next dev proxy drops requests at 30 s by default;
+   `experimental.proxyTimeout` is set to 180 s in dev. Judge-facing hosting
+   needs the same patience at the edge (CloudFront origin timeout).
 
 ## Next steps, in order (six days to September 14, 7 p.m. Central)
 
-1. **Website, Food today screen.** Run `impeccable` `shape` for the Food
-   today journey first (PRD section 14 requires it), then
-   `mattpocock-skills:grill-with-docs` → `to-spec` → `to-tickets` →
-   `linear-build`. Next.js 16 static export, Tailwind 4, `apps/web/`. The
-   screen calls `POST /api/plans`. It must show today expanded, days two to
-   seven collapsed, the no-match state with help routes, and a delayed-status
-   message after 30 s (PRD section 8) because a plan takes 60–100 s.
+1. **Website, Food today screen.** Shape, grill, spec, and tickets are done
+   (2026-09-08). Branch `tarikjmoody/moo-779-web-app-base` holds the base
+   (three commits, not pushed). Next: Tarik says "push", open the PR, watch
+   the CI web job go red-then-green, close MOO-779. Then build MOO-782, 783,
+   784 (parallel-safe), then 785, 786, 787, each via `linear-build`. Spec:
+   `docs/specs/food-today-screen.md`. The Matt Pocock `implement` skill is
+   user-invocation only, like `grill-with-docs`, `to-spec`, `to-tickets`.
 2. **Latency.** Return day one first, the week second; or cache the system
    prompt. Only after the screen exists, so the fix is measured on the real
    flow.
@@ -112,14 +119,15 @@ confirm" with the date; only a missing date is "unconfirmed".
 
 ```text
 We are building GoodNext in /Users/tarikmoody/Projects/foodshare-strands.
-Read HANDOFF.md, then CONTEXT.md, then docs/agents/issue-tracker.md.
-Do not re-read the planning docs unless a task needs them.
+Read HANDOFF.md, then CONTEXT.md, then docs/agents/issue-tracker.md, then
+docs/specs/food-today-screen.md. Do not re-read the planning docs unless a
+task needs them.
 
-Next feature is the website's Food today screen. Start with the Impeccable
-shape workflow for that journey, then grill-with-docs, to-spec, to-tickets,
-and create the Linear issues with linear-build. Ship the scaffolding;
-Socratic only at the seams. Explain in plain English. Nothing in AWS is
-created or changed without my go, and deploys are commands I run myself.
+Branch tarikjmoody/moo-779-web-app-base has the website base, unpushed.
+Build MOO-782 (today's cards) with linear-build, tdd, and code-review, on
+that branch or a child of it. Read the surface brief and PRODUCT.md before
+touching UI. Explain in plain English. Nothing in AWS is created or changed
+without my go; deploys and pushes are mine.
 ```
 
 ## Working agreements
@@ -133,4 +141,9 @@ created or changed without my go, and deploys are commands I run myself.
 - Fixture tests must never reach Bedrock; `tests/conftest.py` enforces it.
   Mark a live test `@pytest.mark.live`.
 - Use the Matt Pocock skills by plugin name (`mattpocock-skills:…`); top-level
-  `code-review` is CodeRabbit.
+  `code-review` is CodeRabbit. `grill-with-docs`, `to-spec`, `to-tickets`, and
+  `implement` are user-invocation only: Tarik types the slash command.
+- Browser checks run through `ego-browser`; scroll the target into view before
+  clicking (the dev-tools badge and the viewport edge swallow clicks), and use
+  real typing so React sees the input. LastPass injects into inputs and trips a
+  harmless hydration warning in dev.
