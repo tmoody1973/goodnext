@@ -60,7 +60,8 @@ makes changes through pull requests. Push only when Tarik says "push".
 ## Directory data, in trust order
 
 1. **Reviewed** (`fixtures/milwaukee-food-resources-reviewed.json`, 16 sites):
-   checked against official provider pages 2026-09-08; "verified" tier. Source
+   built by Tarik himself, each checked against the official provider page on
+   2026-09-08; "verified" tier, verifier "Tarik Moody". Source
    file under `fixtures/reviewed/`. Wins over the map for the same site.
 2. **Milwaukee Food Environment Map** (75 sites, 68 after de-dup): public
    ArcGIS layer, data as of 2024-08-27, no license stated. Used per decision
