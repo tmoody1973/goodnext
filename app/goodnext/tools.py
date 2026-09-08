@@ -8,7 +8,7 @@ plain dict. Tools never reserve food, verify stock, or contact providers.
 import contextvars
 import json
 import os
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 from strands import tool
@@ -36,6 +36,28 @@ def freshness_tier(last_verified: str | None, start_date: str) -> FreshnessTier:
     if age <= CALL_TO_CONFIRM_MAX_DAYS:
         return "call_to_confirm"
     return "unconfirmed"
+
+
+def window_open_at(window: dict, now: datetime) -> bool:
+    """MOO-774 (D2): True unless window is dated today and its close is at/before now's clock (HH:MM).
+    Windows on other dates are never affected by this check. Pure; no I/O."""
+    if window["date"] != now.date().isoformat():
+        return True
+    return window["close"] > now.strftime("%H:%M")
+
+
+def next_open_after(windows: list[dict], now: datetime) -> dict | None:
+    """Earliest window that is still open or opens later today, or falls on a later date.
+    None if nothing qualifies. Pure; no I/O."""
+    candidates = [w for w in windows if window_open_at(w, now)]
+    if not candidates:
+        return None
+    return min(candidates, key=lambda w: (w["date"], w["open"]))
+
+
+def _open_today(windows: list[dict], now: datetime) -> bool:
+    today = now.date().isoformat()
+    return any(w["date"] == today and window_open_at(w, now) for w in windows)
 
 
 def load_directory() -> dict[str, FoodResource]:
@@ -78,9 +100,14 @@ def _staleness_warning(resource: FoodResource, tier: FreshnessTier) -> str | Non
 
 
 @tool
-def find_food_resources(zip_code: str, start_date: str, end_date: str) -> dict:
+def find_food_resources(zip_code: str, start_date: str, end_date: str, now_local: str) -> dict:
     """Search published, reviewed food-service records for the supplied ZIP area and date window.
-    Returns resource IDs, service windows, cost, requirements and unknown fields.
+    now_local is the current Milwaukee local time (ISO datetime with UTC offset). Always pass the
+    now_local value copied verbatim from server_context in the task text; never invent or omit it.
+    Returns resource IDs, service windows, cost, requirements and unknown fields. Each record also
+    carries open_today (bool) and next_open ({date, open, close} or null): a window dated today
+    whose close time has already passed does not count toward open_today, and next_open carries
+    the resource's earliest still-open-or-future window instead.
     This lookup does not reserve food, verify stock or contact providers.
     Records marked closed or withdrawn, and providers that do not serve the ZIP, are excluded.
     """
@@ -89,16 +116,20 @@ def find_food_resources(zip_code: str, start_date: str, end_date: str) -> dict:
     except (OSError, ValueError) as exc:
         return _envelope("temporarily_unavailable", warnings=[f"directory unavailable: {exc.__class__.__name__}"], retryable=True)
 
+    now = datetime.fromisoformat(now_local)
     candidates, warnings = [], []
     for resource in directory.values():
         windows = _visible(resource, zip_code, start_date, end_date)
         if not windows:
             continue
         tier = freshness_tier(resource.last_verified, start_date)
+        nxt = next_open_after(windows, now)
         record = resource.model_dump()
         record["windows"] = windows
         record["quantity_per_visit"] = "unknown"
         record["freshness_tier"] = tier
+        record["open_today"] = _open_today(windows, now)
+        record["next_open"] = {"date": nxt["date"], "open": nxt["open"], "close": nxt["close"]} if nxt else None
         candidates.append(record)
         if stale := _staleness_warning(resource, tier):
             warnings.append(stale)
