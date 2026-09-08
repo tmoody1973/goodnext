@@ -60,7 +60,7 @@ A map tool for the USDA Summer Food Service Program, powered by USDA's fns.usda.
 - [ ] Exact response fields for opening hours, service area, eligibility, cost, languages, last-updated
 - [ ] Whether Milwaukee/Wisconsin/IMPACT 211 records are included and how complete they are
 - [ ] Authentication method and rate limits, pagination, result caps
-- [ ] Attribution, display, caching, storage, and redistribution terms (confirm or refute the CC BY-NC-SA claim found in search results but not in primary docs)
+- [x] Terms read 2026-09-08: data owned by local 211 centers; any production, operational, commercial, or external use needs each center's prior permission. No CC license language; the CC BY-NC-SA claim is refuted for the API terms. Excerpt in 211-samples/terms-of-use-2026-09-08.md.
 - [ ] Meaning of any "last updated" timestamp — record edit vs. verified-in-person
 - [ ] Export V2 semantics: full snapshot vs. incremental, deletions, resumable pagination
 

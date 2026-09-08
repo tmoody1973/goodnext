@@ -6,6 +6,8 @@ September 8, 2026 | Version 1.0 | Integration addendum to PRD 1.5
 
 ## 1 Confirmed access and the decision
 
+**Status correction, September 8, 2026:** the owner has a portal account and a Trial - V2 subscription (development and testing only; 10 calls/minute, 1,000/day, 10 results, first page). Production or external use of any 211 record requires prior permission from the local 211 center, IMPACT 211, per the portal Terms of Use. See docs/decisions/005 and docs/research/211-samples/terms-of-use-2026-09-08.md. The original text follows.
+
 The project owner confirms access to the 211 API and supplied the portal descriptions for Search V2, Query V2, Suggest V2, and Export V2. This replaces the earlier assumption that obtaining developer access was still a prerequisite. We have not yet exercised the account or inspected its operation schemas, product entitlements, Wisconsin data coverage, quotas, or reuse terms.
 
 Use **Search V2 plus Query V2 as the first live directory integration** for FoodShare Bridge. Add Suggest V2 when it improves the interface. Consider Export V2 for a maintained local directory after confirming storage and redistribution rights. The supplied catalog labels the V1 products deprecated; do not start a new integration on V1.
