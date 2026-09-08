@@ -15,5 +15,5 @@ def load_model() -> BedrockModel:
         model_id=os.environ.get("GOODNEXT_MODEL_ID", DEFAULT_MODEL_ID),
         region_name=os.environ.get("GOODNEXT_BEDROCK_REGION", DEFAULT_REGION),
         temperature=0.2,
-        max_tokens=4096,
+        max_tokens=16000,
     )

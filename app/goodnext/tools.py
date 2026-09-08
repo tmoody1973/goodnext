@@ -97,6 +97,11 @@ def _visible(resource: FoodResource, zip_code: str, start: str, end: str) -> lis
     requires an exact match (decision 004)."""
     if resource.status != "published":
         return []
+    if not resource.zip_codes_served and zip_code not in resource.address:
+        # Decision 006 refinement of D5: an unknown service area is shown only for the
+        # site's own address ZIP, still marked conditional. With 54 real records lacking
+        # an area, "any ZIP" made every search return the whole county.
+        return []
     if resource.zip_codes_served and zip_code not in resource.zip_codes_served:
         return []
     return [w.model_dump() for w in resource.windows if start <= w.date <= end]

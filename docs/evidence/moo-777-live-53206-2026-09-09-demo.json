@@ -1,0 +1,770 @@
+{
+ "status": "success",
+ "data": {
+  "start_date": "2026-09-09",
+  "days": [
+   {
+    "date": "2026-09-09",
+    "visits": [
+     {
+      "resource_id": "mfc-008",
+      "provider": "Capuchin Community Services \u2013 House of Peace",
+      "date": "2026-09-09",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "schedule_text": "Wed Sep 9: 8:30 AM\u201312:00 PM and 12:00 PM\u20133:15 PM",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-933-1300",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": true,
+      "uncertainty": [
+       "Hours last confirmed Aug 2024 \u2014 call before going",
+       "Ask for no-cook, ready-to-eat items (no kitchen)",
+       "Last checked 2024-08-27; call to confirm"
+      ],
+      "backup_resource_id": "mfc-060",
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "08:30",
+       "close": "12:00"
+      },
+      "claims": {
+       "open_today_text": "Open today from 8:30 AM to 12:00 PM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1702+West+Walnut+St.%2C+Milwaukee%2C+WI+53205",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     },
+     {
+      "resource_id": "res-002",
+      "provider": "St. Demo Hot Meal Program",
+      "date": "2026-09-09",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Wed Sep 9: 5:00 PM\u20136:30 PM",
+      "requirements": [],
+      "last_verified": "2026-09-01",
+      "contact": "(414) 555-0102",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Sit-down meal only \u2014 no confirmed take-home portions"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "17:00",
+       "close": "18:30"
+      },
+      "claims": {
+       "open_today_text": "Open today from 5:00 PM to 6:30 PM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2026-09-01",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=300+E+Fixture+Ave%2C+Milwaukee%2C+WI+53212",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": ""
+      }
+     }
+    ],
+    "meal_notes": [
+     "Morning/afternoon: pick up no-cook pantry items at Capuchin (confirmed service area)",
+     "Evening: sit-down hot meal at St. Demo Hot Meal Program (verified Sep 2026)"
+    ],
+    "unmet_needs": []
+   },
+   {
+    "date": "2026-09-10",
+    "visits": [
+     {
+      "resource_id": "mfc-008",
+      "provider": "Capuchin Community Services \u2013 House of Peace",
+      "date": "2026-09-10",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "schedule_text": "Thu Sep 10: 8:30 AM\u201312:00 PM and 12:00 PM\u20133:15 PM",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-933-1300",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": true,
+      "uncertainty": [
+       "Hours last confirmed Aug 2024 \u2014 call before going",
+       "Ask for no-cook, ready-to-eat items",
+       "Last checked 2024-08-27; call to confirm"
+      ],
+      "backup_resource_id": "res-001",
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "08:30",
+       "close": "12:00"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 8:30 AM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1702+West+Walnut+St.%2C+Milwaukee%2C+WI+53205",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     },
+     {
+      "resource_id": "res-001",
+      "provider": "Northside Community Pantry",
+      "date": "2026-09-10",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "schedule_text": "Thu Sep 10: 10:00 AM\u20132:00 PM",
+      "requirements": [
+       "Bring a photo ID if you have one; not required"
+      ],
+      "last_verified": "2026-09-05",
+      "contact": "(414) 555-0101",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Visit limit: once per 7 days \u2014 coordinate with any other pantry visits this week",
+       "Ask for no-cook, ready-to-eat items (no kitchen)"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "10:00",
+       "close": "14:00"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 10:00 AM",
+       "cost_label": "Free",
+       "requirements_text": "May require: Bring a photo ID if you have one; not required",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2026-09-05",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1200+W+Demo+St%2C+Milwaukee%2C+WI+53206",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": ""
+      }
+     },
+     {
+      "resource_id": "res-002",
+      "provider": "St. Demo Hot Meal Program",
+      "date": "2026-09-10",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Thu Sep 10: 5:00 PM\u20136:30 PM",
+      "requirements": [],
+      "last_verified": "2026-09-01",
+      "contact": "(414) 555-0102",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Sit-down meal only \u2014 no confirmed take-home portions"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "17:00",
+       "close": "18:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 5:00 PM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2026-09-01",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=300+E+Fixture+Ave%2C+Milwaukee%2C+WI+53212",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": ""
+      }
+     }
+    ],
+    "meal_notes": [
+     "Morning: Capuchin pantry (confirmed area) or Northside Pantry (verified Sep 2026, pre-bagged no-cook items)",
+     "Evening: hot meal at St. Demo"
+    ],
+    "unmet_needs": []
+   },
+   {
+    "date": "2026-09-11",
+    "visits": [
+     {
+      "resource_id": "mfc-008",
+      "provider": "Capuchin Community Services \u2013 House of Peace",
+      "date": "2026-09-11",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "schedule_text": "Fri Sep 11: 8:30 AM\u201312:00 PM and 12:00 PM\u20133:15 PM",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-933-1300",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": true,
+      "uncertainty": [
+       "Hours last confirmed Aug 2024 \u2014 call before going",
+       "Ask for no-cook, ready-to-eat items",
+       "Last checked 2024-08-27; call to confirm"
+      ],
+      "backup_resource_id": "mfc-038",
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "08:30",
+       "close": "12:00"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 8:30 AM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1702+West+Walnut+St.%2C+Milwaukee%2C+WI+53205",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     },
+     {
+      "resource_id": "mfc-038",
+      "provider": "Maccanon Brown Homeless Sanctuary \u2013 Hephatha Lutheran Church",
+      "date": "2026-09-11",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Fri Sep 11: 11:00 AM\u20132:30 PM",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-404-0600",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": false,
+      "uncertainty": [
+       "Service area not confirmed for 53206 \u2014 call first",
+       "Hours last confirmed Aug 2024 \u2014 call before going",
+       "Last checked 2024-08-27; call to confirm",
+       "Confirm they serve your area"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-11",
+       "open": "11:00",
+       "close": "14:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-11 at 11:00 AM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "Confirm they serve your area",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1720+W.+Locust+St.%2C+Milwaukee%2C+WI+53206",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     },
+     {
+      "resource_id": "res-002",
+      "provider": "St. Demo Hot Meal Program",
+      "date": "2026-09-11",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Fri Sep 11: 5:00 PM\u20136:30 PM",
+      "requirements": [],
+      "last_verified": "2026-09-01",
+      "contact": "(414) 555-0102",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Sit-down meal only \u2014 no confirmed take-home portions"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "17:00",
+       "close": "18:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 5:00 PM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2026-09-01",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=300+E+Fixture+Ave%2C+Milwaukee%2C+WI+53212",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": ""
+      }
+     }
+    ],
+    "meal_notes": [
+     "Morning: Capuchin pantry (confirmed area)",
+     "Midday: free meal at Hephatha Lutheran (call to confirm service area)",
+     "Evening: hot meal at St. Demo (verified)"
+    ],
+    "unmet_needs": []
+   },
+   {
+    "date": "2026-09-12",
+    "visits": [
+     {
+      "resource_id": "mfc-013",
+      "provider": "COA Goldin Center",
+      "date": "2026-09-12",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "schedule_text": "Sat Sep 12: 9:00 AM\u201312:00 PM",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-265-7696",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": false,
+      "uncertainty": [
+       "Service area not confirmed for 53206 \u2014 call first",
+       "Hours last confirmed Aug 2024 \u2014 call before going",
+       "Ask for no-cook, ready-to-eat items",
+       "Last checked 2024-08-27; call to confirm",
+       "Confirm they serve your area"
+      ],
+      "backup_resource_id": "mfc-015",
+      "next_open": {
+       "date": "2026-09-09",
+       "open": "15:00",
+       "close": "18:00"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-09 at 3:00 PM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "Confirm they serve your area",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=2320+W+Burleigh+St.%2C+Milwaukee%2C+WI+53206",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     },
+     {
+      "resource_id": "mfc-015",
+      "provider": "Ebenezer Stone Ministries \u2013 North Pop-Up",
+      "date": "2026-09-12",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "schedule_text": "Sat Sep 12: 1:00 PM\u20133:00 PM (weather-permitting pop-up, twice monthly)",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-488-8070",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": false,
+      "uncertainty": [
+       "Service area not confirmed for 53206 \u2014 call first",
+       "Hours last confirmed Aug 2024 \u2014 call before going",
+       "Pop-up only when weather permits \u2014 call to confirm this date",
+       "Ask for no-cook, ready-to-eat items",
+       "Last checked 2024-08-27; call to confirm",
+       "Confirm they serve your area"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-12",
+       "open": "13:00",
+       "close": "15:00"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-12 at 1:00 PM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "Confirm they serve your area",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1902+W+Center+St%2C+Milwaukee%2C+WI+53206",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     },
+     {
+      "resource_id": "res-002",
+      "provider": "St. Demo Hot Meal Program",
+      "date": "2026-09-12",
+      "service_type": "free_meal",
+      "cost": "free",
+      "schedule_text": "Sat Sep 12: 5:00 PM\u20136:30 PM",
+      "requirements": [],
+      "last_verified": "2026-09-01",
+      "contact": "(414) 555-0102",
+      "freshness_tier": "verified",
+      "service_area_known": true,
+      "uncertainty": [
+       "Sit-down meal only \u2014 no confirmed take-home portions"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "17:00",
+       "close": "18:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 5:00 PM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2026-09-01",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=300+E+Fixture+Ave%2C+Milwaukee%2C+WI+53212",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": ""
+      }
+     }
+    ],
+    "meal_notes": [
+     "Morning: COA Goldin Center pantry (call to confirm service area and hours)",
+     "Afternoon: Ebenezer pop-up (call to confirm weather/date)",
+     "Evening: hot meal at St. Demo (verified)"
+    ],
+    "unmet_needs": [
+     "Saturday pantry options require phone confirmation before traveling \u2014 service area and hours unverified"
+    ]
+   },
+   {
+    "date": "2026-09-13",
+    "visits": [],
+    "meal_notes": [],
+    "unmet_needs": [
+     "No confirmed open food services found for Sunday Sep 13 in the current data \u2014 call 211 for same-day options"
+    ]
+   },
+   {
+    "date": "2026-09-14",
+    "visits": [
+     {
+      "resource_id": "mfc-008",
+      "provider": "Capuchin Community Services \u2013 House of Peace",
+      "date": "2026-09-14",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "schedule_text": "Mon Sep 14: 8:30 AM\u201312:00 PM and 12:00 PM\u20133:15 PM",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-933-1300",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": true,
+      "uncertainty": [
+       "Hours last confirmed Aug 2024 \u2014 call before going",
+       "Ask for no-cook, ready-to-eat items",
+       "Last checked 2024-08-27; call to confirm"
+      ],
+      "backup_resource_id": "mfc-060",
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "08:30",
+       "close": "12:00"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 8:30 AM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1702+West+Walnut+St.%2C+Milwaukee%2C+WI+53205",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     },
+     {
+      "resource_id": "mfc-060",
+      "provider": "Scott Christian Youth and Family Center",
+      "date": "2026-09-14",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "schedule_text": "Mon Sep 14: Pantry 9:00 AM\u20134:00 PM; Breakfast meal 10:00\u201311:00 AM; Dinner meal 3:00\u20134:00 PM",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-374-3923",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": false,
+      "uncertainty": [
+       "Service area not confirmed for 53206 \u2014 call first",
+       "Hours last confirmed Aug 2024 \u2014 call before going",
+       "Last checked 2024-08-27; call to confirm",
+       "Confirm they serve your area"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "09:00",
+       "close": "16:00"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 9:00 AM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "Confirm they serve your area",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=2741+N.+Tentonia+Ave.%2C+Milwaukee%2C+WI+53206",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     }
+    ],
+    "meal_notes": [
+     "Morning/afternoon: Capuchin pantry (confirmed area) or Scott Christian (call to confirm area)",
+     "Meals available at Scott Christian if service area confirmed: breakfast 10\u201311 AM, dinner 3\u20134 PM"
+    ],
+    "unmet_needs": []
+   },
+   {
+    "date": "2026-09-15",
+    "visits": [
+     {
+      "resource_id": "mfc-008",
+      "provider": "Capuchin Community Services \u2013 House of Peace",
+      "date": "2026-09-15",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "schedule_text": "Tue Sep 15: 8:30 AM\u201312:00 PM and 12:00 PM\u20133:15 PM",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-933-1300",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": true,
+      "uncertainty": [
+       "Hours last confirmed Aug 2024 \u2014 call before going",
+       "Ask for no-cook, ready-to-eat items",
+       "Last checked 2024-08-27; call to confirm"
+      ],
+      "backup_resource_id": "mfc-036",
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "08:30",
+       "close": "12:00"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 8:30 AM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=1702+West+Walnut+St.%2C+Milwaukee%2C+WI+53205",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     },
+     {
+      "resource_id": "mfc-036",
+      "provider": "Maccanon Brown Homeless Sanctuary",
+      "date": "2026-09-15",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "schedule_text": "Tue Sep 15: 11:00 AM\u20131:30 PM",
+      "requirements": [],
+      "last_verified": "2024-08-27",
+      "contact": "414-404-0600",
+      "freshness_tier": "call_to_confirm",
+      "service_area_known": false,
+      "uncertainty": [
+       "Service area not confirmed for 53206 \u2014 call first",
+       "Hours last confirmed Aug 2024 \u2014 call before going",
+       "Ask for no-cook, ready-to-eat items",
+       "Last checked 2024-08-27; call to confirm",
+       "Confirm they serve your area"
+      ],
+      "backup_resource_id": null,
+      "next_open": {
+       "date": "2026-09-08",
+       "open": "11:00",
+       "close": "13:30"
+      },
+      "claims": {
+       "open_today_text": "Not open today; next open 2026-09-08 at 11:00 AM",
+       "cost_label": "Free",
+       "requirements_text": "No requirements listed",
+       "appointment_text": "",
+       "freshness_text": "Last checked 2024-08-27; call to confirm",
+       "inventory_text": "We can't confirm they have food today.",
+       "service_area_text": "Confirm they serve your area",
+       "travel_text": "Travel time unknown, check the map.",
+       "directions_url": "https://www.google.com/maps/search/?api=1&query=2461+W.+Center+St.%2C+Milwaukee%2C+WI+53206",
+       "travel_echo": "You said: bus, up to 30 minutes",
+       "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+      }
+     }
+    ],
+    "meal_notes": [
+     "Morning: Capuchin pantry (confirmed area)",
+     "Midday: Maccanon Brown pantry (call to confirm service area and hours)"
+    ],
+    "unmet_needs": []
+   }
+  ],
+  "food_today": [
+   {
+    "resource_id": "mfc-008",
+    "provider": "Capuchin Community Services \u2013 House of Peace",
+    "date": "2026-09-09",
+    "service_type": "free_pantry",
+    "cost": "free",
+    "schedule_text": "Wed Sep 9: 8:30 AM\u201312:00 PM and 12:00 PM\u20133:15 PM",
+    "requirements": [],
+    "last_verified": "2024-08-27",
+    "contact": "414-933-1300",
+    "freshness_tier": "call_to_confirm",
+    "service_area_known": true,
+    "uncertainty": [
+     "Hours last confirmed Aug 2024 \u2014 call before going",
+     "Ask for no-cook, ready-to-eat items (no kitchen)",
+     "Last checked 2024-08-27; call to confirm"
+    ],
+    "backup_resource_id": "mfc-060",
+    "next_open": {
+     "date": "2026-09-08",
+     "open": "08:30",
+     "close": "12:00"
+    },
+    "claims": {
+     "open_today_text": "Open today from 8:30 AM to 12:00 PM",
+     "cost_label": "Free",
+     "requirements_text": "No requirements listed",
+     "appointment_text": "",
+     "freshness_text": "Last checked 2024-08-27; call to confirm",
+     "inventory_text": "We can't confirm they have food today.",
+     "service_area_text": "",
+     "travel_text": "Travel time unknown, check the map.",
+     "directions_url": "https://www.google.com/maps/search/?api=1&query=1702+West+Walnut+St.%2C+Milwaukee%2C+WI+53205",
+     "travel_echo": "You said: bus, up to 30 minutes",
+     "source_text": "Source: Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27"
+    }
+   },
+   {
+    "resource_id": "res-002",
+    "provider": "St. Demo Hot Meal Program",
+    "date": "2026-09-09",
+    "service_type": "free_meal",
+    "cost": "free",
+    "schedule_text": "Wed Sep 9: 5:00 PM\u20136:30 PM",
+    "requirements": [],
+    "last_verified": "2026-09-01",
+    "contact": "(414) 555-0102",
+    "freshness_tier": "verified",
+    "service_area_known": true,
+    "uncertainty": [
+     "Sit-down meal only \u2014 no confirmed take-home portions"
+    ],
+    "backup_resource_id": null,
+    "next_open": {
+     "date": "2026-09-08",
+     "open": "17:00",
+     "close": "18:30"
+    },
+    "claims": {
+     "open_today_text": "Open today from 5:00 PM to 6:30 PM",
+     "cost_label": "Free",
+     "requirements_text": "No requirements listed",
+     "appointment_text": "",
+     "freshness_text": "Last checked 2026-09-01",
+     "inventory_text": "We can't confirm they have food today.",
+     "service_area_text": "",
+     "travel_text": "Travel time unknown, check the map.",
+     "directions_url": "https://www.google.com/maps/search/?api=1&query=300+E+Fixture+Ave%2C+Milwaukee%2C+WI+53212",
+     "travel_echo": "You said: bus, up to 30 minutes",
+     "source_text": ""
+    }
+   }
+  ],
+  "resource_ids_used": [
+   "mfc-008",
+   "mfc-013",
+   "mfc-015",
+   "mfc-036",
+   "mfc-038",
+   "mfc-060",
+   "res-001",
+   "res-002"
+  ],
+  "preparation_checklist": [
+   "\ud83d\udcde TODAY \u2014 Call Capuchin (414-933-1300) before leaving: confirm they are open and ask for no-cook, ready-to-eat items",
+   "\ud83d\udcde TODAY \u2014 Call Scott Christian (414-374-3923) to confirm they serve ZIP 53206",
+   "\ud83d\udcde Call COA Goldin Center (414-265-7696) before Saturday Sep 12 to confirm hours and service area",
+   "\ud83d\udcde Call Ebenezer Stone Ministries (414-488-8070) before Saturday Sep 12 \u2014 pop-up is weather-dependent and twice-monthly",
+   "\ud83d\udcde Call Maccanon Brown (414-404-0600) before Tuesday Sep 15 to confirm service area and hours",
+   "\ud83d\udcde Call Maccanon Brown \u2013 Hephatha (414-404-0600) before Friday Sep 11 to confirm service area",
+   "\ud83d\uddd3\ufe0f Note: Northside Community Pantry (res-001) has a once-per-7-days visit limit \u2014 plan your visit accordingly",
+   "\ud83c\udf7d\ufe0f No kitchen: always ask pantry staff specifically for shelf-stable, no-cook, ready-to-eat items (canned pull-tab, peanut butter, crackers, granola bars, etc.)",
+   "\ud83e\udeaa Bring photo ID if you have one (helpful but not required at Northside Pantry)",
+   "\ud83d\udcc5 Sunday Sep 13: no confirmed services in current data \u2014 call 211 (dial 2-1-1) for same-day options",
+   "\ud83d\udcde For any day with no open service or a closed pantry, call 211 for real-time Milwaukee food referrals"
+  ],
+  "unmet_needs": [
+   "Sunday Sep 13: no confirmed open food services in current data \u2014 call 211 for same-day options",
+   "No kitchen: pantry items must be no-cook/ready-to-eat; not all pantries can guarantee this \u2014 always ask staff",
+   "Quantity per visit is unknown at every location \u2014 cannot confirm full daily coverage from pantry visits alone",
+   "res-003 (Fresh Fixture Mobile Market) excluded \u2014 paid service, zero budget household",
+   "res-004 (Riverwest Appointment Pantry) requires a pre-booked appointment \u2014 not usable without advance call"
+  ],
+  "unconfirmed": [
+   {
+    "resource_id": "res-007",
+    "provider": "Placeholder Pop-Up Pantry (synthetic)",
+    "contact": "(414) 555-0107"
+   }
+  ],
+  "explanation": "You have no food on hand, no kitchen, no budget, and can travel by bus. I found free pantries and free meals within or near ZIP 53206. res-003 (paid mobile market) is excluded \u2014 zero budget. All pantry items must be no-cook; ask staff specifically for shelf-stable, ready-to-eat items. Most Milwaukee Food Council records were last verified August 2024 \u2014 call ahead to confirm hours before traveling. Two resources (res-002, res-001) carry more recent verification. Saturday (Sep 13) and Sunday (Sep 12 evening onward) have no confirmed open services in the data; those days are flagged as gaps. Wednesday Sep 9 is today and multiple options are open right now."
+ },
+ "evidence": [
+  "mfc-008",
+  "mfc-013",
+  "mfc-015",
+  "mfc-036",
+  "mfc-038",
+  "mfc-060",
+  "res-001",
+  "res-002"
+ ],
+ "missing": [
+  "Sunday Sep 13: no confirmed open food services in current data \u2014 call 211 for same-day options",
+  "No kitchen: pantry items must be no-cook/ready-to-eat; not all pantries can guarantee this \u2014 always ask staff",
+  "Quantity per visit is unknown at every location \u2014 cannot confirm full daily coverage from pantry visits alone",
+  "res-003 (Fresh Fixture Mobile Market) excluded \u2014 paid service, zero budget household",
+  "res-004 (Riverwest Appointment Pantry) requires a pre-booked appointment \u2014 not usable without advance call"
+ ],
+ "warnings": [],
+ "retryable": false,
+ "request_id": "redacted",
+ "help_routes": []
+}

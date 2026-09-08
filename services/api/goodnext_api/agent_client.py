@@ -19,7 +19,7 @@ class AgentClient(Protocol):
 class LocalDevAgentClient:
     """Talks to `agentcore dev` (BedrockAgentCoreApp serves POST /invocations)."""
 
-    def __init__(self, base_url: str | None = None, timeout_s: float = 60.0):
+    def __init__(self, base_url: str | None = None, timeout_s: float = 180.0):
         self.base_url = (base_url or os.environ.get("GOODNEXT_AGENT_LOCAL_URL", "http://localhost:8080")).rstrip("/")
         self.timeout_s = timeout_s
 
@@ -39,9 +39,12 @@ class AgentCoreRuntimeClient:
 
     def __init__(self, runtime_arn: str, region: str):
         import boto3  # imported here so local dev needs no AWS SDK session
+        from botocore.config import Config
 
         self.runtime_arn = runtime_arn
-        self.client = boto3.client("bedrock-agentcore", region_name=region)
+        # ponytail: a full seven-day plan over real records runs 60-120s; PRD 8 wants
+        # a delayed-status message past 30s, which is the website's job (later).
+        self.client = boto3.client("bedrock-agentcore", region_name=region, config=Config(read_timeout=180, connect_timeout=10, retries={"max_attempts": 1}))
 
     def invoke(self, payload: dict, runtime_session_id: str) -> dict:
         response = self.client.invoke_agent_runtime(

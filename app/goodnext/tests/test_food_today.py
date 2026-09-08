@@ -255,13 +255,20 @@ def test_food_today_derived_from_surviving_day_one_visits_not_models_list():
 # --- MOO-772: unknown service area shown as conditional, never confirmed ---
 
 
-@pytest.mark.parametrize("zip_code", ["53206", "53999"])
-def test_find_returns_unknown_service_area_record_for_any_zip(zip_code):
-    result = find_food_resources(zip_code, DATES[0], DATES[-1], NOW_LOCAL)
+def test_find_returns_unknown_service_area_record_for_its_own_address_zip():
+    """Decision 006 refinement of D5: an unknown-area record is visible only for the
+    ZIP in its own address, still conditional. (Real map data has 54 such records;
+    'any ZIP' returned the whole county for every search.)"""
+    result = find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
     by_id = {r["resource_id"]: r for r in result["data"]}
     assert "res-009" in by_id
     assert by_id["res-009"]["service_area_known"] is False
     assert any("res-009" in w and "service area unknown; confirm they serve your area" in w for w in result["warnings"])
+
+
+def test_find_hides_unknown_service_area_record_for_other_zips(fixture_without_res009):
+    result = find_food_resources("53999", DATES[0], DATES[-1], NOW_LOCAL)
+    assert result["status"] == "no_match"
 
 
 def test_find_known_service_area_record_keeps_service_area_known_true():

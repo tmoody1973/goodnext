@@ -11,6 +11,8 @@
 
 **What we chose and why** — The first. Tarik's call, over Claude's recommendation to wait or call first. A hackathon demo is temporary, the layer is public, and every card says where the data came from and how old it is. The phone calls remain the path to "verified" records.
 
+**Refinements made while loading the data (same day)** — Two follow-on changes, both Tarik-approved in spirit under "be pragmatic": (1) a site with no service area is shown only for the ZIP in its own address, still marked "confirm they serve your area"; the original "any ZIP" rule (D5) returned the whole county on every search once 54 real records lacked an area. (2) The model's output ceiling and both client timeouts were raised; a full plan over real records takes 60 to 90 seconds, which the website must cover with a delayed-status message per PRD section 8, and which prompt caching or a smaller plan should shorten later.
+
 **What we gave up** — Certainty about reuse rights, and the original strictness of the freshness rule. A judge could still object to unlicensed data; the disclosure is the answer.
 
 **How we'll know if this was right** — No objection from the publisher or judges, and the call sheet later replaces map hours with phone-confirmed hours for the demo ZIP.
