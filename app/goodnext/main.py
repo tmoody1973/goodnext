@@ -27,6 +27,7 @@ class FoodTodayRequest(BaseModel):
     workflow: str = Field(pattern=r"^food_today$")
     constraints: HouseholdConstraints
     dates: list[str] = Field(min_length=7, max_length=7, description="Seven local calendar dates from the server")
+    now_local: str = Field(description="Current Milwaukee local time, ISO datetime with UTC offset, from the server")
     request_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
 
 
@@ -44,6 +45,7 @@ def task_text(req: FoodTodayRequest) -> str:
     return (
         "<server_context>\n"
         f"seven_local_dates: {json.dumps(req.dates)}\n"
+        f"now_local: {req.now_local}\n"
         "language: en\n"
         "</server_context>\n"
         "<resident_constraints>\n"

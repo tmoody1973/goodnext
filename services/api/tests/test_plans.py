@@ -1,9 +1,9 @@
-from datetime import date
+from datetime import date, datetime
 
 import httpx
 from fastapi.testclient import TestClient
 
-from goodnext_api.main import app, get_agent_client, seven_local_dates, runtime_session_id
+from goodnext_api.main import LOCAL_TZ, app, get_agent_client, seven_local_dates, runtime_session_id
 
 BODY = {"constraints": {"zip_code": "53206", "budget_usd": 0, "kitchen": "none", "travel": ["bus"]}}
 
@@ -62,3 +62,26 @@ def test_agent_outage_is_truthful_503():
     assert r.status_code == 503
     body = r.json()
     assert body["status"] == "temporarily_unavailable" and body["retryable"] is True
+
+
+def test_demo_env_pins_date_and_now_local(monkeypatch):
+    monkeypatch.setenv("GOODNEXT_ENV", "demo")
+    monkeypatch.setenv("GOODNEXT_DEMO_NOW", "2026-09-08T10:00:00-05:00")
+    agent = FakeAgent()
+    r = client_with(agent).post("/api/plans", json=BODY)
+    assert r.status_code == 200
+    payload, _ = agent.calls[0]
+    assert payload["dates"][0] == "2026-09-08"
+    assert payload["now_local"] == "2026-09-08T10:00:00-05:00"
+
+
+def test_demo_now_ignored_outside_demo_env(monkeypatch, caplog):
+    monkeypatch.delenv("GOODNEXT_ENV", raising=False)
+    monkeypatch.setenv("GOODNEXT_DEMO_NOW", "2026-09-08T10:00:00-05:00")
+    real_today = datetime.now(LOCAL_TZ).date().isoformat()
+    agent = FakeAgent()
+    r = client_with(agent).post("/api/plans", json=BODY)
+    assert r.status_code == 200
+    payload, _ = agent.calls[0]
+    assert payload["dates"][0] == real_today
+    assert "GOODNEXT_DEMO_NOW is set" in caplog.text

@@ -45,4 +45,11 @@ directory (`app/goodnext/fixtures/`), synthetic notices, and labeled test
 delivery. A public pilot needs the gates in PRD section 11. Every integration
 that is not wired yet is listed in `docs/decisions/`.
 
+Set `GOODNEXT_ENV=demo` plus `GOODNEXT_DEMO_NOW` (an ISO datetime with the
+Milwaukee offset, e.g. `2026-09-08T10:00:00-05:00`) to pin "now" for the API.
+Judges will see a fixed Milwaukee date and time all day, so the synthetic food
+directory still shows open windows instead of drifting stale as real time
+passes during judging. Outside `GOODNEXT_ENV=demo` the pin is ignored (a
+warning is logged) and the real Milwaukee clock is used.
+
 Hackathon: Agents for Humans, deadline September 14, 2026, 7 p.m. Central.
