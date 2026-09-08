@@ -79,6 +79,7 @@ class PlannedVisit(BaseModel):
     last_verified: ISODate
     contact: str
     freshness_tier: FreshnessTier = "unconfirmed"
+    service_area_known: bool = True
     uncertainty: list[str] = Field(default=[], description="Unknowns the resident should confirm")
     backup_resource_id: str | None = None
     next_open: NextOpen | None = Field(default=None, description="Set when the resource's window today has already closed")

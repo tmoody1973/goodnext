@@ -33,14 +33,24 @@ def _visit_violation(
 
 
 def _with_freshness(v: PlannedVisit, resource: FoodResource, tier: str, now: datetime) -> PlannedVisit:
-    update = {"freshness_tier": tier}
+    uncertainty = list(v.uncertainty)
     if tier == "call_to_confirm":
         note = f"Last checked {resource.last_verified}; call to confirm"
-        if note not in v.uncertainty:
-            update["uncertainty"] = [*v.uncertainty, note]
+        if note not in uncertainty:
+            uncertainty.append(note)
+    service_area_known = bool(resource.zip_codes_served)
+    if not service_area_known:
+        # MOO-772 (D5): keep the visit, never let it read as a plain confirmed one.
+        note = "Confirm they serve your area"
+        if note not in uncertainty:
+            uncertainty.append(note)
     nxt = next_open_after([w.model_dump() for w in resource.windows], now)
-    update["next_open"] = NextOpen(date=nxt["date"], open=nxt["open"], close=nxt["close"]) if nxt else None
-    return v.model_copy(update=update)
+    return v.model_copy(update={
+        "freshness_tier": tier,
+        "uncertainty": uncertainty,
+        "service_area_known": service_area_known,
+        "next_open": NextOpen(date=nxt["date"], open=nxt["open"], close=nxt["close"]) if nxt else None,
+    })
 
 
 def _unconfirmed_records(ledger: set[str], directory: dict[str, FoodResource], start: str) -> list[UnconfirmedRecord]:
