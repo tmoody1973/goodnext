@@ -84,3 +84,55 @@ hand. Public repo: https://github.com/tmoody1973/goodnext.
 Thank you,
 Tarik Moody
 [phone or preferred contact]
+
+---
+
+## 3. To Data You Can Use (publisher of the Milwaukee Food Environment Map)
+
+Via the contact page at https://www.datayoucanuse.org (look for Contact or
+Get in Touch), or a direct email if you know someone there. The map is
+https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5
+and the data layer is titled "EmergencyFood_MKE_2024."
+
+**Subject:** Reuse permission for the Milwaukee Food Environment Map emergency food layer
+
+Hello,
+
+My name is Tarik Moody. I'm a Milwaukee resident building GoodNext, a free,
+non-commercial website that helps a household find food today and understand
+a FoodShare notice. [One line about you, optional.]
+
+Your Milwaukee Food Environment Map (the EmergencyFood_MKE_2024 layer, 75
+sites, sourced from the Milwaukee Food Council and SafeGraph) is the best
+public picture of the county's emergency food system I've found. The layer
+is public but has no license listed, so I'm asking before using anything
+from it.
+
+What I'd like permission to do:
+
+- Use the layer as a starting list of sites to verify by phone. We would
+  publish only what each site confirms to us directly, with the call date and
+  a "Source: site confirmed by phone; location from the Milwaukee Food
+  Environment Map (Data You Can Use / Milwaukee Food Council)" credit.
+- If you also allow it, display the layer's name, address, phone, and type
+  fields directly, credited to you, marked with the layer's last update date
+  and "not verified" until we confirm each one.
+- Never claim a site has food in stock, never take reservations, and never
+  store anything about the resident.
+
+Two questions: Are the rows that came from SafeGraph separable, or do their
+terms cover the whole layer? And is there a newer version of this data than
+the August 2024 edit date shown on the layer?
+
+Timeline: the first version is an entry in the "Agents for Humans"
+hackathon, due September 14, 2026, with judging through October 8. Until I
+hear from you the demo uses clearly labeled made-up sites, so nothing of
+yours is shown without your okay.
+
+The code is public at https://github.com/tmoody1973/goodnext. Happy to credit
+you however you prefer, share anything useful back, and sign a simple
+agreement if that helps.
+
+Thank you,
+Tarik Moody
+[phone or preferred contact]
