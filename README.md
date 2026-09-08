@@ -52,4 +52,22 @@ directory still shows open windows instead of drifting stale as real time
 passes during judging. Outside `GOODNEXT_ENV=demo` the pin is ignored (a
 warning is logged) and the real Milwaukee clock is used.
 
+## Data sources and disclosure
+
+- **Milwaukee Food Environment Map** (Data You Can Use / Milwaukee Food
+  Council), public ArcGIS layer `EmergencyFood_MKE_2024`, 75 sites, data as of
+  August 27, 2024. Loaded by `app/goodnext/scripts/ingest_mfc_map.py` into
+  `app/goodnext/fixtures/milwaukee-food-environment-map-2024.json`. Hours were
+  parsed from free text; they are shown as "last checked 2024-08-27, call to
+  confirm" and are **not verified by phone**. The layer states no license;
+  reuse permission has been requested from the publisher. See
+  `docs/decisions/006`.
+- **Synthetic records** in `milwaukee-food-resources.json` exercise the closed,
+  unknown-area, paid, and appointment cases. They are labeled synthetic.
+- **211 National Data Platform**: portal account and trial subscription only.
+  No 211 data is used until IMPACT 211 grants permission (`docs/decisions/005`).
+
+GoodNext never claims a site has food in stock, never takes reservations,
+and stores nothing about the resident.
+
 Hackathon: Agents for Humans, deadline September 14, 2026, 7 p.m. Central.

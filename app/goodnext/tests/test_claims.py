@@ -99,3 +99,22 @@ def test_envelope_schema_has_no_forbidden_travel_fields():
         return found
 
     assert walk(schema) == set()
+
+
+def test_real_map_records_are_listed_with_source_and_call_to_confirm():
+    """MOO-777 / decision 006: real Milwaukee Food Environment Map records are listed for
+    53206 with a parsed window, tier call_to_confirm, and a source line on every claim."""
+    now = "2026-09-09T09:00:00-05:00"
+    dates = [f"2026-09-{d:02d}" for d in range(9, 16)]
+    result = find_food_resources("53206", dates[0], dates[-1], now)
+    real = [r for r in result["data"] if r["resource_id"].startswith("mfc-")]
+    assert real, "expected at least one real map record for 53206"
+    assert all(r["freshness_tier"] == "call_to_confirm" for r in real)
+    assert all(r["source"].startswith("Milwaukee Food Environment Map") for r in real)
+    open_now = next(r for r in real if r["open_today"])
+    v = visit(open_now["resource_id"], dates[0])
+    cleaned, violations = validate_food_plan(proposal_with([v], dates=dates), returned_ids.get(), load_directory(), ZERO_BUDGET_BUS, dates, now)
+    kept = cleaned.days[0].visits
+    assert kept and kept[0].claims.source_text.startswith("Source: Milwaukee Food Environment Map")
+    assert kept[0].claims.freshness_text == "Last checked 2024-08-27; call to confirm"
+    assert never_list_hits(envelope_for(cleaned, violations, "r1").model_dump()) == []

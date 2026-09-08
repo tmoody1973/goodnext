@@ -171,7 +171,7 @@ def test_task_text_keeps_resident_data_out_of_system_prompt():
 
 @pytest.mark.parametrize(
     "days_ago,expected_tier",
-    [(0, "verified"), (14, "verified"), (15, "call_to_confirm"), (60, "call_to_confirm"), (61, "unconfirmed")],
+    [(0, "verified"), (14, "verified"), (15, "call_to_confirm"), (60, "call_to_confirm"), (61, "call_to_confirm"), (400, "call_to_confirm")],
 )
 def test_freshness_tier_thresholds(days_ago, expected_tier):
     last_verified = (date.fromisoformat(DATES[0]) - timedelta(days=days_ago)).isoformat()

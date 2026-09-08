@@ -1,0 +1,2879 @@
+{
+  "_fixture_note": "REAL DATA. Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27. Public layer, no license stated; used for the hackathon demo per docs/decisions/006. Hours parsed from free text into dated windows for 2 weeks from 2026-09-08; unparsed hours are kept in notes. Not verified by phone.",
+  "resources": [
+    {
+      "resource_id": "mfc-001",
+      "provider": "Bay View Community Center",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1320 E. Oklahoma Ave, Milwaukee, WI 53207",
+      "zip_codes_served": [
+        "53215",
+        "53221",
+        "53235"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "16:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "16:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "16:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "16:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "13:30",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "13:30",
+          "close": "16:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-482-1000",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://bayviewcenter.org/food-pantry/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesdays 4pm - 6pm, Wednesdays 4pm - 6pm, Fridays 1:30pm - 4pm. "
+    },
+    {
+      "resource_id": "mfc-002",
+      "provider": "Bethany Lutheran Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2031 N. 38th St., Milwaukee, WI 53208",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-16",
+          "open": "11:00",
+          "close": "13:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-444-3131",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Third and fourth Wednesday of the month, 11am - 1pm. "
+    },
+    {
+      "resource_id": "mfc-003",
+      "provider": "Bethel CME Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "3281 N 26th St., Milwaukee, WI 53206",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-442-8970",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-004",
+      "provider": "Benedict Center",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1849 N Doctor M.L.K. Jr Dr, Milwaukee, WI 53212",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-347-1774",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-005",
+      "provider": "All Saints Catholic Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "4060 N. 26th St., Milwaukee, WI 53209",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "09:30",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "09:30",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "09:30",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "09:30",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-975-3006",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://allsaintsmke.org/outreach-ministries/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesdays and Thursdays 9:30am - 12pm. "
+    },
+    {
+      "resource_id": "mfc-006",
+      "provider": "Bethesda Baptist Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2909 N 20th St., Milwaukee, WI 53206",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414 442 1323",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-007",
+      "provider": "Amani Community Food Pantry",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2480 W Locust Street, Milwaukee, WI 53206",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "no phone listed",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-008",
+      "provider": "Capuchin Community Services - House of Peace",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1702 West Walnut St., Milwaukee, WI 53205",
+      "zip_codes_served": [
+        "53205",
+        "53206",
+        "53233"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "08:30",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "08:30",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "08:30",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "08:30",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-14",
+          "open": "08:30",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "08:30",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "08:30",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "08:30",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "08:30",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "08:30",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-08",
+          "open": "12:00",
+          "close": "15:15"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "12:00",
+          "close": "15:15"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "12:00",
+          "close": "15:15"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "12:00",
+          "close": "15:15"
+        },
+        {
+          "date": "2026-09-14",
+          "open": "12:00",
+          "close": "15:15"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "12:00",
+          "close": "15:15"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "12:00",
+          "close": "15:15"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "12:00",
+          "close": "15:15"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "12:00",
+          "close": "15:15"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "12:00",
+          "close": "15:15"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-933-1300",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.capuchincommunityservices.org/en/services/food-pantry/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Monday through Friday, 8:30am - 12pm, 12pm - 3:15pm. "
+    },
+    {
+      "resource_id": "mfc-009",
+      "provider": "Casa Maria Hospitality House",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1131 N. 21st St., Milwaukee, WI 53233",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-344-5745",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-010",
+      "provider": "Capuchin Community Services - St. Bens Community Meal",
+      "service_type": "free_meal",
+      "cost": "free",
+      "address": "930 W State St., Milwaukee, WI 53233",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-10",
+          "open": "17:15",
+          "close": "18:30"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "17:15",
+          "close": "18:30"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "13:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "13:00",
+          "close": "16:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-271-0135",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.capuchincommunityservices.org/en/services/meal/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Hot meals: Sunday, Monday, Tuesday, Wednesday, Thursday 5:15pm - 6:30pm. Bagged food: Fridays 1pm - 4pm. "
+    },
+    {
+      "resource_id": "mfc-011",
+      "provider": "City of Light Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "6725 W. Burleigh St., Milwaukee, WI 53210",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-235-1025",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-012",
+      "provider": "City of Praise",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "5214 W Luebbe Ln., Milwaukee, WI 53223",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "206-972-1544",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-013",
+      "provider": "COA Goldin Center",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2320 W Burleigh St., Milwaukee, WI 53206",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-09",
+          "open": "15:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "15:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-12",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-19",
+          "open": "09:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-265-7696",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Wednesday 3pm - 6pm, Saturday 9am - 12pm. "
+    },
+    {
+      "resource_id": "mfc-014",
+      "provider": "Ebenezer Stone Ministries - South Pantry",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1501 W Lincoln Ave, Milwaukee, WI 53215",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-09",
+          "open": "09:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-12",
+          "open": "09:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "09:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-19",
+          "open": "09:00",
+          "close": "11:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-488-8070",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://ebenezerstoneministries.org/programs/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Wednesdays and Saturdays 9am - 11am. "
+    },
+    {
+      "resource_id": "mfc-015",
+      "provider": "Ebenezer Stone Ministries - North Pop-Up",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1902 W Center St, Milwaukee, WI 53206",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-12",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-19",
+          "open": "13:00",
+          "close": "15:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-488-8070",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://ebenezerstoneministries.org/programs/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Two times per month on Saturdays 1pm - 3pm, when weather permits. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-016",
+      "provider": "Eastbrook Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "5353 N. Green Bay Ave., Milwaukee, WI 53209",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-14",
+          "open": "18:30",
+          "close": "20:30"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "18:30",
+          "close": "20:30"
+        },
+        {
+          "date": "2026-09-12",
+          "open": "09:30",
+          "close": "11:30"
+        },
+        {
+          "date": "2026-09-19",
+          "open": "09:30",
+          "close": "11:30"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "773-710-0247",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://eastbrook.org/ministries/missions/food-pantry/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Monday 6:30pm - 8:30pm, Satuday 9:30am - 11:30am. "
+    },
+    {
+      "resource_id": "mfc-017",
+      "provider": "Family Life Center",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "5511 W Burleigh St., Milwaukee, WI 53210",
+      "zip_codes_served": [
+        "53132",
+        "53154"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "09:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-755-9696",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.saintstephenmil.org/Emergency-Food-Pantry-Information",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesdays and Thursdays 9am - 12pm. "
+    },
+    {
+      "resource_id": "mfc-018",
+      "provider": "Feeding America Eastern Wisconsin - Milwaukee",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1700 W Fond Du Lac Ave., Milwaukee, WI 53205",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-204-2373",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://feedingamericawi.org/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-019",
+      "provider": "El Bethel Church of God In Christ",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "5401 Good Hope Rd., Milwaukee, WI 53223",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-378-0551",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-020",
+      "provider": "Noursish MKE \u2013 Vliet St.",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1220 West Vliet St., Milwaukee, WI 53205",
+      "zip_codes_served": [
+        "53205"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-09",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "09:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-289-6030",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.nourishmke.org/find-food/#FondDuLac",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Wednesday through Friday 9am - 12pm. "
+    },
+    {
+      "resource_id": "mfc-021",
+      "provider": "Nourish MKE \u2013 Orchard St.",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "209 West Orchard St., Milwaukee, WI 53204",
+      "zip_codes_served": [
+        "53204"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "12:30",
+          "close": "14:30"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "12:30",
+          "close": "14:30"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "12:30",
+          "close": "14:30"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "12:30",
+          "close": "14:30"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": "Once per month",
+      "contact": "414-389-3822",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.nourishmke.org/find-food/#FondDuLac",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesday and Thursday 12:30pm - 2:30pm; visits are limited to once per month. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-022",
+      "provider": "Good Samaritan COGIC",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "5226 West Burleigh St., Milwaukee, WI 53210",
+      "zip_codes_served": [
+        "53210",
+        "53211",
+        "53212",
+        "53213",
+        "53214",
+        "53215",
+        "53216"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "13:00",
+          "close": "15:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-444-0896",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesday 10am - 12pm, Wednesday 1pm - 3pm. "
+    },
+    {
+      "resource_id": "mfc-023",
+      "provider": "Nourish MKE \u2013 Fond du Lac",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "10230 West Fond du Lac Ave, Milwaukee, WI 53224",
+      "zip_codes_served": [
+        "53223",
+        "53224",
+        "53225"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "17:00",
+          "close": "19:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "17:00",
+          "close": "19:00"
+        },
+        {
+          "date": "2026-09-12",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-19",
+          "open": "10:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": "Once per month",
+      "contact": "414-289-6030",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.nourishmke.org/find-food/#FondDuLac",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesday 5pm - 7pm, Saturday 10am - 12pm; visits are limited to once per month. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-024",
+      "provider": "Great Faith Progressive Missionary Baptist Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "4767 North Hopkins St., Milwaukee, WI 53209",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "11:00",
+          "close": "13:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "11:00",
+          "close": "13:00"
+        },
+        {
+          "date": "2026-09-12",
+          "open": "09:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-19",
+          "open": "09:00",
+          "close": "11:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-873-2484",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesday 11am - 1pm, Saturday 9am - 11am. "
+    },
+    {
+      "resource_id": "mfc-025",
+      "provider": "Nourish MKE \u2013 Mitchell St.",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1615 S 22nd St., Milwaukee, WI 53204",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-12",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-19",
+          "open": "10:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-289-6030",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.nourishmke.org/find-food/#FondDuLac",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Saturday 10am - 12pm. "
+    },
+    {
+      "resource_id": "mfc-026",
+      "provider": "Ebenezer Stone Ministries - West Pantry",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1127 S 35th St, Milwaukee, WI 53215",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-488-8070",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://ebenezerstoneministries.org/programs/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Mondays and Fridays 1pm. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-027",
+      "provider": "Greater Little Hill COGIC",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2480 West Locust St., Milwaukee, WI 53206",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-442-1886",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-028",
+      "provider": "Good Samaritan Outreach Center",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "5916 W Burnham St., Milwaukee, WI 53219",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-10",
+          "open": "10:00",
+          "close": "14:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "10:00",
+          "close": "14:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-541-7668",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesday, Wednesday, Thurday 10am - 2pm. "
+    },
+    {
+      "resource_id": "mfc-029",
+      "provider": "Greater New Birth Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "8237 W Silver Spring Dr., Milwaukee, WI 53218",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-264-5683",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-030",
+      "provider": "Hmong American Friendship Association",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "3824 W Vliet St., Milwaukee, WI 53208",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "10:00",
+          "close": "13:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "10:00",
+          "close": "13:00"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "12:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "12:00",
+          "close": "15:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-344-6575",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://hmongfriendship.org/services/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesday 10am - 1pm, Friday 12pm - 3pm. "
+    },
+    {
+      "resource_id": "mfc-031",
+      "provider": "Holy Ghost Lutheran Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "541 W Concordia Ave., Milwaukee, WI 53212",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-510-7808",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-032",
+      "provider": "Hope Lutheran Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1115 N. 35th St., Milwaukee, WI 53208",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-10",
+          "open": "09:30",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "09:30",
+          "close": "11:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-342-0471",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.hopeluthmke.com/ministries",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Thursday 9:30am - 11am. "
+    },
+    {
+      "resource_id": "mfc-033",
+      "provider": "Jewish Community Center",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2930 W. Center St., Milwaukee, WI 53210",
+      "zip_codes_served": [
+        "53210",
+        "53216"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "16:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "16:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "09:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-447-8901",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.jccmilwaukee.org/program/jewish-community-pantry/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesday 4pm - 6pm, Thursday 9am - 12pm. "
+    },
+    {
+      "resource_id": "mfc-034",
+      "provider": "Greater Mount Sinai COGIC",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "5385 North 60th St., Milwaukee, WI 53218",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-17",
+          "open": "17:00",
+          "close": "18:15"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-539-3978",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Third and fourth Thursday, 5pm - 6:15pm. "
+    },
+    {
+      "resource_id": "mfc-035",
+      "provider": "Interchange Food Pantry",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "130 E Juneau Ave, Milwaukee, WI",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "14:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "14:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "16:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "16:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "09:30",
+          "close": "11:30"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "09:30",
+          "close": "11:30"
+        },
+        {
+          "date": "2026-09-12",
+          "open": "09:30",
+          "close": "11:30"
+        },
+        {
+          "date": "2026-09-19",
+          "open": "09:30",
+          "close": "11:30"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "+14145512184",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.interchangefoodpantry.org/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesday 2pm - 4pm, Wednesday 4pm - 6pm, Thursday 9:30am - 11:30am, Saturday 9:30am - 11:30am. "
+    },
+    {
+      "resource_id": "mfc-036",
+      "provider": "Maccanon Brown Homeless Sanctuary",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2461 W. Center St., Milwaukee, WI 53206",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "11:00",
+          "close": "13:30"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "11:00",
+          "close": "13:30"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-404-0600",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.mbsanctuary.org/our_services/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesday 11am - 1:30pm. "
+    },
+    {
+      "resource_id": "mfc-037",
+      "provider": "Kinship Community Food Center",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2610 N. Martin Luther King Jr. Drive, Milwaukee, WI 53212",
+      "zip_codes_served": [
+        "53202",
+        "53203",
+        "53211",
+        "53212",
+        "53217"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-12",
+          "open": "08:30",
+          "close": "10:30"
+        },
+        {
+          "date": "2026-09-19",
+          "open": "08:30",
+          "close": "10:30"
+        },
+        {
+          "date": "2026-09-08",
+          "open": "16:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "16:00",
+          "close": "18:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-301-1478",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.kinshipmke.org/help",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Saturday 8:30am - 10:30am, Tuesday 4pm - 6pm. "
+    },
+    {
+      "resource_id": "mfc-038",
+      "provider": "Maccanon Brown Homeless Sanctuary - Hephatha Lutheran Church",
+      "service_type": "free_meal",
+      "cost": "free",
+      "address": "1720 W. Locust St., Milwaukee, WI 53206",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-11",
+          "open": "11:00",
+          "close": "14:30"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "11:00",
+          "close": "14:30"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-404-0600",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.mbsanctuary.org/our_services/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Friday 11am - 2:30pm. "
+    },
+    {
+      "resource_id": "mfc-039",
+      "provider": "Milwaukee Christian Center",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "807 S. 14th St., Milwaukee, WI 53204",
+      "zip_codes_served": [
+        "53204"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-14",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "13:00",
+          "close": "15:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-645-5350",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://mccwi.org/food-security-3/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Monday - Thursday 1pm - 3pm. "
+    },
+    {
+      "resource_id": "mfc-040",
+      "provider": "Monumental Baptist Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2407 W. North Ave., Milwaukee, WI 53205",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-933-2443",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-041",
+      "provider": "Milwaukee Synagogue for Russian Jews",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "3213 N. Oakland Ave., Milwaukee, WI 53211",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-961-0234",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-042",
+      "provider": "Neighborhood House of Milwaukee",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2819 W. Richardson Pl., Milwaukee, WI 53208",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-933-6161",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-043",
+      "provider": "Northside Church of God",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "4858 N. 19th St., Milwaukee, WI 53209",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-09",
+          "open": "10:30",
+          "close": "13:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "10:30",
+          "close": "13:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-372-6612",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.northsidemilwaukee.org/ministries/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Wednesday 10:30am - 1pm. "
+    },
+    {
+      "resource_id": "mfc-044",
+      "provider": "Project Concern of Cudahy St Francis Food Pantry",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "3658 E Plankinton Ave, Cudahy, WI",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-14",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-14",
+          "open": "15:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "15:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "09:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "+14147440645",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://projectconcerncudahy.org/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Monday 9am - 12pm 3pm - 6pm, Wednesday and Friday 9am - 12pm, 1st Saturday of each month 9am - 11am. "
+    },
+    {
+      "resource_id": "mfc-045",
+      "provider": "Praise Temple Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "6103 W. Capitol Dr., Milwaukee, WI 53216",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "10:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-763-5000",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesdays 10am - 12pm. "
+    },
+    {
+      "resource_id": "mfc-046",
+      "provider": "Restoration Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "3722 W. Lisbon Ave., Milwaukee, WI 53208",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-449-9664",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-047",
+      "provider": "Redeemer Evangelical Free Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "7735 W Howard Ave., Milwaukee, WI 53220",
+      "zip_codes_served": [
+        "53129",
+        "53130",
+        "53219",
+        "53220",
+        "53227",
+        "53228"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-14",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-12",
+          "open": "08:00",
+          "close": "10:00"
+        },
+        {
+          "date": "2026-09-19",
+          "open": "08:00",
+          "close": "10:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-541-5580",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://redeemerefc.com/home/food-pantry",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Monday 9am - 12pm, Saturday 8am - 10am. "
+    },
+    {
+      "resource_id": "mfc-048",
+      "provider": "Project Lunch Box Food Pantry",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1905 W Wisconsin Ave, Milwaukee, WI",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "+14149337004",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-049",
+      "provider": "Risen Savior Lutheran",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "9505 W. Brown Deer Rd., Milwaukee, WI 53224",
+      "zip_codes_served": [
+        "53224"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-12",
+          "open": "11:45",
+          "close": "13:30"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414 354-7320",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.risensaviormilwaukee.com/page/food-clothing-etc",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Second and fourth Saturday from 11:45am - 1:30pm. "
+    },
+    {
+      "resource_id": "mfc-050",
+      "provider": "Salvation Army - 60th St.",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "5880 N. 60th St., Milwaukee, WI 53218",
+      "zip_codes_served": [
+        "53216",
+        "53218",
+        "53223",
+        "53224",
+        "53225"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-14",
+          "open": "11:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "11:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-08",
+          "open": "11:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "11:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "12:30",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "12:30",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "11:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "11:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "09:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-464-2940",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://centralusa.salvationarmy.org/milwaukee/food-pantry/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Monday 11am - 3pm, Tuesday 11am - 3pm, Wednesday 12:30pm - 3pm, Thursday 11am - 3pm, Friday 9am - 12pm. "
+    },
+    {
+      "resource_id": "mfc-051",
+      "provider": "Salvation Army - Citadel Corps",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "4129 W. Villard Ave., Milwaukee, WI 53209",
+      "zip_codes_served": [
+        "53209",
+        "53216",
+        "53218",
+        "53222",
+        "53223",
+        "53224",
+        "53225"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-10",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "10:00",
+          "close": "14:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "10:00",
+          "close": "14:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-463-3300",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://centralusa.salvationarmy.org/milwaukee/food-pantry/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Thursday 10am - 12pm, Friday 10am - 2pm. "
+    },
+    {
+      "resource_id": "mfc-052",
+      "provider": "Rooted & Rising (UMCS)",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "3940 W. Lisbon Ave, Milwaukee, WI 53208",
+      "zip_codes_served": [
+        "53208",
+        "53210"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-09",
+          "open": "12:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-14",
+          "open": "12:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "12:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "12:00",
+          "close": "16:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": "Once per month",
+      "contact": "414-344-1818",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.rootedandrisingwp.org/community-food-center",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Monday and Wednesday 12pm - 4pm; one visit every 30 days. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-053",
+      "provider": "Marquette Neighborhood Kitchen",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1918 W. Wisconsin Ave., Milwaukee, WI 53233",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-288-0342",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.marquette.edu/neighborhood-kitchen/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-054",
+      "provider": "Salvation Army - Cold Spring Corps Worship & Community Center",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2900 W Cold Spring Rd., Greenfield, WI 53221",
+      "zip_codes_served": [
+        "53220",
+        "53221"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "10:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-762-3993",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://centralusa.salvationarmy.org/milwaukee/food-pantry/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesday 10am - 12pm, Thursday 10am - 12pm. "
+    },
+    {
+      "resource_id": "mfc-055",
+      "provider": "Salvation Army - West Corps",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1645 N. 25th St., Milwaukee, WI 53205",
+      "zip_codes_served": [
+        "53205",
+        "53208"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-08",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "13:00",
+          "close": "15:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-831-1156",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://centralusa.salvationarmy.org/milwaukee/food-pantry/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesday 10am - 12pm 1pm - 3pm, Wednesday 10am - 12pm 1pm - 3pm, Thursday 10am - 12pm 1pm - 3pm. "
+    },
+    {
+      "resource_id": "mfc-056",
+      "provider": "Silver Spring Neighborhood Center",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "5460 N. 64th St., Milwaukee, WI 53218",
+      "zip_codes_served": [
+        "53209",
+        "53218",
+        "53225"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-14",
+          "open": "11:00",
+          "close": "14:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "11:00",
+          "close": "14:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "11:00",
+          "close": "14:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "11:00",
+          "close": "14:00"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "11:00",
+          "close": "14:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "11:00",
+          "close": "14:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-463-7950",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.ssnc-milw.org/programs/family",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Monday 11am - 2pm, Wednesday 11am - 2pm, Friday 11am - 2pm. "
+    },
+    {
+      "resource_id": "mfc-057",
+      "provider": "Salvation Army - Oak Creek Corps Worship & Community Center",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "8853 S. Howell Ave., Oak Creek, WI 53154",
+      "zip_codes_served": [
+        "53129",
+        "53130",
+        "53132",
+        "53154"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-09",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "09:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-763-9797",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://centralusa.salvationarmy.org/milwaukee/food-pantry/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Wednesday 9am - 12pm, Thursday 9am - 12pm. "
+    },
+    {
+      "resource_id": "mfc-058",
+      "provider": "Sherman Park Food Pantry Good Shepherd Trinity Gathering Space",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "3302 N Sherman Blvd, Milwaukee, WI",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "+14148719440",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-059",
+      "provider": "Solomon Community Temple United Methodist Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "3295 N. Dr Martin Luther King Jr Dr., Milwaukee, WI 53212",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-10",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "13:00",
+          "close": "15:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-372-2101",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://solomoncommunitytemple.org/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Thursday 1pm - 3pm. "
+    },
+    {
+      "resource_id": "mfc-060",
+      "provider": "Scott Christian Youth and Family Center",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2741 N. Tentonia Ave., Milwaukee, WI 53206",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "09:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "09:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "09:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "09:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-14",
+          "open": "09:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "09:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "09:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "09:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "09:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "09:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-08",
+          "open": "10:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "10:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "10:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "10:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-14",
+          "open": "10:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "10:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "10:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "10:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "10:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "10:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-08",
+          "open": "15:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "15:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "15:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "15:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-14",
+          "open": "15:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "15:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "15:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "15:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "15:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "15:00",
+          "close": "16:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-374-3923",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.scottchristianyouthandfamilycenter.com/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Pantry: Monday through Friday, 9am - 4pm; Meals: 10am -11am Breakfast, 3pm - 4pm Dinner. "
+    },
+    {
+      "resource_id": "mfc-061",
+      "provider": "St Francis Convent",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "3221 S Lake Dr, Milwaukee, WI",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "+14147441160",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-062",
+      "provider": "St James Catholic Church Food Pantry",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "7219 S 27th St, Franklin, WI",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-11",
+          "open": "09:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "09:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "16:00",
+          "close": "18:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "+14147610480",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.stjames-franklin.org/svdp-food-pantry",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Every Friday 9am - 11am, Third Friday of every month 4pm - 6pm, First Saturday of every month 9am - 11am. "
+    },
+    {
+      "resource_id": "mfc-063",
+      "provider": "St Martin Of Tours Food Pantry",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "7963 S 116th St, Franklin, WI",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "10:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "+14144251114",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.stmoftours.org/food-pantry",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesday 10am - 12pm. "
+    },
+    {
+      "resource_id": "mfc-064",
+      "provider": "South Milwaukee Human Concerns",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1029 Milwaukee Ave., South Milwaukee, WI 53172",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-14",
+          "open": "12:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "12:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "15:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "15:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "09:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "09:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-764-5340",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://smhumanconcerns.org/location/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Monday 12pm - 3pm, Wednesday 3pm - 6pm, Friday 9am - 12pm. "
+    },
+    {
+      "resource_id": "mfc-065",
+      "provider": "St. Bernard Parish",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1500 N. Wauwatosa Ave., Wauwatosa, WI 53213",
+      "zip_codes_served": [
+        "53213",
+        "53222",
+        "53225",
+        "53226"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-14",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-12",
+          "open": "09:00",
+          "close": "11:00"
+        },
+        {
+          "date": "2026-09-19",
+          "open": "09:00",
+          "close": "11:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-258-4320",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://stbernardparish.org/tosa-community-food-pantry/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Monday 1pm - 3pm, Saturday 9am - 11am. "
+    },
+    {
+      "resource_id": "mfc-066",
+      "provider": "St. Catherine Parish",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "5101 W. Center St., Milwaukee, WI 53210",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-12",
+          "open": "09:00",
+          "close": "11:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-445-5115",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://saintcatherine51.org/?ai1ec_event=food-pantry-community-center-2",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Second and fouth Saturday of the month, 9am - 11am. "
+    },
+    {
+      "resource_id": "mfc-067",
+      "provider": "St. Gregory the Great Parish",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "3160 S. 63rd St., Milwaukee, WI 53219",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-19",
+          "open": "10:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-491-9768 | 414-543-8292 | 414-321-1350",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.gregthegreat.org/st--vincent-de-paul-food-pantry",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: First and third Saturday of the month, 10am - 12pm; serves school families. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-068",
+      "provider": "Jim Luther New Hope Center",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1414 W. Becher St., Milwaukee, WI 53215",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "12:30",
+          "close": "14:30"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "12:30",
+          "close": "14:30"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "16:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "16:00",
+          "close": "18:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-909-9223 | 414-645-1455",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.jluthernhc.com/general-9",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Tuesday 12:30pm - 2:30pm, Wednesday 4pm - 6pm. "
+    },
+    {
+      "resource_id": "mfc-069",
+      "provider": "St. Martin de Porres Catholic Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "128 W. Burleigh St., Milwaukee, WI 53212",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-372-3090",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://experience.arcgis.com/experience/4883a0957d124294aa236d9e9cc696a5",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "No hours listed. Hours could not be fully parsed; call to confirm. "
+    },
+    {
+      "resource_id": "mfc-070",
+      "provider": "St. Peter-Immanuel Lutheran Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "7801 W. Acacia St., Milwaukee, WI 53223",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-14",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "13:00",
+          "close": "15:00"
+        },
+        {
+          "date": "2026-09-12",
+          "open": "10:00",
+          "close": "12:00"
+        },
+        {
+          "date": "2026-09-19",
+          "open": "10:00",
+          "close": "12:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-353-6800",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.spi-mke.com/resources-and-links",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Monday 1pm - 3pm, Saturday 10am - 12pm. "
+    },
+    {
+      "resource_id": "mfc-071",
+      "provider": "St. Matthias Catholic Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "9306 Beloit Rd., Milwaukee, WI 53227",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-12",
+          "open": "07:30",
+          "close": "11:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-321-0893",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://stmatthias-milw.org/community/food-pantry/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Second and fourth Saturday, 7:30am - 11am. "
+    },
+    {
+      "resource_id": "mfc-072",
+      "provider": "St. Veronica Congregation",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "353 E Norwich St., Milwaukee, WI 53207",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-09",
+          "open": "13:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "13:00",
+          "close": "18:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "no phone listed",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.saintveronica.org/our-ministries",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Wednesday 1pm - 6pm. "
+    },
+    {
+      "resource_id": "mfc-073",
+      "provider": "UMOS",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "2701 S. Chase Ave., Milwaukee, WI 53207",
+      "zip_codes_served": [
+        "53207",
+        "53221"
+      ],
+      "windows": [
+        {
+          "date": "2026-09-08",
+          "open": "13:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-09",
+          "open": "13:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-10",
+          "open": "13:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-11",
+          "open": "13:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-14",
+          "open": "13:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-15",
+          "open": "13:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "13:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-17",
+          "open": "13:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-18",
+          "open": "13:00",
+          "close": "16:00"
+        },
+        {
+          "date": "2026-09-21",
+          "open": "13:00",
+          "close": "16:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-389-6300",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.umos.org/how-we-help/social-services/food-pantry/",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Monday through Friday, 1pm - 4pm. "
+    },
+    {
+      "resource_id": "mfc-074",
+      "provider": "Unity Lutheran Church",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "1025 E. Oklahoma Ave., Milwaukee, WI 53207",
+      "zip_codes_served": [],
+      "windows": [
+        {
+          "date": "2026-09-09",
+          "open": "17:00",
+          "close": "18:00"
+        },
+        {
+          "date": "2026-09-16",
+          "open": "17:00",
+          "close": "18:00"
+        }
+      ],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-744-6311",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.unitymilwaukee.org/outreach.html#:~:text=Open%20every%20two%20weeks%20on,check%20website%20for%20days%20open.",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Wednesday 5pm - 6pm. "
+    },
+    {
+      "resource_id": "mfc-075",
+      "provider": "St. Rose Food Pantry",
+      "service_type": "free_pantry",
+      "cost": "free",
+      "address": "3005 W Michigan St., Milwaukee, WI 53208",
+      "zip_codes_served": [],
+      "windows": [],
+      "requirements": [],
+      "appointment_required": false,
+      "visit_limit": null,
+      "contact": "414-342-1778",
+      "languages": [],
+      "last_verified": "2024-08-27",
+      "verifier": "map publisher",
+      "status": "published",
+      "source_url": "https://www.stmichael-strose.org/food-pantry-and-clothing",
+      "source": "Milwaukee Food Environment Map (Data You Can Use / Milwaukee Food Council), data as of 2024-08-27",
+      "notes": "Listed hours: Second and forth Tuesdays at 5:30pm. Hours could not be fully parsed; call to confirm. "
+    }
+  ]
+}

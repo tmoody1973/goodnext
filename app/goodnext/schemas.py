@@ -63,6 +63,7 @@ class FoodResource(BaseModel):
     verifier: str
     status: Literal["published", "closed", "withdrawn"]
     source_url: str
+    source: str = ""
     notes: str = ""
 
 
@@ -81,6 +82,7 @@ class Claims(BaseModel):
     travel_text: str
     directions_url: str
     travel_echo: str
+    source_text: str = ""
 
 
 class PlannedVisit(BaseModel):

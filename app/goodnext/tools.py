@@ -22,7 +22,6 @@ returned_ids: contextvars.ContextVar[set[str]] = contextvars.ContextVar("returne
 
 # CONTEXT.md freshness tiers (D7): verified <=14 days, call_to_confirm <=60, else unconfirmed.
 VERIFIED_MAX_DAYS = 14
-CALL_TO_CONFIRM_MAX_DAYS = 60
 FIXTURE_PATH = Path(os.environ.get("GOODNEXT_FIXTURE_PATH", Path(__file__).parent / "fixtures" / "milwaukee-food-resources.json"))
 
 
@@ -33,9 +32,9 @@ def freshness_tier(last_verified: str | None, start_date: str) -> FreshnessTier:
     age = (date.fromisoformat(start_date) - date.fromisoformat(last_verified)).days
     if age <= VERIFIED_MAX_DAYS:
         return "verified"
-    if age <= CALL_TO_CONFIRM_MAX_DAYS:
-        return "call_to_confirm"
-    return "unconfirmed"
+    # Decision 006: any dated check older than 14 days is call_to_confirm (the
+    # date is shown). Only a record with no date at all is unconfirmed.
+    return "call_to_confirm"
 
 
 def window_open_at(window: dict, now: datetime) -> bool:
@@ -61,8 +60,14 @@ def _open_today(windows: list[dict], now: datetime) -> bool:
 
 
 def load_directory() -> dict[str, FoodResource]:
-    raw = json.loads(FIXTURE_PATH.read_text())
-    return {r["resource_id"]: FoodResource(**r) for r in raw["resources"]}
+    """Every JSON file beside FIXTURE_PATH (synthetic cases plus real map records).
+    A FIXTURE_PATH outside the fixtures folder (tests) is loaded alone."""
+    paths = sorted(FIXTURE_PATH.parent.glob("*.json")) if FIXTURE_PATH.parent.name == "fixtures" else [FIXTURE_PATH]
+    directory: dict[str, FoodResource] = {}
+    for path in paths:
+        raw = json.loads(path.read_text())
+        directory.update({r["resource_id"]: FoodResource(**r) for r in raw["resources"]})
+    return directory
 
 
 def _ledger() -> set[str]:

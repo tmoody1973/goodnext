@@ -99,4 +99,5 @@ def build_claims(visit: PlannedVisit, resource: FoodResource, constraints: House
         travel_text="Travel time unknown, check the map.",
         directions_url="https://www.google.com/maps/search/?api=1&query=" + quote_plus(resource.address),
         travel_echo=_travel_echo(constraints),
+        source_text=f"Source: {resource.source}" if resource.source else "",
     )
