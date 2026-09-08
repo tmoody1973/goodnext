@@ -63,3 +63,11 @@ _Avoid_: Fallback, referral, escalation
 **No-match**:
 The outcome when no listed option exists for the resident's ZIP and date. Always paired with help routes and the option to change ZIP.
 _Avoid_: Empty state, no results, error
+
+**Later this week**:
+Days two to seven of the Bridge Plan, shown after Food today as small day tiles that unfold one at a time. Listed, never promised.
+_Avoid_: Rest of the week, upcoming, coming days
+
+**Delayed status**:
+The screen state after 30 seconds of waiting for a plan: a plain message that checking continues, a way to cancel, and the help routes. Never a bare spinner.
+_Avoid_: Timeout, slow, error, loading
