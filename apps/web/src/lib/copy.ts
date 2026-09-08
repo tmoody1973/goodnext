@@ -31,6 +31,16 @@ export const copy = {
   wait: {
     checking: "Checking today's listings for {zip}.",
     estimate: "This usually takes one to two minutes.",
+    delayed: "Still checking. You can wait, or use one of these help routes.",
+    cancel: "Cancel",
+  },
+  actions: {
+    retry: "Try again",
+    change: "Change my answers",
+  },
+  help: {
+    heading: "Need more help?",
+    checked: "Checked {date}",
   },
   result: {
     heading: "Food today, {date}",
@@ -42,7 +52,6 @@ export const copy = {
       denied: "We could not build a list for that answer.",
       temporarily_unavailable: "Temporarily unavailable. Try again in a moment.",
     },
-    unreachable: "We could not reach the service. Try again in a moment.",
     listedToday: "{n} listed today",
     oneListedToday: "1 listed today",
     noneListedToday: "Nothing listed for today.",

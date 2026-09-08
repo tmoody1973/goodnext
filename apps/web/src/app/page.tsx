@@ -1,31 +1,74 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ConstraintForm, toConstraints, type FormValues } from "@/components/ConstraintForm";
+import { HelpRoutes } from "@/components/HelpRoutes";
 import { OptionCard } from "@/components/OptionCard";
-import { postPlan, type Envelope, type PlanData } from "@/lib/api";
+import { postPlan, type Envelope, type HelpRoute, type PlanData } from "@/lib/api";
 import { copy, fill } from "@/lib/copy";
 import { formatPlanDate } from "@/lib/format";
 import { telHref } from "@/lib/phone";
 
+// PRD section 8: after 30 s of waiting, show explicit delayed status.
+export const DELAYED_AFTER_MS = 30_000;
+
 type State =
   | { kind: "idle" }
-  | { kind: "submitting"; zip: string }
-  | { kind: "done"; envelope: Envelope }
-  | { kind: "unreachable" };
+  | { kind: "submitting"; zip: string; delayed: boolean }
+  | { kind: "done"; envelope: Envelope };
+
+// A network failure looks like the API's own 503 to the resident.
+function unreachableEnvelope(): Envelope {
+  return { status: "temporarily_unavailable", data: null, evidence: [], missing: [], warnings: ["unreachable"], retryable: true, request_id: "local" };
+}
+
+function focusZip() {
+  const zip = document.getElementById("zip");
+  zip?.scrollIntoView?.({ block: "center" });
+  zip?.focus();
+}
 
 export default function FoodTodayPage() {
   const [state, setState] = useState<State>({ kind: "idle" });
+  // The last help routes any response carried; shown while waiting and on failures.
+  const [routes, setRoutes] = useState<HelpRoute[]>([]);
+  const lastValues = useRef<FormValues | null>(null);
+  const controller = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    if (state.kind !== "submitting" || state.delayed) return;
+    const timer = setTimeout(() => setState((s) => (s.kind === "submitting" ? { ...s, delayed: true } : s)), DELAYED_AFTER_MS);
+    return () => clearTimeout(timer);
+  }, [state]);
 
   async function submit(next: FormValues) {
-    setState({ kind: "submitting", zip: next.zip });
+    lastValues.current = next;
+    controller.current?.abort();
+    const ac = new AbortController();
+    controller.current = ac;
+    setState({ kind: "submitting", zip: next.zip, delayed: false });
     try {
-      const envelope = await postPlan(toConstraints(next));
+      const envelope = await postPlan(toConstraints(next), ac.signal);
+      if (ac.signal.aborted) return;
+      if (envelope.help_routes?.length) setRoutes(envelope.help_routes);
       setState({ kind: "done", envelope });
-    } catch {
-      setState({ kind: "unreachable" });
+    } catch (error) {
+      if (ac.signal.aborted || (error instanceof DOMException && error.name === "AbortError")) return;
+      setState({ kind: "done", envelope: unreachableEnvelope() });
     }
   }
+
+  function cancel() {
+    controller.current?.abort();
+    setState({ kind: "idle" });
+    focusZip();
+  }
+
+  function retry() {
+    if (lastValues.current) void submit(lastValues.current);
+  }
+
+  const busy = state.kind === "submitting";
 
   return (
     <main className="mx-auto flex w-full max-w-2xl flex-col gap-8 px-4 py-6">
@@ -34,17 +77,25 @@ export default function FoodTodayPage() {
         <p className="text-sm text-ink-soft">{copy.site.tagline}</p>
       </header>
 
-      <ConstraintForm busy={state.kind === "submitting"} onSubmit={submit} />
+      <ConstraintForm busy={busy} onSubmit={submit} />
 
-      <section aria-live="polite" className="flex flex-col gap-2">
+      <section aria-live="polite" className="flex flex-col gap-4">
         {state.kind === "submitting" && (
-          <>
+          <div className="flex flex-col gap-2">
             <p className="font-medium">{fill(copy.wait.checking, { zip: state.zip })}</p>
             <p className="text-ink-soft">{copy.wait.estimate}</p>
-          </>
+            {state.delayed && (
+              <>
+                <p role="status" className="font-medium">{copy.wait.delayed}</p>
+                <button type="button" onClick={cancel} className="self-start rounded-xl border border-navy px-5 py-2.5 font-semibold text-navy">
+                  {copy.wait.cancel}
+                </button>
+                <HelpRoutes routes={routes} />
+              </>
+            )}
+          </div>
         )}
-        {state.kind === "unreachable" && <p role="alert" className="font-medium text-alert">{copy.result.unreachable}</p>}
-        {state.kind === "done" && <Result envelope={state.envelope} />}
+        {state.kind === "done" && <Result envelope={state.envelope} routes={state.envelope.help_routes?.length ? state.envelope.help_routes : routes} onRetry={retry} onChange={focusZip} />}
       </section>
     </main>
   );
@@ -61,10 +112,32 @@ function countLine(n: number) {
   return fill(copy.result.listedToday, { n: String(n) });
 }
 
-function Result({ envelope }: { envelope: Envelope }) {
+type ResultProps = { envelope: Envelope; routes: HelpRoute[]; onRetry: () => void; onChange: () => void };
+
+const actionClass = "self-start rounded-xl bg-amber px-5 py-2.5 font-semibold text-ink shadow-[0_2px_8px_rgba(11,42,74,0.18)]";
+
+function Result({ envelope, routes, onRetry, onChange }: ResultProps) {
   const data = envelope.data;
   const hasPlan = (envelope.status === "success" || envelope.status === "partial") && data !== null;
   const visits = hasPlan ? todayVisits(data) : [];
+  if (envelope.status === "temporarily_unavailable") {
+    return (
+      <div className="flex flex-col gap-4">
+        <p role="alert" className="font-medium text-alert">{copy.result.status.temporarily_unavailable}</p>
+        <button type="button" onClick={onRetry} className={actionClass}>{copy.actions.retry}</button>
+        <HelpRoutes routes={routes} />
+      </div>
+    );
+  }
+  if (envelope.status === "needs_clarification" || envelope.status === "denied") {
+    return (
+      <div className="flex flex-col gap-4">
+        <p role="alert" className="font-medium">{copy.result.status[envelope.status]}</p>
+        <button type="button" onClick={onChange} className={actionClass}>{copy.actions.change}</button>
+        <HelpRoutes routes={routes} />
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col gap-4">
       <div className="rounded-2xl bg-navy px-5 py-4 text-paper">
@@ -96,6 +169,7 @@ function Result({ envelope }: { envelope: Envelope }) {
           </ul>
         </section>
       )}
+      <HelpRoutes routes={routes} />
     </div>
   );
 }
