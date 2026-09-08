@@ -21,7 +21,7 @@ or a notice before helping with food, or use real residents' documents.
 | Strands agent (Python 3.12) | `app/goodnext/` | Built, 39 tests green, deployed v3 and verified live |
 | FastAPI backend | `services/api/` | Built, 10 tests green |
 | AgentCore CLI config + CDK | `agentcore/` | Deployed to us-east-1 |
-| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Base built (MOO-779, In Review); 9 tests green; screens MOO-782 to 787 open |
+| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Base built (MOO-779 Done, PR #4 open, CI green); screens MOO-782 to 787 open |
 | Directory data | `app/goodnext/fixtures/` | 93 records, see below |
 | Feature specs | `docs/specs/food-today.md`, `docs/specs/food-today-screen.md` | Settled |
 | Design context | `PRODUCT.md`, `.impeccable/surfaces/`, `.impeccable/mocks/decision/` | Shape pass done; DESIGN.md lands with MOO-786 |
@@ -33,8 +33,8 @@ Tracker: **Linear**, team MOO, project "GoodNext — Agents for Humans
 Hackathon". Only the `linear-build` skill creates or closes issues. Issues
 MOO-770 to MOO-775, MOO-777, MOO-778 are Done with evidence comments.
 **All nine Food today issues (MOO-770 to 778) are Done.** Screen issues
-MOO-779 to MOO-787 created 2026-09-08 14:45 CDT (779 In Review; 780 and 781
-are agent fixes, unblocked; 782, 783, 784 unblocked once 779 is Done).
+MOO-779 to MOO-787 created 2026-09-08 14:45 CDT (779 Done; 780 and 781 are
+agent fixes, unblocked; 782, 783, 784 unblocked now).
 
 GitHub: https://github.com/tmoody1973/goodnext, pushed and current as of
 2026-09-08 13:10 CDT. CI (`.github/workflows/ci.yml`) runs both test suites
@@ -97,10 +97,11 @@ confirm" with the date; only a missing date is "unconfirmed".
 ## Next steps, in order (six days to September 14, 7 p.m. Central)
 
 1. **Website, Food today screen.** Shape, grill, spec, and tickets are done
-   (2026-09-08). Branch `tarikjmoody/moo-779-web-app-base` holds the base
-   (three commits, not pushed). Next: Tarik says "push", open the PR, watch
-   the CI web job go red-then-green, close MOO-779. Then build MOO-782, 783,
-   784 (parallel-safe), then 785, 786, 787, each via `linear-build`. Spec:
+   (2026-09-08). Branch `tarikjmoody/moo-779-web-app-base` is pushed as PR #4
+   (https://github.com/tmoody1973/goodnext/pull/4), all five CI checks green,
+   web job proven red then green. Tarik reviews and merges. Then build
+   MOO-782, 783, 784 (parallel-safe), then 785, 786, 787, each via
+   `linear-build`, on branches off main once #4 merges. Spec:
    `docs/specs/food-today-screen.md`. The Matt Pocock `implement` skill is
    user-invocation only, like `grill-with-docs`, `to-spec`, `to-tickets`.
 2. **Latency.** Return day one first, the week second; or cache the system
@@ -123,9 +124,9 @@ Read HANDOFF.md, then CONTEXT.md, then docs/agents/issue-tracker.md, then
 docs/specs/food-today-screen.md. Do not re-read the planning docs unless a
 task needs them.
 
-Branch tarikjmoody/moo-779-web-app-base has the website base, unpushed.
-Build MOO-782 (today's cards) with linear-build, tdd, and code-review, on
-that branch or a child of it. Read the surface brief and PRODUCT.md before
+PR #4 has the website base; merge it first if it is still open. Build
+MOO-782 (today's cards) with linear-build, tdd, and code-review, on a new
+branch off main. Read the surface brief and PRODUCT.md before
 touching UI. Explain in plain English. Nothing in AWS is created or changed
 without my go; deploys and pushes are mine.
 ```
