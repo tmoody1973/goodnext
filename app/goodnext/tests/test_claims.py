@@ -64,7 +64,7 @@ def test_validator_populates_permitted_claims_for_every_kept_visit():
         assert v.claims.travel_echo == "You said: bus"
 
 
-def test_never_list_hits_empty_over_success_and_no_match_envelopes():
+def test_never_list_hits_empty_over_success_and_no_match_envelopes(fixture_without_res009):
     find_food_resources("53206", DATES[0], DATES[-1], MORNING)
     proposal = proposal_with([visit("res-001", DATES[0]), visit("res-002", DATES[0])])
     cleaned, violations = validate_food_plan(proposal, returned_ids.get(), load_directory(), ZERO_BUDGET_BUS, DATES, MORNING)

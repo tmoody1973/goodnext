@@ -29,18 +29,6 @@ def fresh_ledger():
     returned_ids.reset(token)
 
 
-@pytest.fixture
-def fixture_without_res009(tmp_path, monkeypatch):
-    """A temp copy of the fixture directory with res-009 removed. res-009 (MOO-772)
-    has an empty zip_codes_served, so by rule it is returned for ANY ZIP; tests that
-    need a true no-match ZIP must point tools.FIXTURE_PATH at a directory without it."""
-    raw = json.loads(tools.FIXTURE_PATH.read_text())
-    raw["resources"] = [r for r in raw["resources"] if r["resource_id"] != "res-009"]
-    path = tmp_path / "no-res-009.json"
-    path.write_text(json.dumps(raw))
-    monkeypatch.setattr(tools, "FIXTURE_PATH", path)
-
-
 def visit(rid: str, date: str, cost: str = "free") -> PlannedVisit:
     r = load_directory().get(rid)
     return PlannedVisit(
