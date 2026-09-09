@@ -179,8 +179,17 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
         {data?.start_date && (
           <h1 className="text-2xl font-bold text-balance">{fill(copy.result.heading, { date: formatPlanDate(data.start_date) })}</h1>
         )}
-        <p className="mt-1 text-navy-soft">{hasPlan ? countLine(visits.length) : copy.result.status[envelope.status]}</p>
+        <h2 className="mt-1 text-navy-soft">{hasPlan ? countLine(visits.length) : copy.result.status[envelope.status]}</h2>
       </div>
+      {hasPlan && (visits.length > 0 || data.unconfirmed.length > 0) && (
+        <button
+          type="button"
+          onClick={() => window.print()}
+          className="self-start rounded-xl border border-navy px-5 py-2.5 font-semibold text-navy"
+        >
+          {copy.print.action}
+        </button>
+      )}
       {envelope.status === "partial" && <p className="font-medium">{copy.result.status.partial}</p>}
       {visits.map((v) => (
         <OptionCard key={v.resource_id} visit={v} />

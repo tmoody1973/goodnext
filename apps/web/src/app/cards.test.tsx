@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import FoodTodayPage from "./page";
-import { NEVER_LIST, neverListHits } from "@/lib/never-list";
+import { NEVER_LIST, VENDOR_NEVER_LIST, neverListHits } from "@/lib/never-list";
 import day9 from "../../../../docs/evidence/moo-777-live-53206-2026-09-09-demo.json";
 import day10 from "../../../../docs/evidence/moo-778-live-53206-2026-09-10-demo.json";
 
@@ -22,7 +22,9 @@ describe("today's cards", () => {
   it("renders one card per today visit from the 2026-09-09 response, claims in order", async () => {
     await submitWith(day9);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Food today, Wednesday, September 9");
-    expect(screen.getByText("2 listed today")).toBeInTheDocument();
+    // The count is a heading, so a screen-reader user can reach it as a result.
+    expect(screen.getByRole("heading", { level: 2, name: "2 listed today" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Print this list" })).toBeInTheDocument();
 
     const cards = screen.getAllByRole("article");
     expect(cards).toHaveLength(2);
@@ -46,10 +48,13 @@ describe("today's cards", () => {
     expect(positions.every((p) => p >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
 
-    const directions = first.getByRole("link", { name: "Directions" });
+    const directions = first.getByRole("link", { name: "Directions to Capuchin Community Services – House of Peace" });
     expect(directions).toHaveAttribute("href", expect.stringContaining("google.com/maps"));
     expect(directions).toHaveAttribute("target", "_blank");
-    expect(first.getByRole("link", { name: "Call 414-933-1300" })).toHaveAttribute("href", "tel:4149331300");
+    expect(first.getByRole("link", { name: "Call Capuchin Community Services – House of Peace at 414-933-1300" })).toHaveAttribute(
+      "href",
+      "tel:4149331300",
+    );
 
     // Second card has no source line and no appointment line.
     expect(cards[1].textContent).not.toContain("Source:");
@@ -99,6 +104,8 @@ describe("today's cards", () => {
 
   it("never-list scan passes over the rendered fixture pages", async () => {
     await submitWith(day10);
-    expect(neverListHits({ page: document.body.textContent }, NEVER_LIST)).toEqual([]);
+    const page = { page: document.body.textContent };
+    expect(neverListHits(page, NEVER_LIST)).toEqual([]);
+    expect(neverListHits(page, VENDOR_NEVER_LIST)).toEqual([]);
   });
 });

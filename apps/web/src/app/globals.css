@@ -42,3 +42,33 @@ body {
     animation: none !important;
   }
 }
+
+/* Print (spec S6, user story 34): a resident on a library terminal carries
+   today's list on paper. Print the result — the cards, the unconfirmed list,
+   and the help routes — and drop the form, the buttons, and the waiting chrome
+   the page cannot use. */
+@media print {
+  /* Ink economy on a shared printer: flat black on white, no fills or shadows. */
+  *,
+  *::before,
+  *::after {
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none !important;
+  }
+
+  /* Interactive chrome the paper cannot use. `button` covers the form submit,
+     Retry, Change, Cancel, the Print link, and the later-week tiles. */
+  form,
+  button {
+    display: none !important;
+  }
+
+  /* Keep each card and the help routes whole across a page break, with a plain
+     rule where a fill used to separate them. */
+  article,
+  section[aria-labelledby="help-heading"] {
+    border: 1px solid #000;
+    break-inside: avoid;
+  }
+}

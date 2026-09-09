@@ -40,12 +40,17 @@ export function OptionCard({ visit }: { visit: PlannedVisit }) {
             href={c.directions_url}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={fill(copy.card.directionsLabel, { provider: visit.provider })}
             className="rounded-xl bg-amber px-5 py-2.5 font-semibold text-ink shadow-[0_2px_8px_rgba(11,42,74,0.18)]"
           >
             {copy.card.directions}
           </a>
           {tel ? (
-            <a href={tel} className="font-medium text-navy underline underline-offset-4">
+            <a
+              href={tel}
+              aria-label={fill(copy.card.callLabel, { provider: visit.provider, phone: visit.contact })}
+              className="font-medium text-navy underline underline-offset-4"
+            >
               {fill(copy.card.call, { phone: visit.contact })}
             </a>
           ) : (

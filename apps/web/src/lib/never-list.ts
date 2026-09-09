@@ -11,6 +11,24 @@ export const NEVER_LIST = [
   "food covered",
 ] as const;
 
+// Decision 007's own-world rule and the screen spec's copy rule: the site names
+// no technology. These build and vendor names must never reach a resident, on
+// screen or in the copy module. Certainty words live in NEVER_LIST above.
+export const VENDOR_NEVER_LIST = [
+  "aws",
+  "amazon",
+  "bedrock",
+  "agentcore",
+  "strands",
+  "fastapi",
+  "anthropic",
+  "claude",
+  "openai",
+  "next.js",
+  "vercel",
+  "impeccable",
+] as const;
+
 // The `_Avoid_:` lines in CONTEXT.md, read at test time so the glossary stays
 // the single source.
 export function avoidWordsFrom(contextMd: string): string[] {

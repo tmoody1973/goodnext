@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import path from "node:path";
 import { copy } from "./copy";
-import { NEVER_LIST, avoidWordsFrom, neverListHits, readContextAvoidWords } from "./never-list";
+import { NEVER_LIST, VENDOR_NEVER_LIST, avoidWordsFrom, neverListHits, readContextAvoidWords } from "./never-list";
 
 const CONTEXT_MD = path.resolve(__dirname, "../../../../CONTEXT.md");
 
@@ -12,6 +12,10 @@ describe("never-list", () => {
 
   it("the copy module contains none of the seven never-list terms", () => {
     expect(neverListHits(copy, NEVER_LIST)).toEqual([]);
+  });
+
+  it("the copy module names no vendor or build technology", () => {
+    expect(neverListHits(copy, VENDOR_NEVER_LIST)).toEqual([]);
   });
 
   it("the copy module contains none of the CONTEXT.md avoid-words", () => {
