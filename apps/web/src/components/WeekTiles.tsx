@@ -26,7 +26,7 @@ export function WeekTiles({ days }: { days: DayPlan[] }) {
           const isOpen = open === day.date;
           const count = n === 0 ? copy.week.nothing : n === 1 ? copy.week.oneListed : fill(copy.week.listed, { n: String(n) });
           // The count is the scan target, so it is the tile's dominant line.
-          const cls = `flex w-full flex-col items-center rounded-xl border px-2 py-2 text-center [overflow-wrap:anywhere] ${
+          const cls = `flex h-full w-full flex-col items-center justify-center rounded-xl border px-2 py-2 text-center [overflow-wrap:anywhere] ${
             isOpen ? "border-navy bg-navy text-paper" : "border-line bg-paper text-ink"
           }`;
           const buttonCls = `${cls} transition-colors hover:border-navy active:bg-navy-soft`;
