@@ -21,7 +21,7 @@ or a notice before helping with food, or use real residents' documents.
 | Strands agent (Python 3.12) | `app/goodnext/` | Built, 39 tests green, deployed v3 and verified live |
 | FastAPI backend | `services/api/` | Built, 10 tests green |
 | AgentCore CLI config + CDK | `agentcore/` | Deployed to us-east-1 |
-| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Base, cards, waiting states, no-match and summary line (MOO-779, 782, 783, 784); 24 tests green; MOO-785 to 787 open |
+| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Base, cards, waiting states, no-match, summary line, week tiles (MOO-779, 782 to 785); 28 tests green; MOO-786, 787 open |
 | Directory data | `app/goodnext/fixtures/` | 93 records, see below |
 | Feature specs | `docs/specs/food-today.md`, `docs/specs/food-today-screen.md` | Settled |
 | Design context | `PRODUCT.md`, `.impeccable/surfaces/`, `.impeccable/mocks/decision/` | Shape pass done; DESIGN.md lands with MOO-786 |
@@ -104,9 +104,9 @@ confirm" with the date; only a missing date is "unconfirmed".
 
 1. **Website, Food today screen.** Shape, grill, spec, and tickets done
    2026-09-08. Merged: base (#4), cards (#5), waiting states (#6), help routes
-   on every status (#7, runtime v4), docs (#8). PR #9 (MOO-784, no-match and
-   summary line) open for merge. Remaining: MOO-785 (tiles), MOO-781 (agent
-   later-day claims), MOO-786 (finish pass, DESIGN.md), MOO-787 (live run).
+   on every status (#7, runtime v4), docs (#8). No-match (#9) merged. PR #10 (MOO-785, week tiles) open for merge.
+   Remaining: MOO-781 (agent later-day claims), MOO-786 (finish pass,
+   DESIGN.md), MOO-787 (live run).
    Each via `linear-build` on a branch off main; specs in
    `docs/specs/food-today-screen.md`.
 2. **Latency.** Return day one first, the week second; or cache the system
@@ -129,9 +129,9 @@ Read HANDOFF.md, then CONTEXT.md, then docs/agents/issue-tracker.md, then
 docs/specs/food-today-screen.md. Do not re-read the planning docs unless a
 task needs them.
 
-PR #9 (MOO-784) may still be open; merge it. Build MOO-785 (later this week
-tiles) with linear-build, tdd, and code-review, on a new branch off main; then
-MOO-781 on the agent side, then 786 and 787. Read the surface brief and PRODUCT.md before
+PR #10 (MOO-785, week tiles) may still be open; merge it. Build MOO-781 (agent
+later-day claims) with linear-build and tdd, then MOO-786 (the Impeccable
+finish pass: print, accessibility, responsive audit, DESIGN.md), then MOO-787. Read the surface brief and PRODUCT.md before
 touching UI. Explain in plain English. Nothing in AWS is created or changed
 without my go; deploys and pushes are mine.
 ```
