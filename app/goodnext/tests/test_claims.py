@@ -17,6 +17,7 @@ import pytest
 DATES = [f"2026-09-{d:02d}" for d in range(8, 15)]
 MORNING = "2026-09-08T09:00:00-05:00"
 ZERO_BUDGET_BUS = HouseholdConstraints(zip_code="53206", budget_usd=0, kitchen="none", travel=["bus"])
+NOW_LOCAL = "2026-09-08T10:00:00-05:00"
 
 
 @pytest.fixture(autouse=True)
@@ -156,3 +157,29 @@ def test_never_list_ignores_honest_denials():
     assert never_list_hits({"t": "Nothing is reserved for you."}) == []
     assert never_list_hits({"t": "Your food is guaranteed."}) == ["guaranteed"]
     assert never_list_hits({"t": "A spot is reserved for you."}) == ["reserved"]
+
+
+def test_later_day_claims_describe_their_own_day():
+    """MOO-781: a Thursday visit says "Open Thursday", never "Not open today", and its
+    next-open window is on or after Thursday. Today's wording is unchanged."""
+    find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
+    proposal = proposal_with([visit("res-001", DATES[0]), visit("res-001", DATES[2])])  # res-001: 09-08 and 09-10
+    cleaned, _ = validate_food_plan(proposal, returned_ids.get(), load_directory(), ZERO_BUDGET_BUS, DATES, NOW_LOCAL)
+    today_visit = cleaned.days[0].visits[0]
+    thursday_visit = cleaned.days[2].visits[0]
+    assert today_visit.claims.open_today_text == "Open today from 10:00 AM to 2:00 PM"
+    assert thursday_visit.claims.open_today_text == "Open Thursday from 10:00 AM to 2:00 PM"
+    assert "Not open today" not in thursday_visit.claims.open_today_text
+    assert thursday_visit.next_open is not None and thursday_visit.next_open.date >= thursday_visit.date
+    assert thursday_visit.next_open.date == DATES[2]
+
+
+def test_next_open_never_precedes_the_visit_date():
+    find_food_resources("53206", DATES[0], DATES[-1], NOW_LOCAL)
+    proposal = proposal_with([visit("res-002", d) for d in DATES[:5]])  # res-002 open 09-08 to 09-12
+    cleaned, _ = validate_food_plan(proposal, returned_ids.get(), load_directory(), ZERO_BUDGET_BUS, DATES, NOW_LOCAL)
+    kept = [v for day in cleaned.days for v in day.visits]
+    assert len(kept) == 5
+    for v in kept:
+        assert v.next_open is None or v.next_open.date >= v.date, (v.date, v.next_open)
+    assert never_list_hits(cleaned.model_dump()) == []

@@ -104,9 +104,9 @@ confirm" with the date; only a missing date is "unconfirmed".
 
 1. **Website, Food today screen.** Shape, grill, spec, and tickets done
    2026-09-08. Merged: base (#4), cards (#5), waiting states (#6), help routes
-   on every status (#7, runtime v4), docs (#8). No-match (#9) merged. PR #10 (MOO-785, week tiles) open for merge.
-   Remaining: MOO-781 (agent later-day claims), MOO-786 (finish pass,
-   DESIGN.md), MOO-787 (live run).
+   on every status (#7, runtime v4), docs (#8). No-match (#9) merged. Week tiles (#10) merged. PR #11 (MOO-781, later-day claims) open;
+   after merge Tarik runs `agentcore deploy` from the repo root for runtime
+   v5. Remaining: MOO-786 (finish pass, DESIGN.md), MOO-787 (live run).
    Each via `linear-build` on a branch off main; specs in
    `docs/specs/food-today-screen.md`.
 2. **Latency.** Return day one first, the week second; or cache the system
@@ -129,9 +129,9 @@ Read HANDOFF.md, then CONTEXT.md, then docs/agents/issue-tracker.md, then
 docs/specs/food-today-screen.md. Do not re-read the planning docs unless a
 task needs them.
 
-PR #10 (MOO-785, week tiles) may still be open; merge it. Build MOO-781 (agent
-later-day claims) with linear-build and tdd, then MOO-786 (the Impeccable
-finish pass: print, accessibility, responsive audit, DESIGN.md), then MOO-787. Read the surface brief and PRODUCT.md before
+PR #11 (MOO-781) may still be open; merge it and I deploy runtime v5 from the
+repo root. Build MOO-786 (the Impeccable finish pass: print, accessibility,
+responsive audit, DESIGN.md), then MOO-787 (the closing live run). Read the surface brief and PRODUCT.md before
 touching UI. Explain in plain English. Nothing in AWS is created or changed
 without my go; deploys and pushes are mine.
 ```

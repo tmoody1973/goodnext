@@ -64,13 +64,16 @@ def _fmt_12h(hhmm: str) -> str:
 
 
 def _open_today_text(visit: PlannedVisit, resource: FoodResource, now: datetime) -> str:
+    """Claim 1. Today's visit reads "Open today …"; a later-day visit names its own
+    weekday (MOO-781). "Not open" wording appears only when the record has no window
+    on the visit's day, and next open is then never earlier than that day."""
     today = now.date().isoformat()
-    if visit.date == today:
-        window = next((w for w in resource.windows if w.date == today), None)
-        if window is not None:
-            return f"Open today from {_fmt_12h(window.open)} to {_fmt_12h(window.close)}"
+    day_word = "today" if visit.date == today else datetime.fromisoformat(visit.date).strftime("%A")
+    window = next((w for w in resource.windows if w.date == visit.date), None)
+    if window is not None and (visit.date != today or window.close > now.strftime("%H:%M")):
+        return f"Open {day_word} from {_fmt_12h(window.open)} to {_fmt_12h(window.close)}"
     if visit.next_open is not None:
-        return f"Not open today; next open {visit.next_open.date} at {_fmt_12h(visit.next_open.open)}"
+        return f"Not open {day_word}; next open {visit.next_open.date} at {_fmt_12h(visit.next_open.open)}"
     return "Opening time unknown"
 
 
