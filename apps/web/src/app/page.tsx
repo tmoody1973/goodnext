@@ -10,6 +10,7 @@ import { postPlan, type Envelope, type HelpRoute, type PlanData } from "@/lib/ap
 import { copy, fill } from "@/lib/copy";
 import { formatPlanDate } from "@/lib/format";
 import { telHref } from "@/lib/phone";
+import { primaryActionClass, secondaryActionClass, textLinkClass } from "@/lib/styles";
 
 // PRD section 8: after 30 s of waiting, show explicit delayed status.
 export const DELAYED_AFTER_MS = 30_000;
@@ -160,8 +161,6 @@ function CountLine({ n }: { n: number }) {
 
 type ResultProps = { envelope: Envelope; zip: string; routes: HelpRoute[]; onRetry: () => void; onChange: () => void };
 
-const actionClass = "self-start rounded-xl bg-amber px-5 py-2.5 font-semibold text-ink shadow-[0_2px_8px_rgba(11,42,74,0.18)]";
-const secondaryActionClass = "self-start rounded-xl border border-navy px-5 py-2.5 font-semibold text-navy";
 
 function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
   const headingRef = useFocusOnMount<HTMLHeadingElement>();
@@ -175,7 +174,7 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
           <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-bold text-balance break-words outline-none sm:text-4xl sm:tracking-[-0.02em]">{fill(copy.noMatch.statement, { zip })}</h1>
         </div>
         <HelpRoutes routes={routes} />
-        <button type="button" onClick={onChange} className={actionClass}>{copy.noMatch.tryAnother}</button>
+        <button type="button" onClick={onChange} className={primaryActionClass}>{copy.noMatch.tryAnother}</button>
       </div>
     );
   }
@@ -183,7 +182,7 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
     return (
       <div className="flex flex-col gap-4">
         <p role="alert" className="font-medium text-alert">{copy.result.status.temporarily_unavailable}</p>
-        <button type="button" onClick={onRetry} className={actionClass}>{copy.actions.retry}</button>
+        <button type="button" onClick={onRetry} className={primaryActionClass}>{copy.actions.retry}</button>
         <HelpRoutes routes={routes} />
       </div>
     );
@@ -192,7 +191,7 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
     return (
       <div className="flex flex-col gap-4">
         <p role="alert" className="font-medium">{copy.result.status[envelope.status]}</p>
-        <button type="button" onClick={onChange} className={actionClass}>{copy.actions.change}</button>
+        <button type="button" onClick={onChange} className={primaryActionClass}>{copy.actions.change}</button>
         <HelpRoutes routes={routes} />
       </div>
     );
@@ -217,7 +216,7 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
               <li key={u.resource_id}>
                 {u.provider}{" "}
                 {telHref(u.contact) ? (
-                  <a href={telHref(u.contact)!} className="font-medium text-navy underline underline-offset-4">
+                  <a href={telHref(u.contact)!} className={textLinkClass}>
                     {u.contact}
                   </a>
                 ) : (

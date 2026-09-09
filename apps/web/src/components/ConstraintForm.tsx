@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { copy } from "@/lib/copy";
 import type { Constraints, Kitchen, Travel } from "@/lib/api";
+import { primaryActionClass } from "@/lib/styles";
 
 const KITCHENS: Kitchen[] = ["full", "microwave_only", "none"];
 const TRAVELS: Travel[] = ["walk", "bus", "car", "ride"];
@@ -152,7 +153,7 @@ export function ConstraintForm({ busy = false, onSubmit }: Props) {
       <button
         type="submit"
         disabled={busy}
-        className="self-start rounded-xl bg-amber px-6 py-3 text-lg font-semibold text-ink shadow-[0_2px_8px_rgba(11,42,74,0.18)] disabled:opacity-60"
+        className={`${primaryActionClass} px-6 py-3 text-lg disabled:opacity-60`}
       >
         {copy.form.submit}
       </button>

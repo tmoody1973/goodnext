@@ -1,6 +1,7 @@
 import type { PlannedVisit } from "@/lib/api";
 import { copy, fill } from "@/lib/copy";
 import { telHref } from "@/lib/phone";
+import { primaryActionClass, textLinkClass } from "@/lib/styles";
 
 // "Open today from 8:30 AM to 12:00 PM" -> ["8:30 AM", "12:00 PM"]; anything
 // else (closed, next open) is shown as its own sentence in the time block.
@@ -41,12 +42,12 @@ export function OptionCard({ visit }: { visit: PlannedVisit }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={fill(copy.card.directionsLabel, { provider: visit.provider })}
-            className="rounded-xl bg-amber px-5 py-2.5 font-semibold text-ink shadow-[0_2px_8px_rgba(11,42,74,0.18)] print:hidden"
+            className={`${primaryActionClass} print:hidden`}
           >
             {copy.card.directions}
           </a>
           {tel ? (
-            <a href={tel} aria-label={fill(copy.card.callLabel, { phone: visit.contact, provider: visit.provider })} className="font-medium text-navy underline underline-offset-4">
+            <a href={tel} aria-label={fill(copy.card.callLabel, { phone: visit.contact, provider: visit.provider })} className={textLinkClass}>
               {fill(copy.card.call, { phone: visit.contact })}
             </a>
           ) : (

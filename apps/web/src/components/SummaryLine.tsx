@@ -1,5 +1,6 @@
 import type { FormValues } from "@/components/ConstraintForm";
 import { copy, fill } from "@/lib/copy";
+import { textLinkClass } from "@/lib/styles";
 
 // After a result the form folds into one line so the options come first.
 export function SummaryLine({ values, onChange }: { values: FormValues; onChange: () => void }) {
@@ -18,7 +19,7 @@ export function SummaryLine({ values, onChange }: { values: FormValues; onChange
         </span>
       ))}
       <span aria-hidden="true" className="print:hidden">·</span>
-      <button type="button" onClick={onChange} className="font-semibold text-navy underline underline-offset-4">
+      <button type="button" onClick={onChange} className={`${textLinkClass} font-semibold`}>
         {copy.summary.change}
       </button>
     </div>

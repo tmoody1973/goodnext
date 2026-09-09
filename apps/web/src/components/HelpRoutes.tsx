@@ -1,6 +1,7 @@
 import type { HelpRoute } from "@/lib/api";
 import { copy, fill } from "@/lib/copy";
 import { telHref } from "@/lib/phone";
+import { textLinkClass } from "@/lib/styles";
 
 // CONTEXT.md "Help route": a maintained, verified way to reach a human. The
 // list comes only from the API's reviewed constant, never from this site.
@@ -18,12 +19,12 @@ export function HelpRoutes({ routes }: { routes: HelpRoute[] }) {
               <p>{r.purpose}</p>
               <p className="flex flex-wrap gap-x-4">
                 {r.phone && (tel ? (
-                  <a href={tel} className="font-medium text-navy underline underline-offset-4">{r.phone}</a>
+                  <a href={tel} className={textLinkClass}>{r.phone}</a>
                 ) : (
                   <span className="font-medium">{r.phone}</span>
                 ))}
                 {r.url && (
-                  <a href={r.url} target="_blank" rel="noopener noreferrer" className="font-medium text-navy underline underline-offset-4 [overflow-wrap:anywhere]">
+                  <a href={r.url} target="_blank" rel="noopener noreferrer" className={`${textLinkClass} [overflow-wrap:anywhere]`}>
                     {new URL(r.url).hostname}
                   </a>
                 )}
