@@ -68,8 +68,8 @@ export const copy = {
       denied: "We could not build a list for that answer.",
       temporarily_unavailable: "Temporarily unavailable. Try again in a moment.",
     },
-    listedToday: "{n} listed today",
-    oneListedToday: "1 listed today",
+    // The count is the panel's focal number; the label sits beside it.
+    listedToday: "listed today",
     noneListedToday: "Nothing listed for today.",
   },
   card: {

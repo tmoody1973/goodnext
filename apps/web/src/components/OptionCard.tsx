@@ -15,7 +15,7 @@ export function OptionCard({ visit }: { visit: PlannedVisit }) {
   const tel = visit.contact ? telHref(visit.contact) : null;
   return (
     <article className="flex flex-col gap-3 rounded-2xl bg-paper p-4 shadow-[0_2px_10px_rgba(11,42,74,0.12)] sm:flex-row sm:gap-5">
-      <div className="flex shrink-0 flex-col justify-center rounded-xl bg-navy px-4 py-3 text-paper sm:w-32 sm:self-start sm:text-center print:border print:border-ink">
+      <div className="flex shrink-0 flex-wrap items-baseline gap-x-2 self-start rounded-xl bg-navy px-4 py-2 text-paper sm:w-32 sm:flex-col sm:items-stretch sm:gap-0 sm:py-3 sm:text-center print:border print:border-ink">
         {window ? (
           <>
             <span className="text-xl font-bold leading-tight">{window[1]}</span>
@@ -27,7 +27,7 @@ export function OptionCard({ visit }: { visit: PlannedVisit }) {
         )}
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <h2 className="text-lg font-semibold text-balance">{visit.provider}</h2>
+        <h2 className="text-lg font-semibold text-balance break-words">{visit.provider}</h2>
         <p className="font-medium">{c.cost_label}</p>
         <p>{c.requirements_text}</p>
         {c.appointment_text && <p>{c.appointment_text}</p>}

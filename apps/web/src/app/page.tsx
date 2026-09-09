@@ -147,10 +147,15 @@ function laterDays(data: PlanData) {
   return data.days.filter((d) => d.date > data.start_date).slice(0, 6);
 }
 
-function countLine(n: number) {
-  if (n === 0) return copy.result.noneListedToday;
-  if (n === 1) return copy.result.oneListedToday;
-  return fill(copy.result.listedToday, { n: String(n) });
+// Decision 007: the date and the count are the focal moment. The number is the
+// panel's largest element, in amber (the one color for what can be counted).
+function CountLine({ n }: { n: number }) {
+  if (n === 0) return <p className="mt-2 text-lg text-navy-soft">{copy.result.noneListedToday}</p>;
+  return (
+    <p className="mt-2 flex items-baseline gap-x-3 text-lg text-paper">
+      <span className="text-5xl font-bold leading-none tracking-[-0.02em] text-amber">{n}</span> {copy.result.listedToday}
+    </p>
+  );
 }
 
 type ResultProps = { envelope: Envelope; zip: string; routes: HelpRoute[]; onRetry: () => void; onChange: () => void };
@@ -166,8 +171,8 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
   if (envelope.status === "no_match") {
     return (
       <div className="flex flex-col gap-4">
-        <div className="rounded-2xl bg-navy px-5 py-4 text-paper">
-          <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-bold text-balance outline-none">{fill(copy.noMatch.statement, { zip })}</h1>
+        <div className="rounded-2xl bg-navy px-5 py-6 text-paper sm:px-7 sm:py-8">
+          <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-bold text-balance break-words outline-none sm:text-4xl sm:tracking-[-0.02em]">{fill(copy.noMatch.statement, { zip })}</h1>
         </div>
         <HelpRoutes routes={routes} />
         <button type="button" onClick={onChange} className={actionClass}>{copy.noMatch.tryAnother}</button>
@@ -194,17 +199,12 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
   }
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-2xl bg-navy px-5 py-4 text-paper print:border print:border-ink">
+      <div className="rounded-2xl bg-navy px-5 py-6 text-paper sm:px-7 sm:py-8 print:border print:border-ink">
         {data?.start_date && (
-          <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-bold text-balance outline-none">{fill(copy.result.heading, { date: formatPlanDate(data.start_date) })}</h1>
+          <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-bold text-balance break-words outline-none sm:text-4xl sm:tracking-[-0.02em]">{fill(copy.result.heading, { date: formatPlanDate(data.start_date) })}</h1>
         )}
-        <p className="mt-1 text-navy-soft">{hasPlan ? countLine(visits.length) : copy.result.status[envelope.status]}</p>
+        {hasPlan ? <CountLine n={visits.length} /> : <p className="mt-2 text-lg text-navy-soft">{copy.result.status[envelope.status]}</p>}
       </div>
-      {hasPlan && (visits.length > 0 || data.unconfirmed.length > 0) && (
-        <button type="button" onClick={() => window.print()} className={secondaryActionClass}>
-          {copy.print.action}
-        </button>
-      )}
       {envelope.status === "partial" && <p className="font-medium">{copy.result.status.partial}</p>}
       {visits.map((v) => (
         <OptionCard key={v.resource_id} visit={v} />
@@ -227,6 +227,11 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
             ))}
           </ul>
         </section>
+      )}
+      {hasPlan && (visits.length > 0 || data.unconfirmed.length > 0) && (
+        <button type="button" onClick={() => window.print()} className={secondaryActionClass}>
+          {copy.print.action}
+        </button>
       )}
       {hasPlan && <WeekTiles days={laterDays(data)} />}
       <HelpRoutes routes={routes} />

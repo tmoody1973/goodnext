@@ -22,7 +22,7 @@ describe("today's cards", () => {
   it("renders one card per today visit from the 2026-09-09 response, claims in order", async () => {
     await submitWith(day9);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Food today, Wednesday, September 9");
-    expect(screen.getByText("2 listed today")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 }).parentElement).toHaveTextContent("2 listed today");
 
     const cards = screen.getAllByRole("article");
     expect(cards).toHaveLength(2);
@@ -70,7 +70,7 @@ describe("today's cards", () => {
 
   it("renders the 2026-09-10 response: three cards with appointment and source lines", async () => {
     await submitWith(day10);
-    expect(screen.getByText("3 listed today")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 }).parentElement).toHaveTextContent("3 listed today");
     const cards = screen.getAllByRole("article");
     expect(cards).toHaveLength(3);
     expect(cards[0].textContent).toContain("The Gathering at Running Rebels");
