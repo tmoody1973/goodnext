@@ -21,7 +21,7 @@ or a notice before helping with food, or use real residents' documents.
 | Strands agent (Python 3.12) | `app/goodnext/` | Built, 39 tests green, deployed v3 and verified live |
 | FastAPI backend | `services/api/` | Built, 10 tests green |
 | AgentCore CLI config + CDK | `agentcore/` | Deployed to us-east-1 |
-| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Base, today's cards, and waiting states on main or in PR #6 (MOO-779, 782, 783); 21 tests green; MOO-784 to 787 open |
+| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Base, cards, waiting states, no-match and summary line (MOO-779, 782, 783, 784); 24 tests green; MOO-785 to 787 open |
 | Directory data | `app/goodnext/fixtures/` | 93 records, see below |
 | Feature specs | `docs/specs/food-today.md`, `docs/specs/food-today-screen.md` | Settled |
 | Design context | `PRODUCT.md`, `.impeccable/surfaces/`, `.impeccable/mocks/decision/` | Shape pass done; DESIGN.md lands with MOO-786 |
@@ -132,9 +132,9 @@ Read HANDOFF.md, then CONTEXT.md, then docs/agents/issue-tracker.md, then
 docs/specs/food-today-screen.md. Do not re-read the planning docs unless a
 task needs them.
 
-Build MOO-784 (no-match, help-routes footer,
-summary line) with linear-build, tdd, and code-review, on a new branch off
-main. Read the surface brief and PRODUCT.md before
+PR #9 (MOO-784) may still be open; merge it. Build MOO-785 (later this week
+tiles) with linear-build, tdd, and code-review, on a new branch off main; then
+MOO-781 on the agent side, then 786 and 787. Read the surface brief and PRODUCT.md before
 touching UI. Explain in plain English. Nothing in AWS is created or changed
 without my go; deploys and pushes are mine.
 ```
