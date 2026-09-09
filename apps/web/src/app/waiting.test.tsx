@@ -105,6 +105,7 @@ describe("waiting, delayed status, unavailable", () => {
     render(<FoodTodayPage />);
     await submit(user);
     await screen.findByRole("alert");
+    await user.click(screen.getByRole("button", { name: "Change my answers" }));
     await user.click(screen.getByRole("button", { name: "Show food today" }));
     act(() => { vi.advanceTimersByTime(30_000); });
     expect(screen.getByRole("status")).toBeInTheDocument();

@@ -42,6 +42,16 @@ export const copy = {
     heading: "Need more help?",
     checked: "Checked {date}",
   },
+  noMatch: {
+    statement: "Nothing is listed for {zip} today.",
+    tryAnother: "Try another ZIP",
+  },
+  summary: {
+    change: "Change",
+    money: "${money}",
+    minutes: "up to {n} min",
+    label: "Your answers",
+  },
   result: {
     heading: "Food today, {date}",
     status: {
