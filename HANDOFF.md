@@ -102,16 +102,13 @@ confirm" with the date; only a missing date is "unconfirmed".
 
 ## Next steps, in order (six days to September 14, 7 p.m. Central)
 
-1. **Website, Food today screen.** Shape, grill, spec, and tickets are done
-   (2026-09-08). Branch `tarikjmoody/moo-779-web-app-base` is pushed as PR #4
-   (https://github.com/tmoody1973/goodnext/pull/4), all five CI checks green,
-   web job proven red then green. PRs #4 and #5 merged; PR #6 (MOO-783,
-   waiting states) is open for merge. Then MOO-784 and 785 (parallel-safe),
-   then 786, 787, each via `linear-build`, on branches off main. MOO-780
-   (help routes on every status) should land before 786 so the delayed
-   status and the footer actually show routes on a first visit. Spec:
-   `docs/specs/food-today-screen.md`. The Matt Pocock `implement` skill is
-   user-invocation only, like `grill-with-docs`, `to-spec`, `to-tickets`.
+1. **Website, Food today screen.** Shape, grill, spec, and tickets done
+   2026-09-08. Merged: base (#4), cards (#5), waiting states (#6), help routes
+   on every status (#7, runtime v4), docs (#8). PR #9 (MOO-784, no-match and
+   summary line) open for merge. Remaining: MOO-785 (tiles), MOO-781 (agent
+   later-day claims), MOO-786 (finish pass, DESIGN.md), MOO-787 (live run).
+   Each via `linear-build` on a branch off main; specs in
+   `docs/specs/food-today-screen.md`.
 2. **Latency.** Return day one first, the week second; or cache the system
    prompt. Only after the screen exists, so the fix is measured on the real
    flow.
