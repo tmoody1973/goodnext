@@ -16,7 +16,7 @@ A Milwaukee resident short on food today, on a phone or a shared library compute
 Enter four things (ZIP, money, kitchen, travel plus optional minutes); get today's listed options. Each card renders the eight permitted claims from the API's `claims` object and nothing else: open-today text, cost label, requirements, appointment, freshness (check date and tier word), inventory caveat, service-area caveat, travel echo, directions link, source line. Proof is the check date and tier word on every card. Success: the resident reaches an open door today without a false promise.
 
 ## Selected direction: The 7-Day Forecast Strip
-Chosen by Tarik 2026-09-08 over the rolled Checkout Receipt (seed a5fbc27f). Approved comp: `.impeccable/mocks/decision/model-pick.webp`.
+Chosen by Tarik 2026-09-08 over the rolled Checkout Receipt (seed a5fbc27f). Approved comp: `.impeccable/mocks/decision/model-pick.webp` (decision round, code-led build; the comp is the critique reference, not a pixel spec). Finish pass MOO-786 on 2026-09-08: review captures under `.impeccable/review/`, the built system recorded in `DESIGN.md` at the repo root.
 - Structural thesis: today is the big panel; the next six days are small tiles. Days two to seven are collapsed by default and never presented as promised.
 - Sequence: wordmark plus "Not a government service"; the four-question form (first visit) which collapses to a one-line summary with Change after a result; the today heading with the date and a count of listed options; one card per option with a time block on the left; the six-tile strip; the help-route footer.
 - Focal moment: the date and count in the header ("2 listed today").
@@ -30,9 +30,9 @@ Production-ready single route with all states. Untouched: the API contract, the 
 ## States and ranges
 - Idle: form only, ZIP focused, money defaults to 0, kitchen and travel as segmented choices.
 - Submitting: visible feedback within one second; a plain progress line ("Checking today's listings for 53206").
-- Delayed (after 30 s): "This is taking longer than usual. We are still checking." with Cancel, and the three help routes shown beneath so no one waits on a spinner.
+- Delayed (after 30 s): "Still checking. You can wait, or use one of these help routes." with Cancel, and the three help routes shown beneath so no one waits on a spinner.
 - Success: 1 to 6 options today (fixture range); provider names up to ~60 characters; requirements up to five lines; two long uncertainty lines. Each card shows its claims verbatim.
-- Partial: same as success plus the warnings list in plain words above the cards.
+- Partial: same as success plus one fixed sentence above the cards; the API's warnings are never shown (spec S11).
 - No-match: the plain statement, the three help routes as cards, and a Change ZIP action that reopens the form with ZIP focused.
 - Unconfirmed list: below today's cards, name and phone only, labeled unconfirmed, never a card.
 - Temporarily unavailable: one sentence, Retry, help routes.

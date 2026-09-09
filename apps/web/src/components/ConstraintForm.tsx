@@ -89,7 +89,7 @@ export function ConstraintForm({ busy = false, onSubmit }: Props) {
           onChange={(e) => set("zip", e.target.value.replace(/\D/g, ""))}
           aria-describedby={errors.zip ? "zip-help zip-error" : "zip-help"}
           aria-invalid={errors.zip ? true : undefined}
-          className="w-40 rounded-xl border border-ink-soft px-4 py-3 text-lg"
+          className="w-40 max-w-full rounded-xl border border-ink-soft px-4 py-3 text-lg"
         />
         {errors.zip && <p id="zip-error" role="alert" className="text-sm font-medium text-alert">{errors.zip}</p>}
       </div>
@@ -109,7 +109,7 @@ export function ConstraintForm({ busy = false, onSubmit }: Props) {
             value={values.money}
             onChange={(e) => set("money", e.target.value)}
             aria-describedby="money-help"
-            className="w-32 rounded-xl border border-ink-soft px-4 py-3 text-lg"
+            className="w-32 min-w-0 max-w-full rounded-xl border border-ink-soft px-4 py-3 text-lg"
           />
         </div>
       </div>
@@ -145,7 +145,7 @@ export function ConstraintForm({ busy = false, onSubmit }: Props) {
           step={5}
           value={values.minutes}
           onChange={(e) => set("minutes", e.target.value)}
-          className="w-32 rounded-xl border border-ink-soft px-4 py-3 text-lg"
+          className="w-32 max-w-full rounded-xl border border-ink-soft px-4 py-3 text-lg"
         />
       </div>
 
