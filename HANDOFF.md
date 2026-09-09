@@ -50,9 +50,11 @@ makes changes through pull requests. Push only when Tarik says "push".
 - Stack `AgentCore-goodnext-default`, us-east-1, deployed 2026-09-08 12:30 CDT, version 1.
 - Version 3 deployed 2026-09-08 12:55 CDT: larger output ceiling, brevity
   instruction, and both trace-redaction env vars. **Version 4 deployed 2026-09-08 19:12 CDT** by
-  Tarik: help routes on every status (MOO-780, decision 009). Verified live:
-  53206 partial plan in 98 s with three routes; evidence
-  `docs/evidence/moo-780-deployed-runtime-v4-*`. MOO-776 verified live on v3:
+  Tarik: help routes on every status (MOO-780, decision 009). **Version 5
+  deployed 2026-09-08 20:57 CDT** by Tarik: later-day claims name their own
+  day (MOO-781). Verified live on v5: 53206 success in 97 s, "Open Friday
+  from 8:30 AM to 9:30 AM", zero next-open violations, three routes;
+  evidence `docs/evidence/moo-781-deployed-runtime-v5-*`. MOO-776 verified live on v3:
   53206 plan in 89 s, no-match in 7 s, CloudWatch shows zero resident values
   and REDACTED markers. Evidence under `docs/evidence/moo-776-*`.
 - Local dev: `agentcore dev --skip-deploy -l` (port 8080) plus
@@ -61,8 +63,9 @@ makes changes through pull requests. Push only when Tarik says "push".
 - Demo clock: `GOODNEXT_ENV=demo GOODNEXT_DEMO_NOW=2026-09-10T09:00:00-05:00`
   (fixture windows cover 2026-09-08 to 2026-09-21; regenerate with the two
   scripts in `app/goodnext/scripts/` when the demo week moves).
-- AWS login is the account **root** user via `aws login`. Fine for now; use a
-  role before judge-facing hosting.
+- AWS login is the account **root** user via `aws login`; the session expires
+  after some hours and the API then answers 503 (PR #13). Use a role before
+  judge-facing hosting.
 
 ## Directory data, in trust order
 
@@ -104,9 +107,9 @@ confirm" with the date; only a missing date is "unconfirmed".
 
 1. **Website, Food today screen.** Shape, grill, spec, and tickets done
    2026-09-08. Merged: base (#4), cards (#5), waiting states (#6), help routes
-   on every status (#7, runtime v4), docs (#8). No-match (#9) merged. Week tiles (#10) merged. PR #11 (MOO-781, later-day claims) open;
-   after merge Tarik runs `agentcore deploy` from the repo root for runtime
-   v5. Remaining: MOO-786 (finish pass, DESIGN.md), MOO-787 (live run).
+   on every status (#7, runtime v4), docs (#8). No-match (#9) merged. Week tiles (#10) merged. MOO-781 merged (#11) and live on v5. PR #13 (API: truthful 503 on any
+   agent failure, found when the AWS session expired) open. Remaining:
+   MOO-786 (finish pass, DESIGN.md), MOO-787 (live run).
    Each via `linear-build` on a branch off main; specs in
    `docs/specs/food-today-screen.md`.
 2. **Latency.** Return day one first, the week second; or cache the system
@@ -129,8 +132,7 @@ Read HANDOFF.md, then CONTEXT.md, then docs/agents/issue-tracker.md, then
 docs/specs/food-today-screen.md. Do not re-read the planning docs unless a
 task needs them.
 
-PR #11 (MOO-781) may still be open; merge it and I deploy runtime v5 from the
-repo root. Build MOO-786 (the Impeccable finish pass: print, accessibility,
+PR #13 (API 503 fix) may still be open; merge it. Build MOO-786 (the Impeccable finish pass: print, accessibility,
 responsive audit, DESIGN.md), then MOO-787 (the closing live run). Read the surface brief and PRODUCT.md before
 touching UI. Explain in plain English. Nothing in AWS is created or changed
 without my go; deploys and pushes are mine.
