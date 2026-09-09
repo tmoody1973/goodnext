@@ -23,7 +23,7 @@ export function HelpRoutes({ routes }: { routes: HelpRoute[] }) {
                   <span className="font-medium">{r.phone}</span>
                 ))}
                 {r.url && (
-                  <a href={r.url} target="_blank" rel="noopener noreferrer" className="font-medium text-navy underline underline-offset-4">
+                  <a href={r.url} target="_blank" rel="noopener noreferrer" className="font-medium text-navy underline underline-offset-4 [overflow-wrap:anywhere]">
                     {new URL(r.url).hostname}
                   </a>
                 )}

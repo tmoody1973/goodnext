@@ -65,7 +65,8 @@ body {
   }
 
   article,
-  section[aria-labelledby="help-heading"] {
+  section[aria-labelledby="help-heading"],
+  section.border-line {
     border: 1px solid #000;
     break-inside: avoid;
   }

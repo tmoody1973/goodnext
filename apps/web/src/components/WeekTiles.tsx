@@ -24,13 +24,13 @@ export function WeekTiles({ days }: { days: DayPlan[] }) {
           const { weekday, day: dayLabel } = formatTileDate(day.date);
           const isOpen = open === day.date;
           const count = n === 0 ? copy.week.nothing : n === 1 ? copy.week.oneListed : fill(copy.week.listed, { n: String(n) });
-          const cls = `flex w-full flex-col items-center rounded-xl border px-2 py-2 text-center ${
+          const cls = `flex w-full flex-col items-center rounded-xl border px-2 py-2 text-center [overflow-wrap:anywhere] ${
             isOpen ? "border-navy bg-navy text-paper" : "border-line bg-paper text-ink"
           }`;
           return (
             <li key={day.date}>
               {n === 0 ? (
-                <div className={`${cls} text-ink-soft`} aria-label={`${weekday} ${dayLabel}: ${count}`}>
+                <div className={`${cls} text-ink-soft`}>
                   <span className="text-xs font-semibold uppercase">{weekday}</span>
                   <span className="text-sm">{dayLabel}</span>
                   <span className="mt-1 text-xs">{count}</span>
