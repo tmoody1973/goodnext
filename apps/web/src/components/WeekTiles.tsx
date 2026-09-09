@@ -78,12 +78,12 @@ function DayEntry({ visit }: { visit: PlannedVisit }) {
       {c && <p>{c.freshness_text}</p>}
       <p className="flex flex-wrap gap-x-4 gap-y-1">
         {c?.directions_url && (
-          <a href={c.directions_url} target="_blank" rel="noopener noreferrer" className="font-medium text-navy underline underline-offset-4">
+          <a href={c.directions_url} target="_blank" rel="noopener noreferrer" aria-label={fill(copy.card.directionsLabel, { provider: visit.provider })} className="font-medium text-navy underline underline-offset-4">
             {copy.card.directions}
           </a>
         )}
         {tel ? (
-          <a href={tel} className="font-medium text-navy underline underline-offset-4">{fill(copy.card.call, { phone: visit.contact })}</a>
+          <a href={tel} aria-label={fill(copy.card.callLabel, { phone: visit.contact, provider: visit.provider })} className="font-medium text-navy underline underline-offset-4">{fill(copy.card.call, { phone: visit.contact })}</a>
         ) : (
           visit.contact && <span className="text-ink-soft">{visit.contact}</span>
         )}

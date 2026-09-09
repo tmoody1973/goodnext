@@ -46,10 +46,10 @@ describe("today's cards", () => {
     expect(positions.every((p) => p >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
 
-    const directions = first.getByRole("link", { name: "Directions" });
+    const directions = first.getByRole("link", { name: "Directions to Capuchin Community Services – House of Peace" });
     expect(directions).toHaveAttribute("href", expect.stringContaining("google.com/maps"));
     expect(directions).toHaveAttribute("target", "_blank");
-    expect(first.getByRole("link", { name: "Call 414-933-1300" })).toHaveAttribute("href", "tel:4149331300");
+    expect(first.getByRole("link", { name: "Call 414-933-1300, Capuchin Community Services – House of Peace" })).toHaveAttribute("href", "tel:4149331300");
 
     // Second card has no source line and no appointment line.
     expect(cards[1].textContent).not.toContain("Source:");

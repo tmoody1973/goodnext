@@ -15,7 +15,7 @@ export function OptionCard({ visit }: { visit: PlannedVisit }) {
   const tel = visit.contact ? telHref(visit.contact) : null;
   return (
     <article className="flex flex-col gap-3 rounded-2xl bg-paper p-4 shadow-[0_2px_10px_rgba(11,42,74,0.12)] sm:flex-row sm:gap-5">
-      <div className="flex shrink-0 flex-col justify-center rounded-xl bg-navy px-4 py-3 text-paper sm:w-32 sm:text-center">
+      <div className="flex shrink-0 flex-col justify-center rounded-xl bg-navy px-4 py-3 text-paper sm:w-32 sm:self-start sm:text-center print:border print:border-ink">
         {window ? (
           <>
             <span className="text-xl font-bold leading-tight">{window[1]}</span>
@@ -40,12 +40,13 @@ export function OptionCard({ visit }: { visit: PlannedVisit }) {
             href={c.directions_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl bg-amber px-5 py-2.5 font-semibold text-ink shadow-[0_2px_8px_rgba(11,42,74,0.18)]"
+            aria-label={fill(copy.card.directionsLabel, { provider: visit.provider })}
+            className="rounded-xl bg-amber px-5 py-2.5 font-semibold text-ink shadow-[0_2px_8px_rgba(11,42,74,0.18)] print:hidden"
           >
             {copy.card.directions}
           </a>
           {tel ? (
-            <a href={tel} className="font-medium text-navy underline underline-offset-4">
+            <a href={tel} aria-label={fill(copy.card.callLabel, { phone: visit.contact, provider: visit.provider })} className="font-medium text-navy underline underline-offset-4">
               {fill(copy.card.call, { phone: visit.contact })}
             </a>
           ) : (

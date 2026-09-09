@@ -11,6 +11,24 @@ export const NEVER_LIST = [
   "food covered",
 ] as const;
 
+// Spec: no Strands, AWS, or internal names on screen. Scanned over the copy
+// module and the rendered fixture pages. Certainty words live in NEVER_LIST.
+export const VENDOR_NEVER_LIST = [
+  "aws",
+  "amazon",
+  "bedrock",
+  "agentcore",
+  "strands",
+  "fastapi",
+  "anthropic",
+  "claude",
+  "openai",
+  "next.js",
+  "vercel",
+  "impeccable",
+  "linear",
+] as const;
+
 // The `_Avoid_:` lines in CONTEXT.md, read at test time so the glossary stays
 // the single source.
 export function avoidWordsFrom(contextMd: string): string[] {

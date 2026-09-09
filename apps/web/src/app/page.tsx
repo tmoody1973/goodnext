@@ -24,6 +24,17 @@ function unreachableEnvelope(): Envelope {
   return { status: "temporarily_unavailable", data: null, evidence: [], missing: [], warnings: ["unreachable"], retryable: true, request_id: "local" };
 }
 
+// The form folds away when a result lands, which would drop keyboard focus on
+// the body. Move it to the result heading so a keyboard or screen-reader user
+// starts reading at the answer.
+function useFocusOnMount<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    ref.current?.focus();
+  }, []);
+  return ref;
+}
+
 function focusZip() {
   const zip = document.getElementById("zip");
   zip?.scrollIntoView?.({ block: "center" });
@@ -104,7 +115,7 @@ export default function FoodTodayPage() {
             {state.delayed && (
               <>
                 <p role="status" className="font-medium">{copy.wait.delayed}</p>
-                <button type="button" onClick={cancel} className="self-start rounded-xl border border-navy px-5 py-2.5 font-semibold text-navy">
+                <button type="button" onClick={cancel} className={secondaryActionClass}>
                   {copy.wait.cancel}
                 </button>
                 <HelpRoutes routes={routes} />
@@ -145,8 +156,10 @@ function countLine(n: number) {
 type ResultProps = { envelope: Envelope; zip: string; routes: HelpRoute[]; onRetry: () => void; onChange: () => void };
 
 const actionClass = "self-start rounded-xl bg-amber px-5 py-2.5 font-semibold text-ink shadow-[0_2px_8px_rgba(11,42,74,0.18)]";
+const secondaryActionClass = "self-start rounded-xl border border-navy px-5 py-2.5 font-semibold text-navy";
 
 function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
+  const headingRef = useFocusOnMount<HTMLHeadingElement>();
   const data = envelope.data;
   const hasPlan = (envelope.status === "success" || envelope.status === "partial") && data !== null;
   const visits = hasPlan ? todayVisits(data) : [];
@@ -154,7 +167,7 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
     return (
       <div className="flex flex-col gap-4">
         <div className="rounded-2xl bg-navy px-5 py-4 text-paper">
-          <h1 className="text-2xl font-bold text-balance">{fill(copy.noMatch.statement, { zip })}</h1>
+          <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-bold text-balance outline-none">{fill(copy.noMatch.statement, { zip })}</h1>
         </div>
         <HelpRoutes routes={routes} />
         <button type="button" onClick={onChange} className={actionClass}>{copy.noMatch.tryAnother}</button>
@@ -181,12 +194,17 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
   }
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-2xl bg-navy px-5 py-4 text-paper">
+      <div className="rounded-2xl bg-navy px-5 py-4 text-paper print:border print:border-ink">
         {data?.start_date && (
-          <h1 className="text-2xl font-bold text-balance">{fill(copy.result.heading, { date: formatPlanDate(data.start_date) })}</h1>
+          <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-bold text-balance outline-none">{fill(copy.result.heading, { date: formatPlanDate(data.start_date) })}</h1>
         )}
         <p className="mt-1 text-navy-soft">{hasPlan ? countLine(visits.length) : copy.result.status[envelope.status]}</p>
       </div>
+      {hasPlan && (visits.length > 0 || data.unconfirmed.length > 0) && (
+        <button type="button" onClick={() => window.print()} className={secondaryActionClass}>
+          {copy.print.action}
+        </button>
+      )}
       {envelope.status === "partial" && <p className="font-medium">{copy.result.status.partial}</p>}
       {visits.map((v) => (
         <OptionCard key={v.resource_id} visit={v} />

@@ -75,6 +75,13 @@ export const copy = {
   card: {
     directions: "Directions",
     call: "Call {phone}",
+    // Read out of context by a screen reader, so each link also names its
+    // provider. The visible text stays the start of the label.
+    directionsLabel: "Directions to {provider}",
+    callLabel: "Call {phone}, {provider}",
+  },
+  print: {
+    action: "Print this list",
   },
   unconfirmed: {
     heading: "Not checked recently. Call before you go.",
