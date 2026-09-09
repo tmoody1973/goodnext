@@ -16,11 +16,13 @@ BODY = {"constraints": {"zip_code": "53206", "budget_usd": 0, "kitchen": "none",
 
 
 class FakeAgent:
-    def __init__(self, reply=None, fail=False):
-        self.calls, self.reply, self.fail = [], reply, fail
+    def __init__(self, reply=None, fail=False, error: Exception | None = None):
+        self.calls, self.reply, self.fail, self.error = [], reply, fail, error
 
     def invoke(self, payload, runtime_session_id):
         self.calls.append((payload, runtime_session_id))
+        if self.error is not None:
+            raise self.error
         if self.fail:
             raise httpx.ConnectError("refused")
         return self.reply or {"status": "no_match", "data": None, "evidence": [], "missing": ["none"], "warnings": [], "retryable": False, "request_id": payload["request_id"]}
@@ -76,6 +78,21 @@ def test_agent_outage_is_truthful_503():
         "Hunger Task Force emergency food",
         "FoodShare member line",
     ]
+    assert never_list_hits(body) == []
+
+
+def test_expired_aws_session_is_still_a_truthful_503():
+    """Found live 2026-09-08: an expired `aws login` surfaced as a bare 500 with a
+    traceback. Any failure to reach the agent is the same honest envelope."""
+    class LoginRefreshRequired(Exception):
+        pass
+
+    r = client_with(FakeAgent(error=LoginRefreshRequired("Your session has expired"))).post("/api/plans", json=BODY)
+    assert r.status_code == 503
+    body = r.json()
+    assert body["status"] == "temporarily_unavailable" and body["retryable"] is True
+    assert len(body["help_routes"]) == 3
+    assert "expired" not in body["warnings"][0].lower()  # class name only, never the message
     assert never_list_hits(body) == []
 
 
