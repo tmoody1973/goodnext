@@ -34,8 +34,7 @@ Hackathon". Only the `linear-build` skill creates or closes issues. Issues
 MOO-770 to MOO-775, MOO-777, MOO-778 are Done with evidence comments.
 **All nine Food today issues (MOO-770 to 778) are Done.** Screen issues
 MOO-779 to MOO-787 created 2026-09-08 14:45 CDT. 779, 782, 783 Done and
-merged (PRs #4, #5, #6). 780 built in PR #7 (agent and API; needs a runtime
-deploy, v4, before routes show live). 781 unblocked. 784 and 785 unblocked.
+merged (PRs #4, #5, #6). 780 Done and merged (PR #7), live on runtime v4. 781 unblocked. 784 and 785 unblocked.
 786 waits on 784 and 785.
 
 GitHub: https://github.com/tmoody1973/goodnext, pushed and current as of
@@ -50,9 +49,10 @@ makes changes through pull requests. Push only when Tarik says "push".
 - Runtime ARN: `arn:aws:bedrock-agentcore:us-east-1:953791390715:runtime/goodnext_goodnext-j7ndOFF7b3`
 - Stack `AgentCore-goodnext-default`, us-east-1, deployed 2026-09-08 12:30 CDT, version 1.
 - Version 3 deployed 2026-09-08 12:55 CDT: larger output ceiling, brevity
-  instruction, and both trace-redaction env vars. **Version 4 not yet deployed:**
-  MOO-780 (help routes on every status, decision 009) is on main once PR #7
-  merges; Tarik runs `agentcore deploy` for it. MOO-776 verified live on v3:
+  instruction, and both trace-redaction env vars. **Version 4 deployed 2026-09-08 19:12 CDT** by
+  Tarik: help routes on every status (MOO-780, decision 009). Verified live:
+  53206 partial plan in 98 s with three routes; evidence
+  `docs/evidence/moo-780-deployed-runtime-v4-*`. MOO-776 verified live on v3:
   53206 plan in 89 s, no-match in 7 s, CloudWatch shows zero resident values
   and REDACTED markers. Evidence under `docs/evidence/moo-776-*`.
 - Local dev: `agentcore dev --skip-deploy -l` (port 8080) plus
@@ -132,8 +132,7 @@ Read HANDOFF.md, then CONTEXT.md, then docs/agents/issue-tracker.md, then
 docs/specs/food-today-screen.md. Do not re-read the planning docs unless a
 task needs them.
 
-PR #7 (MOO-780, help routes on every status) may still be open; merge it,
-then I deploy runtime v4 myself. Build MOO-784 (no-match, help-routes footer,
+Build MOO-784 (no-match, help-routes footer,
 summary line) with linear-build, tdd, and code-review, on a new branch off
 main. Read the surface brief and PRODUCT.md before
 touching UI. Explain in plain English. Nothing in AWS is created or changed
@@ -150,6 +149,7 @@ without my go; deploys and pushes are mine.
   "What actually happened" field left blank.
 - Fixture tests must never reach Bedrock; `tests/conftest.py` enforces it.
   Mark a live test `@pytest.mark.live`.
+- `agentcore deploy` runs from the repo root, not from `agentcore/`.
 - Use the Matt Pocock skills by plugin name (`mattpocock-skills:…`); top-level
   `code-review` is CodeRabbit. `grill-with-docs`, `to-spec`, `to-tickets`, and
   `implement` are user-invocation only: Tarik types the slash command.
