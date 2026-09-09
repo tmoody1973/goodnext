@@ -5,6 +5,7 @@ import { ConstraintForm, toConstraints, type FormValues } from "@/components/Con
 import { HelpRoutes } from "@/components/HelpRoutes";
 import { OptionCard } from "@/components/OptionCard";
 import { SummaryLine } from "@/components/SummaryLine";
+import { WeekTiles } from "@/components/WeekTiles";
 import { postPlan, type Envelope, type HelpRoute, type PlanData } from "@/lib/api";
 import { copy, fill } from "@/lib/copy";
 import { formatPlanDate } from "@/lib/format";
@@ -130,6 +131,11 @@ function todayVisits(data: PlanData) {
   return data.days.find((d) => d.date === data.start_date)?.visits ?? data.food_today;
 }
 
+// Later this week: every day after the start date, in order.
+function laterDays(data: PlanData) {
+  return data.days.filter((d) => d.date > data.start_date).slice(0, 6);
+}
+
 function countLine(n: number) {
   if (n === 0) return copy.result.noneListedToday;
   if (n === 1) return copy.result.oneListedToday;
@@ -204,6 +210,7 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
           </ul>
         </section>
       )}
+      {hasPlan && <WeekTiles days={laterDays(data)} />}
       <HelpRoutes routes={routes} />
     </div>
   );
