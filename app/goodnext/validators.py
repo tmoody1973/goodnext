@@ -6,7 +6,7 @@ proposed; unknowns stay visible. Decision (2026-09-08): a violating visit is
 stripped and the plan returns as partial. No retry in this slice.
 """
 
-from datetime import datetime
+from datetime import date, datetime, time
 
 from claims import build_claims
 from schemas import DayPlan, FoodPlanProposal, FoodResource, HouseholdConstraints, NextOpen, PlannedVisit, UnconfirmedRecord
@@ -50,7 +50,10 @@ def _with_freshness(v: PlannedVisit, resource: FoodResource, tier: str, now: dat
         note = "Confirm they serve your area"
         if note not in uncertainty:
             uncertainty.append(note)
-    nxt = next_open_after([w.model_dump() for w in resource.windows], now)
+    # MOO-781: a later-day visit's next-open window is judged from the start of
+    # its own day, not from today's clock; today's visit keeps the live clock.
+    anchor = now if v.date == now.date().isoformat() else datetime.combine(date.fromisoformat(v.date), time.min, tzinfo=now.tzinfo)
+    nxt = next_open_after([w.model_dump() for w in resource.windows], anchor)
     updated = v.model_copy(update={
         "freshness_tier": tier,
         "uncertainty": uncertainty,

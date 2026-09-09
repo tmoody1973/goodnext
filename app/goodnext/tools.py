@@ -47,8 +47,10 @@ def window_open_at(window: dict, now: datetime) -> bool:
 
 def next_open_after(windows: list[dict], now: datetime) -> dict | None:
     """Earliest window that is still open or opens later today, or falls on a later date.
-    None if nothing qualifies. Pure; no I/O."""
-    candidates = [w for w in windows if window_open_at(w, now)]
+    Windows dated before `now`'s day never qualify (MOO-781). None if nothing qualifies.
+    Pure; no I/O."""
+    today = now.date().isoformat()
+    candidates = [w for w in windows if w["date"] >= today and window_open_at(w, now)]
     if not candidates:
         return None
     return min(candidates, key=lambda w: (w["date"], w["open"]))
