@@ -1,15 +1,16 @@
 # GoodNext handoff
 
-Written September 8, 2026, 12:45 CDT; updated 15:10 CDT, for a fresh Claude Code session.
-Read this, then `CONTEXT.md`, then `docs/agents/issue-tracker.md`. Do not
-re-read the planning docs unless a task needs them; the decisions are settled.
+Written September 8, 2026, 21:40 CDT, for a fresh Claude Code session.
+Read this, then `CONTEXT.md`, then `docs/agents/issue-tracker.md`, then
+`docs/specs/food-today-screen.md`. Do not re-read the planning docs unless a
+task needs them; the decisions are settled.
 
 ## What GoodNext is
 
 A free website that helps a Wisconsin household find food today and prepare
 an official next step after a FoodShare notice. Hackathon entry ("Agents for
 Humans"), deadline **September 14, 2026, 7 p.m. Central**, judging through
-October 8. Product name GoodNext; docs still say "FoodShare Bridge."
+October 8. Product name GoodNext; older docs still say "FoodShare Bridge."
 
 Never: decide eligibility, promise benefits or food stock, ask for an account
 or a notice before helping with food, or use real residents' documents.
@@ -18,111 +19,163 @@ or a notice before helping with food, or use real residents' documents.
 
 | Piece | Path | State |
 | --- | --- | --- |
-| Strands agent (Python 3.12) | `app/goodnext/` | Built, 39 tests green, deployed v3 and verified live |
-| FastAPI backend | `services/api/` | Built, 10 tests green |
+| Strands agent (Python 3.12) | `app/goodnext/` | 42 tests green; deployed runtime v5, verified live |
+| FastAPI backend | `services/api/` | 13 tests green; truthful 503 on any agent failure (PR #13) |
 | AgentCore CLI config + CDK | `agentcore/` | Deployed to us-east-1 |
-| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Base, cards, waiting states, no-match, summary line, week tiles (MOO-779, 782 to 785); 28 tests green; MOO-786, 787 open |
+| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Functionally complete: form, waiting states, today's cards, week tiles, no-match, summary line, help routes. 28 tests green. Finish pass (MOO-786) and closing live run (MOO-787) open |
 | Directory data | `app/goodnext/fixtures/` | 93 records, see below |
-| Feature specs | `docs/specs/food-today.md`, `docs/specs/food-today-screen.md` | Settled |
-| Design context | `PRODUCT.md`, `.impeccable/surfaces/`, `.impeccable/mocks/decision/` | Shape pass done; DESIGN.md lands with MOO-786 |
-| Decisions | `docs/decisions/001` to `006` | Plain English, blanks for Tarik |
+| Help routes | `app/goodnext/help_routes.json` | One reviewed file; agent and API both read it (decision 009) |
+| Specs | `docs/specs/food-today.md` (agent, API), `docs/specs/food-today-screen.md` (website) | Settled; grill notes beside each |
+| Design context | `PRODUCT.md`, `.impeccable/surfaces/apps-web-src-app-page-tsx.md`, `.impeccable/mocks/decision/` | Shape pass done; direction is the 7-Day Forecast Strip (decision 007); **DESIGN.md does not exist yet, MOO-786 writes it** |
+| Decisions | `docs/decisions/001` to `009` | Plain English; "What actually happened" blank for Tarik |
+| Learning log | `docs/LEARNING-LOG.md` | One entry (dev proxy timeout) |
 | Research | `docs/research/` | Data access, 211 guide, drafts, call sheet |
-| Evidence | `docs/evidence/` | Live responses per issue |
+| Evidence | `docs/evidence/` | Live responses and screenshots per issue |
 
 Tracker: **Linear**, team MOO, project "GoodNext — Agents for Humans
-Hackathon". Only the `linear-build` skill creates or closes issues. Issues
-MOO-770 to MOO-775, MOO-777, MOO-778 are Done with evidence comments.
-**All nine Food today issues (MOO-770 to 778) are Done.** Screen issues
-MOO-779 to MOO-787 created 2026-09-08 14:45 CDT. 779, 782, 783 Done and
-merged (PRs #4, #5, #6). 780 Done and merged (PR #7), live on runtime v4. 781 unblocked. 784 and 785 unblocked.
-786 waits on 784 and 785.
+Hackathon". Only the `linear-build` skill creates, moves, or closes issues.
+Food today agent issues MOO-770 to 778: Done. Screen issues MOO-779 to 785
+and agent fixes 780, 781: Done, merged, with evidence comments. **Open:
+MOO-786 (finish pass) and MOO-787 (live run).** 787 is blocked by 786.
 
-GitHub: https://github.com/tmoody1973/goodnext, pushed and current as of
-2026-09-08 13:10 CDT. CI (`.github/workflows/ci.yml`) runs both test suites
-and `agentcore validate` on every push to main and every PR; proven red on
-PR #1 (closed, throwaway). Branch protection on main requires all three CI
-checks and blocks force-pushes; admins can bypass in an emergency. Claude
-makes changes through pull requests. Push only when Tarik says "push".
+GitHub: https://github.com/tmoody1973/goodnext. PRs #4 to #11 and #13 merged
+2026-09-08. CI runs agent tests, API tests, `agentcore validate`, and the web
+job (typecheck, tests, build) on every push and PR; branch protection on main
+requires them. Claude works on branches off main and opens PRs; Tarik merges
+and says "push" before any push.
 
 ## The deployed runtime
 
 - Runtime ARN: `arn:aws:bedrock-agentcore:us-east-1:953791390715:runtime/goodnext_goodnext-j7ndOFF7b3`
-- Stack `AgentCore-goodnext-default`, us-east-1, deployed 2026-09-08 12:30 CDT, version 1.
-- Version 3 deployed 2026-09-08 12:55 CDT: larger output ceiling, brevity
-  instruction, and both trace-redaction env vars. **Version 4 deployed 2026-09-08 19:12 CDT** by
-  Tarik: help routes on every status (MOO-780, decision 009). **Version 5
-  deployed 2026-09-08 20:57 CDT** by Tarik: later-day claims name their own
-  day (MOO-781). Verified live on v5: 53206 success in 97 s, "Open Friday
-  from 8:30 AM to 9:30 AM", zero next-open violations, three routes;
-  evidence `docs/evidence/moo-781-deployed-runtime-v5-*`. MOO-776 verified live on v3:
-  53206 plan in 89 s, no-match in 7 s, CloudWatch shows zero resident values
-  and REDACTED markers. Evidence under `docs/evidence/moo-776-*`.
-- Local dev: `agentcore dev --skip-deploy -l` (port 8080) plus
-  `cd services/api && uv run uvicorn goodnext_api.main:app --port 8000`.
-- Point the API at the deployed runtime with env `GOODNEXT_AGENT_RUNTIME_ARN`.
-- Demo clock: `GOODNEXT_ENV=demo GOODNEXT_DEMO_NOW=2026-09-10T09:00:00-05:00`
-  (fixture windows cover 2026-09-08 to 2026-09-21; regenerate with the two
-  scripts in `app/goodnext/scripts/` when the demo week moves).
+- Stack `AgentCore-goodnext-default`, us-east-1.
+- **v5 deployed 2026-09-08 20:57 CDT** (later-day claims name their own day,
+  MOO-781). v4 19:12 CDT (help routes on every status, MOO-780). v3 12:55 CDT
+  (output ceiling, brevity, trace redaction). All verified live; evidence
+  under `docs/evidence/moo-776-*`, `moo-780-*`, `moo-781-*`.
+- Run the API against it:
+  `cd services/api && GOODNEXT_ENV=demo GOODNEXT_DEMO_NOW=2026-09-10T09:00:00-05:00 GOODNEXT_AGENT_RUNTIME_ARN='<ARN above>' AWS_REGION=us-east-1 uv run uvicorn goodnext_api.main:app --port 8000`
+- Run the site: `cd apps/web && pnpm dev` (port 3000, proxies `/api/*` to 8000
+  with a 180 s timeout).
+- Demo clock: fixture windows cover 2026-09-08 to 2026-09-21; regenerate with
+  the two scripts in `app/goodnext/scripts/` when the demo week moves.
+- A plan takes 60 to 105 s. No-match returns in under 10 s without a model call.
 - AWS login is the account **root** user via `aws login`; the session expires
-  after some hours and the API then answers 503 (PR #13). Use a role before
-  judge-facing hosting.
+  after some hours (the API then answers 503 with help routes). Use a role
+  before judge-facing hosting. `agentcore deploy` runs from the repo root.
 
 ## Directory data, in trust order
 
 1. **Reviewed** (`fixtures/milwaukee-food-resources-reviewed.json`, 16 sites):
-   built by Tarik himself, each checked against the official provider page on
-   2026-09-08; "verified" tier, verifier "Tarik Moody". Source
-   file under `fixtures/reviewed/`. Wins over the map for the same site.
+   built by Tarik, each checked against the official provider page on
+   2026-09-08; "verified" tier, verifier "Tarik Moody". Wins over the map.
 2. **Milwaukee Food Environment Map** (75 sites, 68 after de-dup): public
    ArcGIS layer, data as of 2024-08-27, no license stated. Used per decision
    006 with a source line on every card; permission request drafted, not sent.
-3. **Synthetic** (9): closed, unknown-area, paid, appointment cases. Labeled.
+3. **Synthetic** (9): closed, unknown-area, paid, appointment cases. Labeled
+   "(synthetic)" in the provider name, which a judge will see on the demo date.
 
-Rules that came out of real data (decision 006): unknown service area shows
-only for the site's own ZIP; anything checked over 14 days ago is "call to
-confirm" with the date; only a missing date is "unconfirmed".
+Rules from real data (decision 006): unknown service area shows only for the
+site's own ZIP; over 14 days old is "call to confirm" with the date; only a
+missing date is "unconfirmed".
 
-## Known problems, in priority order
+## Next: MOO-786, the Impeccable finish pass
 
-1. **Plan latency 60–105 s.** Too slow for a resident. Fix direction: a
-   day-one-only first response, then the week; delayed-status message per
-   PRD section 8; prompt caching. Not started.
-2. **Older log events (v1, v2) still hold synthetic test prompts** in the
-   runtime log group; harmless (no real resident) but delete the log group or
-   set retention before any real use.
-3. **Model sometimes places visits on days with no window**; the validator
-   strips them and returns `partial` with a warning. Working as designed;
-   a nudge in the task text could reduce it.
-4. **211 data** needs IMPACT 211 permission (decision 005). The 211 API trial
-   request was rejected on 2026-09-08; the fixture directory (reviewed plus
-   Food Environment Map, decision 006) stays the data source for the hackathon.
-   DIY verification guide at `docs/research/211-portal-verification-guide.md`.
-5. **Website** has only the base screen (form to first response). Cards,
-   waiting states, no-match, tiles, finish, and the live run are MOO-782 to 787.
-6. **Dev proxy timeout.** The Next dev proxy drops requests at 30 s by default;
-   `experimental.proxyTimeout` is set to 180 s in dev. Judge-facing hosting
-   needs the same patience at the edge (CloudFront origin timeout).
+Read the Linear issue with `linear-build` (`get_issue MOO-786`) before starting;
+it is the contract. In short: print stylesheet, keyboard and screen-reader
+pass, 320 px and 200 percent zoom, contrast, reduced motion, the Impeccable
+detector once, findings fixed in one batch, DESIGN.md written from the built
+screen, no internal names on screen.
 
-## Next steps, in order (six days to September 14, 7 p.m. Central)
+How Impeccable wants it run (skill `impeccable`, reference `new-work.md`
+section 7 "Inspect and finish", plus `audit.md` and `polish.md`):
 
-1. **Website, Food today screen.** Shape, grill, spec, and tickets done
-   2026-09-08. Merged: base (#4), cards (#5), waiting states (#6), help routes
-   on every status (#7, runtime v4), docs (#8). No-match (#9) merged. Week tiles (#10) merged. MOO-781 merged (#11) and live on v5. PR #13 (API: truthful 503 on any
-   agent failure, found when the AWS session expired) open. Remaining:
-   MOO-786 (finish pass, DESIGN.md), MOO-787 (live run).
-   Each via `linear-build` on a branch off main; specs in
-   `docs/specs/food-today-screen.md`.
-2. **Latency.** Return day one first, the week second; or cache the system
-   prompt. Only after the screen exists, so the fix is measured on the real
-   flow.
-3. **Judge-facing hosting.** The API needs a public home (Tech Stack says
-   Fargate behind CloudFront); the site is a static export. Use an IAM role,
-   not root, for this. Not started.
-4. **Submission checklist** (PRD section 13, H06–H10): public repo with MIT
-   (done), architecture diagram matching what shipped, description, video
-   under five minutes, Builder ID, judge access through October 8.
-5. **Data follow-ups.** Send the three drafted permission requests; work the
-   53206 call sheet; set CloudWatch log retention on the runtime log group.
+1. Run `node $(realpath ~/.claude/skills/impeccable/scripts)/context.mjs --target apps/web/src/app/page.tsx`
+   once. The skill folder is a symlink; scripts only run through the real path.
+2. Build every state locally and capture one batched round: desktop and
+   mobile (320 and 390 wide), at 100 and 200 percent zoom, into
+   `.impeccable/review/desktop.png`, `mobile.png`. Clip captures to the element
+   (see the ego-browser pattern below); full-viewport captures from the top
+   of the page have twice come out blank or wrong.
+3. Run the detector once: `node $(realpath ~/.claude/skills/impeccable/scripts)/detect.mjs --json apps/web/src`.
+   Fix what is mechanical in one batch.
+4. The finish reviewer and documenter are shipped as Codex agent files
+   (`~/.claude/skills/impeccable/agents/*.toml`), not as Claude Code agent
+   types. Run them as fresh `general-purpose` Agent calls with the packet the
+   reference lists, or in-thread from `reference/degraded/finish-reviewer.md`
+   and `reference/degraded/documenter.md`. Say which was used.
+5. DESIGN.md at the repo root, written from the built world: palette (sample
+   the hex values from `apps/web/src/app/globals.css`, they are the source),
+   type (system sans), spacing, the reusable pieces (time block, option card,
+   day tile, summary line, help routes, pill), motion grammar (none beyond
+   hover color; reduced motion honored). Update the surface brief to record
+   the approved comp `.impeccable/mocks/decision/model-pick.webp`.
+6. Two inspection rounds is the ceiling. Then MOO-787.
+
+Things already noticed for the finish pass, from the live screenshots:
+- The navy time block on a card stretches to the card's full height when the
+  requirements text is long; it should stay compact (top-aligned or fixed).
+- "2-1-1" renders as plain text in help routes because it has fewer than seven
+  digits; a `tel:211` link is valid and better.
+- The help-routes footer repeats the same three entries on every result; fine,
+  but the footer and the delayed-status copy share one component.
+- Every card says "We can't confirm they have food today." in bold; on three
+  cards that is heavy. Keep the line (spec claim 6, never removed); weight is
+  open.
+- The "(synthetic)" label appears on the demo date. Decision for Tarik: keep
+  for honesty or drop synthetic records from the demo week.
+- Direction contract lives in `apps/web/src/app/layout.tsx` inside a
+  `<template id="direction-contract">`; grep the built `out/index.html` for
+  `a5fbc27f` to confirm it survives.
+
+After 786: **MOO-787**, the closing live run (real 53206 through the dev
+proxy on the deployed runtime, screenshot, cookie, console, request id).
+
+## Then, in order (five days left)
+
+1. **Latency.** Return day one first, the week second; or cache the system
+   prompt. The model writes roughly 5,800 tokens for a seven-day plan, which is
+   the whole wait. Measure on the real flow.
+2. **Judge-facing hosting.** One hostname for site and API (decision 008):
+   static files plus a path rule sending `/api/*` to the API with an origin
+   timeout of at least 180 s; the API container must carry
+   `app/goodnext/help_routes.json` (decision 009). IAM role, not root. Nothing
+   in AWS is created without Tarik's go.
+3. **Submission checklist** (PRD section 13): architecture diagram matching
+   what shipped, description, video under five minutes, Builder ID, judge
+   access through October 8.
+4. **Data follow-ups.** The 211 API trial was rejected 2026-09-08; the fixture
+   directory stays the source. Send the drafted IMPACT 211 request anyway; work
+   the 53206 call sheet; set CloudWatch retention on the runtime log group.
+
+## Known problems
+
+1. Plan latency 60 to 105 s (above).
+2. Older log events (v1, v2) hold synthetic test prompts; set retention.
+3. The model sometimes places visits on days with no window; the validator
+   strips them and returns `partial`. Working as designed.
+4. Older Impeccable version installed (4.1.2; 4.2.2 available). Do not update
+   mid-session.
+
+## Working agreements
+
+- Socratic at the seams only; ship the scaffolding. Cite data sources,
+  disclose, move on.
+- Plain English; define terms inline. Tarik is not a traditional engineer.
+- Every non-trivial decision gets a `docs/decisions/NNN` file with the
+  "What actually happened" field left blank for Tarik.
+- Fixture tests never reach Bedrock; `tests/conftest.py` enforces it.
+- The Matt Pocock skills `grill-with-docs`, `to-spec`, `to-tickets`, and
+  `implement` are user-invocation only: Tarik types the slash command.
+  `linear-build` and `impeccable` are callable by Claude.
+- Per ticket: branch off main, tests first, one bounded live run with clipped
+  screenshots, PR, CI green, `linear-build` closes with evidence, Tarik merges.
+- Browser checks run through `ego-browser`. Real typing (`click` then
+  `typeText`), scroll the target into view before clicking, clip screenshots
+  with `Page.captureScreenshot` and a `clip` from the element's rect, do the
+  whole run in one bounded script and `completeTaskSpace` at the end. Stop the
+  dev server and API before running the unit tests; they flake under load.
+- Live web checks cost one model call each (cents). A no-match ZIP such as
+  53001 answers in seconds and costs nothing.
 
 ## First message for the next session (paste this)
 
@@ -132,27 +185,10 @@ Read HANDOFF.md, then CONTEXT.md, then docs/agents/issue-tracker.md, then
 docs/specs/food-today-screen.md. Do not re-read the planning docs unless a
 task needs them.
 
-PR #13 (API 503 fix) may still be open; merge it. Build MOO-786 (the Impeccable finish pass: print, accessibility,
-responsive audit, DESIGN.md), then MOO-787 (the closing live run). Read the surface brief and PRODUCT.md before
-touching UI. Explain in plain English. Nothing in AWS is created or changed
-without my go; deploys and pushes are mine.
+Build MOO-786, the Impeccable finish pass for the Food today screen, on a
+new branch off main: read the issue with linear-build, follow HANDOFF's
+"Next: MOO-786" section and the impeccable skill's finish references, write
+DESIGN.md, and close the issue with evidence. Then MOO-787. Explain in plain
+English. Nothing in AWS is created or changed without my go; deploys, pushes,
+and merges are mine.
 ```
-
-## Working agreements
-
-- Socratic at the seams only; ship the scaffolding. Tarik said "quit being
-  strict" about data reuse for the hackathon; cite sources, disclose, move on.
-- Explain in plain English; define terms inline. Tarik is not a traditional
-  engineer.
-- Every non-trivial decision gets a `docs/decisions/NNN` file with the
-  "What actually happened" field left blank.
-- Fixture tests must never reach Bedrock; `tests/conftest.py` enforces it.
-  Mark a live test `@pytest.mark.live`.
-- `agentcore deploy` runs from the repo root, not from `agentcore/`.
-- Use the Matt Pocock skills by plugin name (`mattpocock-skills:…`); top-level
-  `code-review` is CodeRabbit. `grill-with-docs`, `to-spec`, `to-tickets`, and
-  `implement` are user-invocation only: Tarik types the slash command.
-- Browser checks run through `ego-browser`; scroll the target into view before
-  clicking (the dev-tools badge and the viewport edge swallow clicks), and use
-  real typing so React sees the input. LastPass injects into inputs and trips a
-  harmless hydration warning in dev.
