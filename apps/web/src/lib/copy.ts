@@ -46,6 +46,12 @@ export const copy = {
     statement: "Nothing is listed for {zip} today.",
     tryAnother: "Try another ZIP",
   },
+  week: {
+    heading: "Later this week",
+    listed: "{n} listed",
+    oneListed: "1 listed",
+    nothing: "Nothing listed",
+  },
   summary: {
     change: "Change",
     money: "${money}",
