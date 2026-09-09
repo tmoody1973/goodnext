@@ -102,7 +102,8 @@ def create_plan(
     }
     try:
         envelope = agent.invoke(payload, runtime_session_id(session))
-    except (httpx.HTTPError, OSError) as exc:
+    except Exception as exc:  # noqa: BLE001 - boundary: network, AWS session, or runtime failure all read the same to a resident
+        log.warning("agent unavailable: %s", exc.__class__.__name__)
         return JSONResponse(
             status_code=503,
             headers=dict(response.headers),
