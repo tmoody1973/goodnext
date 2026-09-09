@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ConstraintForm, toConstraints, type FormValues } from "@/components/ConstraintForm";
 import { HelpRoutes } from "@/components/HelpRoutes";
 import { OptionCard } from "@/components/OptionCard";
+import { SummaryLine } from "@/components/SummaryLine";
 import { postPlan, type Envelope, type HelpRoute, type PlanData } from "@/lib/api";
 import { copy, fill } from "@/lib/copy";
 import { formatPlanDate } from "@/lib/format";
@@ -32,6 +33,9 @@ export default function FoodTodayPage() {
   const [state, setState] = useState<State>({ kind: "idle" });
   // The last help routes any response carried; shown while waiting and on failures.
   const [routes, setRoutes] = useState<HelpRoute[]>([]);
+  // The answers behind the current result; the form folds into a summary of them.
+  const [submitted, setSubmitted] = useState<FormValues | null>(null);
+  const [editing, setEditing] = useState(true);
   const lastValues = useRef<FormValues | null>(null);
   const controller = useRef<AbortController | null>(null);
 
@@ -43,6 +47,8 @@ export default function FoodTodayPage() {
 
   async function submit(next: FormValues) {
     lastValues.current = next;
+    setSubmitted(next);
+    setEditing(false);
     controller.current?.abort();
     const ac = new AbortController();
     controller.current = ac;
@@ -61,7 +67,14 @@ export default function FoodTodayPage() {
   function cancel() {
     controller.current?.abort();
     setState({ kind: "idle" });
-    focusZip();
+    reopen();
+  }
+
+  // Show the form again with its values intact (it never unmounts) and put the
+  // cursor in the ZIP field.
+  function reopen() {
+    setEditing(true);
+    setTimeout(focusZip, 0);
   }
 
   function retry() {
@@ -77,7 +90,10 @@ export default function FoodTodayPage() {
         <p className="text-sm text-ink-soft">{copy.site.tagline}</p>
       </header>
 
-      <ConstraintForm busy={busy} onSubmit={submit} />
+      {!editing && submitted && <SummaryLine values={submitted} onChange={reopen} />}
+      <div hidden={!editing}>
+        <ConstraintForm busy={busy} onSubmit={submit} />
+      </div>
 
       <section aria-live="polite" className="flex flex-col gap-4">
         {state.kind === "submitting" && (
@@ -95,7 +111,15 @@ export default function FoodTodayPage() {
             )}
           </div>
         )}
-        {state.kind === "done" && <Result envelope={state.envelope} routes={state.envelope.help_routes?.length ? state.envelope.help_routes : routes} onRetry={retry} onChange={focusZip} />}
+        {state.kind === "done" && (
+          <Result
+            envelope={state.envelope}
+            zip={submitted?.zip ?? ""}
+            routes={state.envelope.help_routes?.length ? state.envelope.help_routes : routes}
+            onRetry={retry}
+            onChange={reopen}
+          />
+        )}
       </section>
     </main>
   );
@@ -112,14 +136,25 @@ function countLine(n: number) {
   return fill(copy.result.listedToday, { n: String(n) });
 }
 
-type ResultProps = { envelope: Envelope; routes: HelpRoute[]; onRetry: () => void; onChange: () => void };
+type ResultProps = { envelope: Envelope; zip: string; routes: HelpRoute[]; onRetry: () => void; onChange: () => void };
 
 const actionClass = "self-start rounded-xl bg-amber px-5 py-2.5 font-semibold text-ink shadow-[0_2px_8px_rgba(11,42,74,0.18)]";
 
-function Result({ envelope, routes, onRetry, onChange }: ResultProps) {
+function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
   const data = envelope.data;
   const hasPlan = (envelope.status === "success" || envelope.status === "partial") && data !== null;
   const visits = hasPlan ? todayVisits(data) : [];
+  if (envelope.status === "no_match") {
+    return (
+      <div className="flex flex-col gap-4">
+        <div className="rounded-2xl bg-navy px-5 py-4 text-paper">
+          <h1 className="text-2xl font-bold text-balance">{fill(copy.noMatch.statement, { zip })}</h1>
+        </div>
+        <HelpRoutes routes={routes} />
+        <button type="button" onClick={onChange} className={actionClass}>{copy.noMatch.tryAnother}</button>
+      </div>
+    );
+  }
   if (envelope.status === "temporarily_unavailable") {
     return (
       <div className="flex flex-col gap-4">
