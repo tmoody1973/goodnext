@@ -164,3 +164,72 @@ class Envelope(BaseModel):
     retryable: bool = False
     request_id: str
     help_routes: list[HelpRoute] = []
+
+
+# Understand my letter (spec docs/specs/understand-notice.md, MOO-789).
+
+class NoticePassage(BaseModel):
+    """One numbered passage of a letter, supplied by the server. The model never sees a file."""
+
+    id: str
+    page: int
+    text: str
+
+
+LetterKind = Literal["sanction", "time_limited_warning", "six_month_report", "unknown"]
+Screening = Literal["action_identified", "more_information_needed", "no_action_identified"]
+DateKind = Literal["official", "continuity", "suggested", "unknown"]
+TaskKind = Literal["report", "interview", "proof", "contact_agency", "reapply", "fair_hearing", "enroll", "other"]
+
+
+class Finding(BaseModel):
+    label: str
+    text: str
+    passage_ids: list[str] = []
+
+
+class NextStep(BaseModel):
+    text: str
+    passage_ids: list[str] = []
+
+
+class NoticeTask(BaseModel):
+    kind: TaskKind
+    text: str
+    date_text: str = Field(default="not stated", description="Exactly as the letter prints it, or 'not stated'")
+    date_kind: DateKind = "unknown"
+    passage_ids: list[str] = []
+
+
+class QuestionToAsk(BaseModel):
+    text: str
+    policy_ids: list[str] = []
+
+
+class NoticeRoute(BaseModel):
+    name: str
+    phone: str | None = None
+    url: str | None = None
+    source: str
+
+
+class NoticePlanProposal(BaseModel):
+    """Model output schema for P02. Schema validity is not factual correctness."""
+
+    letter_kind: LetterKind = "unknown"
+    findings: list[Finding] = []
+    screening: Screening = "more_information_needed"
+    next_step: NextStep | None = None
+    tasks: list[NoticeTask] = []
+    questions_to_ask: list[QuestionToAsk] = []
+    routes: list[NoticeRoute] = []
+    unknowns: list[str] = []
+    explanation: str = Field(default="", description="Under 60 words, resident-facing")
+
+
+class ManualNotice(BaseModel):
+    """The three plain questions for a resident with no file."""
+
+    letter_kind: LetterKind
+    date_text: str = ""
+    asks_text: str = ""
