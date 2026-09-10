@@ -203,3 +203,12 @@ def test_invoke_routes_workflows(monkeypatch):
     assert out["status"] == "success" and out["request_id"] == "r-2" and len(out["help_routes"]) == 3
     bad = invoke({"workflow": "understand_notice", "now_local": NOW_LOCAL})
     assert bad["status"] == "needs_clarification"
+
+
+def test_shipped_policy_file_loads_only_approved_official_passages(monkeypatch):
+    """MOO-788: whatever Tarik approves must come from an official DHS or DOA page and carry a passage."""
+    monkeypatch.setattr(notice_tools, "POLICY_PATH", Path(notice_tools.__file__).parent / "policy_passages.json")
+    for p in notice_tools.load_policy():
+        assert p["review_status"] == "approved"
+        assert p["source_url"].startswith(("https://www.dhs.wisconsin.gov/", "https://doa.wi.gov/"))
+        assert p["passage"] and p["retrieved_at"] and p["id"]
