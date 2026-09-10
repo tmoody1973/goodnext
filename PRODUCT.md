@@ -41,6 +41,7 @@ Every option on screen traces to a directory record with a named verifier and a 
 ## Evidence on Hand
 - Live response samples: `docs/evidence/moo-777-live-53206-2026-09-09-demo.json`, `docs/evidence/moo-778-live-53206-2026-09-10-demo.json`.
 - Directory fixtures: `app/goodnext/fixtures/`.
+- Demo letters: three fictional FoodShare notices for "Maria Example" generated from official Wisconsin DHS sample templates, under `docs/research/notices/generated/` (decision 011). Every page carries a fictional-letter footer; no real person, case, or deadline.
 - Feature spec for the agent and API: `docs/specs/food-today.md`; grill notes D1 to D12 alongside it.
 - PRD: `docs/FoodShare-Bridge-PRD.md`, sections 4, 5 (FR04), 7, 8, 14 (UX01 to UX08).
 - No testimonials, no usage numbers, no partner logos. Do not fabricate any.

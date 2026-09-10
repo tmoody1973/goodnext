@@ -96,6 +96,21 @@ components:
     textColor: "{colors.paper}"
     rounded: "{rounded.xl}"
     padding: "8px 16px"
+  tab-default:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.xl}"
+    padding: "12px 16px"
+  tab-selected:
+    backgroundColor: "{colors.navy}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.xl}"
+    padding: "12px 16px"
+  passage-quote:
+    backgroundColor: "{colors.navy-soft}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.2xl}"
+    padding: "12px 16px"
 ---
 
 # Design System: GoodNext
@@ -122,7 +137,7 @@ Two confirmed rejections shape everything below: no dark theme (the use scene is
 The palette is nearly monochrome on purpose: one structural color (navy), one accent (amber) rationed to two jobs, and paper/ink/line carrying everything else.
 
 ### Primary
-- **Listing Amber** (#ffb703): the one color reserved for anything a resident can press or count — Directions, Try another ZIP, Retry, Change my answers, the form's own submit, and the day's count numeral. It never appears as decoration or structure.
+- **Listing Amber** (#ffb703): the one color reserved for anything a resident can press or count — Directions, Try another ZIP, Retry, Change my answers, Find food today, the form's own submit, and the day's count numeral. A status word is never amber: the letter screen's screening outcome ("Something to do") is paper text at title weight inside the navy panel. Amber never appears as decoration or structure.
 - **Amber Deep** (#8a5a00): the same accent stepped down for contrast. It's the day tile's own listed-count color on white, and it's also where every primary amber action lands on hover and press, with its label flipping to paper so contrast holds.
 
 ### Secondary
@@ -137,7 +152,7 @@ The palette is nearly monochrome on purpose: one structural color (navy), one ac
 - **Alert Red** (#a4211f): validation and failure text only — the ZIP error, the temporarily-unavailable message.
 
 ### Named Rules
-**The One Pressable Color Rule.** Amber appears only on something a resident can press or something they can count. Everything else on screen is navy, paper, ink, or line.
+**The One Pressable Color Rule.** Amber appears only on something a resident can press or something they can count. A status word, however important, is never amber (the finish review of the letter screen removed exactly that). Everything else on screen is navy, paper, ink, or line.
 **The Word-First Status Rule.** Every state — submitting, delayed, partial, no-match, unavailable — is a sentence before it is a color. Color is a second signal, never the only one.
 **The State-Is-A-Color-Step Rule.** Every hover or active state is a deeper or softer step of the same palette — amber to amber-deep, a navy outline filling with navy-soft, a thin underline thickening — never a new hue and never a shadow. `transition-colors` carries the change and `prefers-reduced-motion` removes it cleanly.
 
@@ -176,7 +191,7 @@ The system is mostly flat. The two shadows that exist are both soft and diffuse,
 
 ## Shapes
 
-Two radii carry the whole system. Cards, the result panel, and the bordered sections (help routes, the unconfirmed list) use a generous 16px corner that reads as a resting object. Everything a resident touches or types into — buttons, pills, inputs, day tiles, the time block — uses a tighter 12px corner, so touch targets read as one family distinct from the cards that hold them. No sharp corners, and no fully-rounded pill-shaped control anywhere.
+Two radii carry the whole system. Cards, the result panel, and the bordered sections (help routes, the unconfirmed list, and — as of the letter screen — next step, questions, contacts, and unknowns) use a generous 16px corner that reads as a resting object. Everything a resident touches or types into — buttons, pills, tabs, inputs, day tiles, the time block — uses a tighter 12px corner, so touch targets read as one family distinct from the cards that hold them. No sharp corners, and no fully-rounded pill-shaped control anywhere. The file input's inner choose-button is re-skinned to the 12px control corner so no third radius appears. A quoted passage (the Passage Quote) is a resting block, so it takes the 16px corner.
 
 ### Named Rules
 **The Two-Radius Rule.** 16px for anything you rest on; 12px for anything you press or type into. No third radius.
@@ -193,6 +208,11 @@ Two radii carry the whole system. Cards, the result panel, and the bordered sect
 ### Text Links
 - **Style:** navy, medium weight, underlined at a 4px offset.
 - **Hover:** the underline thickens from 1px to 2px; color and weight don't change.
+- **As a mode switch:** a plain text link is also how a form quietly offers its own alternative path — "No file? Answer three questions instead," "Upload the letter instead" — sitting below the primary button rather than beside it.
+
+### Tab Switch
+- **Style:** a two-item `role="tablist"` at the top of the page, 12px corner, 1px border, semibold weight, `transition-colors`. Selected tab fills navy with paper text; unselected sits on paper with a line border, shifting to a navy border on hover — the same color logic as a selected Pill, one weight heavier.
+- **Behavior:** switches only the page's two entry points (Find food today / Understand my letter). Each tab carries `aria-selected` and `aria-controls`; both panels stay mounted and toggle with `hidden`, so values entered in either flow survive a switch.
 
 ### Pills (radio and checkbox choices)
 - **Style:** 12px corner, 1px border. Unselected: line border, paper background, ink text, shifting to a navy border on hover. Selected: navy background and border, paper text.
@@ -203,6 +223,16 @@ Two radii carry the whole system. Cards, the result panel, and the bordered sect
 - **Background:** paper.
 - **Shadow:** the Card shadow; no border.
 - **Internal padding:** 16px, with a 12–20px gap between the time block and the claims column depending on viewport.
+- **Also carries:** a letter's finding and task cards use the identical treatment — paper, Card shadow, 16px corner. A finding card's label is its real heading (an `h3` at 600, ink), the finding text is body, and the Passage Quote sits underneath. No small gray label above a heading, ever (the craft floor's eyebrow ban).
+
+### Bordered Section
+- **Style:** 1px `line` border, 16px corner, no shadow — the Shadow-Or-Border Rule's border half. A semibold heading plus a short list or paragraph.
+- **Use:** help routes and the unconfirmed list on the food screen; next step, questions to ask, who to contact, and what we can't tell on the letter screen. Six independent uses now confirm this as a named system component, not a one-off container.
+
+### Passage Quote
+- **Style:** navy-soft background, 16px corner (a resting block, not a control), small text, no border and no shadow — deliberately distinct from a Card, since it always sits nested inside one rather than resting on the page itself. In print it takes a 1px black rule so its shape survives on paper.
+- **Credit:** a small `ink-soft` line reading "From your letter, Page n" directly below the quoted sentence, never above it (no eyebrow).
+- **Use:** one per cited finding, next step, or task — the letter's own words, always attributed to a page, never paraphrased.
 
 ### Time Block
 - **Style:** navy background, paper text, 12px corner; stacked (open time, "to," close time) at 640px and up, inline on mobile. A record whose text doesn't parse into an open/close pair falls back to a single centered sentence in the same chip.
@@ -212,7 +242,8 @@ Two radii carry the whole system. Cards, the result panel, and the bordered sect
 - **Hover / Active:** a closed tile takes a navy border on hover and fills with navy-soft on press.
 
 ### Inputs / Fields
-- **Style:** paper background, 1px `ink-soft` border, 12px corner, 18px text sized for a phone.
+- **Style:** paper background, 1px `ink-soft` border, 12px corner, 18px text sized for a phone. A `<select>` and a `<textarea>` take the identical treatment — same border, radius, and padding as a text field — so a letter's kind-picker and its free-text answers read as the same control family as the ZIP field.
+- **File input:** the field itself keeps the standard `ink-soft` border and 12px corner. Its choose-button is a small control inside it: navy-soft background, medium-weight text, no border, 12px corner (`file:rounded-xl`), so it belongs to the same control family.
 - **Focus:** the global 3px navy outline at a 2px offset — no separate glow or border-color change.
 - **Error:** the field's own alert-red text appears beneath it in a live-announced line; the border does not change color.
 
@@ -236,3 +267,4 @@ Two radii carry the whole system. Cards, the result panel, and the bordered sect
 - **Don't** give any hover or active state a new hue, a shadow, or a size change — the vocabulary is a deeper/softer step of the existing palette, or a thicker underline, nothing else.
 - **Don't** use `line` (#cfd6df) for anything but a decorative section border; it is not a text or icon color.
 - **Don't** reach for a hard-offset or neobrutalist shadow. Both shadows in this system are soft and diffuse.
+- **Don't** add a third border radius outside the 12px/16px pair; re-skin native sub-controls (the file-picker button) to 12px rather than letting a browser default through.

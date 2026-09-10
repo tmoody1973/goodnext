@@ -24,6 +24,13 @@ function Passages({ ids, byId }: { ids: string[]; byId: Map<string, NoticePassag
   );
 }
 
+// The API's source register in the screen's own words: the letter, or a check date.
+function sourceLine(source: string): string {
+  if (source.startsWith("from your letter")) return r.fromLetter;
+  const date = /\d{4}-\d{2}-\d{2}/.exec(source);
+  return date ? fill(copy.help.checked, { date: date[0] }) : source;
+}
+
 // Spec: the screen renders only the validated proposal fields and the passages.
 export function NoticeResult({ data, onFindFood, onAnother }: { data: NoticeData; onFindFood: () => void; onAnother: () => void }) {
   const headingRef = useFocusOnMount<HTMLHeadingElement>();
@@ -112,7 +119,7 @@ export function NoticeResult({ data, onFindFood, onAnother }: { data: NoticeData
                       <a href={route.url} target="_blank" rel="noopener noreferrer" className={`${textLinkClass} [overflow-wrap:anywhere]`}>{new URL(route.url).hostname}</a>
                     )}
                   </p>
-                  <p className="text-xs text-ink-soft">{route.source}</p>
+                  <p className="text-xs text-ink-soft">{sourceLine(route.source)}</p>
                 </li>
               );
             })}
