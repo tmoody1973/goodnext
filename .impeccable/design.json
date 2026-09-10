@@ -4,33 +4,184 @@
   "title": "Design System: GoodNext",
   "extensions": {
     "colorMeta": {
-      "paper": { "role": "neutral", "displayName": "Paper", "tonalRamp": ["#262626", "#474747", "#666666", "#858585", "#a3a3a3", "#c2c2c2", "#dbdbdb", "#f2f2f2"] },
-      "ink": { "role": "neutral", "displayName": "Ink", "tonalRamp": ["#262626", "#474747", "#666666", "#858585", "#a3a3a3", "#c2c2c2", "#dbdbdb", "#f2f2f2"] },
-      "ink-soft": { "role": "neutral", "displayName": "Ink Soft", "tonalRamp": ["#20252c", "#3c4552", "#566376", "#728197", "#95a1b1", "#b8c0cb", "#d6dae1", "#f0f2f4"] },
-      "navy": { "role": "secondary", "displayName": "Field Navy", "tonalRamp": ["#0a2643", "#12477c", "#1a65b2", "#2a83df", "#5fa2e7", "#94c1ef", "#c1dbf6", "#e9f2fc"] },
-      "navy-soft": { "role": "secondary", "displayName": "Navy Soft", "tonalRamp": ["#142538", "#264669", "#366496", "#4b82be", "#78a1ce", "#a5c1df", "#cbdbec", "#ecf2f8"] },
-      "amber": { "role": "primary", "displayName": "Listing Amber", "tonalRamp": ["#4c3700", "#8f6600", "#cc9200", "#ffb90a", "#ffcb47", "#ffdc85", "#ffebb8", "#fff8e5"] },
-      "amber-deep": { "role": "primary", "displayName": "Amber Deep", "tonalRamp": ["#4c3200", "#8f5d00", "#cc8500", "#ffaa0a", "#ffbf47", "#ffd485", "#ffe6b8", "#fff6e5"] },
-      "alert": { "role": "neutral", "displayName": "Alert Red", "tonalRamp": ["#400d0c", "#781817", "#ac2320", "#d83431", "#e26665", "#ec9998", "#f4c4c3", "#fbeaea"] },
-      "line": { "role": "neutral", "displayName": "Line", "tonalRamp": ["#1f252e", "#394656", "#52637a", "#6c829d", "#91a1b6", "#b6c0ce", "#d4dae2", "#f0f2f5"] }
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "#262626",
+          "#474747",
+          "#666666",
+          "#858585",
+          "#a3a3a3",
+          "#c2c2c2",
+          "#dbdbdb",
+          "#f2f2f2"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "#262626",
+          "#474747",
+          "#666666",
+          "#858585",
+          "#a3a3a3",
+          "#c2c2c2",
+          "#dbdbdb",
+          "#f2f2f2"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Ink Soft",
+        "tonalRamp": [
+          "#20252c",
+          "#3c4552",
+          "#566376",
+          "#728197",
+          "#95a1b1",
+          "#b8c0cb",
+          "#d6dae1",
+          "#f0f2f4"
+        ]
+      },
+      "navy": {
+        "role": "secondary",
+        "displayName": "Field Navy",
+        "tonalRamp": [
+          "#0a2643",
+          "#12477c",
+          "#1a65b2",
+          "#2a83df",
+          "#5fa2e7",
+          "#94c1ef",
+          "#c1dbf6",
+          "#e9f2fc"
+        ]
+      },
+      "navy-soft": {
+        "role": "secondary",
+        "displayName": "Navy Soft",
+        "tonalRamp": [
+          "#142538",
+          "#264669",
+          "#366496",
+          "#4b82be",
+          "#78a1ce",
+          "#a5c1df",
+          "#cbdbec",
+          "#ecf2f8"
+        ]
+      },
+      "amber": {
+        "role": "primary",
+        "displayName": "Listing Amber",
+        "tonalRamp": [
+          "#4c3700",
+          "#8f6600",
+          "#cc9200",
+          "#ffb90a",
+          "#ffcb47",
+          "#ffdc85",
+          "#ffebb8",
+          "#fff8e5"
+        ]
+      },
+      "amber-deep": {
+        "role": "primary",
+        "displayName": "Amber Deep",
+        "tonalRamp": [
+          "#4c3200",
+          "#8f5d00",
+          "#cc8500",
+          "#ffaa0a",
+          "#ffbf47",
+          "#ffd485",
+          "#ffe6b8",
+          "#fff6e5"
+        ]
+      },
+      "alert": {
+        "role": "neutral",
+        "displayName": "Alert Red",
+        "tonalRamp": [
+          "#400d0c",
+          "#781817",
+          "#ac2320",
+          "#d83431",
+          "#e26665",
+          "#ec9998",
+          "#f4c4c3",
+          "#fbeaea"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "tonalRamp": [
+          "#1f252e",
+          "#394656",
+          "#52637a",
+          "#6c829d",
+          "#91a1b6",
+          "#b6c0ce",
+          "#d4dae2",
+          "#f0f2f5"
+        ]
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "The day's listed-option count only. Largest thing on screen." },
-      "headline": { "displayName": "Headline", "purpose": "The result heading and the site wordmark, sharing one class." },
-      "title": { "displayName": "Title", "purpose": "Section and card headings." },
-      "body": { "displayName": "Body", "purpose": "Claim text on every card; tabular numerals throughout." },
-      "label": { "displayName": "Label", "purpose": "Helper text, tagline, day-tile weekday, source/checked-date captions." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "The day's listed-option count only. Largest thing on screen."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "The result heading and the site wordmark, sharing one class."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section and card headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Claim text on every card; tabular numerals throughout."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Helper text, tagline, day-tile weekday, source/checked-date captions."
+      }
     },
     "shadows": [
-      { "name": "card", "value": "0 2px 10px rgba(11,42,74,0.12)", "purpose": "Option cards and an unfolded day-tile entry rest on the page." },
-      { "name": "action", "value": "0 2px 8px rgba(11,42,74,0.18)", "purpose": "Every amber pressable reads as raised: Directions, submit, Try another ZIP, Retry." }
+      {
+        "name": "card",
+        "value": "0 2px 10px rgba(11,42,74,0.12)",
+        "purpose": "Option cards and an unfolded day-tile entry rest on the page."
+      },
+      {
+        "name": "action",
+        "value": "0 2px 8px rgba(11,42,74,0.18)",
+        "purpose": "Every amber pressable reads as raised: Directions, submit, Try another ZIP, Retry."
+      }
     ],
     "motion": [
-      { "name": "state-transition", "value": "150ms cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Shared transition-colors timing for every hover/active/selected color shift: primary and secondary buttons, pills, day tiles, and text-link underline thickness." },
-      { "name": "reduced-motion-override", "value": "none", "purpose": "prefers-reduced-motion strips every transition and animation sitewide, including the day tile's expand/collapse, with no substitute state." }
+      {
+        "name": "state-transition",
+        "value": "150ms cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Shared transition-colors timing for every hover/active/selected color shift: primary and secondary buttons, pills, day tiles, and text-link underline thickness."
+      },
+      {
+        "name": "reduced-motion-override",
+        "value": "none",
+        "purpose": "prefers-reduced-motion strips every transition and animation sitewide, including the day tile's expand/collapse, with no substitute state."
+      }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "640px" }
+      {
+        "name": "sm",
+        "value": "640px"
+      }
     ]
   },
   "components": [
@@ -83,6 +234,22 @@
       "css": ".ds-card { display: flex; flex-direction: column; gap: 12px; border-radius: 16px; background: var(--color-paper); padding: 16px; box-shadow: 0 2px 10px rgba(11,42,74,0.12); } @media (min-width: 640px) { .ds-card { flex-direction: row; gap: 20px; } } .ds-card-time { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; align-self: flex-start; border-radius: 12px; background: var(--color-navy); color: var(--color-paper); padding: 8px 16px; } @media (min-width: 640px) { .ds-card-time { width: 128px; flex-direction: column; align-items: stretch; text-align: center; gap: 0; padding: 12px 16px; } } .ds-card-time-value { font-size: 1.25rem; font-weight: 700; line-height: 1.1; } .ds-card-time-sep { font-size: 0.875rem; color: var(--color-navy-soft); } .ds-card-body { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; } .ds-card-title { font-size: 1.125rem; font-weight: 600; } .ds-card-line { color: var(--color-ink); }"
     },
     {
+      "name": "Tab Switch",
+      "kind": "custom",
+      "refersTo": "tab-selected",
+      "description": "The two-item entry-point switch at the top of the page: Find food today / Understand my letter.",
+      "html": "<div role=\"tablist\" class=\"ds-tabs\"><button type=\"button\" role=\"tab\" aria-selected=\"true\" class=\"ds-tab ds-tab--selected\">Find food today</button><button type=\"button\" role=\"tab\" aria-selected=\"false\" class=\"ds-tab\">Understand my letter</button></div>",
+      "css": ".ds-tabs { display: flex; gap: 8px; } .ds-tab { border-radius: 12px; border: 1px solid var(--color-line); background: var(--color-paper); color: var(--color-ink); font-weight: 600; padding: 12px 16px; transition: border-color 150ms cubic-bezier(0.4,0,0.2,1), background-color 150ms cubic-bezier(0.4,0,0.2,1), color 150ms cubic-bezier(0.4,0,0.2,1); } .ds-tab:hover { border-color: var(--color-navy); } .ds-tab--selected { border-color: var(--color-navy); background: var(--color-navy); color: var(--color-paper); } .ds-tab:focus-visible { outline: 3px solid var(--color-navy); outline-offset: 2px; }"
+    },
+    {
+      "name": "Passage Quote",
+      "kind": "custom",
+      "refersTo": "passage-quote",
+      "description": "A quoted passage from the resident's letter, nested inside a finding or task card; credit line below the quote.",
+      "html": "<blockquote class=\"ds-quote\"><p class=\"ds-quote-caption\"><span>From your letter</span> <span aria-hidden=\"true\">\u00b7</span> <span>Page 2</span></p><p class=\"ds-quote-text\">You must report any change in income within 10 days.</p></blockquote>",
+      "css": ".ds-quote { border-radius: 16px; background: var(--color-navy-soft); padding: 12px 16px; font-size: 0.875rem; color: var(--color-ink); } .ds-quote-caption { font-size: 0.75rem; font-weight: 600; color: var(--color-ink-soft); margin: 0; } .ds-quote-text { margin: 4px 0 0; }"
+    },
+    {
       "name": "Text Link",
       "kind": "custom",
       "description": "An inline navy underlined link: phone numbers, source and help-route URLs.",
@@ -99,7 +266,7 @@
   ],
   "narrative": {
     "northStar": "The Forecast, Not the Form",
-    "overview": "GoodNext borrows a shape people already read correctly — today big, the rest of the week small — and refuses to look like the thing it must not be mistaken for: a benefits portal's list of identical rows. Decision 007 turned down a Checkout Receipt world specifically because it carried more identity than a scannable task screen needs. What shipped instead spends almost the whole page on structure and words, and saves color for two jobs only: something a resident can press, and something they can count.\n\nThe result reads as calm rather than unfinished. One typeface carries a giant amber count numeral, a navy header field, and an eight-word source line at the same weight of restraint. Nothing on the screen competes with the number the whole page exists to answer.\n\nTwo confirmed rejections shape everything below: no dark theme (the use scene is a daylight phone or a library terminal, never a dim room), and no device the system doesn't already use natively — no hard-offset shadow, no icon glyph, no second typeface waiting to become \"the brand font.\"",
+    "overview": "GoodNext borrows a shape people already read correctly \u2014 today big, the rest of the week small \u2014 and refuses to look like the thing it must not be mistaken for: a benefits portal's list of identical rows. Decision 007 turned down a Checkout Receipt world specifically because it carried more identity than a scannable task screen needs. What shipped instead spends almost the whole page on structure and words, and saves color for two jobs only: something a resident can press, and something they can count.\n\nThe result reads as calm rather than unfinished. One typeface carries a giant amber count numeral, a navy header field, and an eight-word source line at the same weight of restraint. Nothing on the screen competes with the number the whole page exists to answer.\n\nTwo confirmed rejections shape everything below: no dark theme (the use scene is a daylight phone or a library terminal, never a dim room), and no device the system doesn't already use natively \u2014 no hard-offset shadow, no icon glyph, no second typeface waiting to become \"the brand font.\"",
     "keyCharacteristics": [
       "One accent color, rationed to pressable and countable things only.",
       "A single navy field carries almost all of the screen's visual weight; everything else is paper, ink, or a thin line.",
@@ -108,27 +275,52 @@
       "Status is always a sentence first, a color second."
     ],
     "rules": [
-      { "name": "The One Pressable Color Rule", "body": "Amber appears only on something a resident can press or something they can count. Everything else on screen is navy, paper, ink, or line.", "section": "colors" },
-      { "name": "The Word-First Status Rule", "body": "Every state — submitting, delayed, partial, no-match, unavailable — is a sentence before it is a color. Color is a second signal, never the only one.", "section": "colors" },
-      { "name": "The State-Is-A-Color-Step Rule", "body": "Every hover or active state is a deeper or softer step of the same palette — amber to amber-deep, a navy outline filling with navy-soft, a thin underline thickening — never a new hue and never a shadow. transition-colors carries the change and prefers-reduced-motion removes it cleanly.", "section": "colors" },
-      { "name": "The One Typeface Rule", "body": "The system sans stack is the whole hierarchy, from the count to the caption. No serif, no display face, no icon font. This is a deliberate OWN-WORLD choice, not a placeholder waiting for a brand font.", "section": "typography" },
-      { "name": "The Shadow-Or-Border Rule", "body": "An element gets a soft shadow or a 1px line border, never both.", "section": "elevation" },
-      { "name": "The Two-Radius Rule", "body": "16px for anything you rest on; 12px for anything you press or type into. No third radius.", "section": "shapes" }
+      {
+        "name": "The One Pressable Color Rule",
+        "body": "Amber appears only on something a resident can press or something they can count. A status word, however important, is never amber. Everything else on screen is navy, paper, ink, or line.",
+        "section": "colors"
+      },
+      {
+        "name": "The Word-First Status Rule",
+        "body": "Every state \u2014 submitting, delayed, partial, no-match, unavailable \u2014 is a sentence before it is a color. Color is a second signal, never the only one.",
+        "section": "colors"
+      },
+      {
+        "name": "The State-Is-A-Color-Step Rule",
+        "body": "Every hover or active state is a deeper or softer step of the same palette \u2014 amber to amber-deep, a navy outline filling with navy-soft, a thin underline thickening \u2014 never a new hue and never a shadow. transition-colors carries the change and prefers-reduced-motion removes it cleanly.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Typeface Rule",
+        "body": "The system sans stack is the whole hierarchy, from the count to the caption. No serif, no display face, no icon font. This is a deliberate OWN-WORLD choice, not a placeholder waiting for a brand font.",
+        "section": "typography"
+      },
+      {
+        "name": "The Shadow-Or-Border Rule",
+        "body": "An element gets a soft shadow or a 1px line border, never both.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Two-Radius Rule",
+        "body": "16px for anything you rest on; 12px for anything you press or type into. No third radius.",
+        "section": "shapes"
+      }
     ],
     "dos": [
       "Do keep amber to things a resident can press or count. Nothing else earns it.",
       "Do pair every status with a sentence, not just a color change.",
       "Do use the Card shadow and the 1px line border as alternatives, never together.",
       "Do carry the 12px/16px corner split into any new control or container.",
-      "Do trust the palette's own contrast — every shipped text/background pair already clears 5.9:1; don't dial back to a lighter tint for \"softness.\"",
+      "Do trust the palette's own contrast \u2014 every shipped text/background pair already clears 5.9:1; don't dial back to a lighter tint for \"softness.\"",
       "Do respect prefers-reduced-motion: the global rule strips every transition and animation, including the day tile's expand/collapse and every hover/active color shift, with no fallback state to design around.",
-      "Do carry the browser-chrome theming — amber-on-ink text selection, navy-on-navy-soft scrollbar, tabular numerals — into any new page; it's a sitewide rule, not a one-off."
+      "Do carry the browser-chrome theming \u2014 amber-on-ink text selection, navy-on-navy-soft scrollbar, tabular numerals \u2014 into any new page; it's a sitewide rule, not a one-off."
     ],
     "donts": [
       "Don't add a second typeface, a display serif, or an icon set. The system sans and text alone carry the whole hierarchy.",
-      "Don't give any hover or active state a new hue, a shadow, or a size change — the vocabulary is a deeper/softer step of the existing palette, or a thicker underline, nothing else.",
+      "Don't give any hover or active state a new hue, a shadow, or a size change \u2014 the vocabulary is a deeper/softer step of the existing palette, or a thicker underline, nothing else.",
       "Don't use line (#cfd6df) for anything but a decorative section border; it is not a text or icon color.",
-      "Don't reach for a hard-offset or neobrutalist shadow. Both shadows in this system are soft and diffuse."
+      "Don't reach for a hard-offset or neobrutalist shadow. Both shadows in this system are soft and diffuse.",
+      "Don't add a third border radius outside the 12px/16px pair. Re-skin native sub-controls (the file-picker button) to 12px rather than letting a browser default through."
     ]
   }
 }

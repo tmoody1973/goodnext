@@ -1,0 +1,90 @@
+{
+  "note": "Fictional demonstration values used to fill Wisconsin DHS sample notice templates. No real resident, case, or deadline.",
+  "shared": {
+    "resident_name": "Maria Example",
+    "resident_address": "1234 W Example St, Milwaukee WI 53206-0000",
+    "agency_name": "Milwaukee Enrollment Services",
+    "agency_phone": "1-888-947-6583",
+    "agency_phone_verification": {
+      "status": "verified",
+      "method": "WebFetch https://www.dhs.wisconsin.gov/dms/miles.htm (linked from https://www.dhs.wisconsin.gov/forwardhealth/imagency/index.htm)",
+      "checked_on": "2026-09-10",
+      "result": "Page lists 'Call: 888-947-6583' as the MilES main phone number, matching the requested 1-888-947-6583.",
+      "note": "The DHS page also lists real MilES fax numbers (888-409-1979 and 414-438-4580). Per instructions the fax number used in these letters is a separate fictional value, (414) 555-0100, not the real MilES fax."
+    },
+    "agency_fax_fictional": "(414) 555-0100",
+    "mailing_date": "09/08/2026",
+    "footer_disclaimer": "Fictional demonstration letter based on a Wisconsin DHS sample template. Not a real person, case, or deadline."
+  },
+  "letters": [
+    {
+      "output_html": "notice-of-sanction-maria-example.html",
+      "output_pdf": "notice-of-sanction-maria-example.pdf",
+      "source_template": "docs/research/notices/dhs-sample-notice-of-sanction.txt",
+      "source_original_file": "sanctionletter.pdf",
+      "field_id_type": "PIN",
+      "pin": "0000000001",
+      "return_address": "Milwaukee Enrollment Services, PO Box 000, Milwaukee WI 53201 (fictional PO box)",
+      "mailing_address": "Maria Example, 1234 W Example St, Milwaukee WI 53206-0000",
+      "agency_name": "Milwaukee Enrollment Services",
+      "agency_phone": "1-888-947-6583",
+      "agency_fax": "(414) 555-0100",
+      "mailing_date": "09/08/2026",
+      "vqt_reason": "voluntarily quit a job",
+      "ineligible_from": "10/01/2026",
+      "ineligible_to": "12/31/2026",
+      "total_sanctions_on_file": 1,
+      "reapply_on_or_after": "01/01/2027",
+      "free_legal_help_phone": "1-888-278-0633",
+      "free_legal_help_phone_note": "Template placeholder had no printed number for this letter, so the fallback number given in instructions (1-888-278-0633) was used.",
+      "pages": 2
+    },
+    {
+      "output_html": "time-limited-benefits-warning-maria-example.html",
+      "output_pdf": "time-limited-benefits-warning-maria-example.pdf",
+      "source_template": "docs/research/notices/dhs-sample-time-limited-benefits-warning.txt",
+      "source_original_file": "3tlb-warning-letter-sample.pdf",
+      "field_id_type": "PIN",
+      "pin": "0000000001",
+      "agency_name": "Milwaukee Enrollment Services",
+      "agency_phone": "1-888-947-6583",
+      "agency_fax": "(414) 555-0100",
+      "return_address": "Milwaukee Enrollment Services, PO Box 000, Milwaukee WI 53201 (fictional PO box, replaces template's CDPU / Janesville return address)",
+      "mailing_address": "Maria Example, 1234 W Example St, Milwaukee WI 53206-0000",
+      "mailing_date": "09/08/2026",
+      "fset_provider_phone_fictional": "(414) 555-0142",
+      "fset_link_kept_verbatim": "dhs.wisconsin.gov/foodshare/fset.htm",
+      "months_used_note": "kept verbatim per instructions: 'one of your three time-limited FoodShare benefit months'",
+      "omitted_field": {
+        "field": "internal mail-run sequence number ('000001') printed above the recipient name block in the source extraction",
+        "reason": "Not part of the task's field list and not part of the letter's substantive body copy; treated as a print-shop batch artifact rather than a resident-facing field, so it was dropped rather than guessed at.",
+        "flag": "needs_confirmation_if_required"
+      },
+      "pages": 3,
+      "skipped_blank_page": "Source template's 4th page (SAMPLE watermark only, no body content) was not reproduced, per instructions."
+    },
+    {
+      "output_html": "six-month-report-conversion-maria-example.html",
+      "output_pdf": "six-month-report-conversion-maria-example.pdf",
+      "source_template": "docs/research/notices/dhs-sample-six-month-report-conversion.txt",
+      "source_original_file": "dear-smrfletter.pdf",
+      "field_id_type": "Case number",
+      "case_number": "000000001",
+      "agency_name": "Milwaukee Enrollment Services",
+      "agency_phone": "1-888-947-6583",
+      "agency_fax": "(414) 555-0100",
+      "online_at": "access.wi.gov",
+      "mailing_address": "Maria Example, 1234 W Example St, Milwaukee WI 53206-0000",
+      "mailing_date": "09/08/2026",
+      "first_six_month_report_due": "March 2027",
+      "next_renewal_date": "September 15, 2027",
+      "fair_hearing_request_deadline": "November 17, 2026",
+      "legal_help_phone_kept_verbatim": "1-888-278-0633",
+      "division_of_hearings_and_appeals_address_kept_verbatim": "PO Box 7875, Madison, WI 53707-7875",
+      "division_of_hearings_and_appeals_fax_kept_verbatim": "608-264-9885",
+      "usda_nondiscrimination_statement": "kept verbatim in full, including USDA mail address, fax numbers, and email",
+      "pages": 3,
+      "note": "Source template's page structure (body, fair-hearing, USDA statement) already ends at page 3; no separate blank page needed to be dropped here."
+    }
+  ]
+}

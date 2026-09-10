@@ -9,10 +9,11 @@ from typing import Literal
 from zoneinfo import ZoneInfo
 
 import httpx
-from fastapi import Depends, FastAPI, Request, Response
+from fastapi import Depends, FastAPI, File, Form, Request, Response, UploadFile
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
+from goodnext_api import notices
 from goodnext_api.agent_client import AgentClient, default_agent_client
 from goodnext_api.help_routes import help_routes
 
@@ -84,6 +85,27 @@ def health() -> dict:
     return {"ok": True, "service": "goodnext-api"}
 
 
+def envelope_response(status_code: int, status: str, request_id: str, response: Response, missing: list[str] = (), warnings: list[str] = ()) -> JSONResponse:
+    """The API's own envelope (no agent involved), always with the reviewed help routes (MOO-780)."""
+    return JSONResponse(
+        status_code=status_code,
+        headers=dict(response.headers),
+        content={"status": status, "data": None, "evidence": [], "missing": list(missing), "warnings": list(warnings),
+                 "retryable": status == "temporarily_unavailable", "request_id": request_id, "help_routes": help_routes()},
+    )
+
+
+def invoke_agent(agent: AgentClient, payload: dict, session: str, response: Response):
+    """One boundary for every workflow: an unreachable agent is a truthful 503."""
+    try:
+        envelope = agent.invoke(payload, runtime_session_id(session))
+    except Exception as exc:  # noqa: BLE001 - boundary: network, AWS session, or runtime failure all read the same to a resident
+        log.warning("agent unavailable: %s", exc.__class__.__name__)
+        return envelope_response(503, "temporarily_unavailable", payload["request_id"], response, warnings=[f"agent unavailable: {exc.__class__.__name__}"])
+    response.headers["Cache-Control"] = "no-store"
+    return envelope
+
+
 @app.post("/api/plans")
 def create_plan(
     body: PlanRequest,
@@ -91,25 +113,42 @@ def create_plan(
     session: str = Depends(get_session),
     agent: AgentClient = Depends(get_agent_client),
 ):
-    request_id = str(uuid.uuid4())
     now = local_now()
     payload = {
         "workflow": body.workflow,
         "constraints": body.constraints.model_dump(),
         "dates": seven_local_dates(now.date()),
         "now_local": now.isoformat(),
-        "request_id": request_id,
+        "request_id": str(uuid.uuid4()),
     }
+    return invoke_agent(agent, payload, session, response)
+
+
+@app.post("/api/notices")
+async def understand_notice(
+    response: Response,
+    file: UploadFile | None = File(default=None),
+    letter_kind: str | None = Form(default=None),
+    date_text: str | None = Form(default=None),
+    asks_text: str | None = Form(default=None),
+    session: str = Depends(get_session),
+    agent: AgentClient = Depends(get_agent_client),
+):
+    """Understand my letter (MOO-790, decision 011): a PDF or photo, or the three answers.
+    The file is read once in memory, turned into passages, and never stored or logged."""
+    request_id = str(uuid.uuid4())
+    payload: dict = {"workflow": "understand_notice", "now_local": local_now().isoformat(), "request_id": request_id}
     try:
-        envelope = agent.invoke(payload, runtime_session_id(session))
-    except Exception as exc:  # noqa: BLE001 - boundary: network, AWS session, or runtime failure all read the same to a resident
-        log.warning("agent unavailable: %s", exc.__class__.__name__)
-        return JSONResponse(
-            status_code=503,
-            headers=dict(response.headers),
-            content={"status": "temporarily_unavailable", "data": None, "evidence": [], "missing": [],
-                     "warnings": [f"agent unavailable: {exc.__class__.__name__}"], "retryable": True, "request_id": request_id,
-                     "help_routes": help_routes()},
-        )
-    response.headers["Cache-Control"] = "no-store"
-    return envelope
+        if file is not None and file.filename:
+            data = await file.read()
+            passages = notices.passages_from_upload(data, file.filename, file.content_type)
+            payload["passages"] = [p.as_dict() for p in passages]
+            log.info("notice intake: %d bytes, %d passages, %d pages", len(data), len(passages), max(p.page for p in passages))
+        elif letter_kind is not None:
+            payload["manual"] = notices.manual_notice(letter_kind, date_text, asks_text)
+            log.info("notice intake: manual answers")
+        else:
+            raise notices.NoticeIntakeError(f"Upload the letter ({notices.LIMITS_TEXT}) or answer the three questions.")
+    except notices.NoticeIntakeError as exc:
+        return envelope_response(400, "needs_clarification", request_id, response, missing=[str(exc)])
+    return invoke_agent(agent, payload, session, response)

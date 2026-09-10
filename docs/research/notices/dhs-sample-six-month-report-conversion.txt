@@ -1,0 +1,104 @@
+# Source: Wisconsin DHS sample letter, file dear-smrfletter.pdf, placeholder fields, watermarked SAMPLE. Extracted 2026-09-10 with pypdf. Research fixture; not a real resident notice.
+
+--- page 1 ---
+State of Wisconsin
+Case #: XXXXXXXXXX
+IM AGENCY
+Phone: 123-456-7890 
+Fax: 987-654-3210 
+Online at access.wi.gov
+The State of Wisconsin is an equal opportunity service provider.  This letter contains information 
+that affects your benefits. If you need this material in a different format because of a disability or 
+if you need this letter translated or explained in your own language, please call 123-456-7890. 
+These services are free.
+You Must Complete Six-Month Report Forms to Keep Getting
+FoodShare Benefits
+You are getting this letter because there has been a change in your FoodShare household. You will 
+need to start completing six-month report forms.
+You do not need to take any action at this time.
+Your first six-month report form will be due in Month Year You will be sent this form about a month 
+before it’s due. If you do not submit your six-month report form by the due date, you could lose your 
+FoodShare benefits.
+Your household will need to complete a FoodShare six-month report form every six months until 
+your next renewal. Your next renewal date is Month Day, Year. When it is time for your renewal, you 
+will get information sent to you by mail.
+If you have questions about this letter or your FoodShare benefits, call your agency at 
+123-456-7890. If you do not agree with the change in your FoodShare benefits, you have the right
+to a fair hearing. Fair hearing information can be found at the end of this letter.
+XXXXXXXXXXXXX
+Mailing Date: MM/DD/YEAR
+XXXXXXXXXXXXX
+XXXXXXXXXXXXX
+XXXXXXXXXXXXX
+XXXXXXXXXXXXX
+Page 01 of 04Date: MM/DD/YEARCase : Case : XXXXXXXXX
+ Page 01 of 04
+SAMPLE
+
+--- page 2 ---
+Your Right to a Fair Hearing
+What is fair hearing and why should I ask for one?
+A fair hearing gives you the chance to tell why you think there has been a wrong decision
+about your application or benefit. At the hearing, a hearing officer will hear from you and the
+agency to find out if the decision was right or wrong. You may bring a friend or family
+member with you to the hearing. You may also be able to get free legal help.
+To learn more about free legal help, call 1-888-278-0633.
+How long do I have to ask for a hearing?
+The Division of Hearings and Appeals must get your request for a hearing about the
+decision in this letter by the date below:
+FoodShare
+ Month Day, Year
+Keep in mind that these are the deadlines for asking for a hearing about the decision in this
+letter. If you are getting FoodShare benefits and you miss the deadline, you can ask for a
+hearing at any time if you do not agree with your FoodShare benefit amount.
+Please Note: You cannot request a fair hearing if you have been disqualified from
+FoodShare for an intentional program violation.
+Can I keep my benefits while I wait for my hearing?
+Yes, if you are already getting benefits and if you ask for a hearing before your benefits
+change, you can keep getting the same benefits until the hearing officer makes a decision.
+If the hearing officer decides that the agency was right, you may need to return the extra
+benefits that you got after your benefits were supposed to change.
+Please Note: Benefits will not be continued if the change was due to a member receiving a
+FoodShare intentional program violation.
+How do I ask for a hearing?
+You can ask for a fair hearing and/or a hearing request form at the agency shown on the
+first page of this notice. Or, you can get a request form at doa.wi.gov/RequestAHearing.
+You can send the form or a letter asking for a hearing to the Division of Hearings &
+Appeals, PO Box 7875, Madison, WI 53707-7875, or fax it to 608-264-9885.
+Page 02 of 04Date: MM/DD/YEARCase: XXXXXXXXX
+ Page 02 of 04
+SAMPLE
+
+--- page 3 ---
+USDA Nondiscrimination Statement
+In accordance with federal civil rights law and U.S. Department of Agriculture (USDA) civil rights
+regulations and policies, this institution is prohibited from discriminating on the basis of race, color,
+national origin, sex (including gender identity and sexual orientation), religious creed, disability,
+age, political beliefs, or reprisal or retaliation for prior civil rights activity.
+Program information may be made available in languages other than English. Persons with
+disabilities who require alternative means of communication to obtain program information (e.g.,
+Braille, large print, audiotape, American Sign Language), should contact the agency (state or local)
+where they applied for benefits. Individuals who are deaf, hard of hearing or have speech
+disabilities may contact USDA through the Federal Relay Service at (800) 877-8339.
+To file a program discrimination complaint, a Complainant should complete a Form AD-3027,
+USDA Program Discrimination Complaint Form which can be obtained online at:
+https://www.usda.gov/sites/default/files/documents/ad-3027.pdf, from any USDA office, by calling
+(866) 632-9992, or by writing a letter addressed to USDA. The letter must contain the
+complainant’s name, address, telephone number, and a written description of the alleged
+discriminatory action in sufficient detail to inform the Assistant Secretary for Civil Rights (ASCR)
+about the nature and date of an alleged civil rights violation. The completed AD-3027 form or letter
+must be submitted to:
+1. mail:
+Food and Nutrition
+Service, USDA 1320
+Braddock Place,
+Room 334 Alexandria,
+VA 22314; or
+2. fax:
+(833) 256-1665 or (202) 690-7442; or
+3. email:
+FNSCIVILRIGHTSCOMPLAINTS@usda.gov
+This institution is an equal opportunity provider.
+Page 03 of 04Date: MM/DD/YEARCase: XXXXXXXXX
+ Page 03 of 04
+SAMPLE

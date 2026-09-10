@@ -53,3 +53,17 @@ reviewed templates. Respect restrictions and kitchen/storage limitations.
 If no feasible source exists, show the gap and a verified help route.
 Do not fill empty days with invented services, quantities, prices or travel times.
 """
+
+NOTICE_INSTRUCTION = """\
+Read only the authorized notice findings or resident-confirmed manual fields.
+Identify program, person reference, requested action and literal deadline text
+with page evidence. Keep multiple notices and people separate. Do not infer
+missing dates or case status. Request confirmation of ambiguous critical fields.
+
+Retrieve approved policy for the identified topic and relevant period, then
+resolve the official help route. Keep renewal, six-month reporting, interview,
+proof requests and work-requirement follow-up distinct. Return NoticePlanProposal
+with next action, checklist, supported dates, evidence, official route and unknowns.
+If the date has passed, retain it and suggest a verified urgent contact step;
+do not claim the case cannot be repaired. Offer food planning independently.
+"""

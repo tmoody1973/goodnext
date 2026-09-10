@@ -1,0 +1,359 @@
+{
+  "status": "partial",
+  "data": {
+    "letter_kind": "time_limited_warning",
+    "findings": [
+      {
+        "label": "Letter type",
+        "text": "Time-limited FoodShare warning — 1 of 3 benefit months used.",
+        "passage_ids": [
+          "p1-2"
+        ]
+      },
+      {
+        "label": "Person named",
+        "text": "Maria Example, PIN 0000000001. Letter mailed 09/08/2026.",
+        "passage_ids": [
+          "p1-1",
+          "p1-6"
+        ]
+      },
+      {
+        "label": "Agency",
+        "text": "Milwaukee Enrollment Services — Phone: 1-888-947-6583, Fax: (414) 555-0100.",
+        "passage_ids": [
+          "p1-1"
+        ]
+      },
+      {
+        "label": "Work requirement — three ways to meet it",
+        "text": "(1) Work ≥80 hours/month; (2) participate in FSET, W-2, or WIOA ≥80 hours/month; (3) combined work + allowable program totaling ≥80 hours/month.",
+        "passage_ids": [
+          "p2-1",
+          "p2-2",
+          "p2-3",
+          "p2-4"
+        ]
+      },
+      {
+        "label": "FSET option",
+        "text": "Enrolling in FSET is one way to meet the requirement. The letter states you must enroll and participate by the start of your third time-limited month. FSET provider: (414) 555-0142 or dhs.wisconsin.gov/foodshare/fset.htm.",
+        "passage_ids": [
+          "p1-3",
+          "p1-4"
+        ]
+      },
+      {
+        "label": "Possible exemptions listed in letter",
+        "text": "You may not have to meet the work requirement if you: live with a child under 18 in the same household; are primary caretaker for someone who cannot care for themselves; are primary caretaker for a child under 6 not in the home; are physically or mentally unable to work (including long-term homelessness); are pregnant; receive or applied for unemployment insurance; are in AODA treatment; are enrolled at least half-time in higher education or high school (age 18+); are enrolled in W-2 and complying; or work 30+ hours/week or earn equivalent wages. The agency decides whether an exemption applies to your case.",
+        "passage_ids": [
+          "p2-6",
+          "p2-7",
+          "p2-8",
+          "p2-9",
+          "p2-10",
+          "p2-11",
+          "p2-12",
+          "p2-13",
+          "p2-14",
+          "p2-15",
+          "p2-16",
+          "p2-17",
+          "p2-18",
+          "p2-19"
+        ]
+      },
+      {
+        "label": "How to report an exemption",
+        "text": "Call Milwaukee Enrollment Services at 1-888-947-6583. Ask what proof is needed.",
+        "passage_ids": [
+          "p2-20",
+          "p3-1"
+        ]
+      }
+    ],
+    "screening": "action_identified",
+    "next_step": null,
+    "tasks": [
+      {
+        "kind": "contact_agency",
+        "text": "Call Milwaukee Enrollment Services at 1-888-947-6583 to report a qualifying exemption (if one applies to you) and ask what proof is needed — OR confirm you want to meet the requirement through work or FSET.",
+        "date_text": "not stated",
+        "date_kind": "suggested",
+        "passage_ids": [
+          "p2-20",
+          "p3-1"
+        ]
+      },
+      {
+        "kind": "enroll",
+        "text": "If you plan to use FSET to meet the work requirement, contact the FSET provider at (414) 555-0142 or dhs.wisconsin.gov/foodshare/fset.htm. The letter says you must enroll and participate by the start of your third time-limited benefit month.",
+        "date_text": "not stated",
+        "date_kind": "unknown",
+        "passage_ids": [
+          "p1-3",
+          "p1-4"
+        ]
+      },
+      {
+        "kind": "proof",
+        "text": "If reporting an exemption, gather supporting documents (type depends on exemption — ask the agency). Examples: proof of pregnancy, unemployment insurance paperwork, school enrollment letter, medical documentation.",
+        "date_text": "not stated",
+        "date_kind": "unknown",
+        "passage_ids": [
+          "p2-20"
+        ]
+      }
+    ],
+    "questions_to_ask": [],
+    "routes": [
+      {
+        "name": "Your agency (from your letter)",
+        "phone": "1-888-947-6583",
+        "url": null,
+        "source": "from your letter"
+      },
+      {
+        "name": "2-1-1 (IMPACT 211 in Milwaukee County)",
+        "phone": "2-1-1",
+        "url": "https://www.impactinc.org/impact-211/",
+        "source": "reviewed help route, checked 2026-09-08"
+      },
+      {
+        "name": "Hunger Task Force emergency food",
+        "phone": null,
+        "url": "https://www.hungertaskforce.org/get-help/emergency-food/",
+        "source": "reviewed help route, checked 2026-09-08"
+      },
+      {
+        "name": "FoodShare member line",
+        "phone": "1-800-362-3002",
+        "url": "https://www.dhs.wisconsin.gov/foodshare/index.htm",
+        "source": "reviewed help route, checked 2026-09-08"
+      }
+    ],
+    "unknowns": [
+      "Exact start date of your third time-limited benefit month is not stated in the letter — ask the agency.",
+      "Which (if any) exemption may apply to your situation — only the agency can determine this.",
+      "No approved policy passages were returned to independently verify current rules; letter text is the sole source for policy details above."
+    ],
+    "explanation": "Your letter says you have used 1 of 3 time-limited FoodShare months and are not currently meeting the work requirement. To keep benefits beyond 3 months, you must either meet the work requirement, enroll in FSET before your third month begins, or report a qualifying exemption. The agency decides whether any exemption applies.",
+    "passages": [
+      {
+        "id": "p1-1",
+        "page": 1,
+        "text": "PIN: 0000000001 Date: 09/08/2026 Page 1 of 3 State of Wisconsin PIN #: 0000000001 Milwaukee Enrollment Services Phone Number: 1-888-947-6583 Fax Number: (414) 555-0100 The State of Wisconsin is an equal opportunity service provider. This letter contains information that affects your beneﬁts. If you need this material in a different format because of a disability or if you need this letter translated or explained in your own language, please call 1-888-947-6583. These services are free."
+      },
+      {
+        "id": "p1-2",
+        "page": 1,
+        "text": "Important Information about Your Time-Limited FoodShare Beneﬁts Our records show that you are not meeting the work requirement for getting ongoing FoodShare beneﬁts and that you have already used one of your three time-limited FoodShare beneﬁt months. If you do not start meeting the work requirement or meet an exemption from the work requirement, you will use up your three time-limited FoodShare beneﬁt months, and your FoodShare beneﬁts will end."
+      },
+      {
+        "id": "p1-3",
+        "page": 1,
+        "text": "One way that you can meet the work requirement is by taking part in the FoodShare Employment and Training (FSET) program. The FSET program is a free program that can help you build job skills and ﬁnd employment. If you want to meet the work requirement by taking part in the FSET program, you must enroll and take part in activities by the start of your third time-limited FoodShare beneﬁt month. Otherwise you will use up your three time-limited beneﬁt months, and your FoodShare beneﬁts will end."
+      },
+      {
+        "id": "p1-4",
+        "page": 1,
+        "text": "To enroll in the FSET program or to get answers to your questions about FSET, call your FSET service provider at (414) 555-0142, or go to dhs.wisconsin.gov/foodshare/fset.htm."
+      },
+      {
+        "id": "p1-5",
+        "page": 1,
+        "text": "If you are age 18 through 49 years old, with no minor children living in your home who are in the same FoodShare household, you may only get up to three months of FoodShare beneﬁts in a 36-month period, unless you meet the work requirement or meet an exemption from the work requirement."
+      },
+      {
+        "id": "p1-6",
+        "page": 1,
+        "text": "Milwaukee Enrollment Services PO Box 000 Milwaukee WI 53201 Mailing Date: 09/08/2026 Maria Example 1234 W Example St Milwaukee WI 53206-0000 Fictional demonstration letter based on a Wisconsin DHS sample template. Not a real person, case, or deadline."
+      },
+      {
+        "id": "p2-1",
+        "page": 2,
+        "text": "PIN: 0000000001 Date: 09/08/2026 Page 2 of 3 How to Meet the Work Requirement There are three ways to meet the work requirement:"
+      },
+      {
+        "id": "p2-2",
+        "page": 2,
+        "text": "1. Work at least 80 hours each month."
+      },
+      {
+        "id": "p2-3",
+        "page": 2,
+        "text": "2. Take part in an allowable work program, such as the FSET program, Wisconsin Works (W-2), or a program under the Workforce Innovation and Opportunity Act (WIOA), at least 80 hours each month."
+      },
+      {
+        "id": "p2-4",
+        "page": 2,
+        "text": "3. Work and take part in an allowable work program for a combined total of 80 hours each month."
+      },
+      {
+        "id": "p2-5",
+        "page": 2,
+        "text": "For more information about FSET, go to dhs.wisconsin.gov/foodshare/fset.htm."
+      },
+      {
+        "id": "p2-6",
+        "page": 2,
+        "text": "Who is Exempt from the Work Requirement?"
+      },
+      {
+        "id": "p2-7",
+        "page": 2,
+        "text": "Some adults do not have to meet the work requirement to get FoodShare beneﬁts and are considered exempt."
+      },
+      {
+        "id": "p2-8",
+        "page": 2,
+        "text": "You may not have to meet the work requirement if any of the following are true:"
+      },
+      {
+        "id": "p2-9",
+        "page": 2,
+        "text": "You are living with a child under age 18 who is part of the same FoodShare household."
+      },
+      {
+        "id": "p2-10",
+        "page": 2,
+        "text": "You are the primary caretaker for a person who cannot care for himself or herself."
+      },
+      {
+        "id": "p2-11",
+        "page": 2,
+        "text": "You are the primary caretaker for a child under age 6 who does not live in the home."
+      },
+      {
+        "id": "p2-12",
+        "page": 2,
+        "text": "You are physically or mentally unable to work. This includes being homeless long- term. Being homeless long- term means you will not have a regular place to stay for the next 30 nights."
+      },
+      {
+        "id": "p2-13",
+        "page": 2,
+        "text": "You are pregnant."
+      },
+      {
+        "id": "p2-14",
+        "page": 2,
+        "text": "You are receiving or have applied for unemployment insurance."
+      },
+      {
+        "id": "p2-15",
+        "page": 2,
+        "text": "You are taking part in an alcohol or other drug abuse (AODA) treatment or rehabilitation program."
+      },
+      {
+        "id": "p2-16",
+        "page": 2,
+        "text": "You are enrolled in an institution of higher learning at least half-time."
+      },
+      {
+        "id": "p2-17",
+        "page": 2,
+        "text": "You are age 18 or older attending high school at least half-time."
+      },
+      {
+        "id": "p2-18",
+        "page": 2,
+        "text": "You are enrolled in W-2 and complying with W-2 requirements."
+      },
+      {
+        "id": "p2-19",
+        "page": 2,
+        "text": "You are working 30 or more hours per week or are earning wages equal to 30 or more hours per week at the federal minimum wage."
+      },
+      {
+        "id": "p2-20",
+        "page": 2,
+        "text": "If you meet one of the exemptions listed above, you should contact your agency at the number listed on the top of page 1 of this letter to report the exemption and ﬁnd out what kind of proof is needed."
+      },
+      {
+        "id": "p2-21",
+        "page": 2,
+        "text": "Fictional demonstration letter based on a Wisconsin DHS sample template. Not a real person, case, or deadline."
+      },
+      {
+        "id": "p3-1",
+        "page": 3,
+        "text": "PIN: 0000000001 Date: 09/08/2026 Page 3 of 3 Questions If you have questions about this letter or your FoodShare enrollment or if you want to report an exemption, call your agency listed at the top of page 1 of this letter."
+      },
+      {
+        "id": "p3-2",
+        "page": 3,
+        "text": "This institution is an equal opportunity provider."
+      },
+      {
+        "id": "p3-3",
+        "page": 3,
+        "text": "Fictional demonstration letter based on a Wisconsin DHS sample template. Not a real person, case, or deadline."
+      }
+    ]
+  },
+  "evidence": [
+    "p1-1",
+    "p1-2",
+    "p1-3",
+    "p1-4",
+    "p1-6",
+    "p2-1",
+    "p2-10",
+    "p2-11",
+    "p2-12",
+    "p2-13",
+    "p2-14",
+    "p2-15",
+    "p2-16",
+    "p2-17",
+    "p2-18",
+    "p2-19",
+    "p2-2",
+    "p2-20",
+    "p2-3",
+    "p2-4",
+    "p2-6",
+    "p2-7",
+    "p2-8",
+    "p2-9",
+    "p3-1"
+  ],
+  "missing": [
+    "Exact start date of your third time-limited benefit month is not stated in the letter — ask the agency.",
+    "Which (if any) exemption may apply to your situation — only the agency can determine this.",
+    "No approved policy passages were returned to independently verify current rules; letter text is the sole source for policy details above."
+  ],
+  "warnings": [
+    "finding 'Policy evidence status': cites no supplied passage",
+    "next_step: never-list hit 'you qualify'",
+    "task 'enroll': date 'by the start of your third time-limited FoodShare benefit month' is not literal text of the letter"
+  ],
+  "retryable": false,
+  "request_id": "bfe14fbb-4d96-4b3c-bdf4-21fd49425219",
+  "help_routes": [
+    {
+      "name": "2-1-1 (IMPACT 211 in Milwaukee County)",
+      "purpose": "Find local food and other help by phone, any day. In Milwaukee County you can also text MKEFOOD to 898-211, or call (414) 773-0211.",
+      "phone": "2-1-1",
+      "url": "https://www.impactinc.org/impact-211/",
+      "source_url": "https://www.impactinc.org/impact-211/",
+      "last_checked": "2026-09-08"
+    },
+    {
+      "name": "Hunger Task Force emergency food",
+      "purpose": "Milwaukee County pantry and meal map.",
+      "phone": null,
+      "url": "https://www.hungertaskforce.org/get-help/emergency-food/",
+      "source_url": "https://www.hungertaskforce.org/get-help/emergency-food/",
+      "last_checked": "2026-09-08"
+    },
+    {
+      "name": "FoodShare member line",
+      "purpose": "Questions about your FoodShare case or QUEST card.",
+      "phone": "1-800-362-3002",
+      "url": "https://www.dhs.wisconsin.gov/foodshare/index.htm",
+      "source_url": "https://www.dhs.wisconsin.gov/foodshare/index.htm",
+      "last_checked": "2026-09-08"
+    }
+  ]
+}

@@ -1,15 +1,16 @@
 # GoodNext handoff
 
-Written September 8, 2026, 21:40 CDT; updated 23:59 CDT after MOO-786 and
-MOO-787 closed. For a fresh Claude Code session.
+Written September 8, 2026; updated September 10, 14:30 CDT after the notice
+entry point shipped on runtime v6. For a fresh Claude Code session.
 Read this, then `CONTEXT.md`, then `docs/agents/issue-tracker.md`, then
 `docs/specs/food-today-screen.md`. Do not re-read the planning docs unless a
 task needs them; the decisions are settled.
 
 ## What GoodNext is
 
-A free website that helps a Wisconsin household find food today and prepare
-an official next step after a FoodShare notice. Hackathon entry ("Agents for
+A free website that helps a Wisconsin household find food today and
+understand a FoodShare letter (sanction, time-limited benefits warning,
+six-month report), with the next supported step and the official routes. Hackathon entry ("Agents for
 Humans"), deadline **September 14, 2026, 7 p.m. Central**, judging through
 October 8. Product name GoodNext; older docs still say "FoodShare Bridge."
 
@@ -20,24 +21,31 @@ or a notice before helping with food, or use real residents' documents.
 
 | Piece | Path | State |
 | --- | --- | --- |
-| Strands agent (Python 3.12) | `app/goodnext/` | 42 tests green; deployed runtime v5, verified live |
-| FastAPI backend | `services/api/` | 13 tests green; truthful 503 on any agent failure (PR #13) |
+| Strands agent (Python 3.12) | `app/goodnext/` | 57 tests green; two workflows, `food_today` and `understand_notice`; deployed runtime **v6** (2026-09-10 14:06 CDT), verified live; v7 pending (notice task-text caps and never-list hedge fix are on the branch, not deployed) |
+| FastAPI backend | `services/api/` | 25 tests green; `POST /api/plans` and `POST /api/notices` (PDF text layer, Textract for photos, three answers); truthful 503 |
 | AgentCore CLI config + CDK | `agentcore/` | Deployed to us-east-1 |
-| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Complete and finished: form, waiting states, today's cards, week tiles, no-match, summary line, help routes, print sheet, accessibility pass. 42 tests green (axe-core fixture test included). MOO-786 and MOO-787 Done on branch `tarikjmoody/moo-786-finish-pass`, **11 commits, not yet pushed** |
+| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Two entry tabs: Find food today (finished, MOO-786/787 merged in PR #15) and Understand my letter (upload or three questions, result beside quoted passages; MOO-791). 50 tests green. Notice work on branch `tarikjmoody/notice-entry-point`, **not yet pushed** |
 | Directory data | `app/goodnext/fixtures/` | 93 records, see below |
 | Help routes | `app/goodnext/help_routes.json` | One reviewed file; agent and API both read it (decision 009) |
-| Specs | `docs/specs/food-today.md` (agent, API), `docs/specs/food-today-screen.md` (website) | Settled; grill notes beside each |
+| Specs | `docs/specs/food-today.md`, `docs/specs/food-today-screen.md`, `docs/specs/understand-notice.md` | Settled; the notice spec was written from an approved plan, not a grill |
+| Demo letters | `docs/research/notices/generated/` | Three fictional FoodShare letters for "Maria Example" from DHS templates (HTML, PDF with text layer, PNG of page 1, `values.json`); MilES phone verified against DHS |
+| Policy passages | `app/goodnext/policy_passages.json` (23 draft), review checklist `docs/research/notices/policy-passages-review.md` | **Zero approved.** The agent cites only approved entries; "questions to ask your agency" stays empty until Tarik ticks the checklist and the status flips to `approved` |
 | Design context | `PRODUCT.md`, `DESIGN.md`, `.impeccable/design.json`, `.impeccable/surfaces/apps-web-src-app-page-tsx.md`, `.impeccable/mocks/decision/`, `.impeccable/review/` (untracked captures) | Direction is the 7-Day Forecast Strip (decision 007). DESIGN.md records the built system (finish pass MOO-786). Read DESIGN.md before touching any web UI |
-| Decisions | `docs/decisions/001` to `010` | Plain English; "What actually happened" blank for Tarik |
+| Decisions | `docs/decisions/001` to `011` | Plain English; "What actually happened" blank for Tarik. 011: real upload in the demo, fed with fictional letters |
 | Learning log | `docs/LEARNING-LOG.md` | Two entries (dev proxy timeout; the bot PR) |
 | Research | `docs/research/` | Data access, 211 guide, drafts, call sheet |
 | Evidence | `docs/evidence/` | Live responses and screenshots per issue |
 
 Tracker: **Linear**, team MOO, project "GoodNext — Agents for Humans
 Hackathon". Only the `linear-build` skill creates, moves, or closes issues.
-Food today agent issues MOO-770 to 778: Done. Screen issues MOO-779 to 787
-and agent fixes 780, 781: Done with evidence comments. 786 and 787 are Done
-in Linear but their branch is **not merged**; see "Next" below.
+Food today MOO-770 to 787: Done and merged. Notice entry point MOO-788 to
+792: 789, 790, 791 Done with evidence; 788 In Progress (letters done,
+passage approval waits on Tarik); 792 closes after the finish review verdict.
+Branch `tarikjmoody/notice-entry-point` is **not pushed**.
+
+**A PostHog "self-driving" bot opens PRs on this repo from Linear issues**
+(PR #12 on 2026-09-08, PR #16 on 2026-09-10, both stale and unadopted).
+Close them; find the switch that turns it off.
 
 GitHub: https://github.com/tmoody1973/goodnext. PRs #4 to #11 and #13 merged
 2026-09-08. CI runs agent tests, API tests, `agentcore validate`, and the web
@@ -79,42 +87,28 @@ Rules from real data (decision 006): unknown service area shows only for the
 site's own ZIP; over 14 days old is "call to confirm" with the date; only a
 missing date is "unconfirmed".
 
-## Next: get the finish-pass branch onto main
+## Next: land the notice branch, deploy v7, approve passages
 
-Branch `tarikjmoody/moo-786-finish-pass` holds MOO-786 and MOO-787: print
-sheet, accessibility pass (focus to the result heading, provider-named links,
-tel:211, axe test), reflow fixes at 320 px and doubled text, the reviewer's
-design fixes (amber count as the focal number, compact time row on phones,
-taller today panel, Print below the cards, dominant tile count, hover and
-pressed states), DESIGN.md and its sidecar, decision 010, evidence for both
-issues. 42 web tests green; typecheck and build green; agent and API suites
-untouched. Steps, all Tarik's:
+1. Tarik: `push`, PR, merge (CI runs agent, API, AgentCore validate, web).
+2. Tarik: review `docs/research/notices/policy-passages-review.md`; tick the
+   passages the agent may cite. Claude then sets `review_status: approved` on
+   those entries in `app/goodnext/policy_passages.json` (a test enforces that
+   only approved, official-URL entries load).
+3. Deploy **v7** on Tarik's go: `agentcore deploy --target default --diff`
+   (expect only the code bundle), then `--yes`. v7 carries the finding and
+   citation caps and the never-list hedge fix; without it, results run long
+   and a next step can be stripped.
+4. Re-run the four live uploads (script pattern in the MOO-792 evidence) and
+   refresh `docs/evidence/notice-live-*`.
+5. Hosting: the API's role needs `textract:DetectDocumentText` for photo
+   uploads; `/api/notices` is multipart up to 10 MB.
 
-1. **Close PR #12.** A PostHog Desktop "self-driving" bot opened it at 20:06
-   CDT against a stale main with a partial version of MOO-786. Not adopted;
-   its good ideas were rebuilt on this branch. Closing it also stops the Linear
-   automation that flipped MOO-786 to Done with no evidence.
-2. Say "push"; Claude pushes the branch and opens the PR; CI runs the four
-   jobs; Tarik merges.
-3. **Decide fix 5 from the finish review:** two synthetic records (St. Demo
-   Hot Meal Program, Northside Community Pantry on some runs) carry 555
-   numbers with no "(synthetic)" label or source line on the demo dates.
-   Either give the nine synthetic fixture records a `source_text` naming them
-   synthetic, or drop them from the demo week. Fixture and agent side, one
-   small ticket.
-4. Optional, small: show the response `request_id` as a "Reference" line on
-   the result so a support call can quote it (MOO-787 noted the screen does
-   not display it).
+Running the notice path locally: `agentcore dev` (serves on **8082**, not
+8080; pass `GOODNEXT_AGENT_LOCAL_URL=http://127.0.0.1:8082` to the API), then
+the API and `pnpm dev`. A letter answer takes 25 to 35 s. Photo uploads call
+Textract under the local AWS session.
 
-Impeccable notes for the next UI change: read `DESIGN.md` first; run
-`context.mjs --target <file>` once; the reviewer and documenter run as fresh
-`general-purpose` Agent calls from the `reference/degraded/*.md` role files
-(the shipped `.toml` agents are Codex-only); capture on the production build
-(`pnpm build` then a static server) so the dev badge never covers content;
-set the viewport with `Emulation.setDeviceMetricsOverride` **after** the tab
-exists, and log the heading text before every capture.
-
-## Then, in order (five days left)
+## Then, in order (four days left)
 
 1. **Latency.** Return day one first, the week second; or cache the system
    prompt. The model writes roughly 5,800 tokens for a seven-day plan, which is

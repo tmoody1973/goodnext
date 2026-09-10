@@ -1,0 +1,101 @@
+# Source: Wisconsin DHS sample letter, file sanctionletter.pdf, placeholder fields, watermarked SAMPLE. Extracted 2026-09-10 with pypdf. Research fixture; not a real resident notice.
+
+--- page 1 ---
+PIN #: XXXXXXXX Date: MM/DD/YYYY Page 1 of 2 
+ 
+ 
+ 
+ 
+RETURN ADDRESS 
+XXXXXXXXXXXXXXXXXXXX 
+XXXXXXXXXXXXXXXXXXXX 
+XXXXXXXXXXXXXXXXXXXX 
+ 
+ 
+ 
+Mailing Date: MM/DD/YYYY 
+ 
+ 
+ 
+ 
+ 
+MAILING ADDRESS 
+XXXXXXXXXXXXXXX 
+XXXXXXXXXXXXXXX 
+XXXXXXXXXXXXXXX 
+ 
+ 
+State of Wisconsin 
+ 
+PIN #: XXXXXXXXX 
+ 
+ 
+ 
+ 
+<Consortium Name> 
+Phone Number: X-XXX-XXX-XXXX 
+Fax Number: X-XXX-XXX-XXXX 
+ 
+ 
+ 
+ 
+The State of Wisconsin is an equal opportunity service provider. This letter contains 
+information that affects your benefits. If you need this material in a different format 
+because of a disability or if you need this letter translated or explained in your own 
+language, please call X-XXX-XXX-XXXX. These services are free. 
+ 
+FoodShare Notice of Sanction  
+This letter is to notify you that you have <VQT reason> without good cause. As a result, you will 
+not be eligible for FoodShare from <date> to <date>. This sanction results in the total number 
+of sanctions we have on file for you as: <numeral>. 
+If you do not agree with this decision, you have the right to a fair hearing. You may be able to 
+continue to get FoodShare benefits until your fair hearing decision is made. If the fair hearing 
+officer decides that the agency was right, you may need to return the extra benefits that you got 
+after your benefits were supposed to change. You may also be able to get free legal help. To 
+learn more about free legal help, call <phone number>. Please see your benefits letter for more 
+details about filing a fair hearing. 
+Your sanction may end if any of the following occurs: 
+• You become exempt from the FoodShare work requirement. 
+• You obtain a new job with pay or hours similar to the job you quit. 
+• You work 30 or more hours per week. 
+• You regain eligibility for W-2 by meeting the W-2 work requirements. 
+• You regain eligibility for the unemployment benefit by meeting the unemployment 
+benefit work requirements. 
+• Your sanction period ends. 
+You will need to reapply for FoodShare if you want to get benefits after your sanction period 
+ends. You can reapply for benefits any time on or after <date> or any time you become exempt 
+from the work requirement. If you are part of a FoodShare group, you should contact your 
+agency to update your case instead of reapplying.
+
+--- page 2 ---
+PIN #: XXXXXXXX Date: MM/DD/YYYY Page 2 of 2 
+ 
+ 
+ 
+Work Registration 
+All members of your FoodShare group must be registered for work unless they are exempt. You 
+may be considered exempt and may not need to meet the FoodShare work requirement if any 
+of the following applies to you: 
+• You are younger than age 16 or older than age 59. 
+• You are already working at least 30 hours per week (or getting weekly earnings that 
+equal 30 times the federal minimum hourly wage). 
+• You are the parent or are responsible for the care of a dependent child younger than age 
+6 (in or out of the home). 
+• You are the parent or are responsible for the care of a person of any age who cannot 
+care for himself or herself (in or out of the home). 
+• You are age 16 or 17 and are not the primary person for the case. 
+• You are taking part in an alcohol or other drug abuse (AODA) treatment program. 
+• You are getting or have applied for unemployment insurance. 
+• You are enrolled at least half-time in a recognized school, training program, or institution 
+of higher learning. 
+• You are physically or mentally unable to work. 
+• You are taking part in certain work programs. 
+ 
+If you meet one of the exemptions listed above, you should contact your agency at the number 
+listed at the top of page 1 of this letter to report the exemption and find out what kind of proof 
+may be needed. 
+If you have a good cause reason for the loss of job or hours, there may be no loss of 
+FoodShare benefits. 
+Questions 
+If you have questions about this letter, contact your agency at the number listed at the top of 
+page 1 of this letter.

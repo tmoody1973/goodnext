@@ -1,0 +1,58 @@
+{
+  "runs": [
+    {
+      "label": "sanction",
+      "file": "notice-of-sanction-maria-example.pdf",
+      "elapsed": 34.352,
+      "delayedAt": 30.339,
+      "http": 200,
+      "status": "partial",
+      "request_id": "23b5fc5e-f8fa-4e3d-8435-b7d78c4377c8"
+    },
+    {
+      "label": "time-limited",
+      "file": "time-limited-benefits-warning-maria-example.pdf",
+      "elapsed": 26.858,
+      "delayedAt": null,
+      "http": 200,
+      "status": "partial",
+      "request_id": "bfe14fbb-4d96-4b3c-bdf4-21fd49425219"
+    },
+    {
+      "label": "six-month",
+      "file": "six-month-report-conversion-maria-example.pdf",
+      "elapsed": 25.843,
+      "delayedAt": null,
+      "http": 200,
+      "status": "partial",
+      "request_id": "834dac0d-9e16-451c-848e-b61b45192245"
+    },
+    {
+      "label": "sanction-photo",
+      "file": "notice-of-sanction-maria-example-page1.png",
+      "elapsed": 28.85,
+      "delayedAt": null,
+      "http": 200,
+      "status": "partial",
+      "request_id": "67ee7fd8-ee71-417d-be01-75469b688b4a"
+    }
+  ],
+  "gn_session": {
+    "name": "gn_session",
+    "value": "17a62b72-af2d-406c-9d92-8e5ecc0b4b2c",
+    "domain": "localhost",
+    "path": "/",
+    "expires": 1789081753.405535,
+    "size": 46,
+    "httpOnly": true,
+    "secure": true,
+    "session": false,
+    "sameSite": "Strict",
+    "priority": "Medium",
+    "sourceScheme": "Secure",
+    "sourcePort": 3000
+  },
+  "consoleErrors": [],
+  "runtime": "v6 arn:aws:bedrock-agentcore:us-east-1:953791390715:runtime/goodnext_goodnext-j7ndOFF7b3",
+  "demoNow": "2026-09-10T09:00:00-05:00"
+}

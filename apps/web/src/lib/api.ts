@@ -102,3 +102,39 @@ function isEnvelope(value: unknown): value is Envelope {
   const v = value as Record<string, unknown>;
   return typeof v.status === "string" && typeof v.request_id === "string" && "data" in v;
 }
+
+// Understand my letter (spec docs/specs/understand-notice.md). Mirrors
+// app/goodnext/schemas.py NoticePlanProposal plus the passages the server supplied.
+
+export type LetterKind = "sanction" | "time_limited_warning" | "six_month_report" | "unknown";
+export type Screening = "action_identified" | "more_information_needed" | "no_action_identified";
+export type DateKind = "official" | "continuity" | "suggested" | "unknown";
+
+export type NoticePassage = { id: string; page: number; text: string };
+export type Finding = { label: string; text: string; passage_ids: string[] };
+export type NoticeTask = { kind: string; text: string; date_text: string; date_kind: DateKind; passage_ids: string[] };
+export type NoticeRoute = { name: string; phone: string | null; url: string | null; source: string };
+
+export type NoticeData = {
+  letter_kind: LetterKind;
+  screening: Screening;
+  findings: Finding[];
+  next_step: { text: string; passage_ids: string[] } | null;
+  tasks: NoticeTask[];
+  questions_to_ask: { text: string; policy_ids: string[] }[];
+  routes: NoticeRoute[];
+  unknowns: string[];
+  explanation: string;
+  passages: NoticePassage[];
+};
+
+export type NoticeEnvelope = Omit<Envelope, "data"> & { data: NoticeData | null };
+
+// The letter travels as multipart form data: the file, or the three answers.
+// Read once by the API, never stored (decision 011).
+export async function postNotice(form: FormData, signal?: AbortSignal): Promise<NoticeEnvelope> {
+  const response = await fetch("/api/notices", { method: "POST", body: form, credentials: "same-origin", signal });
+  const body: unknown = await response.json();
+  if (!isEnvelope(body)) throw new Error(`unexpected response shape (${response.status})`);
+  return body as NoticeEnvelope;
+}

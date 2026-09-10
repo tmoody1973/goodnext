@@ -74,8 +74,7 @@ export function ConstraintForm({ busy = false, onSubmit }: Props) {
     set("travel", values.travel.includes(t) ? values.travel.filter((x) => x !== t) : [...values.travel, t]);
 
   return (
-    <form onSubmit={handleSubmit} noValidate aria-busy={busy} className="flex flex-col gap-6">
-      <h2 className="text-xl font-semibold text-balance">{copy.form.heading}</h2>
+    <form onSubmit={handleSubmit} noValidate aria-busy={busy} aria-label={copy.form.heading} className="flex flex-col gap-6">
 
       <div className="flex flex-col gap-1">
         <label htmlFor="zip" className="font-medium">{copy.form.zipLabel}</label>
