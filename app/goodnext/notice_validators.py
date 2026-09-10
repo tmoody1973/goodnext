@@ -73,10 +73,11 @@ def validate_notice_plan(proposal: NoticePlanProposal, ctx: NoticeContext) -> tu
         ids = cited(t.passage_ids, f"task '{t.kind}'")
         if not ids or not clean_text(t.text, f"task '{t.kind}'"):
             continue
-        supporting = " ".join(passages[i].text for i in ids)
+        # Literal means printed somewhere in the letter; the model may cite the wrong passage.
+        letter_text = " ".join(p.text for p in passages.values())
         date_text, date_kind = t.date_text, t.date_kind
-        if date_text != "not stated" and date_text not in supporting:
-            violations.append(f"task '{t.kind}': date '{date_text}' is not literal text of a cited passage")
+        if date_text != "not stated" and date_text not in letter_text:
+            violations.append(f"task '{t.kind}': date '{date_text}' is not literal text of the letter")
             date_text, date_kind = "not stated", "unknown"
         tasks.append(t.model_copy(update={"passage_ids": ids, "date_text": date_text, "date_kind": date_kind}))
 
