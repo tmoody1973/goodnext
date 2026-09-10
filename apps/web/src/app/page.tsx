@@ -10,6 +10,7 @@ import { postPlan, type Envelope, type HelpRoute, type PlanData } from "@/lib/ap
 import { copy, fill } from "@/lib/copy";
 import { formatPlanDate } from "@/lib/format";
 import { telHref } from "@/lib/phone";
+import { primaryActionClass, secondaryActionClass, textLinkClass } from "@/lib/styles";
 
 // PRD section 8: after 30 s of waiting, show explicit delayed status.
 export const DELAYED_AFTER_MS = 30_000;
@@ -22,6 +23,17 @@ type State =
 // A network failure looks like the API's own 503 to the resident.
 function unreachableEnvelope(): Envelope {
   return { status: "temporarily_unavailable", data: null, evidence: [], missing: [], warnings: ["unreachable"], retryable: true, request_id: "local" };
+}
+
+// The form folds away when a result lands, which would drop keyboard focus on
+// the body. Move it to the result heading so a keyboard or screen-reader user
+// starts reading at the answer.
+function useFocusOnMount<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    ref.current?.focus();
+  }, []);
+  return ref;
 }
 
 function focusZip() {
@@ -104,7 +116,7 @@ export default function FoodTodayPage() {
             {state.delayed && (
               <>
                 <p role="status" className="font-medium">{copy.wait.delayed}</p>
-                <button type="button" onClick={cancel} className="self-start rounded-xl border border-navy px-5 py-2.5 font-semibold text-navy">
+                <button type="button" onClick={cancel} className={secondaryActionClass}>
                   {copy.wait.cancel}
                 </button>
                 <HelpRoutes routes={routes} />
@@ -136,28 +148,33 @@ function laterDays(data: PlanData) {
   return data.days.filter((d) => d.date > data.start_date).slice(0, 6);
 }
 
-function countLine(n: number) {
-  if (n === 0) return copy.result.noneListedToday;
-  if (n === 1) return copy.result.oneListedToday;
-  return fill(copy.result.listedToday, { n: String(n) });
+// Decision 007: the date and the count are the focal moment. The number is the
+// panel's largest element, in amber (the one color for what can be counted).
+function CountLine({ n }: { n: number }) {
+  if (n === 0) return <p className="mt-2 text-lg text-navy-soft">{copy.result.noneListedToday}</p>;
+  return (
+    <p className="mt-2 flex items-baseline gap-x-3 text-lg text-paper">
+      <span className="text-5xl font-bold leading-none tracking-[-0.02em] text-amber">{n}</span> {copy.result.listedToday}
+    </p>
+  );
 }
 
 type ResultProps = { envelope: Envelope; zip: string; routes: HelpRoute[]; onRetry: () => void; onChange: () => void };
 
-const actionClass = "self-start rounded-xl bg-amber px-5 py-2.5 font-semibold text-ink shadow-[0_2px_8px_rgba(11,42,74,0.18)]";
 
 function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
+  const headingRef = useFocusOnMount<HTMLHeadingElement>();
   const data = envelope.data;
   const hasPlan = (envelope.status === "success" || envelope.status === "partial") && data !== null;
   const visits = hasPlan ? todayVisits(data) : [];
   if (envelope.status === "no_match") {
     return (
       <div className="flex flex-col gap-4">
-        <div className="rounded-2xl bg-navy px-5 py-4 text-paper">
-          <h1 className="text-2xl font-bold text-balance">{fill(copy.noMatch.statement, { zip })}</h1>
+        <div className="rounded-2xl bg-navy px-5 py-6 text-paper sm:px-7 sm:py-8">
+          <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-bold text-balance break-words outline-none sm:text-4xl sm:tracking-[-0.02em]">{fill(copy.noMatch.statement, { zip })}</h1>
         </div>
         <HelpRoutes routes={routes} />
-        <button type="button" onClick={onChange} className={actionClass}>{copy.noMatch.tryAnother}</button>
+        <button type="button" onClick={onChange} className={primaryActionClass}>{copy.noMatch.tryAnother}</button>
       </div>
     );
   }
@@ -165,7 +182,7 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
     return (
       <div className="flex flex-col gap-4">
         <p role="alert" className="font-medium text-alert">{copy.result.status.temporarily_unavailable}</p>
-        <button type="button" onClick={onRetry} className={actionClass}>{copy.actions.retry}</button>
+        <button type="button" onClick={onRetry} className={primaryActionClass}>{copy.actions.retry}</button>
         <HelpRoutes routes={routes} />
       </div>
     );
@@ -174,18 +191,18 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
     return (
       <div className="flex flex-col gap-4">
         <p role="alert" className="font-medium">{copy.result.status[envelope.status]}</p>
-        <button type="button" onClick={onChange} className={actionClass}>{copy.actions.change}</button>
+        <button type="button" onClick={onChange} className={primaryActionClass}>{copy.actions.change}</button>
         <HelpRoutes routes={routes} />
       </div>
     );
   }
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-2xl bg-navy px-5 py-4 text-paper">
+      <div className="rounded-2xl bg-navy px-5 py-6 text-paper sm:px-7 sm:py-8 print:border print:border-ink">
         {data?.start_date && (
-          <h1 className="text-2xl font-bold text-balance">{fill(copy.result.heading, { date: formatPlanDate(data.start_date) })}</h1>
+          <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-bold text-balance break-words outline-none sm:text-4xl sm:tracking-[-0.02em]">{fill(copy.result.heading, { date: formatPlanDate(data.start_date) })}</h1>
         )}
-        <p className="mt-1 text-navy-soft">{hasPlan ? countLine(visits.length) : copy.result.status[envelope.status]}</p>
+        {hasPlan ? <CountLine n={visits.length} /> : <p className="mt-2 text-lg text-navy-soft">{copy.result.status[envelope.status]}</p>}
       </div>
       {envelope.status === "partial" && <p className="font-medium">{copy.result.status.partial}</p>}
       {visits.map((v) => (
@@ -199,7 +216,7 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
               <li key={u.resource_id}>
                 {u.provider}{" "}
                 {telHref(u.contact) ? (
-                  <a href={telHref(u.contact)!} className="font-medium text-navy underline underline-offset-4">
+                  <a href={telHref(u.contact)!} className={textLinkClass}>
                     {u.contact}
                   </a>
                 ) : (
@@ -209,6 +226,11 @@ function Result({ envelope, zip, routes, onRetry, onChange }: ResultProps) {
             ))}
           </ul>
         </section>
+      )}
+      {hasPlan && (visits.length > 0 || data.unconfirmed.length > 0) && (
+        <button type="button" onClick={() => window.print()} className={secondaryActionClass}>
+          {copy.print.action}
+        </button>
       )}
       {hasPlan && <WeekTiles days={laterDays(data)} />}
       <HelpRoutes routes={routes} />

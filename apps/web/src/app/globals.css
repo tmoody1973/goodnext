@@ -42,3 +42,32 @@ body {
     animation: none !important;
   }
 }
+
+/* Print (spec S6, story 34): a resident on a library computer carries today's
+   list on paper. Paper gets the wordmark, the answers line, the date panel,
+   the cards, the unconfirmed list, and the help routes. It drops the form,
+   every button (including the day tiles), the week strip, and the Directions
+   links, which only work on a device. Flat black on white saves shared ink;
+   the panel and time block keep a rule so their shape survives. */
+@media print {
+  form,
+  button,
+  section[aria-labelledby="week-heading"] {
+    display: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none !important;
+  }
+
+  article,
+  section[aria-labelledby="help-heading"],
+  section.border-line {
+    border: 1px solid #000;
+    break-inside: avoid;
+  }
+}

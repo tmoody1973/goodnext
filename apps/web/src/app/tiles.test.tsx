@@ -47,8 +47,8 @@ describe("later this week tiles", () => {
     expect(entries[1]).toHaveTextContent("Thu Sep 10: 10:00 AM–2:00 PM");
     expect(entries[1]).toHaveTextContent("Free");
     expect(entries[1]).toHaveTextContent("Last checked 2026-09-05");
-    expect(within(entries[1]).getByRole("link", { name: "Call (414) 555-0101" })).toHaveAttribute("href", "tel:4145550101");
-    expect(within(entries[1]).getByRole("link", { name: "Directions" })).toHaveAttribute("href", expect.stringContaining("google.com/maps"));
+    expect(within(entries[1]).getByRole("link", { name: "Call (414) 555-0101, Northside Community Pantry" })).toHaveAttribute("href", "tel:4145550101");
+    expect(within(entries[1]).getByRole("link", { name: "Directions to Northside Community Pantry" })).toHaveAttribute("href", expect.stringContaining("google.com/maps"));
     expect(strip.textContent).not.toContain("Not open today");
     expect(strip.textContent).not.toContain("We can't confirm they have food today");
   });

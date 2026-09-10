@@ -5,6 +5,7 @@ import type { DayPlan, PlannedVisit } from "@/lib/api";
 import { copy, fill } from "@/lib/copy";
 import { formatTileDate } from "@/lib/format";
 import { telHref } from "@/lib/phone";
+import { textLinkClass } from "@/lib/styles";
 
 // CONTEXT.md "Later this week": days two to seven of the Bridge Plan, shown as
 // tiles that unfold one at a time. Listed, never promised. Later-day entries use
@@ -24,16 +25,18 @@ export function WeekTiles({ days }: { days: DayPlan[] }) {
           const { weekday, day: dayLabel } = formatTileDate(day.date);
           const isOpen = open === day.date;
           const count = n === 0 ? copy.week.nothing : n === 1 ? copy.week.oneListed : fill(copy.week.listed, { n: String(n) });
-          const cls = `flex w-full flex-col items-center rounded-xl border px-2 py-2 text-center ${
+          // The count is the scan target, so it is the tile's dominant line.
+          const cls = `flex h-full w-full flex-col items-center justify-center rounded-xl border px-2 py-2 text-center [overflow-wrap:anywhere] ${
             isOpen ? "border-navy bg-navy text-paper" : "border-line bg-paper text-ink"
           }`;
+          const buttonCls = `${cls} transition-colors hover:border-navy active:bg-navy-soft`;
           return (
             <li key={day.date}>
               {n === 0 ? (
-                <div className={`${cls} text-ink-soft`} aria-label={`${weekday} ${dayLabel}: ${count}`}>
+                <div className={`${cls} text-ink-soft`}>
                   <span className="text-xs font-semibold uppercase">{weekday}</span>
                   <span className="text-sm">{dayLabel}</span>
-                  <span className="mt-1 text-xs">{count}</span>
+                  <span className="mt-1 text-sm font-medium">{count}</span>
                 </div>
               ) : (
                 <button
@@ -41,11 +44,11 @@ export function WeekTiles({ days }: { days: DayPlan[] }) {
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                   onClick={() => setOpen(isOpen ? null : day.date)}
-                  className={cls}
+                  className={buttonCls}
                 >
                   <span className="text-xs font-semibold uppercase">{weekday}</span>
                   <span className="text-sm">{dayLabel}</span>
-                  <span className={`mt-1 text-xs font-medium ${isOpen ? "text-navy-soft" : "text-amber-deep"}`}>{count}</span>
+                  <span className={`mt-1 text-base font-semibold ${isOpen ? "text-paper" : "text-amber-deep"}`}>{count}</span>
                 </button>
               )}
             </li>
@@ -78,12 +81,12 @@ function DayEntry({ visit }: { visit: PlannedVisit }) {
       {c && <p>{c.freshness_text}</p>}
       <p className="flex flex-wrap gap-x-4 gap-y-1">
         {c?.directions_url && (
-          <a href={c.directions_url} target="_blank" rel="noopener noreferrer" className="font-medium text-navy underline underline-offset-4">
+          <a href={c.directions_url} target="_blank" rel="noopener noreferrer" aria-label={fill(copy.card.directionsLabel, { provider: visit.provider })} className={textLinkClass}>
             {copy.card.directions}
           </a>
         )}
         {tel ? (
-          <a href={tel} className="font-medium text-navy underline underline-offset-4">{fill(copy.card.call, { phone: visit.contact })}</a>
+          <a href={tel} aria-label={fill(copy.card.callLabel, { phone: visit.contact, provider: visit.provider })} className={textLinkClass}>{fill(copy.card.call, { phone: visit.contact })}</a>
         ) : (
           visit.contact && <span className="text-ink-soft">{visit.contact}</span>
         )}

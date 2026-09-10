@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import path from "node:path";
 import { copy } from "./copy";
-import { NEVER_LIST, avoidWordsFrom, neverListHits, readContextAvoidWords } from "./never-list";
+import { NEVER_LIST, VENDOR_NEVER_LIST, avoidWordsFrom, neverListHits, readContextAvoidWords } from "./never-list";
 
 const CONTEXT_MD = path.resolve(__dirname, "../../../../CONTEXT.md");
 
@@ -23,5 +23,11 @@ describe("never-list", () => {
   it("catches a banned word as a whole word only", () => {
     expect(neverListHits({ a: "Food is available now" }, NEVER_LIST)).toEqual(['a: "available"']);
     expect(neverListHits({ a: "Temporarily unavailable" }, NEVER_LIST)).toEqual([]);
+  });
+});
+
+describe("vendor never-list", () => {
+  it("the copy module names no vendor or build technology", () => {
+    expect(neverListHits(copy, VENDOR_NEVER_LIST)).toEqual([]);
   });
 });

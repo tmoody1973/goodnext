@@ -1,6 +1,7 @@
 # GoodNext handoff
 
-Written September 8, 2026, 21:40 CDT, for a fresh Claude Code session.
+Written September 8, 2026, 21:40 CDT; updated 23:59 CDT after MOO-786 and
+MOO-787 closed. For a fresh Claude Code session.
 Read this, then `CONTEXT.md`, then `docs/agents/issue-tracker.md`, then
 `docs/specs/food-today-screen.md`. Do not re-read the planning docs unless a
 task needs them; the decisions are settled.
@@ -22,21 +23,21 @@ or a notice before helping with food, or use real residents' documents.
 | Strands agent (Python 3.12) | `app/goodnext/` | 42 tests green; deployed runtime v5, verified live |
 | FastAPI backend | `services/api/` | 13 tests green; truthful 503 on any agent failure (PR #13) |
 | AgentCore CLI config + CDK | `agentcore/` | Deployed to us-east-1 |
-| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Functionally complete: form, waiting states, today's cards, week tiles, no-match, summary line, help routes. 28 tests green. Finish pass (MOO-786) and closing live run (MOO-787) open |
+| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Complete and finished: form, waiting states, today's cards, week tiles, no-match, summary line, help routes, print sheet, accessibility pass. 42 tests green (axe-core fixture test included). MOO-786 and MOO-787 Done on branch `tarikjmoody/moo-786-finish-pass`, **11 commits, not yet pushed** |
 | Directory data | `app/goodnext/fixtures/` | 93 records, see below |
 | Help routes | `app/goodnext/help_routes.json` | One reviewed file; agent and API both read it (decision 009) |
 | Specs | `docs/specs/food-today.md` (agent, API), `docs/specs/food-today-screen.md` (website) | Settled; grill notes beside each |
-| Design context | `PRODUCT.md`, `.impeccable/surfaces/apps-web-src-app-page-tsx.md`, `.impeccable/mocks/decision/` | Shape pass done; direction is the 7-Day Forecast Strip (decision 007); **DESIGN.md does not exist yet, MOO-786 writes it** |
-| Decisions | `docs/decisions/001` to `009` | Plain English; "What actually happened" blank for Tarik |
-| Learning log | `docs/LEARNING-LOG.md` | One entry (dev proxy timeout) |
+| Design context | `PRODUCT.md`, `DESIGN.md`, `.impeccable/design.json`, `.impeccable/surfaces/apps-web-src-app-page-tsx.md`, `.impeccable/mocks/decision/`, `.impeccable/review/` (untracked captures) | Direction is the 7-Day Forecast Strip (decision 007). DESIGN.md records the built system (finish pass MOO-786). Read DESIGN.md before touching any web UI |
+| Decisions | `docs/decisions/001` to `010` | Plain English; "What actually happened" blank for Tarik |
+| Learning log | `docs/LEARNING-LOG.md` | Two entries (dev proxy timeout; the bot PR) |
 | Research | `docs/research/` | Data access, 211 guide, drafts, call sheet |
 | Evidence | `docs/evidence/` | Live responses and screenshots per issue |
 
 Tracker: **Linear**, team MOO, project "GoodNext — Agents for Humans
 Hackathon". Only the `linear-build` skill creates, moves, or closes issues.
-Food today agent issues MOO-770 to 778: Done. Screen issues MOO-779 to 785
-and agent fixes 780, 781: Done, merged, with evidence comments. **Open:
-MOO-786 (finish pass) and MOO-787 (live run).** 787 is blocked by 786.
+Food today agent issues MOO-770 to 778: Done. Screen issues MOO-779 to 787
+and agent fixes 780, 781: Done with evidence comments. 786 and 787 are Done
+in Linear but their branch is **not merged**; see "Next" below.
 
 GitHub: https://github.com/tmoody1973/goodnext. PRs #4 to #11 and #13 merged
 2026-09-08. CI runs agent tests, API tests, `agentcore validate`, and the web
@@ -78,63 +79,47 @@ Rules from real data (decision 006): unknown service area shows only for the
 site's own ZIP; over 14 days old is "call to confirm" with the date; only a
 missing date is "unconfirmed".
 
-## Next: MOO-786, the Impeccable finish pass
+## Next: get the finish-pass branch onto main
 
-Read the Linear issue with `linear-build` (`get_issue MOO-786`) before starting;
-it is the contract. In short: print stylesheet, keyboard and screen-reader
-pass, 320 px and 200 percent zoom, contrast, reduced motion, the Impeccable
-detector once, findings fixed in one batch, DESIGN.md written from the built
-screen, no internal names on screen.
+Branch `tarikjmoody/moo-786-finish-pass` holds MOO-786 and MOO-787: print
+sheet, accessibility pass (focus to the result heading, provider-named links,
+tel:211, axe test), reflow fixes at 320 px and doubled text, the reviewer's
+design fixes (amber count as the focal number, compact time row on phones,
+taller today panel, Print below the cards, dominant tile count, hover and
+pressed states), DESIGN.md and its sidecar, decision 010, evidence for both
+issues. 42 web tests green; typecheck and build green; agent and API suites
+untouched. Steps, all Tarik's:
 
-How Impeccable wants it run (skill `impeccable`, reference `new-work.md`
-section 7 "Inspect and finish", plus `audit.md` and `polish.md`):
+1. **Close PR #12.** A PostHog Desktop "self-driving" bot opened it at 20:06
+   CDT against a stale main with a partial version of MOO-786. Not adopted;
+   its good ideas were rebuilt on this branch. Closing it also stops the Linear
+   automation that flipped MOO-786 to Done with no evidence.
+2. Say "push"; Claude pushes the branch and opens the PR; CI runs the four
+   jobs; Tarik merges.
+3. **Decide fix 5 from the finish review:** two synthetic records (St. Demo
+   Hot Meal Program, Northside Community Pantry on some runs) carry 555
+   numbers with no "(synthetic)" label or source line on the demo dates.
+   Either give the nine synthetic fixture records a `source_text` naming them
+   synthetic, or drop them from the demo week. Fixture and agent side, one
+   small ticket.
+4. Optional, small: show the response `request_id` as a "Reference" line on
+   the result so a support call can quote it (MOO-787 noted the screen does
+   not display it).
 
-1. Run `node $(realpath ~/.claude/skills/impeccable/scripts)/context.mjs --target apps/web/src/app/page.tsx`
-   once. The skill folder is a symlink; scripts only run through the real path.
-2. Build every state locally and capture one batched round: desktop and
-   mobile (320 and 390 wide), at 100 and 200 percent zoom, into
-   `.impeccable/review/desktop.png`, `mobile.png`. Clip captures to the element
-   (see the ego-browser pattern below); full-viewport captures from the top
-   of the page have twice come out blank or wrong.
-3. Run the detector once: `node $(realpath ~/.claude/skills/impeccable/scripts)/detect.mjs --json apps/web/src`.
-   Fix what is mechanical in one batch.
-4. The finish reviewer and documenter are shipped as Codex agent files
-   (`~/.claude/skills/impeccable/agents/*.toml`), not as Claude Code agent
-   types. Run them as fresh `general-purpose` Agent calls with the packet the
-   reference lists, or in-thread from `reference/degraded/finish-reviewer.md`
-   and `reference/degraded/documenter.md`. Say which was used.
-5. DESIGN.md at the repo root, written from the built world: palette (sample
-   the hex values from `apps/web/src/app/globals.css`, they are the source),
-   type (system sans), spacing, the reusable pieces (time block, option card,
-   day tile, summary line, help routes, pill), motion grammar (none beyond
-   hover color; reduced motion honored). Update the surface brief to record
-   the approved comp `.impeccable/mocks/decision/model-pick.webp`.
-6. Two inspection rounds is the ceiling. Then MOO-787.
-
-Things already noticed for the finish pass, from the live screenshots:
-- The navy time block on a card stretches to the card's full height when the
-  requirements text is long; it should stay compact (top-aligned or fixed).
-- "2-1-1" renders as plain text in help routes because it has fewer than seven
-  digits; a `tel:211` link is valid and better.
-- The help-routes footer repeats the same three entries on every result; fine,
-  but the footer and the delayed-status copy share one component.
-- Every card says "We can't confirm they have food today." in bold; on three
-  cards that is heavy. Keep the line (spec claim 6, never removed); weight is
-  open.
-- The "(synthetic)" label appears on the demo date. Decision for Tarik: keep
-  for honesty or drop synthetic records from the demo week.
-- Direction contract lives in `apps/web/src/app/layout.tsx` inside a
-  `<template id="direction-contract">`; grep the built `out/index.html` for
-  `a5fbc27f` to confirm it survives.
-
-After 786: **MOO-787**, the closing live run (real 53206 through the dev
-proxy on the deployed runtime, screenshot, cookie, console, request id).
+Impeccable notes for the next UI change: read `DESIGN.md` first; run
+`context.mjs --target <file>` once; the reviewer and documenter run as fresh
+`general-purpose` Agent calls from the `reference/degraded/*.md` role files
+(the shipped `.toml` agents are Codex-only); capture on the production build
+(`pnpm build` then a static server) so the dev badge never covers content;
+set the viewport with `Emulation.setDeviceMetricsOverride` **after** the tab
+exists, and log the heading text before every capture.
 
 ## Then, in order (five days left)
 
 1. **Latency.** Return day one first, the week second; or cache the system
    prompt. The model writes roughly 5,800 tokens for a seven-day plan, which is
-   the whole wait. Measure on the real flow.
+   the whole wait. Measured on the real flow tonight (MOO-787): 95.4, 89.2, and
+   87.1 seconds; delayed status at about 31 seconds each time.
 2. **Judge-facing hosting.** One hostname for site and API (decision 008):
    static files plus a path rule sending `/api/*` to the API with an origin
    timeout of at least 180 s; the API container must carry
@@ -149,7 +134,8 @@ proxy on the deployed runtime, screenshot, cookie, console, request id).
 
 ## Known problems
 
-1. Plan latency 60 to 105 s (above).
+1. Plan latency 87 to 105 s (above). Plans also differ run to run (the model
+   picks different valid visits); the validator accepts each.
 2. Older log events (v1, v2) hold synthetic test prompts; set retention.
 3. The model sometimes places visits on days with no window; the validator
    strips them and returns `partial`. Working as designed.
@@ -170,10 +156,13 @@ proxy on the deployed runtime, screenshot, cookie, console, request id).
 - Per ticket: branch off main, tests first, one bounded live run with clipped
   screenshots, PR, CI green, `linear-build` closes with evidence, Tarik merges.
 - Browser checks run through `ego-browser`. Real typing (`click` then
-  `typeText`), scroll the target into view before clicking, clip screenshots
-  with `Page.captureScreenshot` and a `clip` from the element's rect, do the
-  whole run in one bounded script and `completeTaskSpace` at the end. Stop the
-  dev server and API before running the unit tests; they flake under load.
+  `typeText`, then read the field value back before submitting; at phone
+  emulation the first keystrokes sometimes miss), scroll the target into view
+  before clicking, clip screenshots with `Page.captureScreenshot` and a `clip`
+  from the `main` element's rect, keep captures under about 6000 px tall (taller
+  ones fail), do the run in bounded scripts and `completeTaskSpace` at the end.
+  Stop the dev server and API before running the unit tests; they time out
+  under load (three did tonight, all green once the servers were stopped).
 - Live web checks cost one model call each (cents). A no-match ZIP such as
   53001 answers in seconds and costs nothing.
 
@@ -181,14 +170,13 @@ proxy on the deployed runtime, screenshot, cookie, console, request id).
 
 ```text
 We are building GoodNext in /Users/tarikmoody/Projects/foodshare-strands.
-Read HANDOFF.md, then CONTEXT.md, then docs/agents/issue-tracker.md, then
-docs/specs/food-today-screen.md. Do not re-read the planning docs unless a
-task needs them.
+Read HANDOFF.md, then CONTEXT.md, then DESIGN.md, then
+docs/agents/issue-tracker.md. Do not re-read the planning docs unless a task
+needs them.
 
-Build MOO-786, the Impeccable finish pass for the Food today screen, on a
-new branch off main: read the issue with linear-build, follow HANDOFF's
-"Next: MOO-786" section and the impeccable skill's finish references, write
-DESIGN.md, and close the issue with evidence. Then MOO-787. Explain in plain
-English. Nothing in AWS is created or changed without my go; deploys, pushes,
-and merges are mine.
+The finish-pass branch tarikjmoody/moo-786-finish-pass is merged (or: I will
+merge it now). Next is latency: return Food today first and the rest of the
+week second, measured on the real flow, as a Linear issue created with
+linear-build. Explain in plain English. Nothing in AWS is created or changed
+without my go; deploys, pushes, and merges are mine.
 ```

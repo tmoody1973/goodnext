@@ -22,7 +22,7 @@ describe("today's cards", () => {
   it("renders one card per today visit from the 2026-09-09 response, claims in order", async () => {
     await submitWith(day9);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Food today, Wednesday, September 9");
-    expect(screen.getByText("2 listed today")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 }).parentElement).toHaveTextContent("2 listed today");
 
     const cards = screen.getAllByRole("article");
     expect(cards).toHaveLength(2);
@@ -46,10 +46,10 @@ describe("today's cards", () => {
     expect(positions.every((p) => p >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
 
-    const directions = first.getByRole("link", { name: "Directions" });
+    const directions = first.getByRole("link", { name: "Directions to Capuchin Community Services – House of Peace" });
     expect(directions).toHaveAttribute("href", expect.stringContaining("google.com/maps"));
     expect(directions).toHaveAttribute("target", "_blank");
-    expect(first.getByRole("link", { name: "Call 414-933-1300" })).toHaveAttribute("href", "tel:4149331300");
+    expect(first.getByRole("link", { name: "Call 414-933-1300, Capuchin Community Services – House of Peace" })).toHaveAttribute("href", "tel:4149331300");
 
     // Second card has no source line and no appointment line.
     expect(cards[1].textContent).not.toContain("Source:");
@@ -70,7 +70,7 @@ describe("today's cards", () => {
 
   it("renders the 2026-09-10 response: three cards with appointment and source lines", async () => {
     await submitWith(day10);
-    expect(screen.getByText("3 listed today")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 }).parentElement).toHaveTextContent("3 listed today");
     const cards = screen.getAllByRole("article");
     expect(cards).toHaveLength(3);
     expect(cards[0].textContent).toContain("The Gathering at Running Rebels");

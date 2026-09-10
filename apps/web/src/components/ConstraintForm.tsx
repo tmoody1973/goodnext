@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { copy } from "@/lib/copy";
 import type { Constraints, Kitchen, Travel } from "@/lib/api";
+import { primaryActionClass } from "@/lib/styles";
 
 const KITCHENS: Kitchen[] = ["full", "microwave_only", "none"];
 const TRAVELS: Travel[] = ["walk", "bus", "car", "ride"];
@@ -89,7 +90,7 @@ export function ConstraintForm({ busy = false, onSubmit }: Props) {
           onChange={(e) => set("zip", e.target.value.replace(/\D/g, ""))}
           aria-describedby={errors.zip ? "zip-help zip-error" : "zip-help"}
           aria-invalid={errors.zip ? true : undefined}
-          className="w-40 rounded-xl border border-line px-4 py-3 text-lg"
+          className="w-40 max-w-full rounded-xl border border-ink-soft px-4 py-3 text-lg"
         />
         {errors.zip && <p id="zip-error" role="alert" className="text-sm font-medium text-alert">{errors.zip}</p>}
       </div>
@@ -109,7 +110,7 @@ export function ConstraintForm({ busy = false, onSubmit }: Props) {
             value={values.money}
             onChange={(e) => set("money", e.target.value)}
             aria-describedby="money-help"
-            className="w-32 rounded-xl border border-line px-4 py-3 text-lg"
+            className="w-32 min-w-0 max-w-full rounded-xl border border-ink-soft px-4 py-3 text-lg"
           />
         </div>
       </div>
@@ -145,14 +146,14 @@ export function ConstraintForm({ busy = false, onSubmit }: Props) {
           step={5}
           value={values.minutes}
           onChange={(e) => set("minutes", e.target.value)}
-          className="w-32 rounded-xl border border-line px-4 py-3 text-lg"
+          className="w-32 max-w-full rounded-xl border border-ink-soft px-4 py-3 text-lg"
         />
       </div>
 
       <button
         type="submit"
         disabled={busy}
-        className="self-start rounded-xl bg-amber px-6 py-3 text-lg font-semibold text-ink shadow-[0_2px_8px_rgba(11,42,74,0.18)] disabled:opacity-60"
+        className={`${primaryActionClass} px-6 py-3 text-lg disabled:opacity-60`}
       >
         {copy.form.submit}
       </button>
