@@ -13,11 +13,11 @@ function Passages({ ids, byId }: { ids: string[]; byId: Map<string, NoticePassag
   return (
     <div className="flex flex-col gap-2">
       {passages.map((p) => (
-        <blockquote key={p.id} className="rounded-xl bg-navy-soft px-4 py-3 text-sm">
-          <p className="text-xs font-semibold text-ink-soft">
-            <span>{r.fromLetter}</span> <span aria-hidden="true">·</span> <span>{fill(r.page, { n: String(p.page) })}</span>
-          </p>
-          <p className="mt-1">{p.text}</p>
+        <blockquote key={p.id} className="rounded-2xl bg-navy-soft px-4 py-3 text-sm print:border print:border-ink">
+          <p>{p.text}</p>
+          <footer className="mt-1 text-xs text-ink-soft">
+            <span>{r.fromLetter}</span>, <span>{fill(r.page, { n: String(p.page) })}</span>
+          </footer>
         </blockquote>
       ))}
     </div>
@@ -35,7 +35,7 @@ export function NoticeResult({ data, onFindFood, onAnother }: { data: NoticeData
         <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-bold text-balance break-words outline-none sm:text-4xl sm:tracking-[-0.02em]">
           {r.kinds[data.letter_kind]}
         </h1>
-        <p className="mt-2 text-xl font-semibold text-amber">{r.screening[data.screening]}</p>
+        <p className="mt-2 text-xl font-semibold">{r.screening[data.screening]}</p>
         {data.explanation && <p className="mt-3 text-navy-soft">{data.explanation}</p>}
       </div>
 
@@ -44,8 +44,8 @@ export function NoticeResult({ data, onFindFood, onAnother }: { data: NoticeData
           <h2 id="says-heading" className="text-lg font-semibold">{r.says}</h2>
           {data.findings.map((f, i) => (
             <article key={i} className="flex flex-col gap-3 rounded-2xl bg-paper p-4 shadow-[0_2px_10px_rgba(11,42,74,0.12)]">
-              <p className="text-sm font-semibold text-ink-soft">{f.label}</p>
-              <p className="font-medium">{f.text}</p>
+              <h3 className="font-semibold">{f.label}</h3>
+              <p>{f.text}</p>
               <Passages ids={f.passage_ids} byId={byId} />
             </article>
           ))}
@@ -76,7 +76,7 @@ export function NoticeResult({ data, onFindFood, onAnother }: { data: NoticeData
                   )}
                 </p>
                 <p className="text-xs text-ink-soft">
-                  {t.passage_ids.map((id) => byId.get(id)).filter(Boolean).map((p) => fill(r.page, { n: String(p!.page) })).join(", ")}
+                  {r.fromLetter}, {[...new Set(t.passage_ids.map((id) => byId.get(id)?.page).filter(Boolean))].map((n) => fill(r.page, { n: String(n) })).join(", ").toLowerCase()}
                 </p>
               </li>
             ))}

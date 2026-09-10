@@ -92,12 +92,11 @@ export function NoticeFlow({ routes, onRoutes, onFindFood }: Props) {
   return (
     <div className="flex flex-col gap-6">
       {idle && !manual && (
-        <form onSubmit={submitFile} noValidate className="flex flex-col gap-4">
-          <h2 className="text-xl font-semibold text-balance">{n.heading}</h2>
+        <form onSubmit={submitFile} noValidate aria-label={n.heading} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
             <label htmlFor="letter-file" className="font-medium">{n.fileLabel}</label>
             <p id="letter-limits" className="text-sm text-ink-soft">{n.limits}</p>
-            <input id="letter-file" ref={fileInput} type="file" accept="application/pdf,image/png,image/jpeg" aria-describedby="letter-limits letter-consent" className="rounded-xl border border-ink-soft px-4 py-3 file:mr-3 file:rounded-lg file:border-0 file:bg-navy-soft file:px-3 file:py-1.5 file:font-medium" />
+            <input id="letter-file" ref={fileInput} type="file" accept="application/pdf,image/png,image/jpeg" aria-describedby="letter-limits letter-consent" className="rounded-xl border border-ink-soft px-4 py-3 file:mr-3 file:rounded-xl file:border-0 file:bg-navy-soft file:px-3 file:py-1.5 file:font-medium" />
           </div>
           <p id="letter-consent" className="text-sm">{n.consent}</p>
           {state.error && <p role="alert" className="text-sm font-medium text-alert">{state.error}</p>}
@@ -107,8 +106,7 @@ export function NoticeFlow({ routes, onRoutes, onFindFood }: Props) {
       )}
 
       {idle && manual && (
-        <form onSubmit={submitManual} noValidate className="flex flex-col gap-4">
-          <h2 className="text-xl font-semibold text-balance">{n.heading}</h2>
+        <form onSubmit={submitManual} noValidate aria-label={n.heading} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
             <label htmlFor="letter-kind" className="font-medium">{n.kindLabel}</label>
             <select id="letter-kind" value={letterKind} onChange={(e) => setLetterKind(e.target.value as LetterKind)} className="w-full max-w-sm rounded-xl border border-ink-soft bg-paper px-4 py-3 text-lg">

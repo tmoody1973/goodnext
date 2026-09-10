@@ -101,6 +101,7 @@ describe("Understand my letter", () => {
     const finding = screen.getByText("A sanction means you will not get FoodShare from 10/01/2026 to 12/31/2026.").closest("article")!;
     expect(within(finding).getByText(/This letter is to notify you/)).toBeInTheDocument();
     expect(within(finding).getByText("Page 1")).toBeInTheDocument();
+    expect(within(finding).getByRole("heading", { level: 3 })).toHaveTextContent("What the letter says");
     expect(screen.getByText("Call your agency to ask about good cause and your right to a fair hearing.")).toBeInTheDocument();
     const tasks = screen.getByRole("list", { name: "Tasks" });
     expect(within(tasks).getAllByRole("listitem")).toHaveLength(2);
