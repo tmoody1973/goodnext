@@ -1,0 +1,90 @@
+# Source: Wisconsin DHS sample letter, file 3tlb-warning-letter-sample.pdf, placeholder fields, watermarked SAMPLE. Extracted 2026-09-10 with pypdf. Research fixture; not a real resident notice.
+
+--- page 1 ---
+SAMPLE
+PIN: 12345678 Date: Page 1 of 3
+State of Wisconsin
+PIN #: 12345678
+East Central IM Partnership
+Phone Number: 1-888-256- 4563
+Fax Number: 1-855-293-1822
+The State of Wisconsin is an equal opportunity service provider.  This letter contains information
+that affects your benefits. If you need this material in a different format because of a disability or
+if you need this letter translated or explained in your own language, please call 1-888-256-4563.
+These services are free.
+Important Information about Your Time-Limited
+FoodShare Benefits
+Our records show that you are not meeting the work requirement for getting ongoing
+FoodShare benefits and that you have already used one of your three time-limited
+FoodShare benefit months. If you do not start meeting the work requirement or meet an
+exemption from the work requirement, you will use up your three time-limited FoodShare
+benefit months, and your FoodShare benefits will end.
+One way that you can meet the work requirement is by taking part in the FoodShare
+Employment and Training (FSET) program. The FSET program is a free program that can
+help you build job skills and find employment. If you want to meet the work requirement
+by taking part in the FSET program, you must enroll and take part in activities by the
+start of your third time-limited FoodShare benefit month. Otherwise you will use up
+your three time-limited benefit months, and your FoodShare benefits will end.
+To enroll in the FSET program or to get answers to your questions about FSET, call your
+FSET service provider at (608) 123-4567, or go to dhs.wisconsin.gov/foodshare/fset.htm.
+If you are age 18 through 49 years old, with no minor children living in your home who
+are in the same FoodShare household, you may only get up to three months of FoodShare
+benefits in a 36-month period, unless you meet the work requirement or meet an
+exemption from the work requirement.
+CDPU
+CENTRALIZED DOCUMENT PROCESSING UNIT 
+PO BOX 5234
+JANESVILLE WI 53547 5234
+Mailing Date:
+000001
+TEST TESTL
+111 N AAAAA ST
+APPLETON WI 54911 4522
+
+--- page 2 ---
+SAMPLE
+PIN: 12345678 Date: Page 2 of 3
+How to Meet the Work Requirement
+There are three ways to meet the work requirement:
+1. Work at least 80 hours each month.
+2. Take part in an allowable work program, such as the FSET program, Wisconsin
+Works (W-2), or a program under the Workforce Innovation and Opportunity Act
+(WIOA), at least 80 hours each month.
+3. Work and take part in an allowable work program for a combined total of 80 hours
+each month.
+For more information about FSET, go to dhs.wisconsin.gov/foodshare/fset.htm.
+Who is Exempt from the Work Requirement?
+Some adults do not have to meet the work requirement to get FoodShare benefits and are
+considered exempt. You may not have to meet the work requirement if any of the
+following are true:
+· You are living with a child under age 18 who is part of the same FoodShare
+household.
+· You are the primary caretaker for a person who cannot care for himself or herself.
+· You are the primary caretaker for a child under age 6 who does not live in the
+home.
+· You are physically or mentally unable to work. This includes being homeless long-
+term. Being homeless long-term means you will not have a regular place to stay for
+the next 30 nights.
+· You are pregnant.
+· You are receiving or have applied for unemployment insurance.
+· You are taking part in an alcohol or other drug abuse (AODA) treatment or
+rehabilitation program.
+· You are enrolled in an institution of higher learning at least half-time.
+· You are age 18 or older attending high school at least half-time.
+· You are enrolled in W-2 and complying with W-2 requirements.
+· You are working 30 or more hours per week or are earning wages equal to 30 or
+more hours per week at the federal minimum wage.
+If you meet one of the exemptions listed above, you should contact your agency at the
+number listed on the top of page 1 of this letter to report the exemption and find out what
+kind of proof is needed.
+Questions
+
+--- page 3 ---
+SAMPLE
+PIN: 12345678 Date: Page 3 of 3
+If you have questions about this letter or your FoodShare enrollment or if you want to
+report an exemption, call your agency listed at the top of page 1 of this letter.
+This institution is an equal opportunity provider.
+
+--- page 4 ---
+SAMPLE
