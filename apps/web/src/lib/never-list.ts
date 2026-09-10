@@ -29,6 +29,19 @@ export const VENDOR_NEVER_LIST = [
   "linear",
 ] as const;
 
+// Mirrors NOTICE_NEVER_LIST in app/goodnext/notice_validators.py. Verdicts the
+// site never states about a letter (PRD section 3 exclusions).
+export const NOTICE_NEVER_LIST = [
+  "you are eligible",
+  "you are not eligible",
+  "you are exempt",
+  "you qualify",
+  "your benefits will continue",
+  "your case is fixed",
+  "approved",
+  "guaranteed",
+] as const;
+
 // The `_Avoid_:` lines in CONTEXT.md, read at test time so the glossary stays
 // the single source.
 export function avoidWordsFrom(contextMd: string): string[] {

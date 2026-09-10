@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { ConstraintForm, toConstraints, type FormValues } from "@/components/ConstraintForm";
 import { HelpRoutes } from "@/components/HelpRoutes";
+import { NoticeFlow } from "@/components/NoticeFlow";
 import { OptionCard } from "@/components/OptionCard";
 import { SummaryLine } from "@/components/SummaryLine";
 import { WeekTiles } from "@/components/WeekTiles";
@@ -11,29 +12,21 @@ import { copy, fill } from "@/lib/copy";
 import { formatPlanDate } from "@/lib/format";
 import { telHref } from "@/lib/phone";
 import { primaryActionClass, secondaryActionClass, textLinkClass } from "@/lib/styles";
+import { useDelayedStatus } from "@/lib/useDelayedStatus";
+import { useFocusOnMount } from "@/lib/useFocusOnMount";
 
-// PRD section 8: after 30 s of waiting, show explicit delayed status.
-export const DELAYED_AFTER_MS = 30_000;
+export { DELAYED_AFTER_MS } from "@/lib/useDelayedStatus";
+
+type Entry = "food" | "letter";
 
 type State =
   | { kind: "idle" }
-  | { kind: "submitting"; zip: string; delayed: boolean }
+  | { kind: "submitting"; zip: string }
   | { kind: "done"; envelope: Envelope };
 
 // A network failure looks like the API's own 503 to the resident.
 function unreachableEnvelope(): Envelope {
   return { status: "temporarily_unavailable", data: null, evidence: [], missing: [], warnings: ["unreachable"], retryable: true, request_id: "local" };
-}
-
-// The form folds away when a result lands, which would drop keyboard focus on
-// the body. Move it to the result heading so a keyboard or screen-reader user
-// starts reading at the answer.
-function useFocusOnMount<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  useEffect(() => {
-    ref.current?.focus();
-  }, []);
-  return ref;
 }
 
 function focusZip() {
@@ -51,12 +44,9 @@ export default function FoodTodayPage() {
   const [editing, setEditing] = useState(true);
   const lastValues = useRef<FormValues | null>(null);
   const controller = useRef<AbortController | null>(null);
-
-  useEffect(() => {
-    if (state.kind !== "submitting" || state.delayed) return;
-    const timer = setTimeout(() => setState((s) => (s.kind === "submitting" ? { ...s, delayed: true } : s)), DELAYED_AFTER_MS);
-    return () => clearTimeout(timer);
-  }, [state]);
+  // PRD FR01: two entry points, food first; switching never loses entered values.
+  const [entry, setEntry] = useState<Entry>("food");
+  const delayed = useDelayedStatus(state.kind === "submitting");
 
   async function submit(next: FormValues) {
     lastValues.current = next;
@@ -65,7 +55,7 @@ export default function FoodTodayPage() {
     controller.current?.abort();
     const ac = new AbortController();
     controller.current = ac;
-    setState({ kind: "submitting", zip: next.zip, delayed: false });
+    setState({ kind: "submitting", zip: next.zip });
     try {
       const envelope = await postPlan(toConstraints(next), ac.signal);
       if (ac.signal.aborted) return;
@@ -103,6 +93,28 @@ export default function FoodTodayPage() {
         <p className="text-sm text-ink-soft">{copy.site.tagline}</p>
       </header>
 
+      <div role="tablist" aria-label={copy.entry.label} className="flex gap-2">
+        {(["food", "letter"] as Entry[]).map((e) => (
+          <button
+            key={e}
+            type="button"
+            role="tab"
+            id={`tab-${e}`}
+            aria-selected={entry === e}
+            aria-controls={`panel-${e}`}
+            onClick={() => setEntry(e)}
+            className={`rounded-xl border px-4 py-3 font-semibold transition-colors ${entry === e ? "border-navy bg-navy text-paper" : "border-line bg-paper text-ink hover:border-navy"}`}
+          >
+            {copy.entry[e]}
+          </button>
+        ))}
+      </div>
+
+      <div role="tabpanel" id="panel-letter" aria-labelledby="tab-letter" hidden={entry !== "letter"}>
+        <NoticeFlow routes={routes} onRoutes={setRoutes} onFindFood={() => { setEntry("food"); setTimeout(focusZip, 0); }} />
+      </div>
+
+      <div role="tabpanel" id="panel-food" aria-labelledby="tab-food" hidden={entry !== "food"} className="flex flex-col gap-8">
       {!editing && submitted && <SummaryLine values={submitted} onChange={reopen} />}
       <div hidden={!editing}>
         <ConstraintForm busy={busy} onSubmit={submit} />
@@ -113,7 +125,7 @@ export default function FoodTodayPage() {
           <div className="flex flex-col gap-2">
             <p className="font-medium">{fill(copy.wait.checking, { zip: state.zip })}</p>
             <p className="text-ink-soft">{copy.wait.estimate}</p>
-            {state.delayed && (
+            {delayed && (
               <>
                 <p role="status" className="font-medium">{copy.wait.delayed}</p>
                 <button type="button" onClick={cancel} className={secondaryActionClass}>
@@ -134,6 +146,7 @@ export default function FoodTodayPage() {
           />
         )}
       </section>
+      </div>
     </main>
   );
 }
