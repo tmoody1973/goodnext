@@ -1,0 +1,47 @@
+{
+  "_fixture_note": "Reviewed policy passages for demo and tests. Public Wisconsin DHS pages were checked 2026-09-08; these are reviewer-approved dated records, not live policy and not a FoodShare decision. Applicability stays dated; unknown effective end dates stay null.",
+  "evidence": [
+    {
+      "evidence_id": "pol-smrf-001",
+      "topic": "six_month_report",
+      "program": "FoodShare",
+      "jurisdiction": "Wisconsin",
+      "passage": "FoodShare members complete a six-month report form to keep their benefits. The report confirms household details for the review period.",
+      "source_url": "https://www.dhs.wisconsin.gov/foodshare/smrf.htm",
+      "publication_date": "2026-08-01",
+      "effective_start": "2026-08-01",
+      "effective_end": null,
+      "reviewer": "Tarik Moody",
+      "approved_version": "1.0",
+      "next_review_on": "2026-10-01"
+    },
+    {
+      "evidence_id": "pol-proof-001",
+      "topic": "proof_request",
+      "program": "FoodShare",
+      "jurisdiction": "Wisconsin",
+      "passage": "When the agency requests proof, the member sends the listed documents through an official channel by the stated date. The agency, not this service, decides whether the proof is enough.",
+      "source_url": "https://www.dhs.wisconsin.gov/forwardhealth/myaccess-faqs.htm",
+      "publication_date": "2026-08-01",
+      "effective_start": "2026-08-01",
+      "effective_end": null,
+      "reviewer": "Tarik Moody",
+      "approved_version": "1.0",
+      "next_review_on": "2026-10-01"
+    },
+    {
+      "evidence_id": "pol-work-001",
+      "topic": "work_requirement",
+      "program": "FoodShare",
+      "jurisdiction": "Wisconsin",
+      "passage": "The FoodShare work requirement has work routes, exemptions and good-cause follow-up. Whether it applies depends on the member's own situation. Age alone does not decide it, and official staff decide any exemption.",
+      "source_url": "https://www.dhs.wisconsin.gov/foodshare/work.htm",
+      "publication_date": "2026-08-01",
+      "effective_start": "2026-08-01",
+      "effective_end": null,
+      "reviewer": "Tarik Moody",
+      "approved_version": "1.0",
+      "next_review_on": "2026-10-01"
+    }
+  ]
+}

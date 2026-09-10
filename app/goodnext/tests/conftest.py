@@ -23,6 +23,7 @@ def no_real_model(request, monkeypatch):
         raise AssertionError("build_agent called in a fixture test; mark it @pytest.mark.live if intended")
 
     monkeypatch.setattr(main, "build_agent", refuse)
+    monkeypatch.setattr(main, "build_notice_agent", refuse)
 
 
 @pytest.fixture

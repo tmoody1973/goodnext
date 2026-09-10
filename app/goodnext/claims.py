@@ -25,22 +25,47 @@ NEVER_LIST = [
     "food covered",
 ]
 
+# MOO-789: prohibited notice claims — statements that decide eligibility, approve an
+# exemption, promise benefit continuity or claim an official outcome. P01/P02 and PRD
+# FR02/FR03 forbid all of these. Reviewed 2026-09-10. Scanned by the same mechanism.
+NOTICE_NEVER_LIST = [
+    "you are eligible",
+    "you are ineligible",
+    "you are exempt",
+    "exemption approved",
+    "exemption granted",
+    "benefits will continue",
+    "benefits will stop",
+    "your case is closed",
+    "your case is resolved",
+    "you must work 80 hours",
+    "everyone must work",
+    "successfully submitted",
+    "deadline has been extended",
+    "appeal has been filed",
+]
+
 _COST_LABELS = {"free": "Free", "paid": "Paid", "sliding": "Sliding scale", "unknown": "Cost not stated; ask"}
 
 
-_NEVER_RE = [re.compile(r"\b" + re.escape(term) + r"\b", re.I) for term in NEVER_LIST]
+def _compile(terms: list[str]) -> list[re.Pattern]:
+    return [re.compile(r"\b" + re.escape(term) + r"\b", re.I) for term in terms]
+
+
+_NEVER_RE = _compile(NEVER_LIST)
+_NOTICE_NEVER_RE = _compile(NOTICE_NEVER_LIST)
 # A denial is honest: "stock cannot be guaranteed", "not reserved", "no food secured".
 _NEGATED = re.compile(r"\b(?:not|no|nothing|none|never|cannot|can't|can not|isn't|aren't|without|nor)\b(?:\s+\w+){0,2}\s+$", re.I)
 
 
-def never_list_hits(obj: object) -> list[str]:
-    """Walk any JSON-like structure's string values for never-list terms as whole words
-    (so 'unavailable' in a status does not count as 'available')."""
+def _hits(obj: object, terms: list[str], regexes: list[re.Pattern]) -> list[str]:
+    """Walk any JSON-like structure's string values for prohibited terms as whole words
+    (so 'unavailable' in a status does not count as 'available'), skipping honest denials."""
     hits: list[str] = []
 
     def walk(node: object) -> None:
         if isinstance(node, str):
-            for term, rx in zip(NEVER_LIST, _NEVER_RE):
+            for term, rx in zip(terms, regexes):
                 for m in rx.finditer(node):
                     if not _NEGATED.search(node[max(0, m.start() - 40):m.start()]):
                         hits.append(term)
@@ -53,6 +78,17 @@ def never_list_hits(obj: object) -> list[str]:
 
     walk(obj)
     return hits
+
+
+def never_list_hits(obj: object) -> list[str]:
+    """Food never-list: promises of stock, a reservation, or a computed travel time."""
+    return _hits(obj, NEVER_LIST, _NEVER_RE)
+
+
+def notice_never_list_hits(obj: object) -> list[str]:
+    """Notice never-list: eligibility decisions, exemption approvals, benefit-continuity
+    or official-outcome claims the agent must never make (MOO-789)."""
+    return _hits(obj, NOTICE_NEVER_LIST, _NOTICE_NEVER_RE)
 
 
 def _fmt_12h(hhmm: str) -> str:

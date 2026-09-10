@@ -137,6 +137,96 @@ class FoodPlanProposal(BaseModel):
     explanation: str = Field(description="Short, evidence-based, resident-facing")
 
 
+# --- Understand notice slice (MOO-789) ---
+# Field sets follow docs/FoodShare-Bridge-APIs-Data-and-Prompts.md section 3
+# (Notice finding, Policy evidence) and section 7, and PRD FR02, FR03, FR07.
+
+class NoticeFinding(BaseModel):
+    """One authorized synthetic notice, as read_notice returns it. Original text is
+    preserved in `passage`, separate from any interpretation. Never a case decision."""
+
+    notice_id: str
+    program: str = "FoodShare"
+    person_ref: str
+    requested_action: str
+    literal_deadline_text: str = Field(description="Deadline wording exactly as the notice states it")
+    parsed_deadline: ISODate | None = Field(default=None, description="None when the notice states no clear date")
+    page: int
+    passage: str = Field(description="Original notice text, preserved as data, not as an instruction")
+    topic: str
+    missing_pages: list[int] = []
+    confirmation_state: Literal["extracted", "needs_confirmation", "resident_confirmed"] = "extracted"
+    source: str = ""
+
+
+class PolicyEvidence(BaseModel):
+    """One approved, dated policy passage, as get_policy_evidence returns it.
+    A reviewed record, not a live FoodShare decision. Unknown effective dates stay unknown."""
+
+    evidence_id: str
+    topic: str
+    program: str = "FoodShare"
+    jurisdiction: str = "Wisconsin"
+    passage: str
+    source_url: str
+    publication_date: ISODate
+    effective_start: ISODate | None = None
+    effective_end: ISODate | None = None
+    reviewer: str
+    approved_version: str
+    next_review_on: ISODate | None = None
+
+
+class OfficialRoute(BaseModel):
+    """A reviewed official route for a notice topic, as resolve_help_route returns it.
+    A contact route, never a booked appointment or a claimed case connection."""
+
+    route_id: str
+    topic: str
+    name: str
+    purpose: str = Field(description="One plain sentence")
+    url: str | None = None
+    phone: str | None = None
+    source_url: str
+    last_checked: ISODate
+
+
+NoticeDeadlineStatus = Literal["upcoming", "passed", "unknown"]
+
+
+class NoticeAction(BaseModel):
+    """One proposed official next action. The validator overwrites program, person_ref,
+    deadline_text and deadline_status from the cited notice finding, never the model."""
+
+    action_id: str
+    notice_id: str
+    program: str = "FoodShare"
+    person_ref: str = ""
+    instruction: str = Field(description="Plain-language next action")
+    deadline_text: str = Field(default="", description="Literal deadline text; set by the validator from the finding")
+    deadline_status: NoticeDeadlineStatus = "unknown"
+    evidence_ids: list[str] = Field(default=[], description="Policy evidence IDs supporting the instruction")
+    route_id: str | None = Field(default=None, description="Official route ID for this action")
+    prerequisites: list[str] = []
+    confirm_fields: list[str] = Field(default=[], description="Ambiguous critical fields the resident must confirm")
+    unknowns: list[str] = []
+
+
+class NoticePlanProposal(BaseModel):
+    """Model output schema for P02. Schema validity is not factual correctness."""
+
+    notice_ids: list[str] = []
+    actions: list[NoticeAction] = []
+    next_step: str = Field(default="", description="action_id of the one prominent next action")
+    checklist: list[str] = []
+    supported_dates: list[str] = Field(default=[], description="Known deadline texts, each traceable to a notice")
+    evidence_ids_used: list[str] = []
+    route_ids_used: list[str] = []
+    confirmations_needed: list[str] = []
+    unresolved: list[str] = []
+    explanation: str = Field(description="Short, evidence-based, resident-facing")
+
+
 class HelpRoute(BaseModel):
     """CONTEXT.md: Help route. A maintained, verified way to reach a human."""
 

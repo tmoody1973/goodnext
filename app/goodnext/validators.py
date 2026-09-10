@@ -8,8 +8,21 @@ stripped and the plan returns as partial. No retry in this slice.
 
 from datetime import date, datetime, time
 
-from claims import build_claims
-from schemas import DayPlan, FoodPlanProposal, FoodResource, HouseholdConstraints, NextOpen, PlannedVisit, UnconfirmedRecord
+from claims import build_claims, notice_never_list_hits
+from schemas import (
+    DayPlan,
+    FoodPlanProposal,
+    FoodResource,
+    HouseholdConstraints,
+    NextOpen,
+    NoticeAction,
+    NoticeFinding,
+    NoticePlanProposal,
+    OfficialRoute,
+    PlannedVisit,
+    PolicyEvidence,
+    UnconfirmedRecord,
+)
 from tools import freshness_tier, next_open_after, window_open_at
 
 
@@ -125,4 +138,125 @@ def validate_food_plan(
             "unconfirmed": unconfirmed,
         }
     )
+    return cleaned, violations
+
+
+# --- Understand notice slice (MOO-789) ---
+#
+# PRD FR02, FR03 and APIs doc section 7: a next action may only cite notice findings
+# and policy evidence that authorized tools returned; a prohibited claim (eligibility,
+# exemption approval, benefit continuity, official outcome) is never shown; missing
+# dates are not inferred. A violating action is stripped and the plan returns partial,
+# mirroring the food-today validator. The literal deadline text and its passed/upcoming
+# state come from the finding, never from the model.
+
+
+def _deadline_status(parsed_deadline: str | None, now: datetime) -> str:
+    """passed / upcoming / unknown, judged by the server clock. Never inferred."""
+    if parsed_deadline is None:
+        return "unknown"
+    return "passed" if date.fromisoformat(parsed_deadline) < now.date() else "upcoming"
+
+
+def _action_strings(a: NoticeAction) -> list[str]:
+    return [a.instruction, *a.prerequisites, *a.confirm_fields, *a.unknowns]
+
+
+def _action_violation(
+    a: NoticeAction,
+    ledger: set[str],
+    findings: dict[str, NoticeFinding],
+    evidence: dict[str, PolicyEvidence],
+    routes: dict[str, OfficialRoute],
+) -> str | None:
+    if a.notice_id not in ledger or a.notice_id not in findings:
+        return f"{a.action_id}: cites notice {a.notice_id} not returned by read_notice (possible fabrication)"
+    for eid in a.evidence_ids:
+        if eid not in ledger or eid not in evidence:
+            return f"{a.action_id}: cites policy {eid} not returned by get_policy_evidence"
+    if a.route_id is not None and (a.route_id not in ledger or a.route_id not in routes):
+        return f"{a.action_id}: cites route {a.route_id} not returned by resolve_help_route"
+    if notice_never_list_hits(_action_strings(a)):
+        return f"{a.action_id}: prohibited notice claim"
+    return None
+
+
+def _rendered_action(a: NoticeAction, finding: NoticeFinding, now: datetime) -> NoticeAction:
+    """Overwrite the trustworthy fields from the cited finding, and add the confirmations
+    and urgent step the deadline state requires. The model never sets these."""
+    status = _deadline_status(finding.parsed_deadline, now)
+    confirm_fields = list(a.confirm_fields)
+    if status == "unknown":
+        note = "Confirm the deadline date with the agency"
+        if note not in confirm_fields:
+            confirm_fields.append(note)
+    unknowns = list(a.unknowns)
+    if status == "passed":
+        note = "This date has passed; call the agency about next steps right away"
+        if note not in unknowns:
+            unknowns.append(note)
+    if finding.missing_pages:
+        note = f"Some notice pages are missing (pages {finding.missing_pages}); confirm the full notice"
+        if note not in unknowns:
+            unknowns.append(note)
+    return a.model_copy(update={
+        "program": finding.program,
+        "person_ref": finding.person_ref,
+        "deadline_text": finding.literal_deadline_text,
+        "deadline_status": status,
+        "confirm_fields": confirm_fields,
+        "unknowns": unknowns,
+    })
+
+
+def validate_notice_plan(
+    proposal: NoticePlanProposal,
+    ledger: set[str],
+    findings: dict[str, NoticeFinding],
+    evidence: dict[str, PolicyEvidence],
+    routes: dict[str, OfficialRoute],
+    now_local: str,
+) -> tuple[NoticePlanProposal, list[str]]:
+    """Return a cleaned proposal and the list of violations found. Never mutates input."""
+    violations: list[str] = []
+    now = datetime.fromisoformat(now_local)
+
+    kept: list[NoticeAction] = []
+    for a in proposal.actions:
+        if problem := _action_violation(a, ledger, findings, evidence, routes):
+            violations.append(problem)
+            continue
+        kept.append(_rendered_action(a, findings[a.notice_id], now))
+
+    # Free text outside actions is scanned too, so no prohibited claim survives anywhere.
+    checklist: list[str] = []
+    for item in proposal.checklist:
+        if notice_never_list_hits(item):
+            violations.append("checklist item stripped: prohibited notice claim")
+        else:
+            checklist.append(item)
+    explanation = proposal.explanation
+    if notice_never_list_hits(explanation):
+        violations.append("explanation stripped: prohibited notice claim")
+        explanation = "See the actions above and the source for each one."
+
+    kept_ids = {a.action_id for a in kept}
+    next_step = proposal.next_step if proposal.next_step in kept_ids else (kept[0].action_id if kept else "")
+    confirmations: list[str] = []
+    for a in kept:
+        for c in a.confirm_fields:
+            if c not in confirmations:
+                confirmations.append(c)
+
+    cleaned = proposal.model_copy(update={
+        "actions": kept,
+        "checklist": checklist,
+        "explanation": explanation,
+        "next_step": next_step,
+        "notice_ids": sorted({a.notice_id for a in kept}),
+        "supported_dates": sorted({a.deadline_text for a in kept if a.deadline_status != "unknown" and a.deadline_text}),
+        "evidence_ids_used": sorted({eid for a in kept for eid in a.evidence_ids}),
+        "route_ids_used": sorted({a.route_id for a in kept if a.route_id}),
+        "confirmations_needed": confirmations,
+    })
     return cleaned, violations

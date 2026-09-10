@@ -1,0 +1,35 @@
+{
+  "_fixture_note": "Reviewed official routes for notice topics. Public Wisconsin DHS pages were checked 2026-09-08. Each route is a contact or destination, never a booked appointment or a claimed case connection. No ACCESS credentials are collected.",
+  "routes": [
+    {
+      "route_id": "route-smrf",
+      "topic": "six_month_report",
+      "name": "MyACCESS six-month report",
+      "purpose": "Submit your six-month report online, or ask about it by phone.",
+      "url": "https://access.wisconsin.gov",
+      "phone": "1-800-362-3002",
+      "source_url": "https://www.dhs.wisconsin.gov/foodshare/smrf.htm",
+      "last_checked": "2026-09-08"
+    },
+    {
+      "route_id": "route-proof",
+      "topic": "proof_request",
+      "name": "Milwaukee Enrollment Services",
+      "purpose": "Send requested documents through the official channel, or ask what counts as proof.",
+      "url": "https://www.dhs.wisconsin.gov/dms/miles.htm",
+      "phone": "1-888-947-6583",
+      "source_url": "https://www.dhs.wisconsin.gov/dms/miles.htm",
+      "last_checked": "2026-09-08"
+    },
+    {
+      "route_id": "route-work",
+      "topic": "work_requirement",
+      "name": "FoodShare Employment and Training (FSET)",
+      "purpose": "Ask about work routes, exemptions and good cause for the FoodShare work requirement.",
+      "url": "https://www.dhs.wisconsin.gov/fset/index.htm",
+      "phone": "1-800-362-3002",
+      "source_url": "https://www.dhs.wisconsin.gov/fset/index.htm",
+      "last_checked": "2026-09-08"
+    }
+  ]
+}

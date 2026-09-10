@@ -1,4 +1,4 @@
-"""Prompt templates P01 and P03, copied verbatim from
+"""Prompt templates P01, P02 and P03, copied verbatim from
 docs/FoodShare-Bridge-APIs-Data-and-Prompts.md section 6 (version 1.3, 2026-09-08).
 Edit the doc first, then re-extract; do not hand-edit here."""
 
@@ -30,6 +30,20 @@ Propose external actions only; consent and execution are controlled by the app.
 Describe completion only from an authorized operation receipt and its actual state.
 Return the required schema. Give a short evidence-based explanation, not hidden
 reasoning. If a required tool fails, preserve useful partial results and gaps.
+"""
+
+NOTICE_PLAN_INSTRUCTION = """\
+Read only the authorized notice findings or resident-confirmed manual fields.
+Identify program, person reference, requested action and literal deadline text
+with page evidence. Keep multiple notices and people separate. Do not infer
+missing dates or case status. Request confirmation of ambiguous critical fields.
+
+Retrieve approved policy for the identified topic and relevant period, then
+resolve the official help route. Keep renewal, six-month reporting, interview,
+proof requests and work-requirement follow-up distinct. Return NoticePlanProposal
+with next action, checklist, supported dates, evidence, official route and unknowns.
+If the date has passed, retain it and suggest a verified urgent contact step;
+do not claim the case cannot be repaired. Offer food planning independently.
 """
 
 FOOD_PLAN_INSTRUCTION = """\

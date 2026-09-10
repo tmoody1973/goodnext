@@ -1,0 +1,77 @@
+{
+  "_fixture_note": "SYNTHETIC notice findings for demo and tests. Person references, dates and passages are fictional and labeled as such. No real resident document is used. Built to exercise the two supported notice classes (six-month report, proof request) plus a work-requirement letter, a notice with no clear date, and a passed deadline (PRD FR02, FR03). Original passage text is preserved separate from interpretation.",
+  "notices": [
+    {
+      "notice_id": "ntc-smrf-001",
+      "program": "FoodShare",
+      "person_ref": "Household member A (synthetic)",
+      "requested_action": "Complete and return the six-month report form",
+      "literal_deadline_text": "Return by September 20, 2026",
+      "parsed_deadline": "2026-09-20",
+      "page": 1,
+      "passage": "Complete your six-month report form. Return by September 20, 2026 to keep your FoodShare benefits.",
+      "topic": "six_month_report",
+      "missing_pages": [],
+      "confirmation_state": "extracted",
+      "source": "Synthetic notice fixture (not a real resident document)"
+    },
+    {
+      "notice_id": "ntc-proof-001",
+      "program": "FoodShare",
+      "person_ref": "Household member A (synthetic)",
+      "requested_action": "Send proof of income for the household",
+      "literal_deadline_text": "Send by September 15, 2026",
+      "parsed_deadline": "2026-09-15",
+      "page": 2,
+      "passage": "Please send proof of income for everyone in the household. Send by September 15, 2026.",
+      "topic": "proof_request",
+      "missing_pages": [
+        3
+      ],
+      "confirmation_state": "extracted",
+      "source": "Synthetic notice fixture (not a real resident document)"
+    },
+    {
+      "notice_id": "ntc-nodate-001",
+      "program": "FoodShare",
+      "person_ref": "Household member B (synthetic)",
+      "requested_action": "Complete the six-month report form",
+      "literal_deadline_text": "Return the form promptly",
+      "parsed_deadline": null,
+      "page": 1,
+      "passage": "Complete your six-month report form and return it promptly.",
+      "topic": "six_month_report",
+      "missing_pages": [],
+      "confirmation_state": "needs_confirmation",
+      "source": "Synthetic notice fixture (not a real resident document)"
+    },
+    {
+      "notice_id": "ntc-work-001",
+      "program": "FoodShare",
+      "person_ref": "Household member A (synthetic), age 61",
+      "requested_action": "Read about the FoodShare work requirement and possible exemptions",
+      "literal_deadline_text": "Report a change within 10 days",
+      "parsed_deadline": null,
+      "page": 1,
+      "passage": "Some FoodShare members must meet a work requirement. Exemptions and good cause may apply. Report a change within 10 days.",
+      "topic": "work_requirement",
+      "missing_pages": [],
+      "confirmation_state": "extracted",
+      "source": "Synthetic notice fixture (not a real resident document)"
+    },
+    {
+      "notice_id": "ntc-passed-001",
+      "program": "FoodShare",
+      "person_ref": "Household member A (synthetic)",
+      "requested_action": "Send proof of address",
+      "literal_deadline_text": "Send by September 1, 2026",
+      "parsed_deadline": "2026-09-01",
+      "page": 1,
+      "passage": "Please send proof of address. Send by September 1, 2026.",
+      "topic": "proof_request",
+      "missing_pages": [],
+      "confirmation_state": "extracted",
+      "source": "Synthetic notice fixture (not a real resident document)"
+    }
+  ]
+}
