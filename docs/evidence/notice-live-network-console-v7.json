@@ -1,0 +1,69 @@
+{
+  "runs": [
+    {
+      "label": "sanction",
+      "file": "notice-of-sanction-maria-example.pdf",
+      "elapsed": 34.948,
+      "delayedAt": 30.94,
+      "status": "partial",
+      "request_id": "7a1b2dbb-6e34-4bf4-b26f-ac281a354795",
+      "findings": 6,
+      "citations": 11
+    },
+    {
+      "label": "time-limited",
+      "file": "time-limited-benefits-warning-maria-example.pdf",
+      "elapsed": 25.875,
+      "delayedAt": null,
+      "status": "partial",
+      "request_id": "a395bdce-920a-4af3-9364-d923e6b051fc",
+      "findings": 6,
+      "citations": 13
+    },
+    {
+      "label": "six-month",
+      "file": "six-month-report-conversion-maria-example.pdf",
+      "elapsed": 25.882,
+      "delayedAt": null,
+      "status": "success",
+      "request_id": "76b134e0-5ea5-4ec0-becd-ddf6cb69aaca",
+      "findings": 6,
+      "citations": 10
+    },
+    {
+      "label": "sanction-photo",
+      "file": "notice-of-sanction-maria-example-page1.png",
+      "elapsed": 30.885,
+      "delayedAt": null,
+      "status": "partial",
+      "request_id": "5eb93100-3c0d-4e1f-a1a4-508e77f0dbbc",
+      "findings": 6,
+      "citations": 10
+    },
+    {
+      "label": "food",
+      "elapsed": 240.766,
+      "delayedAt": null,
+      "status": null,
+      "request_id": null
+    }
+  ],
+  "gn_session": {
+    "name": "gn_session",
+    "value": "17a62b72-af2d-406c-9d92-8e5ecc0b4b2c",
+    "domain": "localhost",
+    "path": "/",
+    "expires": 1789081753.405535,
+    "size": 46,
+    "httpOnly": true,
+    "secure": true,
+    "session": false,
+    "sameSite": "Strict",
+    "priority": "Medium",
+    "sourceScheme": "Secure",
+    "sourcePort": 3000
+  },
+  "consoleErrors": [],
+  "runtime": "v7",
+  "demoNow": "2026-09-10T09:00:00-05:00"
+}
