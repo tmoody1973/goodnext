@@ -1,0 +1,364 @@
+{
+  "status": "partial",
+  "data": {
+    "letter_kind": "sanction",
+    "findings": [
+      {
+        "label": "Letter type",
+        "text": "FoodShare Notice of Sanction — voluntary quit without good cause (sanction #1 on file).",
+        "passage_ids": [
+          "p1-3"
+        ]
+      },
+      {
+        "label": "Sanction period",
+        "text": "Benefits paused from 10/01/2026 to 12/31/2026.",
+        "passage_ids": [
+          "p1-3"
+        ]
+      },
+      {
+        "label": "Reapply date",
+        "text": "You can reapply on or after 01/01/2027, or any time you become exempt. If you are part of a FoodShare group, contact your agency to update the case instead of reapplying.",
+        "passage_ids": [
+          "p1-12"
+        ]
+      },
+      {
+        "label": "Ways the sanction may end early",
+        "text": "Become exempt from the work requirement; obtain a comparable new job; work 30+ hours/week; regain W-2 or unemployment eligibility; or wait for the sanction period to end.",
+        "passage_ids": [
+          "p1-5",
+          "p1-6",
+          "p1-7",
+          "p1-8",
+          "p1-9",
+          "p1-10",
+          "p1-11"
+        ]
+      },
+      {
+        "label": "Good cause",
+        "text": "The letter states: 'If you have a good cause reason for the loss of job or hours, there may be no loss of FoodShare benefits.' No approved policy passage was returned to further define good cause; contact your agency or a legal aid attorney.",
+        "passage_ids": [
+          "p1-27"
+        ]
+      },
+      {
+        "label": "Work-requirement exemptions listed in letter",
+        "text": "Under 16 or over 59; working 30+ hrs/week; caring for a child under 6 or a dependent who cannot care for themselves; age 16–17 and not primary case person; in AODA treatment; receiving/applied for unemployment insurance; enrolled at least half-time in school or training; physically or mentally unable to work; in certain work programs.",
+        "passage_ids": [
+          "p1-15",
+          "p1-16",
+          "p1-17",
+          "p1-18",
+          "p1-19",
+          "p1-20",
+          "p1-21",
+          "p1-22",
+          "p1-23",
+          "p1-24",
+          "p1-25"
+        ]
+      },
+      {
+        "label": "Fair hearing right",
+        "text": "You may request a fair hearing. Benefits may continue until a decision is made, but if the agency is found correct you may owe those benefits back. Free legal help: 1-888-278-0633.",
+        "passage_ids": [
+          "p1-4"
+        ]
+      }
+    ],
+    "screening": "action_identified",
+    "next_step": {
+      "text": "Call Milwaukee Enrollment Services at 1-888-947-6583 as soon as possible — before 10/01/2026 — to report any good-cause reason for leaving your job OR to report a work-requirement exemption that may apply to you. Ask about the fair hearing deadline at the same time.",
+      "passage_ids": [
+        "p1-3",
+        "p1-4",
+        "p1-26",
+        "p1-27",
+        "p1-28"
+      ]
+    },
+    "tasks": [
+      {
+        "kind": "contact_agency",
+        "text": "Call your agency (1-888-947-6583) to report a good-cause reason for leaving your job, if one applies.",
+        "date_text": "not stated",
+        "date_kind": "suggested",
+        "passage_ids": [
+          "p1-27",
+          "p1-28"
+        ]
+      },
+      {
+        "kind": "contact_agency",
+        "text": "Call your agency to report a work-requirement exemption and ask what proof is needed, if an exemption applies to you.",
+        "date_text": "not stated",
+        "date_kind": "suggested",
+        "passage_ids": [
+          "p1-26"
+        ]
+      },
+      {
+        "kind": "fair_hearing",
+        "text": "Request a fair hearing if you disagree with this decision. Ask your agency for the filing deadline. Free legal help is available at 1-888-278-0633.",
+        "date_text": "not stated",
+        "date_kind": "unknown",
+        "passage_ids": [
+          "p1-4"
+        ]
+      },
+      {
+        "kind": "reapply",
+        "text": "If the sanction is not ended early, reapply for FoodShare on or after 01/01/2027. If you are in a FoodShare group, contact your agency to update the case instead.",
+        "date_text": "01/01/2027",
+        "date_kind": "official",
+        "passage_ids": [
+          "p1-12"
+        ]
+      }
+    ],
+    "questions_to_ask": [],
+    "routes": [
+      {
+        "name": "Your agency (from your letter)",
+        "phone": "1-888-947-6583",
+        "url": null,
+        "source": "from your letter"
+      },
+      {
+        "name": "2-1-1 (IMPACT 211 in Milwaukee County)",
+        "phone": "2-1-1",
+        "url": "https://www.impactinc.org/impact-211/",
+        "source": "reviewed help route, checked 2026-09-08"
+      },
+      {
+        "name": "Hunger Task Force emergency food",
+        "phone": null,
+        "url": "https://www.hungertaskforce.org/get-help/emergency-food/",
+        "source": "reviewed help route, checked 2026-09-08"
+      },
+      {
+        "name": "FoodShare member line",
+        "phone": "1-800-362-3002",
+        "url": "https://www.dhs.wisconsin.gov/foodshare/index.htm",
+        "source": "reviewed help route, checked 2026-09-08"
+      }
+    ],
+    "unknowns": [
+      "Fair hearing request deadline — not printed in this letter; ask your agency.",
+      "Whether a good-cause reason applies to your situation — the agency decides.",
+      "Whether any work-requirement exemption applies to you — the agency decides.",
+      "Whether you are part of a FoodShare group (affects whether to reapply or update the case).",
+      "No approved policy passages were returned for good cause, exemptions, sanction rules, or fair hearing; current rule details could not be independently verified."
+    ],
+    "explanation": "Your letter says FoodShare will be paused 10/01/2026–12/31/2026 because the agency found you voluntarily quit a job without good cause. You have options: dispute this at a fair hearing, report a good-cause reason, report an exemption, or reapply on 01/01/2027. The agency decides all outcomes.",
+    "passages": [
+      {
+        "id": "p1-1",
+        "page": 1,
+        "text": "PIN #: 0000000001 Date: 09/08/2026 Page 1 of 2 RETURN ADDRESS Milwaukee Enrollment Services PO Box 000 Milwaukee WI 53201 Mailing Date: 09/08/2026 MAILING ADDRESS Maria Example 1234 W Example St Milwaukee WI 53206-0000 State of Wisconsin PIN #: 0000000001 Milwaukee Enrollment Services Phone Number: 1-888-947-6583 Fax Number: (414) 555-0100"
+      },
+      {
+        "id": "p1-2",
+        "page": 1,
+        "text": "The State of Wisconsin is an equal opportunity service provider. This letter contains information that affects your benefits. If you need this material in a different format because of a disability or if you need this letter translated or explained in your own language, please call 1-888-947-6583. These services are free."
+      },
+      {
+        "id": "p1-3",
+        "page": 1,
+        "text": "FoodShare Notice of Sanction This letter is to notify you that you have voluntarily quit a job without good cause. As a result, you will not be eligible for FoodShare from 10/01/2026 to 12/31/2026. This sanction results in the total number of sanctions we have on file for you as: 1."
+      },
+      {
+        "id": "p1-4",
+        "page": 1,
+        "text": "If you do not agree with this decision, you have the right to a fair hearing. You may be able to continue to get FoodShare benefits until your fair hearing decision is made. If the fair hearing officer decides that the agency was right, you may need to return the extra benefits that you got after your benefits were supposed to change. You may also be able to get free legal help. To learn more about free legal help, call 1-888-278-0633. Please see your benefits letter for more details about filing a fair hearing."
+      },
+      {
+        "id": "p1-5",
+        "page": 1,
+        "text": "Your sanction may end if any of the following occurs:"
+      },
+      {
+        "id": "p1-6",
+        "page": 1,
+        "text": "You become exempt from the FoodShare work requirement."
+      },
+      {
+        "id": "p1-7",
+        "page": 1,
+        "text": "You obtain a new job with pay or hours similar to the job you quit."
+      },
+      {
+        "id": "p1-8",
+        "page": 1,
+        "text": "You work 30 or more hours per week."
+      },
+      {
+        "id": "p1-9",
+        "page": 1,
+        "text": "You regain eligibility for W-2 by meeting the W-2 work requirements."
+      },
+      {
+        "id": "p1-10",
+        "page": 1,
+        "text": "You regain eligibility for the unemployment benefit by meeting the unemployment benefit work requirements."
+      },
+      {
+        "id": "p1-11",
+        "page": 1,
+        "text": "Your sanction period ends."
+      },
+      {
+        "id": "p1-12",
+        "page": 1,
+        "text": "You will need to reapply for FoodShare if you want to get benefits after your sanction period ends. You can reapply for benefits any time on or after 01/01/2027 or any time you become exempt from the work requirement. If you are part of a FoodShare group, you should contact your agency to update your case instead of reapplying."
+      },
+      {
+        "id": "p1-13",
+        "page": 1,
+        "text": "Fictional demonstration letter based on a Wisconsin DHS sample template. Not a real person, case, or deadline."
+      },
+      {
+        "id": "p1-14",
+        "page": 1,
+        "text": "PIN #: 0000000001 Date: 09/08/2026 Page 2 of 2"
+      },
+      {
+        "id": "p1-15",
+        "page": 1,
+        "text": "Work Registration All members of your FoodShare group must be registered for work unless they are exempt. You may be considered exempt and may not need to meet the FoodShare work requirement if any of the following applies to you:"
+      },
+      {
+        "id": "p1-16",
+        "page": 1,
+        "text": "You are younger than age 16 or older than age 59."
+      },
+      {
+        "id": "p1-17",
+        "page": 1,
+        "text": "You are already working at least 30 hours per week (or getting weekly earnings that equal 30 times the federal minimum hourly wage)."
+      },
+      {
+        "id": "p1-18",
+        "page": 1,
+        "text": "You are the parent or are responsible for the care of a dependent child younger than age 6 (in or out of the home)."
+      },
+      {
+        "id": "p1-19",
+        "page": 1,
+        "text": "You are the parent or are responsible for the care of a person of any age who cannot care for himself or herself (in or out of the home)."
+      },
+      {
+        "id": "p1-20",
+        "page": 1,
+        "text": "You are age 16 or 17 and are not the primary person for the case."
+      },
+      {
+        "id": "p1-21",
+        "page": 1,
+        "text": "You are taking part in an alcohol or other drug abuse (AODA) treatment program."
+      },
+      {
+        "id": "p1-22",
+        "page": 1,
+        "text": "You are getting or have applied for unemployment insurance."
+      },
+      {
+        "id": "p1-23",
+        "page": 1,
+        "text": "You are enrolled at least half-time in a recognized school, training program, or institution of higher learning."
+      },
+      {
+        "id": "p1-24",
+        "page": 1,
+        "text": "You are physically or mentally unable to work."
+      },
+      {
+        "id": "p1-25",
+        "page": 1,
+        "text": "You are taking part in certain work programs."
+      },
+      {
+        "id": "p1-26",
+        "page": 1,
+        "text": "If you meet one of the exemptions listed above, you should contact your agency at the number listed at the top of page 1 of this letter to report the exemption and find out what kind of proof may be needed."
+      },
+      {
+        "id": "p1-27",
+        "page": 1,
+        "text": "If you have a good cause reason for the loss of job or hours, there may be no loss of FoodShare benefits."
+      },
+      {
+        "id": "p1-28",
+        "page": 1,
+        "text": "Questions If you have questions about this letter, contact your agency at the number listed at the top of page 1 of this letter."
+      }
+    ]
+  },
+  "evidence": [
+    "p1-10",
+    "p1-11",
+    "p1-12",
+    "p1-15",
+    "p1-16",
+    "p1-17",
+    "p1-18",
+    "p1-19",
+    "p1-20",
+    "p1-21",
+    "p1-22",
+    "p1-23",
+    "p1-24",
+    "p1-25",
+    "p1-26",
+    "p1-27",
+    "p1-28",
+    "p1-3",
+    "p1-4",
+    "p1-5",
+    "p1-6",
+    "p1-7",
+    "p1-8",
+    "p1-9"
+  ],
+  "missing": [
+    "Fair hearing request deadline — not printed in this letter; ask your agency.",
+    "Whether a good-cause reason applies to your situation — the agency decides.",
+    "Whether any work-requirement exemption applies to you — the agency decides.",
+    "Whether you are part of a FoodShare group (affects whether to reapply or update the case).",
+    "No approved policy passages were returned for good cause, exemptions, sanction rules, or fair hearing; current rule details could not be independently verified."
+  ],
+  "warnings": [
+    "finding 'Policy evidence status': cites no supplied passage"
+  ],
+  "retryable": false,
+  "request_id": "67ee7fd8-ee71-417d-be01-75469b688b4a",
+  "help_routes": [
+    {
+      "name": "2-1-1 (IMPACT 211 in Milwaukee County)",
+      "purpose": "Find local food and other help by phone, any day. In Milwaukee County you can also text MKEFOOD to 898-211, or call (414) 773-0211.",
+      "phone": "2-1-1",
+      "url": "https://www.impactinc.org/impact-211/",
+      "source_url": "https://www.impactinc.org/impact-211/",
+      "last_checked": "2026-09-08"
+    },
+    {
+      "name": "Hunger Task Force emergency food",
+      "purpose": "Milwaukee County pantry and meal map.",
+      "phone": null,
+      "url": "https://www.hungertaskforce.org/get-help/emergency-food/",
+      "source_url": "https://www.hungertaskforce.org/get-help/emergency-food/",
+      "last_checked": "2026-09-08"
+    },
+    {
+      "name": "FoodShare member line",
+      "purpose": "Questions about your FoodShare case or QUEST card.",
+      "phone": "1-800-362-3002",
+      "url": "https://www.dhs.wisconsin.gov/foodshare/index.htm",
+      "source_url": "https://www.dhs.wisconsin.gov/foodshare/index.htm",
+      "last_checked": "2026-09-08"
+    }
+  ]
+}

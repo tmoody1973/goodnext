@@ -35,7 +35,6 @@ export const NOTICE_NEVER_LIST = [
   "you are eligible",
   "you are not eligible",
   "you are exempt",
-  "you qualify",
   "your benefits will continue",
   "your case is fixed",
   "approved",
