@@ -83,7 +83,7 @@ export function NoticeResult({ data, onFindFood, onAnother }: { data: NoticeData
                   )}
                 </p>
                 <p className="text-xs text-ink-soft">
-                  {r.fromLetter}, {[...new Set(t.passage_ids.map((id) => byId.get(id)?.page).filter(Boolean))].map((n) => fill(r.page, { n: String(n) })).join(", ").toLowerCase()}
+                  {r.fromLetter}, {[...new Set(t.passage_ids.map((id) => byId.get(id)?.page).filter(Boolean))].map((n) => fill(r.page, { n: String(n) })).join(", ")}
                 </p>
               </li>
             ))}
