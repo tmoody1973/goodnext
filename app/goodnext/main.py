@@ -172,7 +172,8 @@ def notice_task_text(req: NoticeRequest, passages: list[NoticePassage]) -> str:
         "returns nothing, leave questions_to_ask empty. Copy route names, phones and URLs exactly "
         "as resolve_help_route returns them. Never write that the resident is eligible, exempt, "
         "approved, or that benefits will continue; say the agency decides. Explanation under 60 "
-        "words. Be brief."
+        "words. At most six findings and five tasks; cite at most three passage ids per item, the "
+        "most specific ones. Be brief."
     )
 
 
