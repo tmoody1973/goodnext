@@ -86,6 +86,37 @@ export const copy = {
   unconfirmed: {
     heading: "Not checked recently. Call before you go.",
   },
+  notice: {
+    navToNotice: "Understand my letter",
+    navToFood: "Find food today",
+    heading: "Understand my letter",
+    intro: "See what a FoodShare letter appears to ask for, beside guidance we have reviewed. This does not decide your case.",
+    samplesHeading: "Try a sample letter",
+    samples: {
+      six_month_report: "Six-month report",
+      proof_request: "Proof request",
+    },
+    uploadLabel: "Or open a letter file (PDF or photo)",
+    uploadHelp: "Use a fictional sample. Do not send a real letter.",
+    reading: "Reading your letter.",
+    classLabel: {
+      six_month_report: "This looks like a six-month report.",
+      proof_request: "This looks like a request for proof.",
+      unknown: "We could not tell which kind of letter this is.",
+    },
+    datesHeading: "Dates your letter mentions",
+    datesHelp: "Check these against your own letter. We do not set your dates.",
+    textHeading: "What we read from your letter",
+    passagesHeading: "Guidance we have reviewed",
+    passageAction: "What you can do",
+    passageSource: "Source",
+    passageDraft: "Reviewed for the demo. Confirm with a caseworker before you rely on it.",
+    noMatch: "We read your letter but found no reviewed guidance that fits it.",
+    status: {
+      temporarily_unavailable: "Temporarily unavailable. Try again in a moment.",
+      denied: "We could not open that file. Try a PDF or a photo.",
+    },
+  },
 } as const;
 
 export function fill(template: string, values: Record<string, string>): string {

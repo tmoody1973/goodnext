@@ -9,12 +9,13 @@ from typing import Literal
 from zoneinfo import ZoneInfo
 
 import httpx
-from fastapi import Depends, FastAPI, Request, Response
+from fastapi import Depends, FastAPI, File, Request, Response, UploadFile
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from goodnext_api.agent_client import AgentClient, default_agent_client
 from goodnext_api.help_routes import help_routes
+from goodnext_api import notices
 
 LOCAL_TZ = ZoneInfo("America/Chicago")
 SESSION_COOKIE = "gn_session"
@@ -104,12 +105,68 @@ def create_plan(
         envelope = agent.invoke(payload, runtime_session_id(session))
     except Exception as exc:  # noqa: BLE001 - boundary: network, AWS session, or runtime failure all read the same to a resident
         log.warning("agent unavailable: %s", exc.__class__.__name__)
-        return JSONResponse(
-            status_code=503,
-            headers=dict(response.headers),
-            content={"status": "temporarily_unavailable", "data": None, "evidence": [], "missing": [],
-                     "warnings": [f"agent unavailable: {exc.__class__.__name__}"], "retryable": True, "request_id": request_id,
-                     "help_routes": help_routes()},
-        )
+        return error_envelope(response, 503, "temporarily_unavailable", request_id,
+                              warning=f"agent unavailable: {exc.__class__.__name__}", retryable=True)
     response.headers["Cache-Control"] = "no-store"
     return envelope
+
+
+# Content types the letter reader supports, with a size cap. A resident's phone
+# photo or a downloaded PDF fits well under this.
+NOTICE_CONTENT_TYPES = {"application/pdf", "image/png", "image/jpeg"}
+MAX_NOTICE_BYTES = 10 * 1024 * 1024
+
+
+def error_envelope(response: Response, status_code: int, status: str, request_id: str,
+                   *, warning: str, retryable: bool, missing: list[str] | None = None) -> JSONResponse:
+    """A non-2xx envelope, shared by both endpoints and every non-2xx exit. Keeps
+    whatever headers the session dependency set (the Set-Cookie for a first-time
+    visitor), marks the answer no-store like the success path, and carries the
+    reviewed help routes so a resident always has a human to reach."""
+    headers = dict(response.headers)
+    headers["Cache-Control"] = "no-store"
+    return JSONResponse(
+        status_code=status_code,
+        headers=headers,
+        content={"status": status, "data": None, "evidence": [], "missing": missing or [],
+                 "warnings": [warning], "retryable": retryable, "request_id": request_id,
+                 "help_routes": help_routes()},
+    )
+
+
+@app.post("/api/notices")
+async def read_notice(
+    response: Response,
+    file: UploadFile = File(...),
+    session: str = Depends(get_session),
+):
+    """Read a FoodShare letter and return what it appears to ask for beside the
+    reviewed policy passages it matches. No model writes any of it (PRD FR02)."""
+    request_id = str(uuid.uuid4())
+    if file.content_type not in NOTICE_CONTENT_TYPES:
+        return error_envelope(response, 415, "denied", request_id,
+                              warning=f"unsupported content type: {file.content_type}",
+                              retryable=False, missing=["unsupported_file_type"])
+    data = await file.read()
+    if len(data) > MAX_NOTICE_BYTES:
+        return error_envelope(response, 413, "denied", request_id,
+                              warning="file too large", retryable=False, missing=["file_too_large"])
+    try:
+        text = notices.extract_text(data, file.content_type)
+    except notices.ExtractionUnavailable as exc:
+        log.warning("notice unreadable: %s", exc.__class__.__name__)
+        return error_envelope(response, 503, "temporarily_unavailable", request_id,
+                              warning=f"could not read the letter: {exc.__class__.__name__}", retryable=True)
+
+    passages, notice_class = notices.analyze(text)
+    status = "success" if passages else "no_match"
+    data_out = {
+        "notice_class": notice_class,
+        "found_dates": notices.found_dates(text),
+        "extracted_text": text,
+        "passages": passages,
+    }
+    response.headers["Cache-Control"] = "no-store"
+    return {"status": status, "data": data_out, "evidence": [p["passage_id"] for p in passages],
+            "missing": [] if passages else ["no_reviewed_passage_matched"], "warnings": [], "retryable": False,
+            "request_id": request_id, "help_routes": help_routes()}

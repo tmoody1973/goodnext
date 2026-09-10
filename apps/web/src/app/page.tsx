@@ -1,40 +1,23 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { ConstraintForm, toConstraints, type FormValues } from "@/components/ConstraintForm";
 import { HelpRoutes } from "@/components/HelpRoutes";
 import { OptionCard } from "@/components/OptionCard";
 import { SummaryLine } from "@/components/SummaryLine";
+import { Waiting } from "@/components/Waiting";
 import { WeekTiles } from "@/components/WeekTiles";
-import { postPlan, type Envelope, type HelpRoute, type PlanData } from "@/lib/api";
+import { postPlan, unreachableEnvelope, type Envelope, type HelpRoute, type PlanData } from "@/lib/api";
 import { copy, fill } from "@/lib/copy";
 import { formatPlanDate } from "@/lib/format";
+import { useFocusOnMount } from "@/lib/hooks";
 import { telHref } from "@/lib/phone";
 import { primaryActionClass, secondaryActionClass, textLinkClass } from "@/lib/styles";
 
-// PRD section 8: after 30 s of waiting, show explicit delayed status.
-export const DELAYED_AFTER_MS = 30_000;
-
 type State =
   | { kind: "idle" }
-  | { kind: "submitting"; zip: string; delayed: boolean }
+  | { kind: "submitting"; zip: string }
   | { kind: "done"; envelope: Envelope };
-
-// A network failure looks like the API's own 503 to the resident.
-function unreachableEnvelope(): Envelope {
-  return { status: "temporarily_unavailable", data: null, evidence: [], missing: [], warnings: ["unreachable"], retryable: true, request_id: "local" };
-}
-
-// The form folds away when a result lands, which would drop keyboard focus on
-// the body. Move it to the result heading so a keyboard or screen-reader user
-// starts reading at the answer.
-function useFocusOnMount<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  useEffect(() => {
-    ref.current?.focus();
-  }, []);
-  return ref;
-}
 
 function focusZip() {
   const zip = document.getElementById("zip");
@@ -52,12 +35,6 @@ export default function FoodTodayPage() {
   const lastValues = useRef<FormValues | null>(null);
   const controller = useRef<AbortController | null>(null);
 
-  useEffect(() => {
-    if (state.kind !== "submitting" || state.delayed) return;
-    const timer = setTimeout(() => setState((s) => (s.kind === "submitting" ? { ...s, delayed: true } : s)), DELAYED_AFTER_MS);
-    return () => clearTimeout(timer);
-  }, [state]);
-
   async function submit(next: FormValues) {
     lastValues.current = next;
     setSubmitted(next);
@@ -65,7 +42,7 @@ export default function FoodTodayPage() {
     controller.current?.abort();
     const ac = new AbortController();
     controller.current = ac;
-    setState({ kind: "submitting", zip: next.zip, delayed: false });
+    setState({ kind: "submitting", zip: next.zip });
     try {
       const envelope = await postPlan(toConstraints(next), ac.signal);
       if (ac.signal.aborted) return;
@@ -101,6 +78,9 @@ export default function FoodTodayPage() {
       <header className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <p className="text-2xl font-bold tracking-[-0.02em] text-navy">{copy.site.name}</p>
         <p className="text-sm text-ink-soft">{copy.site.tagline}</p>
+        <nav className="w-full">
+          <a href="/notice" className={textLinkClass}>{copy.notice.navToNotice}</a>
+        </nav>
       </header>
 
       {!editing && submitted && <SummaryLine values={submitted} onChange={reopen} />}
@@ -110,19 +90,7 @@ export default function FoodTodayPage() {
 
       <section aria-live="polite" className="flex flex-col gap-4">
         {state.kind === "submitting" && (
-          <div className="flex flex-col gap-2">
-            <p className="font-medium">{fill(copy.wait.checking, { zip: state.zip })}</p>
-            <p className="text-ink-soft">{copy.wait.estimate}</p>
-            {state.delayed && (
-              <>
-                <p role="status" className="font-medium">{copy.wait.delayed}</p>
-                <button type="button" onClick={cancel} className={secondaryActionClass}>
-                  {copy.wait.cancel}
-                </button>
-                <HelpRoutes routes={routes} />
-              </>
-            )}
-          </div>
+          <Waiting checkingText={fill(copy.wait.checking, { zip: state.zip })} routes={routes} onCancel={cancel} />
         )}
         {state.kind === "done" && (
           <Result

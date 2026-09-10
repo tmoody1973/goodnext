@@ -78,6 +78,8 @@ def test_agent_outage_is_truthful_503():
         "Hunger Task Force emergency food",
         "FoodShare member line",
     ]
+    # The 503 answer must not be cached, like the success path.
+    assert r.headers["cache-control"] == "no-store"
     assert never_list_hits(body) == []
 
 

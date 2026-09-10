@@ -1,0 +1,119 @@
+{
+  "_file_name": "GoodNext reviewed FoodShare policy passages",
+  "_file_version": "2026-09-08.1",
+  "_purpose": "A small, source-linked set of plain-English policy passages for the 'Understand my letter' flow. Each passage is a reviewed summary of what an official page says, so the site can show a resident what a FoodShare letter appears to ask for beside reviewed guidance, never a paraphrase written by a model. This is not legal advice, an eligibility decision, a case-specific instruction, or a live policy feed. Official staff remain responsible for case decisions.",
+  "_use_rules": [
+    "Show a passage only when the letter text matches one of its triggers; never present a passage as certain to apply to this resident's case.",
+    "Show source_url, source_retrieved_on, effective_dates, version, review_owner, and review_status in resident-facing results.",
+    "Keep the two provenances separate: what the letter appears to say is resident-supplied document text; a passage is reviewed guidance. Never merge them into one claim.",
+    "Ask the resident to confirm dates and actions with a caseworker or the member line before relying on them; the letter's own dates are the resident's, not this file's.",
+    "Do not state that a resident is exempt, ineligible, approved, or denied. Report what a page says and route the case decision to official staff.",
+    "Treat proposed legislation, enacted future provisions, and rules applicable now as distinct; do not turn a future or proposed rule into a present instruction."
+  ],
+  "_field_notes": {
+    "notice_classes": "The two supported letter classes: six_month_report (a periodic report the household must return) and proof_request (a request for documents to verify the case). A passage can apply to both.",
+    "triggers": "Plain lowercase phrases matched against the letter's extracted text, case-insensitively, as whole phrases. A match surfaces the passage; it does not decide the case.",
+    "review_status": "draft means the summary is prepared for the demonstration and needs qualified benefits-staff review before pilot use. reviewed would mean a named reviewer checked it.",
+    "source_retrieved_on": "The date GoodNext checked the cited official page, not a provider's verification timestamp.",
+    "effective_dates": "The date span the guidance applies to, when the source stated one. Empty when the source did not."
+  },
+  "_maintenance": {
+    "file_owner": "GoodNext maintainer — qualified benefits-staff review required before public use",
+    "review_status": "draft",
+    "default_review_interval_days": 7,
+    "stale_after_days": 14,
+    "official_help_fallback": {
+      "name": "FoodShare member line",
+      "phone": "1-800-362-3002",
+      "source_url": "https://www.dhs.wisconsin.gov/foodshare/index.htm"
+    },
+    "not_a_government_service": "GoodNext is not a government service and cannot decide a FoodShare case. Use the member line or a caseworker for a decision."
+  },
+  "passages": [
+    {
+      "passage_id": "fs-six-month-report-basics",
+      "notice_classes": ["six_month_report"],
+      "program": "FoodShare (Wisconsin SNAP)",
+      "jurisdiction": "Wisconsin",
+      "topic": "What a six-month report is",
+      "passage": "A six-month report is a periodic report some FoodShare households must return to keep their benefits. The letter states the household's own due date. Returning it on time, with any requested details, is what keeps the case open; missing the date can end benefits.",
+      "triggers": ["six-month report", "six month report", "6-month report", "srr", "periodic report", "report to keep"],
+      "action_for_resident": "Read the due date on your own letter and return the report by that date. Use ACCESS or the member line if you are not sure how.",
+      "source_url": "https://www.dhs.wisconsin.gov/foodshare/index.htm",
+      "source_retrieved_on": "2026-09-08",
+      "effective_dates": "",
+      "version": "2026-09-08.1",
+      "review_owner": "GoodNext maintainer — benefits-staff review required before pilot",
+      "review_status": "draft",
+      "uncertainties": ["Whether a given household must file this report, and the exact due date, come from the resident's own letter and case, not from this file."]
+    },
+    {
+      "passage_id": "fs-proof-request-basics",
+      "notice_classes": ["proof_request"],
+      "program": "FoodShare (Wisconsin SNAP)",
+      "jurisdiction": "Wisconsin",
+      "topic": "What a proof or verification request is",
+      "passage": "A verification request asks the household to send documents that confirm something about the case, such as income, identity, or where the household lives. The letter lists which documents it wants and the date they are due. Sending the listed items by the date is what lets the agency finish its review.",
+      "triggers": ["verification", "proof of", "verify", "documents", "we need", "provide the following", "requested items"],
+      "action_for_resident": "Gather the documents your own letter lists and send them by the date it states. Ask the member line if a document is unclear or hard to get.",
+      "source_url": "https://www.dhs.wisconsin.gov/foodshare/index.htm",
+      "source_retrieved_on": "2026-09-08",
+      "effective_dates": "",
+      "version": "2026-09-08.1",
+      "review_owner": "GoodNext maintainer — benefits-staff review required before pilot",
+      "review_status": "draft",
+      "uncertainties": ["The exact documents and the due date come from the resident's own letter, not from this file. A layout reference for a proof-request letter is the official DMS sample; it is not present policy or a real deadline."]
+    },
+    {
+      "passage_id": "fs-work-requirement-context",
+      "notice_classes": ["six_month_report", "proof_request"],
+      "program": "FoodShare (Wisconsin SNAP)",
+      "jurisdiction": "Wisconsin",
+      "topic": "Work requirement, exemptions, and good cause",
+      "passage": "Wisconsin DHS describes an expansion of the FoodShare work requirement that follows a federal law signed in July 2025. Work routes, exemptions, and good cause are separate questions, and whether a rule applies depends on the person's own case. A letter about work hours does not by itself decide that a resident owes any set number of hours.",
+      "triggers": ["work requirement", "abawd", "80 hours", "work rules", "able-bodied", "work registration", "employment and training"],
+      "action_for_resident": "Read what your own letter says about work rules and dates, and ask the member line or a caseworker whether an exemption or good cause fits your case before you rely on it.",
+      "source_url": "https://www.dhs.wisconsin.gov/foodshare/work.htm",
+      "source_retrieved_on": "2026-09-08",
+      "effective_dates": "Follows a federal law signed July 2025; applicability is case-specific.",
+      "version": "2026-09-08.1",
+      "review_owner": "GoodNext maintainer — benefits-staff review required before pilot",
+      "review_status": "draft",
+      "uncertainties": ["Proposed, future, and currently-applicable rules must be kept distinct. This passage is context, not a ruling on whether any work requirement applies to a resident."]
+    },
+    {
+      "passage_id": "fs-age-60-to-64-reporting",
+      "notice_classes": ["six_month_report", "proof_request"],
+      "program": "FoodShare (Wisconsin SNAP)",
+      "jurisdiction": "Wisconsin",
+      "topic": "Reporting changes for some adults aged 60 through 64",
+      "passage": "Wisconsin DHS member news describes reporting changes for some adults aged 60 through 64. Age alone does not create an 80-hour work obligation. A personal letter and its dates say more about what a resident must do than a general message about an age group.",
+      "triggers": ["age 60", "ages 60", "60 through 64", "60-64", "older adult", "aged 60"],
+      "action_for_resident": "Rely on the dates and actions in your own letter, and confirm with the member line what applies to your age and case, rather than assuming an age group rule fits you.",
+      "source_url": "https://www.dhs.wisconsin.gov/foodshare/news.htm",
+      "source_retrieved_on": "2026-09-08",
+      "effective_dates": "",
+      "version": "2026-09-08.1",
+      "review_owner": "GoodNext maintainer — benefits-staff review required before pilot",
+      "review_status": "draft",
+      "uncertainties": ["Whether any reporting change applies to a specific resident aged 60 through 64 is a case question for official staff."]
+    },
+    {
+      "passage_id": "fs-how-to-respond",
+      "notice_classes": ["six_month_report", "proof_request"],
+      "program": "FoodShare (Wisconsin SNAP)",
+      "jurisdiction": "Wisconsin",
+      "topic": "How to respond and where to ask",
+      "passage": "A household can respond to a FoodShare letter through the ACCESS website or by contacting the agency. The FoodShare member line answers questions about a case or a QUEST card. Keeping the case open depends on responding by the date the letter states.",
+      "triggers": ["access.wisconsin.gov", "access", "member line", "quest", "contact us", "call", "respond by", "return this"],
+      "action_for_resident": "Respond through ACCESS or the member line by the date on your own letter, and keep a copy of what you send.",
+      "source_url": "https://www.dhs.wisconsin.gov/foodshare/index.htm",
+      "source_retrieved_on": "2026-09-08",
+      "effective_dates": "",
+      "version": "2026-09-08.1",
+      "review_owner": "GoodNext maintainer — benefits-staff review required before pilot",
+      "review_status": "draft",
+      "uncertainties": ["Channel details and hours can change; confirm them on the official page or by phone."]
+    }
+  ]
+}

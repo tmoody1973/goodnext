@@ -18,7 +18,7 @@ helping someone find food.
 | `app/goodnext/` | Strands agent, deployed to Amazon Bedrock AgentCore Runtime |
 | `agentcore/` | AgentCore CLI config and CDK stack (`agentcore deploy`) |
 | `services/api/` | FastAPI backend: sessions, validation, bridge to the agent |
-| `apps/web/` | Next.js static site (not started; Impeccable shape pass first) |
+| `apps/web/` | Next.js static site: Food today (`/`) and Understand my letter (`/notice`) |
 | `docs/` | PRD, research, tech stack, prompts, decisions |
 
 ## Run the first slice locally

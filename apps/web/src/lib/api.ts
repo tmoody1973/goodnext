@@ -71,9 +71,9 @@ export type PlanData = {
   explanation: string;
 };
 
-export type Envelope = {
+export type Envelope<T = PlanData> = {
   status: EnvelopeStatus;
-  data: PlanData | null;
+  data: T | null;
   evidence: string[];
   missing: string[];
   warnings: string[];
@@ -81,6 +81,40 @@ export type Envelope = {
   request_id: string;
   help_routes?: HelpRoute[];
 };
+
+// A network or fetch failure reads to the resident like the API's own 503.
+export function unreachableEnvelope<T = PlanData>(): Envelope<T> {
+  return { status: "temporarily_unavailable", data: null, evidence: [], missing: [], warnings: ["unreachable"], retryable: true, request_id: "local" };
+}
+
+// Understand my letter (MOO-791). The API reads the letter and matches it to
+// reviewed policy passages; the site renders those, never a paraphrase.
+export type NoticeClass = "six_month_report" | "proof_request";
+
+export type PolicyPassage = {
+  passage_id: string;
+  topic: string;
+  passage: string;
+  action_for_resident: string;
+  program: string;
+  jurisdiction: string;
+  source_url: string;
+  source_retrieved_on: string;
+  effective_dates: string;
+  version: string;
+  review_status: string;
+  review_owner: string;
+  uncertainties: string[];
+};
+
+export type NoticeData = {
+  notice_class: NoticeClass | null;
+  found_dates: string[];
+  extracted_text: string;
+  passages: PolicyPassage[];
+};
+
+export type NoticeEnvelope = Envelope<NoticeData>;
 
 // Relative path on purpose (decision 008). Credentials so the API's session
 // cookie round-trips. The API returns an envelope even on 503.
@@ -94,10 +128,28 @@ export async function postPlan(constraints: Constraints, signal?: AbortSignal): 
   });
   const body: unknown = await response.json();
   if (!isEnvelope(body)) throw new Error(`unexpected response shape (${response.status})`);
-  return body;
+  return body as Envelope;
 }
 
-function isEnvelope(value: unknown): value is Envelope {
+// A letter file (a chosen sample, or one the resident opens) goes up as
+// multipart form data; the browser sets the Content-Type boundary itself.
+export async function postNotice(file: File, signal?: AbortSignal): Promise<NoticeEnvelope> {
+  const form = new FormData();
+  form.append("file", file);
+  const response = await fetch("/api/notices", {
+    method: "POST",
+    credentials: "same-origin",
+    body: form,
+    signal,
+  });
+  const body: unknown = await response.json();
+  if (!isEnvelope(body)) throw new Error(`unexpected response shape (${response.status})`);
+  return body as NoticeEnvelope;
+}
+
+// Checks the envelope frame only; the data shape is cast by each caller, since
+// a plan and a notice share this frame but carry different data.
+function isEnvelope(value: unknown): value is Envelope<unknown> {
   if (typeof value !== "object" || value === null) return false;
   const v = value as Record<string, unknown>;
   return typeof v.status === "string" && typeof v.request_id === "string" && "data" in v;
