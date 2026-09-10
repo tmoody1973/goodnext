@@ -34,6 +34,8 @@ class NoticeContext:
     passages: dict[str, NoticePassage]
     policy_returned: set[str] = field(default_factory=set)
     routes_returned: set[str] = field(default_factory=set)
+    routes_phones: set[str] = field(default_factory=set)
+    routes_urls: set[str] = field(default_factory=set)
 
 
 notice_context: contextvars.ContextVar[NoticeContext] = contextvars.ContextVar("notice_context")
@@ -122,4 +124,6 @@ def resolve_help_route(kind: str) -> dict:
     if phone := _agency_phone(ctx.passages):
         routes.insert(0, {"name": AGENCY_ROUTE_NAME, "phone": phone, "url": None, "source": "from your letter"})
     ctx.routes_returned.update(r["name"] for r in routes)
+    ctx.routes_phones.update(r["phone"] for r in routes if r["phone"])
+    ctx.routes_urls.update(r["url"] for r in routes if r["url"])
     return _envelope("success", data=routes, evidence=[r["name"] for r in routes])

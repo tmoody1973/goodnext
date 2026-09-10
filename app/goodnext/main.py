@@ -167,8 +167,12 @@ def notice_task_text(req: NoticeRequest, passages: list[NoticePassage]) -> str:
         "Call get_policy_evidence for each topic the letter raises (for example good cause, "
         "exemptions, six-month report, FSET, fair hearing, sanction) and resolve_help_route once. "
         "Return NoticePlanProposal. Cite passage ids for every finding, next step and task. "
-        "Copy any date exactly as the letter prints it or write 'not stated'. Cite policy ids for "
-        "every question to ask. Explanation under 60 words. Be brief."
+        "Copy any date exactly as the letter prints it or write 'not stated'; never count days or "
+        "weeks until a date. Cite policy ids for every question to ask; if get_policy_evidence "
+        "returns nothing, leave questions_to_ask empty. Copy route names, phones and URLs exactly "
+        "as resolve_help_route returns them. Never write that the resident is eligible, exempt, "
+        "approved, or that benefits will continue; say the agency decides. Explanation under 60 "
+        "words. Be brief."
     )
 
 

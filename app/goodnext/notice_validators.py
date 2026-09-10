@@ -6,8 +6,12 @@ tools returned this run; no eligibility, exemption or continuation verdicts.
 A violating item is stripped and the answer returns as partial.
 """
 
-from notice_tools import NoticeContext, detect_letter_kind
+from notice_tools import PHONE, NoticeContext, detect_letter_kind
 from schemas import NoticePlanProposal
+
+
+def _digits(text: str | None) -> str:
+    return "".join(ch for ch in (text or "") if ch.isdigit())
 
 # Verdicts the site never states (PRD section 3 exclusions). Whole phrase, any case.
 NOTICE_NEVER_LIST = [
@@ -17,7 +21,7 @@ NOTICE_NEVER_LIST = [
     "you qualify",
     "your benefits will continue",
     "your case is fixed",
-    "approved",
+    "you are approved",
     "guaranteed",
 ]
 EXPLANATION_MAX_WORDS = 60
@@ -84,12 +88,16 @@ def validate_notice_plan(proposal: NoticePlanProposal, ctx: NoticeContext) -> tu
         elif clean_text(q.text, "question"):
             questions.append(q.model_copy(update={"policy_ids": ids}))
 
+    # A contact is real when its number or address came back from the tool, or its
+    # number is printed in the letter; the model may reword the name.
+    known_phones = {_digits(p) for p in ctx.routes_phones} | {_digits(m) for p in passages.values() for m in PHONE.findall(p.text)}
+    known_urls = set(ctx.routes_urls)
     routes = []
     for r in proposal.routes:
-        if r.name in ctx.routes_returned:
+        if r.name in ctx.routes_returned or (r.phone and _digits(r.phone) in known_phones) or (r.url and r.url in known_urls):
             routes.append(r)
         else:
-            violations.append(f"route '{r.name}': not returned by resolve_help_route")
+            violations.append(f"route '{r.name}': not returned by resolve_help_route and not printed in the letter")
 
     unknowns = [u for u in proposal.unknowns if clean_text(u, "unknown")]
 

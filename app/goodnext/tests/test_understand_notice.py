@@ -127,6 +127,23 @@ def test_validator_strips_uncited_finding_and_unreturned_policy_and_route(ctx):
     assert len(violations) == 3
 
 
+def test_validator_keeps_reworded_route_with_a_known_number_or_letter_number(ctx):
+    resolve_help_route("agency")
+    p = proposal(questions_to_ask=[], routes=[
+        NoticeRoute(name="2-1-1 (IMPACT 211 Milwaukee County) for food", phone="2-1-1", url=None, source="reviewed"),
+        NoticeRoute(name="Free legal help", phone="1-888-278-0633", url=None, source="from your letter"),
+        NoticeRoute(name="Some hotline", phone="(414) 555-0000", url=None, source="invented"),
+    ])
+    token = notice_context.set(notice_tools.new_context(SANCTION + [NoticePassage(id="p1-9", page=1, text="To learn more about free legal help, call 1-888-278-0633.")]))
+    try:
+        resolve_help_route("agency")
+        cleaned, violations = validate_notice_plan(p, notice_context.get())
+    finally:
+        notice_context.reset(token)
+    assert [r.name for r in cleaned.routes] == ["2-1-1 (IMPACT 211 Milwaukee County) for food", "Free legal help"]
+    assert len(violations) == 1
+
+
 def test_validator_forces_literal_dates(ctx):
     p = proposal(tasks=[NoticeTask(kind="reapply", text="Reapply.", date_text="January 2, 2027", date_kind="official", passage_ids=["p1-4"])])
     cleaned, violations = validate_notice_plan(p, ctx)
