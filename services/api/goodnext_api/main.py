@@ -5,12 +5,14 @@ import logging
 import os
 import uuid
 from datetime import date, datetime, timedelta
+from pathlib import Path
 from typing import Literal
 from zoneinfo import ZoneInfo
 
 import httpx
 from fastapi import Depends, FastAPI, File, Form, Request, Response, UploadFile
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from goodnext_api import notices
@@ -19,7 +21,7 @@ from goodnext_api.help_routes import help_routes
 
 LOCAL_TZ = ZoneInfo("America/Chicago")
 SESSION_COOKIE = "gn_session"
-DEV = os.environ.get("GOODNEXT_ENV", "dev") == "dev"
+DEFAULT_WEB_ROOT = Path(__file__).resolve().parents[3] / "apps" / "web" / "out"
 log = logging.getLogger(__name__)
 
 app = FastAPI(title="GoodNext API", version="0.1.0", docs_url="/api/docs", openapi_url="/api/openapi.json")
@@ -68,11 +70,26 @@ def runtime_session_id(session: str) -> str:
     return hashlib.sha256(session.encode()).hexdigest()[:48]
 
 
+def cookie_secure() -> bool:
+    """Whether the session cookie carries the Secure flag (HTTPS only).
+
+    Split from GOODNEXT_ENV (decision 008) so the demo clock (GOODNEXT_ENV=demo)
+    and plain HTTP can coexist until HTTPS lands: a Secure cookie is dropped
+    silently over HTTP, so every request then looks like a stranger.
+    GOODNEXT_COOKIE_SECURE overrides; otherwise the flag is on for every
+    environment except dev. Env is read per-call so tests can monkeypatch it.
+    """
+    override = os.environ.get("GOODNEXT_COOKIE_SECURE")
+    if override is not None:
+        return override.strip().lower() in ("1", "true", "yes", "on")
+    return os.environ.get("GOODNEXT_ENV", "dev") != "dev"
+
+
 def get_session(request: Request, response: Response) -> str:
     session = request.cookies.get(SESSION_COOKIE)
     if not session or len(session) != 36:
         session = str(uuid.uuid4())
-        response.set_cookie(SESSION_COOKIE, session, httponly=True, samesite="strict", secure=not DEV, max_age=60 * 60 * 4)
+        response.set_cookie(SESSION_COOKIE, session, httponly=True, samesite="strict", secure=cookie_secure(), max_age=60 * 60 * 4)
     return session
 
 
@@ -152,3 +169,20 @@ async def understand_notice(
     except notices.NoticeIntakeError as exc:
         return envelope_response(400, "needs_clarification", request_id, response, missing=[str(exc)])
     return invoke_agent(agent, payload, session, response)
+
+
+def mount_web(application: FastAPI, web_root: str | None = None) -> bool:
+    """Serve the static site at '/', registered after the /api routes so those win.
+
+    Decision 008: one host for the site and the API. The mount only happens when
+    the export is present, so API-only dev and the test suite (no build) are
+    unaffected. In the container GOODNEXT_WEB_ROOT points at the copied export.
+    """
+    root = web_root or os.environ.get("GOODNEXT_WEB_ROOT") or str(DEFAULT_WEB_ROOT)
+    if not os.path.isdir(root):
+        return False
+    application.mount("/", StaticFiles(directory=root, html=True), name="web")
+    return True
+
+
+mount_web(app)

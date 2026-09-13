@@ -45,6 +45,21 @@ jobs:
       - run: npm install -g @aws/agentcore@0.28.1
       - run: agentcore validate
 
+  infra-tests:
+    name: Web hosting stack tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install
+      - run: npm run build
+      - run: npm test
+
   web:
     name: Web typecheck, tests, build
     runs-on: ubuntu-latest
