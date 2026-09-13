@@ -68,16 +68,19 @@ test("logs are kept one week", () => {
   plain.hasResourceProperties("AWS::Logs::LogGroup", { RetentionInDays: 7 });
 });
 
-test("without a certificate: one plain HTTP listener on 80, and 443 refuses fast", () => {
-  plain.resourceCountIs("AWS::ElasticLoadBalancingV2::Listener", 1);
+test("without a certificate: HTTP on 80, and 443 answers plain HTTP so browsers fall back fast", () => {
+  plain.resourceCountIs("AWS::ElasticLoadBalancingV2::Listener", 2);
   plain.hasResourceProperties("AWS::ElasticLoadBalancingV2::Listener", { Port: 80, Protocol: "HTTP" });
-  plain.hasResourceProperties("AWS::EC2::SecurityGroup", {
-    SecurityGroupIngress: Match.arrayWith([Match.objectLike({ FromPort: 443, ToPort: 443, CidrIp: "0.0.0.0/0" })]),
+  plain.hasResourceProperties("AWS::ElasticLoadBalancingV2::Listener", {
+    Port: 443,
+    Protocol: "HTTP",
+    DefaultActions: [Match.objectLike({ Type: "fixed-response", FixedResponseConfig: Match.objectLike({ StatusCode: "400" }) })],
   });
 });
 
 test("with a certificate: HTTPS on 443 and HTTP redirects", () => {
   secured.resourceCountIs("AWS::ElasticLoadBalancingV2::Listener", 2);
   secured.hasResourceProperties("AWS::ElasticLoadBalancingV2::Listener", { Port: 443, Protocol: "HTTPS" });
+  secured.resourcePropertiesCountIs("AWS::ElasticLoadBalancingV2::Listener", { Protocol: "HTTP", Port: 443 }, 0);
   secured.hasResourceProperties("AWS::ElasticLoadBalancingV2::Listener", { Port: 80, DefaultActions: [Match.objectLike({ Type: "redirect" })] });
 });

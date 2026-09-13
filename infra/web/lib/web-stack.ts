@@ -8,6 +8,7 @@ import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as patterns from "aws-cdk-lib/aws-ecs-patterns";
 import { Platform } from "aws-cdk-lib/aws-ecr-assets";
+import * as elbv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as logs from "aws-cdk-lib/aws-logs";
 import { Construct } from "constructs";
@@ -58,10 +59,15 @@ export class GoodNextWebStack extends Stack {
       },
     });
 
-    // Without HTTPS, let port 443 refuse instantly instead of dropping the packet: modern
-    // browsers try https first and fall back to http only after the attempt fails fast.
+    // Without HTTPS, answer port 443 with plain HTTP so a browser's https-first attempt fails
+    // instantly (TLS protocol error) and falls back to http. A closed port only drops the
+    // packet, and the browser waits out the whole timeout before falling back.
     if (!certificate) {
-      service.loadBalancer.connections.allowFromAnyIpv4(ec2.Port.tcp(443), "Fast refusal so browsers fall back to HTTP");
+      service.loadBalancer.addListener("PlainOn443", {
+        port: 443,
+        protocol: elbv2.ApplicationProtocol.HTTP,
+        defaultAction: elbv2.ListenerAction.fixedResponse(400, { contentType: "text/plain", messageBody: "This demo runs on http://, not https://." }),
+      });
     }
 
     // Healthy after 20 s, drained in 2 min: a rollout should not wait longer than the slowest plan.
