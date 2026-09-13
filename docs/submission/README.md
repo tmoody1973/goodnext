@@ -26,8 +26,8 @@ full-page PNGs. `architecture.png` follows the `diagram-design` export procedure
 ## What is still a placeholder
 
 - `description.md`: "Live demo: <PUBLIC ADDRESS>" and "Video: <YOUTUBE URL>".
-- `description.md`: disclosure 8 (plain-HTTP cookie note) stays: decision 012 chose plain HTTP for Monday; delete it only if HTTPS is added before
-  address has no HTTPS; delete it otherwise.
+- `description.md`: disclosure 8 (plain-HTTP cookie note) stays; decision 012 chose
+  plain HTTP for Monday. Delete it only if HTTPS is added before submission.
 - `description.md`: "written during the hackathon window" needs Tarik to confirm the
   start date.
 - `devpost-fields.md`: "AWS Builder ID: <TARIK FILLS IN>", track choice, team
