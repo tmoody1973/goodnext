@@ -1,13 +1,16 @@
 # GoodNext handoff
 
-Written September 13, 2026, 12:55 CDT, for a fresh Claude Code session.
+Written September 13, 2026, 12:55 CDT; updated 14:35 CDT after hosting went live.
 Read this, then `CONTEXT.md`, then `DESIGN.md`, then
 `docs/agents/issue-tracker.md`. Do not re-read the planning docs unless a
 task needs them; the decisions are settled and the product is built.
 
 **Deadline: Monday September 14, 2026, 7 p.m. Central.** Judging runs through
-October 8. What is missing is not code: it is a public address a judge can
-open, and the submission materials.
+October 8. The public address is live and the submission drafts are written;
+what remains is Tarik's part: merge, placeholders, video, Devpost form.
+
+**Public address (plain HTTP, decision 012):**
+`http://GoodNe-Servi-SOh7w0HGiJhV-1702778700.us-east-1.elb.amazonaws.com`
 
 ## What GoodNext is
 
@@ -38,6 +41,8 @@ sample templates (decision 011).
 | Help routes | `app/goodnext/help_routes.json` | One reviewed file; the agent and the API both read it (decision 009). |
 | Policy passages | `app/goodnext/policy_passages.json` | 23 entries, **zero approved**. The tool loads only `review_status: approved` (test-enforced). Review checklist: `docs/research/notices/policy-passages-review.md`. |
 | Demo letters | `docs/research/notices/generated/` | Three fictional letters (sanction, time-limited warning, six-month report) as HTML, PDF with text layer, PNG of page 1, and `values.json`. |
+| Hosting (MOO-793, branch `hosting-fargate`, PR pending) | `services/api/Dockerfile`, `infra/web/` | One container (site at `/`, API at `/api/*`) on ECS Fargate behind an ALB, stack `GoodNext-web`, us-east-1. 8 jest tests; CI job. Deploy: `cd infra/web && npx cdk diff` then `npx cdk deploy` on Tarik's go. Tear down: `npx cdk destroy`. |
+| Submission drafts | `docs/submission/` | H07 diagram (archify), H08 description, H09 video script, H10 Devpost fields, H06 check. Placeholders: live address, video link, Builder ID, hackathon window start date. |
 | Design | `DESIGN.md`, `.impeccable/design.json`, `PRODUCT.md` | Read `DESIGN.md` before touching any web UI. |
 | Specs and decisions | `docs/specs/*.md`, `docs/decisions/001` to `011` | Plain English; "What actually happened" fields blank for Tarik. |
 | Evidence | `docs/evidence/` | Per-issue live envelopes and screenshots; latest are `notice-live-*-v7.json` and `food-live-53206-v7.json`. |
@@ -66,41 +71,32 @@ that turns that agent off, or expect another one.
 - Demo clock: `GOODNEXT_ENV=demo` plus `GOODNEXT_DEMO_NOW` pins "today"; fixture windows cover 2026-09-08 to 2026-09-21. Judges will see September 10; the README setup note says so.
 - AWS login today is the account **root** user via `aws login` (`! aws login` in the session); it expires after hours (the API then answers 503). Hosting must run under an IAM role.
 
-## Next 1: hosting (the one thing that makes the entry judgeable)
+## Next 1: hosting (done September 13)
 
-Decision 008: one hostname for site and API. Nothing below exists yet;
-every resource is created only on Tarik's go, one named resource at a time.
+Deployed as decision 012 describes: one ARM Fargate task (0.5 vCPU, 1 GB) in
+the default VPC, an Application Load Balancer with a 300 s idle timeout, a
+task role limited to `InvokeAgentRuntime` on runtime v7 plus
+`textract:DetectDocumentText`, 7-day logs, ECS circuit breaker. Port 443
+answers plain HTTP with a fixed 400 so https-first browsers fall back at once.
+The session cookie is Secure exactly when the request arrived over HTTPS
+(uvicorn trusts the balancer's `X-Forwarded-Proto`); no env switch.
 
-Recommended shape, smallest that fits the timings (a food plan takes up to
-105 s, which rules out anything with a 30 or 60 second cap such as API
-Gateway or CloudFront's default origin timeout):
+Proven live on September 13: `/api/health`, the page and a static asset; a
+food plan for 53206 in 91 s by request and in a real browser (ego-browser,
+delayed status at 35 s, heading "Food today, Thursday, September 10", 3 options);
+the six-month letter upload in 29 s (6 findings, 4 tasks). Evidence:
+`docs/evidence/hosting-live-*`. Screenshots: see the learning-log entry for
+2026-09-13; both on-screen browsers failed to capture that afternoon.
 
-1. **One container** from `services/api/`: FastAPI serves `/api/*` and also
-   serves the static export from `apps/web/out` (add a StaticFiles mount for
-   `/`; ~5 lines). Copy `app/goodnext/help_routes.json` into the image
-   (decision 009) or set `GOODNEXT_HELP_ROUTES_FILE`.
-2. **ECR repository** for the image.
-3. **ECS Fargate service** (one task, 0.5 vCPU, 1 GB) in the default VPC, with
-   a **task role** allowing `bedrock-agentcore:InvokeAgentRuntime` on the ARN
-   above and `textract:DetectDocumentText`.
-4. **Application Load Balancer**, idle timeout **300 s**, target group health
-   check `GET /api/health`.
-5. **HTTPS**: an ACM certificate on a hostname Tarik owns (Route 53 or an
-   external DNS CNAME to the ALB). Without HTTPS the session cookie is not set
-   (`secure=not DEV`); if no domain is available by Monday, run with
-   `GOODNEXT_ENV=demo` and add an env switch for `secure=False`, and say so in
-   the write-up.
-6. Env on the task: `GOODNEXT_ENV=demo`, `GOODNEXT_DEMO_NOW=2026-09-10T09:00:00-05:00`,
-   `GOODNEXT_AGENT_RUNTIME_ARN`, `AWS_REGION=us-east-1`.
-7. Prove it: open the hostname in a real browser, run 53206 and upload the
-   six-month letter, save the evidence as MOO-776/787 did. Write decision 012
-   (hosting shape) in plain English.
+Cost about $1 a day. Remove after judging with `npx cdk destroy` in `infra/web`.
+HTTPS later: request an ACM certificate for a hostname Tarik owns and redeploy
+with `-c certificateArn=...`; the 443 stand-in listener is replaced automatically.
 
-Alternative if Fargate setup drags: App Runner (120 s request cap; a food
-plan at 99 to 105 s is too close). Lambda function URLs allow 15 minutes but
-need response streaming and a different packaging; not for Monday.
+## Next 2: submission materials (PRD section 13) — drafted in `docs/submission/`
 
-## Next 2: submission materials (PRD section 13)
+Read `docs/submission/README.md` first. Tarik fills in: AWS Builder ID, the
+hackathon window start date, the video link, and confirms the food-site
+example in the video script. Then records the video and submits.
 
 - **H07 architecture diagram** matching what shipped: browser → static site
   and `/api/*` on one host → FastAPI → AgentCore Runtime (Strands, Bedrock) →
@@ -129,8 +125,8 @@ letters' own fair-hearing page is quoted instead.
    each). Latency work (day one first) is deferred past the deadline.
 2. Letter results are long on a phone (six findings, ten to thirteen quotes);
    v7 caps them; folding quotes behind "show more" was not done.
-3. The API's `/api/plans` on the deployed runtime answers 503 when the local
-   AWS session has expired; hosting under a role removes that.
+3. The hosted API runs under a task role, so the expired-laptop-login 503 no
+   longer applies to the public address (local runs still need `aws login`).
 4. Older runtime log events hold synthetic test prompts; set CloudWatch
    retention on the log group.
 5. Impeccable 4.1.2 installed (4.2.2 available); do not update mid-session.

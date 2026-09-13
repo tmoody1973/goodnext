@@ -1,6 +1,6 @@
 # GoodNext demo video script (H09)
 
-Target length: 4 minutes 20 seconds. Hard limit: 5 minutes.
+Target length: 4 minutes 45 seconds (the opening "why now" beat adds 25 s). Hard limit: 5 minutes.
 Record on the public address with the demo clock (September 10, 2026). <!-- HANDOFF.md -->
 One take per flow is fine; the letter result and the food plan both come from the
 live agent, so what appears may differ slightly from the lines below. Read what is on
@@ -19,9 +19,12 @@ screen, not the script, if they disagree.
 
 ## Beats
 
+Times after the first row are as originally planned; add 25 seconds to each to get the real clock. Total stays under five minutes.
+
 | Time | On screen | Said |
 | --- | --- | --- |
-| 0:00 to 0:30 | Title card "GoodNext", then the six-month letter PDF page 1, slowly scrolling. Footer line "Fictional demonstration letter" visible. | "A FoodShare letter arrives. Three pages. Some of it is about you, some of it is boilerplate, and one line changes what you have to do. Most people cannot tell which line. Meanwhile, the question that actually matters today is where dinner is coming from. GoodNext is a free website that does two things: it reads the letter and shows you the next supported step beside the sentence it came from, and it finds food this week without asking for an account or a notice first." |
+| 0:00 to 0:25 | Plain card, two lines, sources small underneath: "Roughly 24,000 to 34,000 Wisconsinites have lost FoodShare in 2026" (WEAU, WUWM). Then a second card: "Work rules now reach ages 18 to 64, including parents of children 14 and older. 80 hours a month." (WUWM, Door County Knock). | "This year federal SNAP changes stripped food assistance from roughly 24,000 to 34,000 Wisconsinites. Work requirements now reach adults up to 64 and parents of teenagers, with 80 hours a month to log. Refugees and other legal residents were cut from the rolls. Food banks are squeezed and county offices are overloaded. Every one of those changes arrives as a letter." <!-- Tarik's sources, description.md "Why now" -->
+| 0:25 to 0:55 | Title card "GoodNext", then the six-month letter PDF page 1, slowly scrolling. Footer line "Fictional demonstration letter" visible. | "A FoodShare letter arrives. Three pages. Some of it is about you, some of it is boilerplate, and one line changes what you have to do. Most people cannot tell which line. Meanwhile, the question that actually matters today is where dinner is coming from. GoodNext is a free website that does two things: it reads the letter and shows you the next supported step beside the sentence it came from, and it finds food this week without asking for an account or a notice first." |
 | 0:30 to 0:45 | Browser on the public address. The two tabs: "Find food today" first, "Understand my letter" second. Click "Understand my letter". | "This is the live site. Two entry points. Let us start with the letter. Our resident is Maria Example. She is fictional; the letter was generated from an official Wisconsin DHS sample template." |
 | 0:45 to 1:00 | Choose file, pick six-month-report-conversion-maria-example.pdf, submit. Processing sentence appears. | "Maria uploads the PDF. The file is read in memory, turned into numbered passages, and never stored. A photo would go through Amazon Textract instead." |
 | 1:00 to 1:30 | Waiting state, then the result lands (25 to 35 seconds in measured runs). <!-- HANDOFF.md --> Keep the camera on the page. | "The agent runs on Amazon Bedrock AgentCore, built with Strands, using Claude Sonnet 4.6. It reads the passages, looks up approved policy passages by topic, and resolves a help route. Then a validator written in code removes anything the letter did not actually say." |

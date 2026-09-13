@@ -21,6 +21,45 @@ tiles for the rest of the week. The promise is simple: understand what changed, 
 the next supported action, and find food while you work through it. Nothing about
 the resident is stored.
 
+## Why now
+
+Federal SNAP cuts and policy changes have stripped food assistance from roughly
+24,000 to 34,000 Wisconsinites, squeezed local food banks, and shifted millions
+in administrative costs to the state. [1, 2] The rules changed under people's
+feet, and the letters explaining the changes are the same dense notices as
+before:
+
+- **Expanded work mandates.** Work requirements now apply to adults aged 18 to
+  64 (previously 18 to 54) and include parents with children 14 and older, while
+  removing automatic exemptions for veterans and former foster youth. Recipients
+  must log 80 hours a month of work, training, or volunteering. [2, 3]
+- **Immigrant eligibility cuts.** New federal guidelines exclude several
+  categories of noncitizens with legal immigration status, including refugees,
+  asylees, and tribal members born abroad, leaving thousands at risk or cut from
+  FoodShare rolls. [2, 4]
+- **School meal disruptions.** As families lose FoodShare eligibility, children
+  lose automatic direct certification for free school meals, adding paperwork
+  barriers for families and cutting funding for high-poverty school nutrition
+  programs. [5]
+- **Strain on the state and counties.** Federal legislation penalizes states
+  with payment error rates over 6% and forces Wisconsin to cover a much larger
+  share of administrative and benefit costs, putting pressure on understaffed
+  county agencies to process heavier caseloads. [5, 6, 7]
+
+A household that gets one of these letters has days, sometimes hours, to
+understand what changed and what to do, while still needing to eat tonight.
+GoodNext exists for exactly that gap.
+
+Sources (Tarik's research, September 2026):
+[1] WEAU, August 3, 2026: https://www.weau.com/2026/08/03/thousands-wisconsinites-lose-snap-benefits-local-food-banks-feel-squeeze/
+[2] WUWM: https://www.wuwm.com/changes-to-snap-requirements-cause-millions-to-lose-benefits
+[3] Door County Knock, March 2026: https://doorcountyknock.org/2026/03/expanded-snap-work-requirements-and-administration-cost-changes-to-increase-pressure-on-recipients-and-county
+[4] Wisconsin Watch, June 2026: https://wisconsinwatch.org/2026/06/wisconsin-foodshare-medicaid-cut-refugees-new-federal-rules-immigrants-trump-snap/
+[5] YouTube short: https://www.youtube.com/shorts/JM0SHGZoass
+[6] Wausau Pilot and Review (Facebook post): https://www.facebook.com/wausaupilotandreview/posts/federal-snap-changes-put-wisconsin-on-the-hook-for-potentially-200m-a-year-in-pe/1617277627071220/
+[7] Kids Forward: https://kidsforward.org/wisconsin-children-families-workers-at-risk-of-losing-critical-food-support-due-to-federal-cuts/
+[8] WPR: https://www.wpr.org/news/evers-new-snap-rule-hurt-small-businesses-rural-wisconsinites
+
 ## Who it is for
 
 A Milwaukee resident who just opened a confusing FoodShare notice and needs to know,

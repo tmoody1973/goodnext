@@ -1,6 +1,6 @@
 # 012: Host the demo as one container behind one load balancer
 
-Date: September 13, 2026. Status: proposed; awaiting Tarik's go (see "What we chose").
+Date: September 13, 2026. Status: decided and deployed.
 
 ## Decision
 The public GoodNext address is one Amazon ECS Fargate container (a small server AWS runs for us without a machine to manage) serving both the static website and the API, behind one Application Load Balancer (the front door that owns the public address and forwards requests) whose idle timeout is raised to 300 seconds. The container calls the deployed agent runtime under an IAM task role (a permission slip attached to the container, so no password or key is stored anywhere).
@@ -15,7 +15,7 @@ Judging needs a public address a stranger can open through October 8. Two facts 
 4. **Tarik's Hetzner server with Caddy for HTTPS.** No AWS load balancer cost. Cost: the container would need a long-lived AWS access key on a non-AWS machine, which the handoff rules out ("hosting must run under an IAM role"), and the entry's story is weaker if the app does not run where the agent runs.
 
 ## What we chose and why
-(Pending Tarik's go. Claude recommends option 1. Call: joint.)
+Option 1, plain HTTP for Monday. Claude recommended it; Tarik approved the resource list and the deploy on September 13 (joint call). Deployed at 13:37 CDT as stack `GoodNext-web`; public address `http://GoodNe-Servi-SOh7w0HGiJhV-1702778700.us-east-1.elb.amazonaws.com`. Two follow-ups the same afternoon: a plain-HTTP listener on port 443 so a browser's https-first attempt fails in milliseconds and falls back (a closed port only drops the packet and the first visit hung), and an ECS circuit breaker so a broken rollout fails in minutes rather than hours.
 
 ## What we gave up
 Simplicity and a free HTTPS hostname. App Runner would have been fewer resources with HTTPS built in; we traded that for a timeout that fits the slowest request. Without a domain, the site runs on plain HTTP, which the write-up must say. One departure from the handoff: instead of an environment switch that turns the cookie's Secure flag off, the API marks the cookie Secure exactly when the request arrived over HTTPS (the load balancer passes the original scheme along). One rule instead of two settings that must agree. The stack is infrastructure as code (a file describes every resource, so the same command creates or removes them all), but it is a second stack beside the agent's, so there are two things to tear down after judging.
