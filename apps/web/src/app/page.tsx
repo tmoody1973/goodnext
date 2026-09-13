@@ -110,10 +110,6 @@ export default function FoodTodayPage() {
         ))}
       </div>
 
-      <div role="tabpanel" id="panel-letter" aria-labelledby="tab-letter" hidden={entry !== "letter"}>
-        <NoticeFlow routes={routes} onRoutes={setRoutes} onFindFood={() => { setEntry("food"); setTimeout(focusZip, 0); }} />
-      </div>
-
       <div role="tabpanel" id="panel-food" aria-labelledby="tab-food" hidden={entry !== "food"} className="flex flex-col gap-8">
       {!editing && submitted && <SummaryLine values={submitted} onChange={reopen} />}
       <div hidden={!editing}>
@@ -146,6 +142,10 @@ export default function FoodTodayPage() {
           />
         )}
       </section>
+      </div>
+
+      <div role="tabpanel" id="panel-letter" aria-labelledby="tab-letter" hidden={entry !== "letter"}>
+        <NoticeFlow routes={routes} onRoutes={setRoutes} onFindFood={() => { setEntry("food"); setTimeout(focusZip, 0); }} />
       </div>
     </main>
   );

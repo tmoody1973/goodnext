@@ -21,7 +21,7 @@ or a notice before helping with food, or use real residents' documents.
 
 | Piece | Path | State |
 | --- | --- | --- |
-| Strands agent (Python 3.12) | `app/goodnext/` | 57 tests green; two workflows, `food_today` and `understand_notice`; deployed runtime **v6** (2026-09-10 14:06 CDT), verified live; v7 pending (notice task-text caps and never-list hedge fix are on the branch, not deployed) |
+| Strands agent (Python 3.12) | `app/goodnext/` | 57 tests green; two workflows, `food_today` and `understand_notice`; deployed runtime **v7** (2026-09-10 15:35 CDT: notice findings and citations capped, hedge phrase no longer strips a next step), both workflows verified live |
 | FastAPI backend | `services/api/` | 25 tests green; `POST /api/plans` and `POST /api/notices` (PDF text layer, Textract for photos, three answers); truthful 503 |
 | AgentCore CLI config + CDK | `agentcore/` | Deployed to us-east-1 |
 | Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Two entry tabs: Find food today (finished, MOO-786/787 merged in PR #15) and Understand my letter (upload or three questions, result beside quoted passages; MOO-791). 50 tests green. Notice work on branch `tarikjmoody/notice-entry-point`, **not yet pushed** |
@@ -41,11 +41,11 @@ Hackathon". Only the `linear-build` skill creates, moves, or closes issues.
 Food today MOO-770 to 787: Done and merged. Notice entry point MOO-788 to
 792: 789, 790, 791 Done with evidence; 788 In Progress (letters done,
 passage approval waits on Tarik); 792 closes after the finish review verdict.
-Branch `tarikjmoody/notice-entry-point` is **not pushed**.
+Notice branch merged as PR #18 (2026-09-10 15:18 CDT).
 
 **A PostHog "self-driving" bot opens PRs on this repo from Linear issues**
-(PR #12 on 2026-09-08, PR #16 on 2026-09-10, both stale and unadopted).
-Close them; find the switch that turns it off.
+(PRs #12, #16, #17; all stale, all closed unmerged). Find the switch that
+turns it off before creating the next issue.
 
 GitHub: https://github.com/tmoody1973/goodnext. PRs #4 to #11 and #13 merged
 2026-09-08. CI runs agent tests, API tests, `agentcore validate`, and the web
@@ -87,21 +87,26 @@ Rules from real data (decision 006): unknown service area shows only for the
 site's own ZIP; over 14 days old is "call to confirm" with the date; only a
 missing date is "unconfirmed".
 
-## Next: land the notice branch, deploy v7, approve passages
+## Next: approve passages, then hosting
 
-1. Tarik: `push`, PR, merge (CI runs agent, API, AgentCore validate, web).
-2. Tarik: review `docs/research/notices/policy-passages-review.md`; tick the
+1. Tarik: review `docs/research/notices/policy-passages-review.md`; tick the
    passages the agent may cite. Claude then sets `review_status: approved` on
    those entries in `app/goodnext/policy_passages.json` (a test enforces that
-   only approved, official-URL entries load).
-3. Deploy **v7** on Tarik's go: `agentcore deploy --target default --diff`
-   (expect only the code bundle), then `--yes`. v7 carries the finding and
-   citation caps and the never-list hedge fix; without it, results run long
-   and a next step can be stripped.
-4. Re-run the four live uploads (script pattern in the MOO-792 evidence) and
-   refresh `docs/evidence/notice-live-*`.
-5. Hosting: the API's role needs `textract:DetectDocumentText` for photo
-   uploads; `/api/notices` is multipart up to 10 MB.
+   only approved, official-URL entries load), and a later deploy (v8) carries
+   them; until then "questions to ask your agency" stays empty.
+2. Hosting (decision 008): one hostname, static files plus `/api/*` to the API
+   with an origin timeout of at least 180 s; the API container carries
+   `app/goodnext/help_routes.json` and `policy_passages.json` is inside the
+   agent bundle; the API's role needs `textract:DetectDocumentText` for photo
+   uploads; `/api/notices` is multipart up to 10 MB. IAM role, not root.
+   Nothing in AWS is created without Tarik's go.
+3. Submission checklist (PRD section 13), then latency if time remains.
+
+Live on v7 (2026-09-10 15:40 CDT): sanction 34.9 s, time-limited 25.9 s,
+six-month 25.9 s, sanction photo via Textract 30.9 s, all with six findings
+and ten to thirteen citations and a next step; Food today 53206 in 99.4 s
+with the delayed status at 31 s. Evidence `docs/evidence/notice-live-*-v7.json`
+and `docs/evidence/food-live-53206-v7.json`.
 
 Running the notice path locally: `agentcore dev` (serves on **8082**, not
 8080; pass `GOODNEXT_AGENT_LOCAL_URL=http://127.0.0.1:8082` to the API), then
