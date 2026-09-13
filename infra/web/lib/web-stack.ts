@@ -38,6 +38,8 @@ export class GoodNextWebStack extends Stack {
       memoryLimitMiB: 1024,
       desiredCount: 1,
       minHealthyPercent: 100,
+      // A task that keeps crashing fails the rollout in minutes, not three hours.
+      circuitBreaker: { rollback: true },
       assignPublicIp: true,
       // ARM: builds natively on the Mac and runs on Graviton, the cheaper Fargate CPU.
       runtimePlatform: { cpuArchitecture: ecs.CpuArchitecture.ARM64, operatingSystemFamily: ecs.OperatingSystemFamily.LINUX },

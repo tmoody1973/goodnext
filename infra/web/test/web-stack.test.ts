@@ -16,7 +16,11 @@ test("one ARM Fargate task, half a vCPU, one gigabyte, one copy", () => {
     RequiresCompatibilities: ["FARGATE"],
     RuntimePlatform: { CpuArchitecture: "ARM64" },
   });
-  plain.hasResourceProperties("AWS::ECS::Service", { DesiredCount: 1, LaunchType: "FARGATE" });
+  plain.hasResourceProperties("AWS::ECS::Service", {
+    DesiredCount: 1,
+    LaunchType: "FARGATE",
+    DeploymentConfiguration: Match.objectLike({ DeploymentCircuitBreaker: { Enable: true, Rollback: true } }),
+  });
 });
 
 test("the load balancer waits 300 seconds, longer than the slowest plan", () => {
