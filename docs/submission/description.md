@@ -99,7 +99,7 @@ instead of a guess.
    windows stay meaningful for judges. Outside demo mode the real Milwaukee clock is
    used. <!-- HANDOFF.md, README.md -->
 7. Plans differ run to run. The validator accepts each one; none is a promise of food.
-8. <IF THE PUBLIC ADDRESS IS PLAIN HTTP, KEEP THIS LINE, OTHERWISE DELETE IT> The
+8. The
    public address runs without HTTPS, so the session cookie is set without the
    secure flag for the demo (decision 012).
 

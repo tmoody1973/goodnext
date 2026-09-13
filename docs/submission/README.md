@@ -26,7 +26,7 @@ full-page PNGs. `architecture.png` follows the `diagram-design` export procedure
 ## What is still a placeholder
 
 - `description.md`: "Live demo: <PUBLIC ADDRESS>" and "Video: <YOUTUBE URL>".
-- `description.md`: disclosure 8 (plain-HTTP cookie note) stays only if the public
+- `description.md`: disclosure 8 (plain-HTTP cookie note) stays: decision 012 chose plain HTTP for Monday; delete it only if HTTPS is added before
   address has no HTTPS; delete it otherwise.
 - `description.md`: "written during the hackathon window" needs Tarik to confirm the
   start date.
