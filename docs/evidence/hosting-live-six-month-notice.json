@@ -1,0 +1,329 @@
+{
+  "status": "success",
+  "data": {
+    "letter_kind": "six_month_report",
+    "findings": [
+      {
+        "label": "Letter type & household change",
+        "text": "Milwaukee Enrollment Services notified you (Case #000000001, mailed 09/08/2026) that a change in your FoodShare household means you must now complete six-month report forms going forward.",
+        "passage_ids": [
+          "p1-1",
+          "p1-2",
+          "p1-7"
+        ]
+      },
+      {
+        "label": "No action needed right now",
+        "text": "The letter states: \"You do not need to take any action at this time.\"",
+        "passage_ids": [
+          "p1-3"
+        ]
+      },
+      {
+        "label": "First six-month report due date",
+        "text": "Your first six-month report form is due in March 2027. The agency will mail it to you about a month before it is due. Missing the due date could result in losing FoodShare benefits.",
+        "passage_ids": [
+          "p1-4"
+        ]
+      },
+      {
+        "label": "Ongoing reporting & renewal",
+        "text": "You must complete a six-month report form every six months until your next renewal. Your next renewal date is September 15, 2027; renewal information will be mailed to you.",
+        "passage_ids": [
+          "p1-5"
+        ]
+      },
+      {
+        "label": "Fair hearing right",
+        "text": "If you disagree with the change in your benefits, you may request a fair hearing. The deadline printed in the letter is November 17, 2026. You may bring a support person and may be able to get free legal help (1-888-278-0633). Request forms are available at doa.wi.gov/RequestAHearing or by contacting the agency.",
+        "passage_ids": [
+          "p2-6",
+          "p2-2",
+          "p2-13"
+        ]
+      },
+      {
+        "label": "Continuing benefits during a hearing",
+        "text": "If you request a hearing before your benefits change, you may be able to keep receiving the same benefits until the hearing officer decides. If the officer finds the agency was right, you may need to repay benefits received after the change date.",
+        "passage_ids": [
+          "p2-9"
+        ]
+      }
+    ],
+    "screening": "action_identified",
+    "next_step": {
+      "text": "No action is required today. Your most important upcoming deadline is to complete and return the six-month report form when it arrives in the mail around February 2027 \u2014 it must be submitted by the due date in March 2027. If you disagree with any change to your benefits, you may request a fair hearing by November 17, 2026.",
+      "passage_ids": [
+        "p1-3",
+        "p1-4",
+        "p2-6"
+      ]
+    },
+    "tasks": [
+      {
+        "kind": "report",
+        "text": "Watch your mail for the six-month report form, which the agency will send around February 2027. Complete and return it by the due date to keep your FoodShare benefits.",
+        "date_text": "March 2027",
+        "date_kind": "official",
+        "passage_ids": [
+          "p1-4"
+        ]
+      },
+      {
+        "kind": "report",
+        "text": "Watch your mail for renewal paperwork and complete it by the renewal deadline.",
+        "date_text": "September 15, 2027",
+        "date_kind": "official",
+        "passage_ids": [
+          "p1-5"
+        ]
+      },
+      {
+        "kind": "fair_hearing",
+        "text": "If you disagree with the change described in this letter, request a fair hearing by the deadline. You can request online at doa.wi.gov/RequestAHearing, by mail to Division of Hearings & Appeals PO Box 7875 Madison WI 53707-7875, by fax to 608-264-9885, or by calling your agency.",
+        "date_text": "November 17, 2026",
+        "date_kind": "official",
+        "passage_ids": [
+          "p2-6",
+          "p2-13"
+        ]
+      },
+      {
+        "kind": "contact_agency",
+        "text": "If you have questions about this letter or your benefits, call Milwaukee Enrollment Services at 1-888-947-6583. Free translation and disability-format services are available.",
+        "date_text": "not stated",
+        "date_kind": "unknown",
+        "passage_ids": [
+          "p1-1",
+          "p1-6"
+        ]
+      }
+    ],
+    "questions_to_ask": [],
+    "routes": [
+      {
+        "name": "Your agency (from your letter)",
+        "phone": "1-888-947-6583",
+        "url": null,
+        "source": "from your letter"
+      },
+      {
+        "name": "2-1-1 (IMPACT 211 in Milwaukee County)",
+        "phone": "2-1-1",
+        "url": "https://www.impactinc.org/impact-211/",
+        "source": "reviewed help route, checked 2026-09-08"
+      },
+      {
+        "name": "Hunger Task Force emergency food",
+        "phone": null,
+        "url": "https://www.hungertaskforce.org/get-help/emergency-food/",
+        "source": "reviewed help route, checked 2026-09-08"
+      },
+      {
+        "name": "FoodShare member line",
+        "phone": "1-800-362-3002",
+        "url": "https://www.dhs.wisconsin.gov/foodshare/index.htm",
+        "source": "reviewed help route, checked 2026-09-08"
+      }
+    ],
+    "unknowns": [
+      "The specific change in the household that triggered this letter is not described.",
+      "The exact due date within March 2027 for the six-month report is not stated in the letter.",
+      "No approved policy passages were returned for 'six-month report' or 'fair hearing' topics; policy details above are drawn solely from the letter text."
+    ],
+    "explanation": "Your letter says no action is needed right now. Your first six-month report form will arrive by mail around February 2027 and must be returned by the due date in March 2027 to keep your FoodShare benefits. The agency decides whether benefits continue. If you disagree with any change, you may request a fair hearing.",
+    "passages": [
+      {
+        "id": "p1-1",
+        "page": 1,
+        "text": "Case #: 000000001 Date: 09/08/2026 Page 1 of 3 State of Wisconsin Case #: 000000001 Milwaukee Enrollment Services Phone: 1-888-947-6583 Fax: (414) 555-0100 Online at access.wi.gov The State of Wisconsin is an equal opportunity service provider. This letter contains information that affects your bene\ufb01ts. If you need this material in a different format because of a disability or if you need this letter translated or explained in your own language, please call 1-888-947-6583. These services are free."
+      },
+      {
+        "id": "p1-2",
+        "page": 1,
+        "text": "You Must Complete Six-Month Report Forms to Keep Getting FoodShare Bene\ufb01ts You are getting this letter because there has been a change in your FoodShare household. You will need to start completing six-month report forms."
+      },
+      {
+        "id": "p1-3",
+        "page": 1,
+        "text": "You do not need to take any action at this time."
+      },
+      {
+        "id": "p1-4",
+        "page": 1,
+        "text": "Your \ufb01rst six-month report form will be due in March 2027. You will be sent this form about a month before it's due. If you do not submit your six-month report form by the due date, you could lose your FoodShare bene\ufb01ts."
+      },
+      {
+        "id": "p1-5",
+        "page": 1,
+        "text": "Your household will need to complete a FoodShare six-month report form every six months until your next renewal. Your next renewal date is September 15, 2027. When it is time for your renewal, you will get information sent to you by mail."
+      },
+      {
+        "id": "p1-6",
+        "page": 1,
+        "text": "If you have questions about this letter or your FoodShare bene\ufb01ts, call your agency at 1-888-947-6583. If you do not agree with the change in your FoodShare bene\ufb01ts, you have the right to a fair hearing. Fair hearing information can be found at the end of this letter."
+      },
+      {
+        "id": "p1-7",
+        "page": 1,
+        "text": "Milwaukee Enrollment Services Mailing Date: 09/08/2026 Maria Example 1234 W Example St Milwaukee WI 53206-0000 Fictional demonstration letter based on a Wisconsin DHS sample template. Not a real person, case, or deadline."
+      },
+      {
+        "id": "p2-1",
+        "page": 2,
+        "text": "Case #: 000000001 Date: 09/08/2026 Page 2 of 3 Your Right to a Fair Hearing What is fair hearing and why should I ask for one?"
+      },
+      {
+        "id": "p2-2",
+        "page": 2,
+        "text": "A fair hearing gives you the chance to tell why you think there has been a wrong decision about your application or bene\ufb01t. At the hearing, a hearing of\ufb01cer will hear from you and the agency to \ufb01nd out if the decision was right or wrong. You may bring a friend or family member with you to the hearing. You may also be able to get free legal help."
+      },
+      {
+        "id": "p2-3",
+        "page": 2,
+        "text": "To learn more about free legal help, call 1-888-278-0633."
+      },
+      {
+        "id": "p2-4",
+        "page": 2,
+        "text": "How long do I have to ask for a hearing?"
+      },
+      {
+        "id": "p2-5",
+        "page": 2,
+        "text": "The Division of Hearings and Appeals must get your request for a hearing about the decision in this letter by the date below:"
+      },
+      {
+        "id": "p2-6",
+        "page": 2,
+        "text": "FoodShare November 17, 2026 Keep in mind that these are the deadlines for asking for a hearing about the decision in this letter. If you are getting FoodShare bene\ufb01ts and you miss the deadline, you can ask for a hearing at any time if you do not agree with your FoodShare bene\ufb01t amount."
+      },
+      {
+        "id": "p2-7",
+        "page": 2,
+        "text": "Please Note: You cannot request a fair hearing if you have been disquali\ufb01ed from FoodShare for an intentional program violation."
+      },
+      {
+        "id": "p2-8",
+        "page": 2,
+        "text": "Can I keep my bene\ufb01ts while I wait for my hearing?"
+      },
+      {
+        "id": "p2-9",
+        "page": 2,
+        "text": "Yes, if you are already getting bene\ufb01ts and if you ask for a hearing before your bene\ufb01ts change, you can keep getting the same bene\ufb01ts until the hearing of\ufb01cer makes a decision. If the hearing of\ufb01cer decides that the agency was right, you may need to return the extra bene\ufb01ts that you got after your bene\ufb01ts were supposed to change."
+      },
+      {
+        "id": "p2-10",
+        "page": 2,
+        "text": "Please Note: Bene\ufb01ts will not be continued if the change was due to a member receiving a FoodShare intentional program violation."
+      },
+      {
+        "id": "p2-11",
+        "page": 2,
+        "text": "How do I ask for a hearing?"
+      },
+      {
+        "id": "p2-12",
+        "page": 2,
+        "text": "You can ask for a fair hearing and/or a hearing request form at the agency shown on the \ufb01rst page of this notice."
+      },
+      {
+        "id": "p2-13",
+        "page": 2,
+        "text": "Or, you can get a request form at doa.wi.gov/RequestAHearing. You can send the form or a letter asking for a hearing to the Division of Hearings & Appeals, PO Box 7875, Madison, WI 53707-7875, or fax it to 608-264-9885."
+      },
+      {
+        "id": "p2-14",
+        "page": 2,
+        "text": "Fictional demonstration letter based on a Wisconsin DHS sample template. Not a real person, case, or deadline."
+      },
+      {
+        "id": "p3-1",
+        "page": 3,
+        "text": "Case #: 000000001 Date: 09/08/2026 Page 3 of 3 USDA Nondiscrimination Statement In accordance with federal civil rights law and U.S. Department of Agriculture (USDA) civil rights regulations and policies, this institution is prohibited from discriminating on the basis of race, color, national origin, sex (including gender identity and sexual orientation), religious creed, disability, age, political beliefs, or reprisal or retaliation for prior civil rights activity."
+      },
+      {
+        "id": "p3-2",
+        "page": 3,
+        "text": "Program information may be made available in languages other than English. Persons with disabilities who require alternative means of communication to obtain program information (e.g., Braille, large print, audiotape, American Sign Language), should contact the agency (state or local) where they applied for bene\ufb01ts. Individuals who are deaf, hard of hearing or have speech disabilities may contact USDA through the Federal Relay Service at (800) 877-8339."
+      },
+      {
+        "id": "p3-3",
+        "page": 3,
+        "text": "To \ufb01le a program discrimination complaint, a Complainant should complete a Form AD-3027, USDA Program Discrimination Complaint Form which can be obtained online at:"
+      },
+      {
+        "id": "p3-4",
+        "page": 3,
+        "text": "https://www.usda.gov/sites/default/\ufb01les/documents/ad-3027.pdf, from any USDA of\ufb01ce, by calling (866) 632- 9992, or by writing a letter addressed to USDA. The letter must contain the complainant's name, address, telephone number, and a written description of the alleged discriminatory action in suf\ufb01cient detail to inform the Assistant Secretary for Civil Rights (ASCR) about the nature and date of an alleged civil rights violation. The completed AD-3027 form or letter must be submitted to:"
+      },
+      {
+        "id": "p3-5",
+        "page": 3,
+        "text": "1. mail: Food and Nutrition Service, USDA 1320 Braddock Place, Room 334 Alexandria, VA 22314; or 2. fax: (833) 256-1665 or (202) 690-7442; or 3. email: FNSCIVILRIGHTSCOMPLAINTS@usda.gov This institution is an equal opportunity provider."
+      },
+      {
+        "id": "p3-6",
+        "page": 3,
+        "text": "Fictional demonstration letter based on a Wisconsin DHS sample template. Not a real person, case, or deadline."
+      }
+    ]
+  },
+  "evidence": [
+    "p1-1",
+    "p1-2",
+    "p1-3",
+    "p1-4",
+    "p1-5",
+    "p1-6",
+    "p1-7",
+    "p2-13",
+    "p2-2",
+    "p2-6",
+    "p2-9"
+  ],
+  "missing": [
+    "The specific change in the household that triggered this letter is not described.",
+    "The exact due date within March 2027 for the six-month report is not stated in the letter.",
+    "No approved policy passages were returned for 'six-month report' or 'fair hearing' topics; policy details above are drawn solely from the letter text."
+  ],
+  "warnings": [],
+  "retryable": false,
+  "request_id": "1b602276-17e6-4d32-9d67-d2c3606c3c3e",
+  "help_routes": [
+    {
+      "name": "2-1-1 (IMPACT 211 in Milwaukee County)",
+      "purpose": "Find local food and other help by phone, any day. In Milwaukee County you can also text MKEFOOD to 898-211, or call (414) 773-0211.",
+      "phone": "2-1-1",
+      "url": "https://www.impactinc.org/impact-211/",
+      "source_url": "https://www.impactinc.org/impact-211/",
+      "last_checked": "2026-09-08"
+    },
+    {
+      "name": "Hunger Task Force emergency food",
+      "purpose": "Milwaukee County pantry and meal map.",
+      "phone": null,
+      "url": "https://www.hungertaskforce.org/get-help/emergency-food/",
+      "source_url": "https://www.hungertaskforce.org/get-help/emergency-food/",
+      "last_checked": "2026-09-08"
+    },
+    {
+      "name": "FoodShare member line",
+      "purpose": "Questions about your FoodShare case or QUEST card.",
+      "phone": "1-800-362-3002",
+      "url": "https://www.dhs.wisconsin.gov/foodshare/index.htm",
+      "source_url": "https://www.dhs.wisconsin.gov/foodshare/index.htm",
+      "last_checked": "2026-09-08"
+    }
+  ],
+  "_evidence": {
+    "issue": "MOO-793",
+    "host": "http://GoodNe-Servi-SOh7w0HGiJhV-1702778700.us-east-1.elb.amazonaws.com",
+    "path": "/api/notices",
+    "file": "six-month-report-conversion-maria-example.pdf",
+    "captured": "2026-09-13T13:55:00-05:00",
+    "seconds": 29,
+    "note": "curl multipart upload through the public load balancer; task role"
+  }
+}

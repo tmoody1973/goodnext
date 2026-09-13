@@ -58,6 +58,12 @@ export class GoodNextWebStack extends Stack {
       },
     });
 
+    // Without HTTPS, let port 443 refuse instantly instead of dropping the packet: modern
+    // browsers try https first and fall back to http only after the attempt fails fast.
+    if (!certificate) {
+      service.loadBalancer.connections.allowFromAnyIpv4(ec2.Port.tcp(443), "Fast refusal so browsers fall back to HTTP");
+    }
+
     // Healthy after 20 s, drained in 2 min: a rollout should not wait longer than the slowest plan.
     service.targetGroup.configureHealthCheck({ path: "/api/health", interval: Duration.seconds(10), healthyThresholdCount: 2 });
     service.targetGroup.setAttribute("deregistration_delay.timeout_seconds", "120");

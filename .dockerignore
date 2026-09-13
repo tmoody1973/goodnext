@@ -8,7 +8,7 @@
 **/dist
 .git
 docs
-!docs/evidence/*.json
+!docs/evidence/moo-77[78]-*.json
 agentcore
 infra
 .impeccable
