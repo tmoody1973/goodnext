@@ -45,3 +45,29 @@ to the repo or the tracker needs to be on the handoff's list of who does what,
 or its output will collide with the human-run loop. Reading before building
 caught this in minutes; building first would have produced a second PR for the
 same ticket.
+
+## 2026-09-13: hosting day, three things the local run never showed
+
+**Expected.** The API that had run fine on the laptop for a week would run
+the same inside a container, and the first public visit would just work.
+
+**Happened.** Three surprises, all caught by checks rather than by luck.
+First, the container crashed on start: the help-routes loader walked three
+folders up from its own file at import time, which works in the repo and
+fails when the package sits two levels below root. A local smoke test of the
+image caught it before deploy; a reviewer agent found it independently. Second,
+the first visit from a Chromium browser hung: modern browsers try https before
+http, and a load balancer with no listener on 443 drops the packet, so the
+browser waits out its whole timeout before falling back. A security-group rule
+did nothing; a plain-HTTP listener on 443 that answers with a fixed 400 makes
+the TLS attempt fail in 0.12 seconds and the fallback is instant. Third, both
+on-screen browsers on the Mac stopped producing screenshots at the same time
+(one hung on capture, the other reported a zero-size viewport), while the pages
+themselves rendered and the text came back fine.
+
+**Now believe.** Run the image locally before the first deploy, every time; the
+container is a different filesystem, not just a different machine. A public
+address is only proven by a real browser's first visit, because browsers add
+behavior (https-first) that curl never shows. And keep text evidence separate
+from screenshots: when the capture tool fails, the text proof still stands and
+the deadline does not move.
