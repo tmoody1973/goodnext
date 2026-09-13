@@ -15,11 +15,15 @@ from pathlib import Path
 
 log = logging.getLogger(__name__)
 
-DEFAULT_PATH = Path(__file__).resolve().parents[3] / "app" / "goodnext" / "help_routes.json"
-
-
 def _path() -> Path:
-    return Path(os.environ.get("GOODNEXT_HELP_ROUTES_FILE", DEFAULT_PATH))
+    override = os.environ.get("GOODNEXT_HELP_ROUTES_FILE")
+    if override:
+        return Path(override)
+    here = Path(__file__).resolve()
+    # Resolved lazily: in the container the package sits at /srv/goodnext_api, two levels below /.
+    if len(here.parents) > 3:
+        return here.parents[3] / "app" / "goodnext" / "help_routes.json"
+    return here.with_name("help_routes.json")
 
 
 @lru_cache(maxsize=4)

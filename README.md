@@ -38,6 +38,31 @@ curl -s localhost:8000/api/plans -H 'content-type: application/json' \
 Offline tests (no AWS): `cd app/goodnext && uv run pytest` and
 `cd services/api && uv run pytest`.
 
+## Host the demo (decision 012)
+
+One container serves the site at `/` and the API at `/api/*`, behind an
+Application Load Balancer in us-east-1. The stack lives in `infra/web`.
+
+```bash
+# build the image locally first to catch errors cheaply (from the repo root)
+docker build --platform linux/amd64 -f services/api/Dockerfile -t goodnext-web:local .
+docker run --rm -p 8090:8000 goodnext-web:local   # then open http://localhost:8090
+
+# show what would change in AWS, then deploy (Tarik's call)
+cd infra/web && npm ci && npm test
+npx cdk diff
+npx cdk deploy
+# HTTPS: add  -c certificateArn=arn:aws:acm:...  to both commands
+```
+
+The container carries the demo clock (`GOODNEXT_ENV=demo`,
+`GOODNEXT_DEMO_NOW`), the runtime ARN, and reads the reviewed help routes from
+a copy of `app/goodnext/help_routes.json`. The session cookie is marked
+Secure exactly when the visitor arrived over HTTPS (the load balancer tells
+the API the original scheme), so plain HTTP works without a switch; with a
+certificate, HTTP redirects to HTTPS.
+Tear down: `npx cdk destroy` in `infra/web`.
+
 ## Demo boundaries
 
 The demo runs the real agent on AgentCore with a **synthetic** Milwaukee food

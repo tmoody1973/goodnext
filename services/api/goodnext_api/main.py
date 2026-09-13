@@ -11,6 +11,7 @@ from zoneinfo import ZoneInfo
 import httpx
 from fastapi import Depends, FastAPI, File, Form, Request, Response, UploadFile
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from goodnext_api import notices
@@ -19,7 +20,6 @@ from goodnext_api.help_routes import help_routes
 
 LOCAL_TZ = ZoneInfo("America/Chicago")
 SESSION_COOKIE = "gn_session"
-DEV = os.environ.get("GOODNEXT_ENV", "dev") == "dev"
 log = logging.getLogger(__name__)
 
 app = FastAPI(title="GoodNext API", version="0.1.0", docs_url="/api/docs", openapi_url="/api/openapi.json")
@@ -72,7 +72,7 @@ def get_session(request: Request, response: Response) -> str:
     session = request.cookies.get(SESSION_COOKIE)
     if not session or len(session) != 36:
         session = str(uuid.uuid4())
-        response.set_cookie(SESSION_COOKIE, session, httponly=True, samesite="strict", secure=not DEV, max_age=60 * 60 * 4)
+        response.set_cookie(SESSION_COOKIE, session, httponly=True, samesite="strict", secure=request.url.scheme == "https", max_age=60 * 60 * 4)
     return session
 
 
@@ -152,3 +152,13 @@ async def understand_notice(
     except notices.NoticeIntakeError as exc:
         return envelope_response(400, "needs_clarification", request_id, response, missing=[str(exc)])
     return invoke_agent(agent, payload, session, response)
+
+
+def mount_site(target: FastAPI, static_dir: str | os.PathLike | None) -> None:
+    """Decision 008: the site and the API share one hostname. Mounted last so /api/* wins.
+    Unset in dev and tests (the site runs separately); a set-but-missing directory fails at startup."""
+    if static_dir:
+        target.mount("/", StaticFiles(directory=static_dir, html=True), name="site")
+
+
+mount_site(app, os.environ.get("GOODNEXT_STATIC_DIR"))
