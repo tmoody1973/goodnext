@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "GoodNext · Architecture as shipped (September 2026)",
+    "quality_profile": "showcase",
+    "viewBox": [
+      1360,
+      740
+    ]
+  },
+  "components": [
+    {
+      "id": "resident-browser",
+      "type": "frontend",
+      "label": "Resident's browser",
+      "sublabel": "Phone or laptop, no account",
+      "pos": [
+        30,
+        330
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "api-container",
+      "type": "backend",
+      "label": "FastAPI + static site",
+      "sublabel": "/ and /api/* on one host",
+      "pos": [
+        300,
+        330
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "agent-runtime",
+      "type": "backend",
+      "label": "Strands agent",
+      "sublabel": "Bedrock AgentCore Runtime v7",
+      "pos": [
+        570,
+        330
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "validators",
+      "type": "security",
+      "label": "Validators",
+      "sublabel": "After every model return",
+      "pos": [
+        840,
+        330
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "answer",
+      "type": "frontend",
+      "label": "Answer on the website",
+      "sublabel": "Cited next step or food plan",
+      "pos": [
+        1110,
+        330
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "textract",
+      "type": "external",
+      "label": "Amazon Textract",
+      "sublabel": "Photo → text, in memory only",
+      "pos": [
+        300,
+        90
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "agent-tools",
+      "type": "backend",
+      "label": "Agent tools",
+      "sublabel": "4 scoped tools, per workflow",
+      "pos": [
+        570,
+        90
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "food-directory",
+      "type": "database",
+      "label": "Reviewed + fixture data",
+      "sublabel": "93 food records, 23 passages",
+      "pos": [
+        840,
+        90
+      ],
+      "size": [
+        210,
+        80
+      ]
+    },
+    {
+      "id": "bedrock-model",
+      "type": "external",
+      "label": "Claude Sonnet 4.6",
+      "sublabel": "us.anthropic.claude-sonnet-4-6",
+      "pos": [
+        570,
+        570
+      ],
+      "size": [
+        210,
+        80
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "AWS us-east-1",
+      "wraps": [
+        "api-container",
+        "agent-runtime",
+        "validators",
+        "textract",
+        "agent-tools",
+        "food-directory",
+        "bedrock-model"
+      ],
+      "pad": 20
+    },
+    {
+      "kind": "security-group",
+      "label": "ALB → one ECS Fargate task",
+      "wraps": [
+        "api-container"
+      ],
+      "pad": 14
+    }
+  ],
+  "connections": [
+    {
+      "id": "https-request",
+      "from": "resident-browser",
+      "to": "api-container",
+      "label": "HTTPS",
+      "variant": "emphasis"
+    },
+    {
+      "id": "invoke-runtime",
+      "from": "api-container",
+      "to": "agent-runtime",
+      "label": "Invoke",
+      "variant": "emphasis"
+    },
+    {
+      "id": "structured-proposal",
+      "from": "agent-runtime",
+      "to": "validators",
+      "label": "Proposal",
+      "variant": "emphasis"
+    },
+    {
+      "id": "checked-envelope",
+      "from": "validators",
+      "to": "answer",
+      "label": "Envelope",
+      "variant": "emphasis"
+    },
+    {
+      "id": "photo-ocr",
+      "from": "api-container",
+      "to": "textract",
+      "label": "Photo upload",
+      "labelDy": -60
+    },
+    {
+      "id": "tool-loop",
+      "from": "agent-runtime",
+      "to": "agent-tools",
+      "label": "Call / result"
+    },
+    {
+      "id": "directory-lookup",
+      "from": "agent-tools",
+      "to": "food-directory",
+      "label": "Lookup"
+    },
+    {
+      "id": "model-call",
+      "from": "agent-runtime",
+      "to": "bedrock-model",
+      "label": "Bedrock",
+      "labelDy": 40
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Two workflows, one agent",
+      "items": [
+        "food_today: ZIP, money, kitchen, travel → today's listed options plus six day tiles.",
+        "understand_notice: a PDF, photo, or three answers → findings beside the sentences they came from."
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Data, labeled honestly",
+      "items": [
+        "93 directory records: 16 reviewed 2026-09-08, 68 from the 2024 Milwaukee Food Environment Map (call to confirm), 9 synthetic and labeled.",
+        "23 policy passages, none approved yet, so 'questions to ask your agency' stays empty."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Nothing about the resident is stored",
+      "items": [
+        "Letters are read in memory, never written or logged; validators strip anything a tool did not support.",
+        "FastAPI invokes the runtime with the task's IAM role; the browser never sees AWS credentials. If the agent is unreachable the API answers 503 with the three reviewed help routes."
+      ]
+    }
+  ]
+}
