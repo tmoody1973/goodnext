@@ -1,169 +1,161 @@
 # GoodNext handoff
 
-Written September 8, 2026; updated September 10, 14:30 CDT after the notice
-entry point shipped on runtime v6. For a fresh Claude Code session.
-Read this, then `CONTEXT.md`, then `docs/agents/issue-tracker.md`, then
-`docs/specs/food-today-screen.md`. Do not re-read the planning docs unless a
-task needs them; the decisions are settled.
+Written September 13, 2026, 12:55 CDT, for a fresh Claude Code session.
+Read this, then `CONTEXT.md`, then `DESIGN.md`, then
+`docs/agents/issue-tracker.md`. Do not re-read the planning docs unless a
+task needs them; the decisions are settled and the product is built.
+
+**Deadline: Monday September 14, 2026, 7 p.m. Central.** Judging runs through
+October 8. What is missing is not code: it is a public address a judge can
+open, and the submission materials.
 
 ## What GoodNext is
 
-A free website that helps a Wisconsin household find food today and
-understand a FoodShare letter (sanction, time-limited benefits warning,
-six-month report), with the next supported step and the official routes. Hackathon entry ("Agents for
-Humans"), deadline **September 14, 2026, 7 p.m. Central**, judging through
-October 8. Product name GoodNext; older docs still say "FoodShare Bridge."
+A free website with two entry points. **Find food today**: enter ZIP, money,
+kitchen, travel; get today's listed options with opening window, cost,
+requirements, check date, and a directions link, plus six small tiles for the
+rest of the week. **Understand my letter**: upload a FoodShare letter as a PDF
+or photo, or answer three questions; see what the letter says beside the
+sentences it came from, the next step, tasks with dates exactly as printed,
+who to contact, and what only the agency can decide. Nothing about the
+resident is stored. Hackathon entry, "Agents for Humans". Product name
+GoodNext; older docs say "FoodShare Bridge".
 
 Never: decide eligibility, promise benefits or food stock, ask for an account
-or a notice before helping with food, or use real residents' documents.
+or a notice before helping with food, or use real residents' documents. The
+demo letters are fictional ("Maria Example"), generated from official DHS
+sample templates (decision 011).
 
-## Where things are
+## State on main (all merged, nothing pending)
 
 | Piece | Path | State |
 | --- | --- | --- |
-| Strands agent (Python 3.12) | `app/goodnext/` | 57 tests green; two workflows, `food_today` and `understand_notice`; deployed runtime **v7** (2026-09-10 15:35 CDT: notice findings and citations capped, hedge phrase no longer strips a next step), both workflows verified live |
-| FastAPI backend | `services/api/` | 25 tests green; `POST /api/plans` and `POST /api/notices` (PDF text layer, Textract for photos, three answers); truthful 503 |
-| AgentCore CLI config + CDK | `agentcore/` | Deployed to us-east-1 |
-| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | Two entry tabs: Find food today (finished, MOO-786/787 merged in PR #15) and Understand my letter (upload or three questions, result beside quoted passages; MOO-791). 50 tests green. Notice work on branch `tarikjmoody/notice-entry-point`, **not yet pushed** |
-| Directory data | `app/goodnext/fixtures/` | 93 records, see below |
-| Help routes | `app/goodnext/help_routes.json` | One reviewed file; agent and API both read it (decision 009) |
-| Specs | `docs/specs/food-today.md`, `docs/specs/food-today-screen.md`, `docs/specs/understand-notice.md` | Settled; the notice spec was written from an approved plan, not a grill |
-| Demo letters | `docs/research/notices/generated/` | Three fictional FoodShare letters for "Maria Example" from DHS templates (HTML, PDF with text layer, PNG of page 1, `values.json`); MilES phone verified against DHS |
-| Policy passages | `app/goodnext/policy_passages.json` (23 draft), review checklist `docs/research/notices/policy-passages-review.md` | **Zero approved.** The agent cites only approved entries; "questions to ask your agency" stays empty until Tarik ticks the checklist and the status flips to `approved` |
-| Design context | `PRODUCT.md`, `DESIGN.md`, `.impeccable/design.json`, `.impeccable/surfaces/apps-web-src-app-page-tsx.md`, `.impeccable/mocks/decision/`, `.impeccable/review/` (untracked captures) | Direction is the 7-Day Forecast Strip (decision 007). DESIGN.md records the built system (finish pass MOO-786). Read DESIGN.md before touching any web UI |
-| Decisions | `docs/decisions/001` to `011` | Plain English; "What actually happened" blank for Tarik. 011: real upload in the demo, fed with fictional letters |
-| Learning log | `docs/LEARNING-LOG.md` | Two entries (dev proxy timeout; the bot PR) |
-| Research | `docs/research/` | Data access, 211 guide, drafts, call sheet |
-| Evidence | `docs/evidence/` | Live responses and screenshots per issue |
+| Strands agent (Python 3.12) | `app/goodnext/` | 57 tests green. Two workflows: `food_today` and `understand_notice`. Deployed runtime **v7** (2026-09-10 15:35 CDT), both verified live. |
+| FastAPI backend | `services/api/` | 25 tests green. `POST /api/plans`, `POST /api/notices` (multipart: PDF text layer via pypdf, photos via Amazon Textract, or three form fields). Truthful 503 with help routes on any agent failure. |
+| AgentCore CLI config + CDK | `agentcore/` | Stack `AgentCore-goodnext-default`, us-east-1. Deploy: `agentcore deploy --target default --diff` (expect only the code bundle), then `--yes`. |
+| Website (Next.js 16 static export, Tailwind 4, pnpm) | `apps/web/` | 50 tests green (axe and never-list included). Two tabs, Find food today first. Impeccable finish passes done on both screens (MOO-786, MOO-792). |
+| Directory data | `app/goodnext/fixtures/` | 93 records: 16 reviewed by Tarik (wins), 68 from the Milwaukee Food Environment Map (2024-08-27, source line on every card), 9 synthetic labeled "(synthetic)". |
+| Help routes | `app/goodnext/help_routes.json` | One reviewed file; the agent and the API both read it (decision 009). |
+| Policy passages | `app/goodnext/policy_passages.json` | 23 entries, **zero approved**. The tool loads only `review_status: approved` (test-enforced). Review checklist: `docs/research/notices/policy-passages-review.md`. |
+| Demo letters | `docs/research/notices/generated/` | Three fictional letters (sanction, time-limited warning, six-month report) as HTML, PDF with text layer, PNG of page 1, and `values.json`. |
+| Design | `DESIGN.md`, `.impeccable/design.json`, `PRODUCT.md` | Read `DESIGN.md` before touching any web UI. |
+| Specs and decisions | `docs/specs/*.md`, `docs/decisions/001` to `011` | Plain English; "What actually happened" fields blank for Tarik. |
+| Evidence | `docs/evidence/` | Per-issue live envelopes and screenshots; latest are `notice-live-*-v7.json` and `food-live-53206-v7.json`. |
 
 Tracker: **Linear**, team MOO, project "GoodNext — Agents for Humans
-Hackathon". Only the `linear-build` skill creates, moves, or closes issues.
-Food today MOO-770 to 787: Done and merged. Notice entry point MOO-788 to
-792: 789, 790, 791 Done with evidence; 788 In Progress (letters done,
-passage approval waits on Tarik); 792 closes after the finish review verdict.
-Notice branch merged as PR #18 (2026-09-10 15:18 CDT).
+Hackathon"; only the `linear-build` skill creates, moves, or closes issues.
+MOO-770 to 792 are Done except **MOO-788** (In Progress: letters done,
+passage approval waits on Tarik). GitHub: https://github.com/tmoody1973/goodnext,
+PRs #4 to #19 merged, none open. CI (agent, API, `agentcore validate`, web) on
+every PR; branch protection on main. Claude works on branches and opens PRs;
+Tarik merges, and says "push" before any push.
 
-**A PostHog "self-driving" bot opens PRs on this repo from Linear issues**
-(PRs #12, #16, #17; all stale, all closed unmerged). Find the switch that
-turns it off before creating the next issue.
-
-GitHub: https://github.com/tmoody1973/goodnext. PRs #4 to #11 and #13 merged
-2026-09-08. CI runs agent tests, API tests, `agentcore validate`, and the web
-job (typecheck, tests, build) on every push and PR; branch protection on main
-requires them. Claude works on branches off main and opens PRs; Tarik merges
-and says "push" before any push.
+**A PostHog "self-driving" bot opens PRs from Linear issues** (PRs #12, #16,
+#17, all stale, all closed). Before creating any new issue, find the switch
+that turns that agent off, or expect another one.
 
 ## The deployed runtime
 
-- Runtime ARN: `arn:aws:bedrock-agentcore:us-east-1:953791390715:runtime/goodnext_goodnext-j7ndOFF7b3`
-- Stack `AgentCore-goodnext-default`, us-east-1.
-- **v5 deployed 2026-09-08 20:57 CDT** (later-day claims name their own day,
-  MOO-781). v4 19:12 CDT (help routes on every status, MOO-780). v3 12:55 CDT
-  (output ceiling, brevity, trace redaction). All verified live; evidence
-  under `docs/evidence/moo-776-*`, `moo-780-*`, `moo-781-*`.
+- ARN: `arn:aws:bedrock-agentcore:us-east-1:953791390715:runtime/goodnext_goodnext-j7ndOFF7b3`
+- Model: `us.anthropic.claude-sonnet-4-6`, us-east-1 (`app/goodnext/model/load.py`).
 - Run the API against it:
-  `cd services/api && GOODNEXT_ENV=demo GOODNEXT_DEMO_NOW=2026-09-10T09:00:00-05:00 GOODNEXT_AGENT_RUNTIME_ARN='<ARN above>' AWS_REGION=us-east-1 uv run uvicorn goodnext_api.main:app --port 8000`
-- Run the site: `cd apps/web && pnpm dev` (port 3000, proxies `/api/*` to 8000
-  with a 180 s timeout).
-- Demo clock: fixture windows cover 2026-09-08 to 2026-09-21; regenerate with
-  the two scripts in `app/goodnext/scripts/` when the demo week moves.
-- A plan takes 60 to 105 s. No-match returns in under 10 s without a model call.
-- AWS login is the account **root** user via `aws login`; the session expires
-  after some hours (the API then answers 503 with help routes). Use a role
-  before judge-facing hosting. `agentcore deploy` runs from the repo root.
+  `cd services/api && GOODNEXT_ENV=demo GOODNEXT_DEMO_NOW=2026-09-10T09:00:00-05:00 GOODNEXT_AGENT_RUNTIME_ARN='<ARN>' AWS_REGION=us-east-1 uv run uvicorn goodnext_api.main:app --port 8000`
+- Run the site: `cd apps/web && pnpm dev` (port 3000, proxies `/api/*` to 8000 with a 180 s timeout).
+- Run the agent locally instead: `agentcore dev` from the repo root (serves on **8082**); pass `GOODNEXT_AGENT_LOCAL_URL=http://127.0.0.1:8082` to the API and drop the ARN.
+- Timings, measured: a food plan 87 to 105 s (delayed status at 31 s); a letter 25 to 35 s; no-match under 10 s with no model call.
+- Demo clock: `GOODNEXT_ENV=demo` plus `GOODNEXT_DEMO_NOW` pins "today"; fixture windows cover 2026-09-08 to 2026-09-21. Judges will see September 10; the README setup note says so.
+- AWS login today is the account **root** user via `aws login` (`! aws login` in the session); it expires after hours (the API then answers 503). Hosting must run under an IAM role.
 
-## Directory data, in trust order
+## Next 1: hosting (the one thing that makes the entry judgeable)
 
-1. **Reviewed** (`fixtures/milwaukee-food-resources-reviewed.json`, 16 sites):
-   built by Tarik, each checked against the official provider page on
-   2026-09-08; "verified" tier, verifier "Tarik Moody". Wins over the map.
-2. **Milwaukee Food Environment Map** (75 sites, 68 after de-dup): public
-   ArcGIS layer, data as of 2024-08-27, no license stated. Used per decision
-   006 with a source line on every card; permission request drafted, not sent.
-3. **Synthetic** (9): closed, unknown-area, paid, appointment cases. Labeled
-   "(synthetic)" in the provider name, which a judge will see on the demo date.
+Decision 008: one hostname for site and API. Nothing below exists yet;
+every resource is created only on Tarik's go, one named resource at a time.
 
-Rules from real data (decision 006): unknown service area shows only for the
-site's own ZIP; over 14 days old is "call to confirm" with the date; only a
-missing date is "unconfirmed".
+Recommended shape, smallest that fits the timings (a food plan takes up to
+105 s, which rules out anything with a 30 or 60 second cap such as API
+Gateway or CloudFront's default origin timeout):
 
-## Next: approve passages, then hosting
+1. **One container** from `services/api/`: FastAPI serves `/api/*` and also
+   serves the static export from `apps/web/out` (add a StaticFiles mount for
+   `/`; ~5 lines). Copy `app/goodnext/help_routes.json` into the image
+   (decision 009) or set `GOODNEXT_HELP_ROUTES_FILE`.
+2. **ECR repository** for the image.
+3. **ECS Fargate service** (one task, 0.5 vCPU, 1 GB) in the default VPC, with
+   a **task role** allowing `bedrock-agentcore:InvokeAgentRuntime` on the ARN
+   above and `textract:DetectDocumentText`.
+4. **Application Load Balancer**, idle timeout **300 s**, target group health
+   check `GET /api/health`.
+5. **HTTPS**: an ACM certificate on a hostname Tarik owns (Route 53 or an
+   external DNS CNAME to the ALB). Without HTTPS the session cookie is not set
+   (`secure=not DEV`); if no domain is available by Monday, run with
+   `GOODNEXT_ENV=demo` and add an env switch for `secure=False`, and say so in
+   the write-up.
+6. Env on the task: `GOODNEXT_ENV=demo`, `GOODNEXT_DEMO_NOW=2026-09-10T09:00:00-05:00`,
+   `GOODNEXT_AGENT_RUNTIME_ARN`, `AWS_REGION=us-east-1`.
+7. Prove it: open the hostname in a real browser, run 53206 and upload the
+   six-month letter, save the evidence as MOO-776/787 did. Write decision 012
+   (hosting shape) in plain English.
 
-1. Tarik: review `docs/research/notices/policy-passages-review.md`; tick the
-   passages the agent may cite. Claude then sets `review_status: approved` on
-   those entries in `app/goodnext/policy_passages.json` (a test enforces that
-   only approved, official-URL entries load), and a later deploy (v8) carries
-   them; until then "questions to ask your agency" stays empty.
-2. Hosting (decision 008): one hostname, static files plus `/api/*` to the API
-   with an origin timeout of at least 180 s; the API container carries
-   `app/goodnext/help_routes.json` and `policy_passages.json` is inside the
-   agent bundle; the API's role needs `textract:DetectDocumentText` for photo
-   uploads; `/api/notices` is multipart up to 10 MB. IAM role, not root.
-   Nothing in AWS is created without Tarik's go.
-3. Submission checklist (PRD section 13), then latency if time remains.
+Alternative if Fargate setup drags: App Runner (120 s request cap; a food
+plan at 99 to 105 s is too close). Lambda function URLs allow 15 minutes but
+need response streaming and a different packaging; not for Monday.
 
-Live on v7 (2026-09-10 15:40 CDT): sanction 34.9 s, time-limited 25.9 s,
-six-month 25.9 s, sanction photo via Textract 30.9 s, all with six findings
-and ten to thirteen citations and a next step; Food today 53206 in 99.4 s
-with the delayed status at 31 s. Evidence `docs/evidence/notice-live-*-v7.json`
-and `docs/evidence/food-live-53206-v7.json`.
+## Next 2: submission materials (PRD section 13)
 
-Running the notice path locally: `agentcore dev` (serves on **8082**, not
-8080; pass `GOODNEXT_AGENT_LOCAL_URL=http://127.0.0.1:8082` to the API), then
-the API and `pnpm dev`. A letter answer takes 25 to 35 s. Photo uploads call
-Textract under the local AWS session.
+- **H07 architecture diagram** matching what shipped: browser → static site
+  and `/api/*` on one host → FastAPI → AgentCore Runtime (Strands, Bedrock) →
+  tools (fixture directory, help routes, policy passages, letter passages);
+  Textract for photos; validators after every model return.
+- **H08 description**: the promise is "understand what changed, take the next
+  supported action, and find food while you work through it." Disclose:
+  fictional demo letters, real upload path, nothing stored, synthetic
+  directory records labeled, policy questions empty until passages are approved.
+- **H09 video** under five minutes: Maria uploads the six-month letter (no
+  action now, March 2027 due date, fair-hearing right), then finds food for
+  today with zero dollars and a bus.
+- **H10** Builder ID and the form fields; **H06** repo public with license.
 
-## Then, in order (four days left)
+## Next 3: approve policy passages (MOO-788)
 
-1. **Latency.** Return day one first, the week second; or cache the system
-   prompt. The model writes roughly 5,800 tokens for a seven-day plan, which is
-   the whole wait. Measured on the real flow tonight (MOO-787): 95.4, 89.2, and
-   87.1 seconds; delayed status at about 31 seconds each time.
-2. **Judge-facing hosting.** One hostname for site and API (decision 008):
-   static files plus a path rule sending `/api/*` to the API with an origin
-   timeout of at least 180 s; the API container must carry
-   `app/goodnext/help_routes.json` (decision 009). IAM role, not root. Nothing
-   in AWS is created without Tarik's go.
-3. **Submission checklist** (PRD section 13): architecture diagram matching
-   what shipped, description, video under five minutes, Builder ID, judge
-   access through October 8.
-4. **Data follow-ups.** The 211 API trial was rejected 2026-09-08; the fixture
-   directory stays the source. Send the drafted IMPACT 211 request anyway; work
-   the 53206 call sheet; set CloudWatch retention on the runtime log group.
+Tarik ticks `docs/research/notices/policy-passages-review.md`. Claude sets
+`review_status: approved` on those ids in `app/goodnext/policy_passages.json`,
+runs the agent tests, deploys v8 (diff first), and re-runs one letter to show
+"questions to ask your agency" populated. Fair hearing has no DHS page; the
+letters' own fair-hearing page is quoted instead.
 
 ## Known problems
 
-1. Plan latency 87 to 105 s (above). Plans also differ run to run (the model
-   picks different valid visits); the validator accepts each.
-2. Older log events (v1, v2) hold synthetic test prompts; set retention.
-3. The model sometimes places visits on days with no window; the validator
-   strips them and returns `partial`. Working as designed.
-4. Older Impeccable version installed (4.1.2; 4.2.2 available). Do not update
-   mid-session.
+1. Plan latency 87 to 105 s; plans differ run to run (the validator accepts
+   each). Latency work (day one first) is deferred past the deadline.
+2. Letter results are long on a phone (six findings, ten to thirteen quotes);
+   v7 caps them; folding quotes behind "show more" was not done.
+3. The API's `/api/plans` on the deployed runtime answers 503 when the local
+   AWS session has expired; hosting under a role removes that.
+4. Older runtime log events hold synthetic test prompts; set CloudWatch
+   retention on the log group.
+5. Impeccable 4.1.2 installed (4.2.2 available); do not update mid-session.
 
 ## Working agreements
 
-- Socratic at the seams only; ship the scaffolding. Cite data sources,
-  disclose, move on.
 - Plain English; define terms inline. Tarik is not a traditional engineer.
-- Every non-trivial decision gets a `docs/decisions/NNN` file with the
-  "What actually happened" field left blank for Tarik.
-- Fixture tests never reach Bedrock; `tests/conftest.py` enforces it.
-- The Matt Pocock skills `grill-with-docs`, `to-spec`, `to-tickets`, and
-  `implement` are user-invocation only: Tarik types the slash command.
-  `linear-build` and `impeccable` are callable by Claude.
+- Nothing in AWS is created or changed without Tarik's go; run the CDK diff
+  before every `agentcore deploy`. Deploys, pushes, and merges are his calls.
+- Every non-trivial decision gets `docs/decisions/NNN` with "What actually
+  happened" left blank.
+- Fixture tests never reach Bedrock (`tests/conftest.py`).
 - Per ticket: branch off main, tests first, one bounded live run with clipped
   screenshots, PR, CI green, `linear-build` closes with evidence, Tarik merges.
-- Browser checks run through `ego-browser`. Real typing (`click` then
-  `typeText`, then read the field value back before submitting; at phone
-  emulation the first keystrokes sometimes miss), scroll the target into view
-  before clicking, clip screenshots with `Page.captureScreenshot` and a `clip`
-  from the `main` element's rect, keep captures under about 6000 px tall (taller
-  ones fail), do the run in bounded scripts and `completeTaskSpace` at the end.
-  Stop the dev server and API before running the unit tests; they time out
-  under load (three did tonight, all green once the servers were stopped).
-- Live web checks cost one model call each (cents). A no-match ZIP such as
-  53001 answers in seconds and costs nothing.
+- Browser checks run through `ego-browser`: set the viewport override after
+  the tab exists; real typing, then read the field value back before
+  submitting; scroll targets into view; scope submit clicks to the panel
+  (`#panel-food button[type="submit"]`); clip captures to `main` and keep them
+  under 6000 px tall; log the h1 before every capture; capture on the
+  production build (`pnpm build`, then a small static server) so no dev badge
+  covers content; `completeTaskSpace` at the end. Stop servers before unit tests.
+- Impeccable reviewer and documenter run as fresh `general-purpose` Agent
+  calls from `reference/degraded/*.md`; let the documenter wait for the
+  reviewer's verdict.
+- Live checks cost one model call each (cents); Textract cents per page.
 
 ## First message for the next session (paste this)
 
@@ -173,9 +165,10 @@ Read HANDOFF.md, then CONTEXT.md, then DESIGN.md, then
 docs/agents/issue-tracker.md. Do not re-read the planning docs unless a task
 needs them.
 
-The finish-pass branch tarikjmoody/moo-786-finish-pass is merged (or: I will
-merge it now). Next is latency: return Food today first and the rest of the
-week second, measured on the real flow, as a Linear issue created with
-linear-build. Explain in plain English. Nothing in AWS is created or changed
-without my go; deploys, pushes, and merges are mine.
+Deadline is Monday September 14, 7 p.m. Central. Do "Next 1: hosting" from
+HANDOFF.md: present the resource list for my go, create only what I approve,
+prove the public address in a real browser with both flows, write decision
+012, then draft the submission materials in Next 2. Explain in plain English.
+Nothing in AWS is created or changed without my go; deploys, pushes, and
+merges are mine.
 ```
